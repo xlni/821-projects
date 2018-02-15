@@ -1,14 +1,15 @@
 %Document setup
-\documentclass[10pt,a5paper]{amsart}
+\documentclass[10pt,a4paper]{amsart}
 \usepackage[latin1]{inputenc}
 \usepackage{mathtools}
 \usepackage{mathrsfs} %gives mathscr font
 \usepackage{graphicx}
-\usepackage[headsep=0.15in, left=0.5in, right=0.5in, top=0.6in, bottom=0.5in]{geometry}
+%\usepackage[headsep=0.15in, left=0.5in, right=0.5in, top=0.6in, bottom=0.5in]{geometry}
 \usepackage[textlf,mathlf]{MinionPro}
 \usepackage{fancyhdr}
 %\usepackage{xypic}
 \usepackage{tikz-cd}
+\usepackage{todonotes}
 
 %Environments
 \numberwithin{equation}{section}
@@ -38,10 +39,14 @@
 
 %macros, etc.
 \newcommand{\legendre}[2]{\genfrac{(}{)}{}{}{#1}{#2}}
+\renewcommand{\arraystretch}{1.2}
 
 \begin{document}
 \begin{rem*}
 	Right now this is mostly a summary. I haven't padded it with much exposition.
+\end{rem*}
+\begin{rem*}
+	\textcolor{red}{I think in the problem statement we want to require that $\gcd(a_1,a_2,a_3) = 1$, a stronger statement than $\gcd(a_1,\ldots,a_6)=1$, to guarantee that the ``conic'' is always actually a conic? See Example \ref{exa:all-possibilities}}
 \end{rem*}
 \section{The case $p = 2$}
 We consider the even prime separately because the diagonalization process employed in the other cases does not work in characteristic 2.
@@ -146,6 +151,31 @@ Suppose $-1$ is a quadratic residue mod $p$. If $Z = 0$, then we are in the sett
 respectively. By Proposition \ref{prop:circle-solutions}, these each have $p - 1$ solutions. Therefore $X^2 + Y^2 + Z^2 = 0$ and $X^2 + Y^2 + rZ^2 = 0$ each have $p+1$ solutions.
 
 Suppose $-1$ is a nonresidue. There are no solutions with $Z=0$, so rewrite the equations as above. By Proposition \ref{prop:circle-solutions} again, they each have $p + 1$ solutions.
+
+\begin{example}[A zoo of possibilities]\label{exa:all-possibilities}
+	
+	In the table below, the first two columns reflect the preceding discussion. The remaining columns consider how many solutions lie in $\{Z = 0\} = \mathbb{P}^1 \subset \mathbb{P}^2$, which do not give solutions to the affine equation. The entries marked ``N/A'' are impossible---explanation is given afterwards. For all other entries, examples are given for the specific case $p=3$.
+	\[\begin{tabular}{|c|c||c|c|c|}
+		\hline
+		\multicolumn{2}{|c||}{} & \multicolumn{3}{c|}{\# soln. in $\{Z=0\}$}  \\
+		\hline
+		rank of proj. & \# soln. in $\mathbb{P}^2$ & 0 & 1 & 2 \\ 
+		\hline 
+		\hline
+		1 & $p+1$ & N/A & $x^2$ & N/A \\ 
+		\hline 
+		2 & 1 & $x^2 + y^2$ & $x^2 + 1$ & N/A \\ 
+		\hline 
+		2 & $2p+1$ & N/A & $x^2 + x$ & $xy$ \\ 
+		\hline 
+		3 & $p+1$ & $x^2 + y^2 + 1$ & $x+y^2$ & $x^2 + 2y^2 + 1$ \\ 
+		\hline 
+	\end{tabular} \]
+	\begin{itemize}
+		\item When the projectivization has rank 1, it is a double line. This line is distinct from $\{Z = 0\}$ \todo{otherwise our original conic was a constant, but maybe this can happen if we're not careful about the problem setup... ask} and thus meets it at exactly one point.
+		\item When the projectivization has rank 2 and has $2p + 1$ points, it is the union of two intersecting lines, neither of which is $\{Z = 0\}$\todo{Likewise... what if the original ``conic'' was just $x$}. If these two lines intersect in $\{Z = 0\}$, then there is just one solution in $\{Z = 0\}$. Otherwise, there are two. This corresponds geometrically to parallel lines versus intersecting lines in $\mathbb{A}^2$.
+	\end{itemize}
+\end{example}
 
 \appendix
 \section{Number theory}
