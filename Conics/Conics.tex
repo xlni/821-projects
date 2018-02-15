@@ -192,7 +192,26 @@ This implies that the product of two nonresidues or two residues is a residue, w
 	For $a \neq 0$, the equation $x^2 + y^2 = a$ has $p - \legendre{-1}{p}$ solutions over $\mathbb{F}_p$.
 \end{prop}
 \begin{proof}
-	\color{blue}will write soon\color{black}
+	Let $S_a \subset \mathbb{A}^2$ denote the solution set of $x^2 + y^2 = a$. First we will show the statement for $a=1$.
+	
+	Let $T$ denote the square-roots of $-1$ in $\mathbb{F}_p$. In the case that $-1$ is a nonresidue, $T$ is empty. Consider the maps $f\colon S_1 \setminus (1,0) \to \mathbb{F}_p \setminus T$ and $g\colon \mathbb{F}_p \setminus T \to S_1 \setminus (1,0)$ defined by
+	\begin{align*}
+		f(x,y) &= \frac{y}{x-1}\\
+		g(m) &= \left(\frac{m^2 - 1}{m^2 + 1}, \frac{-2m}{m^2 + 1}\right).
+	\end{align*}
+	It is easy to check that they are inverse to one another, from which it follows that $|S_1| = |\mathbb{F}_p| - |T| + 1 = p - \legendre{-1}{p}$ as desired.
+	
+	Note that if $a,a'$ are both nonzero residues (or both nonresidues) then $|S_a| = |S_{a'}|$. From the preceding, we have the claim for all residues $a$. Observe that $S_0 \cup \cdots \cup S_{p-1}$ gives a partition of $\mathbb{A}^2$. Since
+	\[
+		|S_0| = \left\{\begin{matrix}
+			1 & \text{if }\legendre{-1}{p} = -1,\\
+			2p+1 & \text{if }\legendre{-1}{p} = 1,
+		\end{matrix}\right.
+	\]
+	for a nonresidue $a$ we have
+	\[
+		|S_a| = \frac{2}{p-1} \left(p^2 - |S_0| - \frac{p-1}{2}|S_1|\right) = p - \legendre{-1}{p}.\qedhere
+	\]
 \end{proof}
 The proof of the following fact is omitted.
 \begin{prop}
