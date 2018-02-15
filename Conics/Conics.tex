@@ -5,7 +5,7 @@
 \usepackage{mathrsfs} %gives mathscr font
 \usepackage{graphicx}
 \usepackage[headsep=0.15in, left=0.5in, right=0.5in, top=0.6in, bottom=0.5in]{geometry}
-%\usepackage[textlf,mathlf]{MinionPro}
+\usepackage[textlf,mathlf]{MinionPro}
 \usepackage{fancyhdr}
 %\usepackage{xypic}
 \usepackage{tikz-cd}
@@ -37,10 +37,143 @@
 \providecommand{\theoremname}{Theorem}
 
 %macros, etc.
-
+\newcommand{\legendre}[2]{\genfrac{(}{)}{}{}{#1}{#2}}
 
 \begin{document}
+\begin{rem*}
+	Right now this is mostly a summary. I haven't padded it with much exposition.
+\end{rem*}
+\section{The case $p = 2$}
+We consider the even prime separately because the diagonalization process employed in the other cases does not work in characteristic 2.
 
-nothing here yet
+Fortunately there are very few conics over $\mathbb{F}_2$, and the solutions to
+\[
+	ax^2 + bxy + cy^2 + dx + ey + f = 0
+\]
+are the same as the solutions to
+\[
+	bxy + (a+d)x + (c+e)y + f = 0.
+\]
+At this point, one can simply list out all the possibilities. It can be checked that the number of solutions in each case can be concisely written as $2 + b(-1)^{(a+d)(c+e) + f}$, where $b$ is either 0 or 1.
 
+\section{The case $p \geq 3$}
+Starting with the conic
+\begin{equation}\label{eq:original-conic}
+	ax^2 + bxy + cy^2 + dx + ey + f = 0
+\end{equation}
+we projectivize it to obtain the following homogeneous equation in $\mathbb{P}^2$:
+\begin{equation}\label{eq:projective-conic}
+	aX^2 + bXY + cY^2 + dXZ + eYZ + fZ^2 = 0.
+\end{equation}
+In $\{Z=0\} = \mathbb{P}^1 \subset \mathbb{P}^2$, this equation is
+\begin{equation}\label{eq:projective-conic-at-infinity}
+	aX^2 + bXY + cY^2 = 0.
+\end{equation}
+
+\begin{lem}
+	The number of solutions to \eqref{eq:projective-conic} in $\mathbb{P}^2$ is the sum of the numbers of solutions to \eqref{eq:original-conic} in $\mathbb{A}^2$ and \eqref{eq:projective-conic-at-infinity} in $\mathbb{P}^1$.
+	
+	%(the below seemed a bit needlessly contrived)
+	%to these three equations are related as follows:
+	%\[
+	%	|\{f = 0\}| = |\{F = 0\}| - |\{\bar{F} = 0\}|
+	%\]	
+	%where $|-|$ denotes cardinality. Note that $\{f = 0\} \subset \mathbb{A}^2$, $\{F=0\} \subset \mathbb{P}^2$, and %$\{\bar{F}=0\} \subset \mathbb{P}^1$.
+\end{lem}
+\begin{proof}
+	A solution $[X:Y:Z]$ of \eqref{eq:projective-conic} corresponds to a solution $(X/Z,Y/Z)$ of \eqref{eq:original-conic} if $Z \neq 0$ and to a solution $[X:Y]$ of \eqref{eq:projective-conic-at-infinity} if $Z=0$.
+\end{proof}
+
+\subsection{Diagonalization of quadratic forms}
+\color{blue}
+% I just copied over what Oron wrote in chat; haven't done anything with it yet
+\[
+	aX^2 + \frac{4ac - b^2}{4a}Y^2 + \frac{4acf - ae^2 - 
+	b^2 f + bde - cd^2}{4ac - b^2}Z^2 = 0
+\]
+Transformation matrix:
+\[
+	\begin{bmatrix}
+		1 & 0 & 0\\
+		-\dfrac{b}{2a} & 1 & 0\\
+		\dfrac{be - 2cd}{4ac - b^2} & \dfrac{-2ae + bd}{4ac - b^2} & 1
+	\end{bmatrix}
+\]
+\color{black}
+
+In the following, let $r$ denote a quadratic nonresidue in $\mathbb{F}_p$.
+\begin{lem}\label{lem:quadrics-P1}
+	By a change of coordinates, the equation $aX^2 + bXY + cY^2 = 0$ can be transformed into one of the following:
+	\begin{enumerate}
+		\item $X^2 = 0$,
+		\item $X^2 + Y^2 = 0$, \label{case:x^2+y^2=0}
+		\item $X^2 + rY^2 = 0$.
+	\end{enumerate}
+\end{lem}
+
+The first of these has one solution, namely $[0:1]$.
+
+Evidently $Y$ must be nonzero for the other two cases, so we can rewrite them as $(X/Y)^2 = -1$ and $(X/Y)^2 = -r$ respectively. If $-1$ is a quadratic residue, then $-r$ is not. It follows that $X^2 + Y^2 = 0$ has two solutions and $X^2 + rY^2 = 0$ has none. If $-1$ is a nonresidue, the situation is reversed: $X^2 + Y^2 = 0$ has no solutions and $X^2 + rY^2 = 0$ has two solutions.
+
+\begin{lem}
+	Every conic in $\mathbb{P}^2$ can be brought to one of the following forms:
+	\begin{enumerate}
+		\item $X^2 = 0$,
+		\item $X^2 + Y^2 = 0$,
+		\item $X^2 + rY^2 = 0$,
+		\item $X^2 + Y^2 + Z^2 = 0$,
+		\item $X^2 + Y^2 + rZ^2 = 0$.
+	\end{enumerate}
+\end{lem}
+
+Now we count the number of solutions in each of these cases.
+\subsubsection*{Rank 1 (first case)}
+The equation $X^2 = 0$ has $p + 1$ solutions.
+
+\subsubsection*{Rank 2 (second and third cases)}
+The only solution with $Y=0$ is $[0:0:1]$. So assume $Y \neq 0$, and rewrite the equations as $(X/Y)^2 = -1$ and $(X/Y)^2 = -r$ respectively.
+
+Suppose $-1$ is a quadratic residue mod $p$. The equation $(X/Y)^2 = -1$ gives two possibilities for $X/Y$, and thus $2p$ solutions in $\mathbb{P}^2$. Hence $X^2 + Y^2 = 0$ has $2p + 1$ solutions in total. On the other hand, $(X/Y)^2 = -r$ has no solutions, meaning $[0:0:1]$ is the only solution to $X^2 + rY^2 = 0$.
+
+If $-1$ is a nonresidue, the situation is reversed, and $X^2 + Y^2 = 0$ has one solution while $X^2 + rY^2 = 0$ has $2p + 1$ solutions.
+
+\subsubsection*{Rank 3 (fourth and fifth cases)}
+Suppose $-1$ is a quadratic residue mod $p$. If $Z = 0$, then we are in the setting of Lemma \ref{lem:quadrics-P1}, case (\ref{case:x^2+y^2=0}), which has two solutions. Otherwise, we can divide by $Z$ and obtain
+\begin{align*}
+	(X/Z)^2 + (Y/Z)^2 &= -1\\
+	(X/Z)^2 + (Y/Z)^2 &= -r
+\end{align*}
+respectively. By Proposition \ref{prop:circle-solutions}, these each have $p - 1$ solutions. Therefore $X^2 + Y^2 + Z^2 = 0$ and $X^2 + Y^2 + rZ^2 = 0$ each have $p+1$ solutions.
+
+Suppose $-1$ is a nonresidue. There are no solutions with $Z=0$, so rewrite the equations as above. By Proposition \ref{prop:circle-solutions} again, they each have $p + 1$ solutions.
+
+\appendix
+\section{Number theory}
+The nonzero elements $\mathbb{F}^\times_p \subset \mathbb{F}_p$ form a group under multiplication, and the squaring map
+\[
+	\mathbb{F}^\times_p \xrightarrow{x \mapsto x^2} \mathbb{F}^\times_p
+\]
+is a homomorphism. If $p$ divides $x^2 - 1 = (x+1)(x-1)$, we must have $x = \pm 1$ mod $p$, thus the kernel is $\{\pm 1\}$. Let $(\mathbb{F}^\times_p)^2$ be the image of the homomorphism. Then,
+\[
+	\mathbb{F}^\times_p / (\mathbb{F}^\times_p)^2 \cong \mathbb{Z}/2.
+\]
+This implies that the product of two nonresidues or two residues is a residue, while the product of a (nonzero) residue and nonresidue is a nonresidue. Moreover, each nonzero residue has exactly two square-roots.
+\begin{prop}\label{prop:circle-solutions}
+	For $a \neq 0$, the equation $x^2 + y^2 = a$ has $p - \legendre{-1}{p}$ solutions over $\mathbb{F}_p$.
+\end{prop}
+\begin{proof}
+	\color{blue}will write soon\color{black}
+\end{proof}
+The proof of the following fact is omitted.
+\begin{prop}
+	For an odd prime $p$, the Legendre symbol $\legendre{-1}{p}$ is given by
+	\[
+		\legendre{-1}{p} = \left\{
+			\begin{matrix}
+				1 & \text{if } p \cong 1 \pmod 4 \\
+				-1 & \text{if } p \cong 3 \pmod 4.
+			\end{matrix}
+		\right.
+	\]
+\end{prop}
 \end{document}
