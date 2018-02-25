@@ -12,6 +12,7 @@
 %\usepackage{xypic}
 \usepackage{tikz-cd} 
 \usepackage{todonotes}
+\usepackage{verbatim}
 
 %Environments
 \numberwithin{equation}{section} 
@@ -45,7 +46,7 @@
 
 \newcommand{\A}{\mathbb{A}}
 \renewcommand{\P}{\mathbb{P}} 
-\newcommand{\F}{\F}
+\newcommand{\F}{\mathbb{F}}
 \newcommand{\Z}{\mathbb{Z}}
 \newcommand{\Q}{\mathbb{Q}}
 \newcommand{\R}{\mathbb{R}}
@@ -62,51 +63,64 @@
 
     \tableofcontents
 
-    \section{Introduction} to be written 
-
+    \section{Introduction} 
+    
+    
+    
     \section{Projectivization of the problem}
 
-    For now, let us fix a conic 
+    Let us  begin by fixing a conic
     \begin{equation}\label{eq:original-conic} 
         ax^2 + bxy + cy^2 + dx + ey + f = 0 
     \end{equation} 
-    as well as a base field $\F_p$, for $p$ an odd prime. (We defer treatment of the case 
-    $p = 2$ to \S\ref{sec:affine-solutions}.)
+    and a choice of ground field $\F_p$. We further require that not all of 
+    $a$, $b$, and $c$ be zero, and that the coefficients have gcd $1$.
+    Unless otherwise specified, all primes are odd.
+    (We defer treatment of the case $p = 2$ to \S\ref{sec:affine-solutions}.)
+    \begin{defn}
+        Let $\A^n_{\F_p}$ denote $n$-dimensional affine space over $\F_p$. Define 
+        $n$-dimensional projective space over $\F_p$ as the quotient
+        \[ \P^n_{\F_p} = (\A^{n+1}_{\F_p}\setminus \{0\})/{\sim}, \]
+        where we declare that $(x_1,\ldots,x_{n+1}) \sim 
+        (\lambda x_1,\ldots,\lambda x_{n+1})$ for $\lambda$ a nonzero scalar. We
+        will primarially work with $n = 2$, and suppress the ground field from the 
+        notation. We will write $[X:Y:Z]\in \P^2$ to denote the equivalence 
+        class of $(X,Y,Z)\in \A^3 \setminus \{0\}$.
+    \end{defn}
 
-    Let $\A^n$ denote $n$-dimensional affine space over $\F_p$. Taking the quotient
-    of $\A^3 \setminus \{0\}$ by the relation $(x,y,z) \sim (\lambda x, \lambda y,
-    \lambda z)$ for $\lambda \neq 0$ produces the projective plane $\P^2$. We will
-    write $[X:Y:Z]\in \P^2$ to denote the equivalence class of $(X,Y,Z)\in \A^3
-    \setminus \{0\}$.
-
-    Let $S$ denote the solution set of \eqref{eq:original-conic} in $\A^2$. Our aim
-    is to characterize $|S|$ as a function of $a,b,c,d,e,f$, and $p$.  To do so, we
-    will first consider the homogeneous equation
+    With this construction in mind, we can \emph{projectivize} our conic
+    \eqref{eq:original-conic} from $\A^2$ to $\P^2$, by writing it as a 
+    homogenous equation: 
     \begin{equation}\label{eq:projective-conic} 
         aX^2 + bXY + cY^2 + dXZ + eYZ + fZ^2 = 0 
-    \end{equation} 
-    whose solutions define a set $S'\subset\P^2$. This
-    ``projectivization'' of the conic enables us to apply the theory of quadratic
-    forms, which we shall do in \S\ref{sec:diagonalizing-quadratic-forms}.
+    \end{equation}
+    Note that homogeneity ensures it is well-defined to ask when this
+    equation has a solution in $\P^2$
 
-    There is an evident injection $S \rightarrowtail S'$ sending $(x,y)$ to
-    $[x:y:1]$. However, elements of $S'$ of the form $[X:Y:0]$ do not correspond to
-    elements of $S$. These are solutions ``at infinity'' in the affine plane.
+    Let $S$ denote the solution set of \eqref{eq:original-conic} in $\A^2$. Our aim
+    is to characterize $|S|$ as a function of the coefficients $a,b,c,d,e,f$ and 
+    the prime $p$. The solutions of \eqref{eq:projective-conic} define a set
+    $S_\P \subset \P^2$.
+
+    There is an evident injection $S \rightarrowtail S_\P$ sending $(x,y)$ to
+    $[x:y:1]$. However, elements of $S_\P$ of the form $[X:Y:0]$ do not 
+    correspond to elements of $S$. 
+    These are solutions ``at infinity'' in the projective plane.
     Thankfully, these extraneous solutions are easily characterized: they are the
     solutions to the equation
     \begin{equation}\label{eq:projective-conic-at-infinity} 
         aX^2 + bXY + cY^2 = 0
     \end{equation} 
-    on the projective line $\P^1$. Call this solution set
-    $S_0\subset \P^1$.  
+    on the projective line $\P^1$. Call this solution set $S_0\subset \P^1$.  
 
     \begin{lem} 
-        $|S'| = |S| + |S_0|$.
+        $|S_\P| = |S| + |S_0|$.
     \end{lem} 
     \begin{proof}
-        A solution $[X:Y:Z]$ of \eqref{eq:projective-conic} corresponds to a solution
-        $(X/Z,Y/Z)$ of \eqref{eq:original-conic} if $Z \neq 0$ and to a solution
-        $[X:Y]$ of \eqref{eq:projective-conic-at-infinity} if $Z=0$.  
+        A solution $[X:Y:Z]$ of \eqref{eq:projective-conic} corresponds 
+        to a solution $(X/Z,Y/Z)$ of \eqref{eq:original-conic} when $Z \neq 0$,
+        and to a solution $[X:Y]$ of \eqref{eq:projective-conic-at-infinity} 
+        when $Z = 0$.  
     \end{proof}
 
     \section{Diagonalization of quadratic forms}
@@ -117,24 +131,23 @@
     \section{Counting solutions of a conic in $\P^2$} 
 
     We precede this undertaking with a brief review of relevant number theory.
-
-    The nonzero elements $\F^\times_p \subset \F_p$ form an abelian
+    The nonzero elements $\F_p^\times \subset \F_p$ form an abelian
     group under multiplication, and the squaring map 
-    \[ s\colon \F^\times_p \xrightarrow{x \mapsto x^2} \F^\times_p \] 
-    is a homomorphism. If $p$ divides $x^2 - 1 = (x+1)(x-1)$, we must have $x = \pm 1$ 
-    mod $p$, thus $\ker s = \{\pm 1\}$. 
-    The quotient $\F^\times_p / s(\F_p^\times)$ is a group of
-    order two: 
-    \[ \F^\times_p / s(\F_p^\times) \cong \{\pm 1\}.  \]
-    Consider the homomorphism 
-    \[ \legendre{\cdot}{p}\colon \F_p^\times \to \F_p^\times / s(\F_p^\times) 
-        \cong \{\pm 1\}, \]
-    so that $\legendre{a}{p}$ is
-    $-1$ if $a$ is a nonresidue, and $1$ if $a$ is a nonzero residue. For the sake
-    of extending the above map to a monoid homomorphism 
-    \[ (\F_p,\times) \to (\{-1,0,1\}, \times) \] one defines $\legendre{0}{p} = 0$. 
-    This completes the definition of the Legendre symbol.
-
+    \[ \F^\times_p \xrightarrow{x \mapsto x^2} \F^\times_p \] 
+    is a homomorphism. If $p$ divides $x^2 - 1 = (x+1)(x-1)$, we must have 
+    $x = \pm 1$ mod $p$, so the kernel is $\{\pm 1\}$. 
+    The cokernel $\F_p^\times / (\F_p^\times)^2$ is also group of order two: 
+    \[ \F_p^\times / (\F_p^\times)^2 \cong \{\pm 1\}.  \]
+    \begin{defn}
+        The \emph{Legendere symbol} is the quotient map    
+        \[ \legendre{\cdot}{p}: 
+            \F_p^\times \to \F_p^\times / (\F_p^\times)^2 \cong \{\pm 1\}, \]
+        where $\legendre{a}{p}$ is $-1$ if $a$ is a nonresidue,
+        and $1$ if $a$ is a nonzero residue. This map extends to a map of magmas
+        \[ (\F_p,\times) \to (\{-1,0,1\}, \times) \]
+        with $\legendre{0}{p}$ defined as $0$.
+    \end{defn}
+    
     Note that each nonzero residue has exactly two square-roots (as we are assuming
     $p > 2$ throughout).
 
@@ -146,14 +159,14 @@
     and similarly, $aX^2 + bXY + cY^2 + dXZ + eYZ + fZ^2 = 0$ can be
     rewritten as 
     \begin{equation}\label{eq:general-form-P2} 
-    a_2 X_2^2 + c_2 Y_2^2 + f_2 Z_2^2 = 0.
+        a_2 X_2^2 + c_2 Y_2^2 + f_2 Z_2^2 = 0.
     \end{equation}
     The different subscripts express that the base
     changes involved for \eqref{eq:general-form-P1} and \eqref{eq:general-form-P2}
     need not be the same!
 
-    Recall that the assumptions on the original coefficients $a,b,c,d,e,f \in
-    \mathbb{Z}$ were that 
+    Recall that the assumptions on the original coefficients 
+    $a,b,c,d,e,f \in \Z$ were that 
     \begin{itemize} 
         \item not all of $a,b,c$ are zero, and
         \item $\gcd(a,b,c,d,e,f) = 1$.  
