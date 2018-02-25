@@ -1,266 +1,340 @@
 %Document setup
-\documentclass[10pt,a4paper]{amsart}
+\documentclass[10pt,a4paper]{amsart} 
+
 \usepackage[latin1]{inputenc}
-\usepackage{mathtools}
-\usepackage{amssymb}
-\usepackage{mathrsfs} %gives mathscr font
+\usepackage{mathtools} 
+\usepackage{amssymb} 
+\usepackage{mathrsfs} % gives mathscr font 
 \usepackage{graphicx}
-%\usepackage[headsep=0.15in, left=0.5in, right=0.5in, top=0.6in, bottom=0.5in]{geometry}
-%\usepackage[textlf,mathlf]{MinionPro}
+%\usepackage[headsep=0.15in, left=0.5in, right=0.5in, top=0.6in, bottom=0.5in]{geometry} 
+%\usepackage[textlf,mathlf]{MinionPro} 
 \usepackage{fancyhdr}
 %\usepackage{xypic}
-\usepackage{tikz-cd}
+\usepackage{tikz-cd} 
 \usepackage{todonotes}
 
 %Environments
-\numberwithin{equation}{section}
+\numberwithin{equation}{section} 
 \numberwithin{figure}{section}
-\theoremstyle{definition}
+\theoremstyle{definition} 
 \newtheorem{example}{\protect\examplename}[section]
-\theoremstyle{remark}
+\theoremstyle{remark} 
 \newtheorem*{rem*}{\protect\remarkname}
-\theoremstyle{plain}
+\theoremstyle{plain} 
 \newtheorem{thm}{\protect\theoremname}[section]
-\theoremstyle{plain}
+\theoremstyle{plain} 
 \newtheorem{cor}{\protect\corollaryname}[section]
-\theoremstyle{definition}
+\theoremstyle{definition} 
 \newtheorem{defn}{\protect\definitionname}[section]
-\theoremstyle{plain}
+\theoremstyle{plain} 
 \newtheorem{prop}{\protect\propositionname}[section]
-\theoremstyle{plain}
+\theoremstyle{plain} 
 \newtheorem{lem}{\protect\lemmaname}[section]
 
 \providecommand{\definitionname}{Definition}
-\providecommand{\examplename}{Example}
+\providecommand{\examplename}{Example} 
 \providecommand{\lemmaname}{Lemma}
 \providecommand{\propositionname}{Proposition}
-\providecommand{\remarkname}{Remark}
+\providecommand{\remarkname}{Remark} 
 \providecommand{\corollaryname}{Corollary}
 \providecommand{\theoremname}{Theorem}
 
 %macros, etc.
 \newcommand{\legendre}[2]{\genfrac{(}{)}{}{}{#1}{#2}}
-\renewcommand{\arraystretch}{1.2}
+\renewcommand{\arraystretch}{1.2} 
+
 \newcommand{\A}{\mathbb{A}}
-\renewcommand{\P}{\mathbb{P}}
-\newcommand{\F}{\mathbb{F}}
+\renewcommand{\P}{\mathbb{P}} 
+\newcommand{\F}{\F}
+\newcommand{\Z}{\mathbb{Z}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\R}{\mathbb{R}}
 
-\begin{document}
-\title{Conics (title tbd)}
-\maketitle
+\begin{document} 
 
-\begin{abstract}
-	to be written
-\end{abstract}
+    \title{Conics (title tbd)} 
 
-\tableofcontents
+    \maketitle
 
-\section{Introduction}
-to be written
-\section{Projectivization of the problem}
-For now, let us fix a conic
-\begin{equation}\label{eq:original-conic}
-ax^2 + bxy + cy^2 + dx + ey + f = 0
-\end{equation}
-as well as a base field $\F_p$, for $p$ an odd prime. (We defer treatment of the case $p = 2$ to \S\ref{sec:affine-solutions}.)
+    \begin{abstract} 
+        to be written 
+    \end{abstract}
 
-Let $\A^n$ denote $n$-dimensional affine space over $\F_p$. Taking the quotient of $\A^3 \setminus \{0\}$ by the relation $(x,y,z) \sim (\lambda x, \lambda y, \lambda z)$ for $\lambda \neq 0$ produces the projective plane $\P^2$. We will write $[X:Y:Z]\in \P^2$ to denote the equivalence class of $(X,Y,Z)\in \A^3 \setminus \{0\}$.
+    \tableofcontents
 
-Let $S$ denote the solution set of \eqref{eq:original-conic} in $\A^2$. Our aim is to characterize $|S|$ as a function of $a,b,c,d,e,f$, and $p$.
-To do so, we will first consider the homogeneous equation
-\begin{equation}\label{eq:projective-conic}
-aX^2 + bXY + cY^2 + dXZ + eYZ + fZ^2 = 0
-\end{equation}
-whose solutions define a set $S'\subset\P^2$. This ``projectivization'' of the conic enables us to apply the theory of quadratic forms, which we shall do in \S\ref{sec:diagonalizing-quadratic-forms}.
+    \section{Introduction} to be written 
 
-There is an evident injection $S \rightarrowtail S'$ sending $(x,y)$ to $[x:y:1]$. However, elements of $S'$ of the form $[X:Y:0]$ do not correspond to elements of $S$. These are solutions ``at infinity'' in the affine plane. Thankfully, these extraneous solutions are easily characterized: they are the solutions to the equation
-\begin{equation}\label{eq:projective-conic-at-infinity}
-aX^2 + bXY + cY^2 = 0
-\end{equation}
-on the projective line $\P^1$. Call this solution set $S_0\subset \P^1$.
-\begin{lem}
-	$|S'| = |S| + |S_0|$.
-\end{lem}
-\begin{proof}
-	A solution $[X:Y:Z]$ of \eqref{eq:projective-conic} corresponds to a solution $(X/Z,Y/Z)$ of \eqref{eq:original-conic} if $Z \neq 0$ and to a solution $[X:Y]$ of \eqref{eq:projective-conic-at-infinity} if $Z=0$.
-\end{proof}
+    \section{Projectivization of the problem}
 
-\section{Diagonalization of quadratic forms}\label{sec:diagonalizing-quadratic-forms}
-(to be written)
+    For now, let us fix a conic 
+    \begin{equation}\label{eq:original-conic} 
+        ax^2 + bxy + cy^2 + dx + ey + f = 0 
+    \end{equation} 
+    as well as a base field $\F_p$, for $p$ an odd prime. (We defer treatment of the case 
+    $p = 2$ to \S\ref{sec:affine-solutions}.)
 
-\section{Counting solutions of a conic in $\P^2$}
-We precede this undertaking with a brief review of relevant number theory.
+    Let $\A^n$ denote $n$-dimensional affine space over $\F_p$. Taking the quotient
+    of $\A^3 \setminus \{0\}$ by the relation $(x,y,z) \sim (\lambda x, \lambda y,
+    \lambda z)$ for $\lambda \neq 0$ produces the projective plane $\P^2$. We will
+    write $[X:Y:Z]\in \P^2$ to denote the equivalence class of $(X,Y,Z)\in \A^3
+    \setminus \{0\}$.
 
-The nonzero elements $\mathbb{F}^\times_p \subset \mathbb{F}_p$ form an abelian group under multiplication, and the squaring map
-\[
-s\colon \mathbb{F}^\times_p \xrightarrow{x \mapsto x^2} \mathbb{F}^\times_p
-\]
-is a homomorphism. If $p$ divides $x^2 - 1 = (x+1)(x-1)$, we must have $x = \pm 1$ mod $p$, thus $\ker s = \{\pm 1\}$. The quotient $\mathbb{F}^\times_p / s(\F_p^\times)$ is a group of order two:
-\[
-\mathbb{F}^\times_p / s(\F_p^\times) \cong \{\pm 1\}.
-\]
-Consider the homomorphism
-\[
-	\legendre{\cdot}{p}\colon \F_p^\times \to \F_p^\times / s(\F_p^\times) \cong \{\pm 1\},
-\]
-so that $\legendre{a}{p}$ is $-1$ if $a$ is a nonresidue, and $1$ if $a$ is a nonzero residue. For the sake of extending the above map to a monoid homomorphism
-\[
-	(\F_p,\times) \to (\{-1,0,1\}, \times)
-\]
-one defines $\legendre{0}{p} = 0$. This completes the definition of the Legendre symbol.
+    Let $S$ denote the solution set of \eqref{eq:original-conic} in $\A^2$. Our aim
+    is to characterize $|S|$ as a function of $a,b,c,d,e,f$, and $p$.  To do so, we
+    will first consider the homogeneous equation
+    \begin{equation}\label{eq:projective-conic} 
+        aX^2 + bXY + cY^2 + dXZ + eYZ + fZ^2 = 0 
+    \end{equation} 
+    whose solutions define a set $S'\subset\P^2$. This
+    ``projectivization'' of the conic enables us to apply the theory of quadratic
+    forms, which we shall do in \S\ref{sec:diagonalizing-quadratic-forms}.
 
-Note that each nonzero residue has exactly two square-roots (as we are assuming $p > 2$ throughout).
+    There is an evident injection $S \rightarrowtail S'$ sending $(x,y)$ to
+    $[x:y:1]$. However, elements of $S'$ of the form $[X:Y:0]$ do not correspond to
+    elements of $S$. These are solutions ``at infinity'' in the affine plane.
+    Thankfully, these extraneous solutions are easily characterized: they are the
+    solutions to the equation
+    \begin{equation}\label{eq:projective-conic-at-infinity} 
+        aX^2 + bXY + cY^2 = 0
+    \end{equation} 
+    on the projective line $\P^1$. Call this solution set
+    $S_0\subset \P^1$.  
 
-In \S\ref{sec:diagonalizing-quadratic-forms}, we showed that, for an appropriate choice of coordinates, $aX^2 + bXY + cY^2$ can be rewritten as
-\begin{equation}\label{eq:general-form-P1}
-	a_1 X_1^2 + c_1 Y_1^2 = 0
-\end{equation}
-and similarly, $aX^2 + bXY + cY^2 + dXZ + eYZ + fZ^2 = 0$ can be rewritten as
-\begin{equation}\label{eq:general-form-P2}
-	a_2 X_2^2 + c_2 Y_2^2 + f_2 Z_2^2 = 0.
-\end{equation}
-The different subscripts express that the base changes involved for \eqref{eq:general-form-P1} and \eqref{eq:general-form-P2} need not be the same!
+    \begin{lem} 
+        $|S'| = |S| + |S_0|$.
+    \end{lem} 
+    \begin{proof}
+        A solution $[X:Y:Z]$ of \eqref{eq:projective-conic} corresponds to a solution
+        $(X/Z,Y/Z)$ of \eqref{eq:original-conic} if $Z \neq 0$ and to a solution
+        $[X:Y]$ of \eqref{eq:projective-conic-at-infinity} if $Z=0$.  
+    \end{proof}
 
-Recall that the assumptions on the original coefficients $a,b,c,d,e,f \in \mathbb{Z}$ were that
-\begin{itemize}
-	\item not all of $a,b,c$ are zero, and
-	\item $\gcd(a,b,c,d,e,f) = 1$.
-\end{itemize}
-If $p$ divides $a,b$, and $c$, then $a_1 = c_1 = 0$ above. However, it will never be the case that $a_2 = c_2 = f_2 = 0$.
+    \section{Diagonalization of quadratic forms}
+    \label{sec:diagonalizing-quadratic-forms} 
 
-\subsection{Extraneous solutions}\label{subsec:counting-P1-solutions}
-Fix a quadratic nonresidue $r \in \F_p$. By scaling the equation \eqref{eq:general-form-P1} and by scaling and permuting the coordinates as appropriate, we can obtain one of the following equivalent forms:
-\begin{enumerate}
-	\item $0 = 0$ if both $a_1, c_1$ are zero,
-	\item $X^2 = 0$ if exactly one of $a_1, c_1$ is zero,
-	\item $X^2 + Y^2 = 0$ if $a_1 c_1$ is a nonzero quadratic residue, and \label{case:x^2+y^2=0}
-	\item $X^2 + rY^2 = 0$ if $a_1 c_1$ is a nonzero quadratic nonresidue.
-\end{enumerate}
+    (to be written)
 
-The first of these has $|\P^1| = p+1$ solutions. 
+    \section{Counting solutions of a conic in $\P^2$} 
 
-The second has one solution, namely $[0:1]$.
+    We precede this undertaking with a brief review of relevant number theory.
 
-Evidently $Y$ must be nonzero for the last two cases, so we can rewrite them as $(X/Y)^2 = -1$ and $(X/Y)^2 = -r$ respectively. If $-1$ is a quadratic residue, then $-r$ is not. It follows that $X^2 + Y^2 = 0$ has two solutions and $X^2 + rY^2 = 0$ has none. If $-1$ is a nonresidue, the situation is reversed: $X^2 + Y^2 = 0$ has no solutions and $X^2 + rY^2 = 0$ has two solutions.
+    The nonzero elements $\F^\times_p \subset \F_p$ form an abelian
+    group under multiplication, and the squaring map 
+    \[ s\colon \F^\times_p \xrightarrow{x \mapsto x^2} \F^\times_p \] 
+    is a homomorphism. If $p$ divides $x^2 - 1 = (x+1)(x-1)$, we must have $x = \pm 1$ 
+    mod $p$, thus $\ker s = \{\pm 1\}$. 
+    The quotient $\F^\times_p / s(\F_p^\times)$ is a group of
+    order two: 
+    \[ \F^\times_p / s(\F_p^\times) \cong \{\pm 1\}.  \]
+    Consider the homomorphism 
+    \[ \legendre{\cdot}{p}\colon \F_p^\times \to \F_p^\times / s(\F_p^\times) 
+        \cong \{\pm 1\}, \]
+    so that $\legendre{a}{p}$ is
+    $-1$ if $a$ is a nonresidue, and $1$ if $a$ is a nonzero residue. For the sake
+    of extending the above map to a monoid homomorphism 
+    \[ (\F_p,\times) \to (\{-1,0,1\}, \times) \] one defines $\legendre{0}{p} = 0$. 
+    This completes the definition of the Legendre symbol.
 
-\subsection{Total solutions}\label{subsec:counting-P2-solutions}
-Let $r$ be a quadratic nonresidue in $\F_p$ as before. Just as in \S\ref{subsec:counting-P1-solutions}, we can rewrite \eqref{eq:general-form-P2} as one of the following:
-\begin{enumerate}
-	\item $X^2 = 0$ if two of $a_2, c_2, f_2$ are zero,
-	\item $X^2 + Y^2 = 0$ if exactly one of $a_2, c_2, f_2$ is zero, and the product of the other two is a quadratic residue,
-	\item $X^2 + rY^2 = 0$ if exactly one of $a_2, c_2, f_2$ is zero, and the product of the other two is a quadratic nonresidue,
-	\item $X^2 + Y^2 + Z^2 = 0$ if $a_2 c_2 f_2$ is a nonzero quadratic residue, and
-	\item $X^2 + Y^2 + rZ^2 = 0$ if $a_2 c_2 f_2$ is a nonzero quadratic nonresidue.
-\end{enumerate}
+    Note that each nonzero residue has exactly two square-roots (as we are assuming
+    $p > 2$ throughout).
 
-Now we count the number of solutions in each of these cases.
-\subsubsection*{Rank 1 (first case)}
-The equation $X^2 = 0$ has $p + 1$ solutions.
+    In \S\ref{sec:diagonalizing-quadratic-forms}, we showed that, for an
+    appropriate choice of coordinates, $aX^2 + bXY + cY^2$ can be rewritten as
+    \begin{equation}\label{eq:general-form-P1} 
+        a_1 X_1^2 + c_1 Y_1^2 = 0
+    \end{equation} 
+    and similarly, $aX^2 + bXY + cY^2 + dXZ + eYZ + fZ^2 = 0$ can be
+    rewritten as 
+    \begin{equation}\label{eq:general-form-P2} 
+    a_2 X_2^2 + c_2 Y_2^2 + f_2 Z_2^2 = 0.
+    \end{equation}
+    The different subscripts express that the base
+    changes involved for \eqref{eq:general-form-P1} and \eqref{eq:general-form-P2}
+    need not be the same!
 
-\subsubsection*{Rank 2 (second and third cases)}
-The only solution with $Y=0$ is $[0:0:1]$. So assume $Y \neq 0$, and rewrite the equations as $(X/Y)^2 = -1$ and $(X/Y)^2 = -r$ respectively.
+    Recall that the assumptions on the original coefficients $a,b,c,d,e,f \in
+    \mathbb{Z}$ were that 
+    \begin{itemize} 
+        \item not all of $a,b,c$ are zero, and
+        \item $\gcd(a,b,c,d,e,f) = 1$.  
+    \end{itemize} 
+    If $p$ divides $a,b$, and $c$, then $a_1 = c_1 = 0$ above. However, 
+    it will never be the case that $a_2 = c_2 = f_2 = 0$.
 
-Suppose $-1$ is a quadratic residue mod $p$. The equation $(X/Y)^2 = -1$ gives two possibilities for $X/Y$, and thus $2p$ solutions in $\mathbb{P}^2$. Hence $X^2 + Y^2 = 0$ has $2p + 1$ solutions in total. On the other hand, $(X/Y)^2 = -r$ has no solutions, meaning $[0:0:1]$ is the only solution to $X^2 + rY^2 = 0$.
+    \subsection{Extraneous solutions}
+    \label{subsec:counting-P1-solutions}
 
-If $-1$ is a nonresidue, the situation is reversed, and $X^2 + Y^2 = 0$ has one solution while $X^2 + rY^2 = 0$ has $2p + 1$ solutions.
+    Fix a quadratic nonresidue $r \in \F_p$. By scaling the equation
+    \eqref{eq:general-form-P1} and by scaling and permuting the coordinates as
+    appropriate, we can obtain one of the following equivalent forms:
+    \begin{enumerate} 
+        \item $0 = 0$ if both $a_1, c_1$ are zero, 
+        \item $X^2 = 0$ if exactly one of $a_1, c_1$ is zero, 
+        \item $X^2 + Y^2 = 0$ if $a_1 c_1$ is a nonzero quadratic residue, and
+        \label{case:x^2+y^2=0} \item $X^2 + rY^2 = 0$ if $a_1 c_1$ is a nonzero 
+        quadratic nonresidue.  
+    \end{enumerate}
 
-\subsubsection*{Rank 3 (fourth and fifth cases)}
-Suppose $-1$ is a quadratic residue mod $p$. If $Z = 0$, then we are in the setting of \S\ref{subsec:counting-P1-solutions} case (\ref{case:x^2+y^2=0}), which has two solutions. Otherwise, we can divide by $Z$ and obtain
-\begin{align*}
-(X/Z)^2 + (Y/Z)^2 &= -1\\
-(X/Z)^2 + (Y/Z)^2 &= -r
-\end{align*}
-respectively. By Proposition \ref{prop:circle-solutions} below, these each have $p - 1$ solutions. Therefore $X^2 + Y^2 + Z^2 = 0$ and $X^2 + Y^2 + rZ^2 = 0$ each have $p+1$ solutions.
+    The first of these has $|\P^1| = p+1$ solutions. 
 
-Suppose $-1$ is a nonresidue. There are no solutions with $Z=0$, so rewrite the equations as above. By Proposition \ref{prop:circle-solutions} again, they each have $p + 1$ solutions.\footnote{\textcolor{red}{add comment about isomorphism to $\P^1$}}
+    The second has one solution, namely $[0:1]$.
 
-\begin{prop}\label{prop:circle-solutions}
-	For $a \neq 0$, the equation $x^2 + y^2 = a$ has $p - \legendre{-1}{p}$ solutions over $\mathbb{F}_p$. \textcolor{red}{usage of $S_0$ in this proof is conflicting notation; need to address}
-\end{prop}
-\begin{proof}
-	Let $S_a \subset \mathbb{A}^2$ denote the solution set of $x^2 + y^2 = a$. First we will show the statement for $a=1$.
-	
-	Let $T$ denote the square-roots of $-1$ in $\mathbb{F}_p$. In the case that $-1$ is a nonresidue, $T$ is empty. Consider the maps $f\colon S_1 \setminus (1,0) \to \mathbb{F}_p \setminus T$ and $g\colon \mathbb{F}_p \setminus T \to S_1 \setminus (1,0)$ defined by
-	\begin{align*}
-	f(x,y) &= \frac{y}{x-1}\\
-	g(m) &= \left(\frac{m^2 - 1}{m^2 + 1}, \frac{-2m}{m^2 + 1}\right).
-	\end{align*}
-	It is easy to check that they are inverse to one another, from which it follows that $|S_1| = |\mathbb{F}_p| - |T| + 1 = p - \legendre{-1}{p}$ as desired.
-	
-	Note that if $a,a'$ are both nonzero residues (or both nonresidues) then $|S_a| = |S_{a'}|$. From the preceding, we have the claim for all residues $a$. Observe that $S_0 \cup \cdots \cup S_{p-1}$ gives a partition of $\mathbb{A}^2$. Since
-	\[
-	|S_0| = \left\{\begin{matrix}
-	1 & \text{if }\legendre{-1}{p} = -1,\\
-	2p+1 & \text{if }\legendre{-1}{p} = 1,
-	\end{matrix}\right.
-	\]
-	for a nonresidue $a$ we have
-	\[
-	|S_a| = \frac{2}{p-1} \left(p^2 - |S_0| - \frac{p-1}{2}|S_1|\right) = p - \legendre{-1}{p}.\qedhere
-	\]
-\end{proof}
+    Evidently $Y$ must be nonzero for the last two cases, so we can rewrite them as
+    $(X/Y)^2 = -1$ and $(X/Y)^2 = -r$ respectively. If $-1$ is a quadratic residue,
+    then $-r$ is not. It follows that $X^2 + Y^2 = 0$ has two solutions and $X^2 +
+    rY^2 = 0$ has none. If $-1$ is a nonresidue, the situation is reversed: $X^2 +
+    Y^2 = 0$ has no solutions and $X^2 + rY^2 = 0$ has two solutions.
 
-\begin{example}[A zoo of possibilities]\label{exa:all-possibilities}
-	
-	In the table below, the first two columns reflect the discussion immediately preceding. The remaining columns consider the number of extraneous solutions. The entries marked ``N/A'' are impossible and explanation is given afterwards. For all other entries, examples are given for the specific case $p=3$.
-	\[\begin{tabular}{|c|c||c|c|c|c|}
-	\hline
-	\multicolumn{2}{|c||}{} & \multicolumn{4}{c|}{\# soln. in $\{Z=0\}$}  \\
-	\hline
-	rank of proj. & \# soln. in $\mathbb{P}^2$ & 0 & 1 & 2 & $p + 1$\\ 
-	\hline 
-	\hline
-	1 & $p+1$ & N/A & $x^2$ & N/A & 1 \\ 
-	\hline 
-	2 & 1 & $x^2 + y^2$ & $x^2 + 1$ & N/A & N/A \\ 
-	\hline 
-	2 & $2p+1$ & N/A & $x^2 + x$ & $xy$ & x \\ 
-	\hline 
-	3 & $p+1$ & $x^2 + y^2 + 1$ & $x+y^2$ & $x^2 + 2y^2 + 1$ & N/A \\ 
-	\hline 
-	\end{tabular} \]
-	\begin{itemize}
-		\item When the projectivization has rank 1, it is a double line. If this line is distinct from $\{Z = 0\}$, they meet at exactly one point. Otherwise they are the same line, giving $p+1$ solutions in $\{Z=0\}$.
-		\item When the projectivization has rank 2 and has $2p + 1$ solutions, it is the union of two intersecting lines. These lines cannot be disjoint from $\{Z=0\}$.
-		\item There are $p+1$ solutions in $\{Z = 0\}$ only when the coefficients $a,b,c$ are all zero. In particular, such a conic cannot have a projectivization of rank 3.
-	\end{itemize}
-\end{example}
+    \subsection{Total solutions}
+    \label{subsec:counting-P2-solutions}
 
-\section{Counting solutions of a conic in $\A^2$}\label{sec:affine-solutions}
-Given a conic, we now have almost all of the necessary pieces to determine how many solutions it has in $\A^2$ over $\F_p$. The remaining case is that of a conic over $\F_2$.
+    Let $r$ be a quadratic nonresidue in $\F_p$ as before. Just as in
+    \S\ref{subsec:counting-P1-solutions}, we can rewrite \eqref{eq:general-form-P2}
+    as one of the following: 
+    \begin{enumerate} 
+        \item $X^2 = 0$ if two of $a_2, c_2, f_2$ are zero, 
+        \item $X^2 + Y^2 = 0$ if exactly one of $a_2, c_2, f_2$ is zero,
+        and the product of the other two is a quadratic residue, 
+        \item $X^2 + rY^2 = 0$ if exactly one of $a_2, c_2, f_2$ is zero, 
+        and the product of the other two is a quadratic nonresidue, 
+        \item $X^2 + Y^2 + Z^2 = 0$ if $a_2 c_2 f_2$ is a nonzero quadratic residue, and 
+        \item $X^2 + Y^2 + rZ^2 = 0$ if $a_2 c_2 f_2$ is
+        a nonzero quadratic nonresidue.  
+    \end{enumerate}
 
-Fortunately there are very few such conics, and the solutions to
-\[
-ax^2 + bxy + cy^2 + dx + ey + f = 0
-\]
-are the same as the solutions to
-\[
-bxy + (a+d)x + (c+e)y + f = 0.
-\]
-At this point, one can simply list out all the possibilities. It can be checked that the number of solutions in each case can be concisely written as $2 + b(-1)^{(a+d)(c+e) + f}$, where $b$ is either 0 or 1. \textcolor{red}{I have temporarily put this here, but this might flow better if moved into the proof of the theorem below. }
+    Now we count the number of solutions in each of these cases.
 
-(remainder to be written)
+    \subsubsection*{Rank 1 (first case)} 
+    The equation $X^2 = 0$ has $p + 1$ solutions.
 
-\begin{thm}
-	main theorem determining $F(a,b,c,d,e,f,p)$
-\end{thm}
+    \subsubsection*{Rank 2 (second and third cases)} 
+    The only solution with $Y=0$ is $[0:0:1]$. So assume $Y \neq 0$, and rewrite the 
+    equations as $(X/Y)^2 = -1$ and $(X/Y)^2 = -r$ respectively.
 
-get a reference for the following fact (which we'll probably need)?
-\begin{prop}
-	For an odd prime $p$, the Legendre symbol $\legendre{-1}{p}$ is given by
-	\[
-	\legendre{-1}{p} = \left\{
-	\begin{matrix}
-	1 & \text{if } p \cong 1 \pmod 4 \\
-	-1 & \text{if } p \cong 3 \pmod 4.
-	\end{matrix}
-	\right.
-	\]
-\end{prop}
+    Suppose $-1$ is a quadratic residue mod $p$. The equation $(X/Y)^2 = -1$ gives
+    two possibilities for $X/Y$, and thus $2p$ solutions in $\mathbb{P}^2$. Hence
+    $X^2 + Y^2 = 0$ has $2p + 1$ solutions in total. On the other hand, $(X/Y)^2 =
+    -r$ has no solutions, meaning $[0:0:1]$ is the only solution to $X^2 + rY^2 =
+    0$.
 
-\section{To the $p$-adics via Hensel's lemma}
-(to be written)
+    If $-1$ is a nonresidue, the situation is reversed, and $X^2 + Y^2 = 0$ has one
+    solution while $X^2 + rY^2 = 0$ has $2p + 1$ solutions.
 
-\section{To $\mathbb{Q}$ via Hasse-Minkowski}
-(to be written)
+    \subsubsection*{Rank 3 (fourth and fifth cases)} 
+    Suppose $-1$ is a quadratic residue mod $p$. If $Z = 0$, then we are in the setting of
+    \S\ref{subsec:counting-P1-solutions} case (\ref{case:x^2+y^2=0}), which has two
+    solutions. Otherwise, we can divide by $Z$ and obtain 
+    \begin{align*} 
+        (X/Z)^2 + (Y/Z)^2 &= -1 \\ 
+        (X/Z)^2 + (Y/Z)^2 &= -r 
+    \end{align*} 
+    respectively. By Proposition \ref{prop:circle-solutions} below, these each have $p - 1$
+    solutions. Therefore $X^2 + Y^2 + Z^2 = 0$ and $X^2 + Y^2 + rZ^2 = 0$ each have
+    $p+1$ solutions.
+
+    Suppose $-1$ is a nonresidue. There are no solutions with $Z=0$, so rewrite the
+    equations as above. By Proposition \ref{prop:circle-solutions} again, they each
+    have $p + 1$ solutions. \footnote{\textcolor{red}{add comment about isomorphism
+    to $\P^1$}}
+
+    \begin{prop}\label{prop:circle-solutions} 
+        For $a \neq 0$, the equation $x^2 + y^2 = a$ has $p - \legendre{-1}{p}$ 
+        solutions over $\F_p$.
+        \textcolor{red}{usage of $S_0$ in this proof is conflicting notation; need to address} 
+    \end{prop} 
+    \begin{proof} 
+        Let $S_a \subset \mathbb{A}^2$ denote the solution set of $x^2 + y^2 = a$. 
+        First we will show the statement for $a=1$.
+    	
+    	Let $T$ denote the square-roots of $-1$ in $\F_p$. In the case
+        that $-1$ is a nonresidue, $T$ is empty. Consider the maps $f\colon S_1
+        \setminus (1,0) \to \F_p \setminus T$ and $g\colon \F_p
+        \setminus T \to S_1 \setminus (1,0)$ defined by 
+        \begin{align*} 
+            f(x,y) &= \frac{y}{x-1} \\ 
+            g(m) &= \left(\frac{m^2 - 1}{m^2 + 1}, \frac{-2m}{m^2 + 1}\right).
+        \end{align*} 
+        It is easy to check that they are inverse to one
+        another, from which it follows that $|S_1| = |\F_p| - |T| + 1 = p -
+        \legendre{-1}{p}$ as desired.
+    	
+    	Note that if $a,a'$ are both nonzero residues (or both nonresidues)
+        then $|S_a| = |S_{a'}|$. From the preceding, we have the claim for all residues
+        $a$. Observe that $S_0 \cup \cdots \cup S_{p-1}$ gives a partition of
+        $\mathbb{A}^2$. Since 
+        \[ |S_0| = \begin{cases}
+            1 & \text{if } \legendre{-1}{p} = -1 \\
+            -1 & \text{if} \legendre{-1}{p} = 1 \\
+        \end{cases} \] 
+        for a nonresidue $a$ we have 
+        \[ |S_a| = \frac{2}{p-1} 
+                    \left(p^2 - |S_0| - \frac{p-1}{2}|S_1|\right) = 
+                    p - \legendre{-1}{p}. \qedhere \] 
+    \end{proof}
+
+    \begin{example}[A zoo of possibilities]
+    \label{exa:all-possibilities}
+    	
+    In the table below, the first two columns reflect the discussion
+    immediately preceding. The remaining columns consider the number of extraneous
+    solutions. The entries marked ``N/A'' are impossible and explanation is given
+    afterwards. For all other entries, examples are given for the specific case
+    $p=3$.  
+    \begin{center} % TODO: convert to booktabs
+        \begin{tabular}{|c|c||c|c|c|c|} \hline \multicolumn{2}{|c||}{} &
+    \multicolumn{4}{c|}{\# soln. in $\{Z=0\}$}  \\ \hline rank of proj. & \# soln.
+    in $\mathbb{P}^2$ & 0 & 1 & 2 & $p + 1$\\ \hline \hline 1 & $p+1$ & N/A & $x^2$
+    & N/A & 1 \\ \hline 2 & 1 & $x^2 + y^2$ & $x^2 + 1$ & N/A & N/A \\ \hline 2 &
+    $2p+1$ & N/A & $x^2 + x$ & $xy$ & x \\ \hline 3 & $p+1$ & $x^2 + y^2 + 1$ &
+    $x+y^2$ & $x^2 + 2y^2 + 1$ & N/A \\ \hline \end{tabular}
+    \end{center} 
+    \begin{itemize}
+        \item When the projectivization has rank 1, it is a double line. If this
+        line is distinct from $\{Z = 0\}$, they meet at exactly one point. 
+        Otherwise they are the same line, giving $p+1$ solutions in $\{Z=0\}$. 
+        \item When the projectivization has rank 2 and has $2p + 1$ solutions, it
+        is the union of two intersecting lines. These lines cannot be disjoint 
+        from $\{Z=0\}$.
+        \item There are $p+1$ solutions in $\{Z = 0\}$ only when the 
+        coefficients $a,b,c$ are all zero. In particular, such a conic cannot 
+        have a projectivization of rank 3.
+    \end{itemize} 
+    \end{example}
+
+    \section{Counting solutions of a conic in $\A^2$}
+    \label{sec:affine-solutions}
+
+    Given a conic, we now have almost all of the necessary pieces to determine how
+    many solutions it has in $\A^2_{\F_p}$. The remaining case is that of a
+    conic over $\F_2$.
+
+    Fortunately there are very few such conics, and the solutions to 
+    \[ ax^2 + bxy + cy^2 + dx + ey + f = 0 \] 
+    are the same as the solutions to 
+    \[ bxy + (a+d)x + (c+e)y + f = 0.  \] 
+    At this point, one can simply list out all the
+    possibilities. It can be checked that the number of solutions in each case can
+    be concisely written as $2 + b(-1)^{(a+d)(c+e) + f}$, where $b$ is either 0 or
+    1. \textcolor{red}{I have temporarily put this here, but this might flow better
+    if moved into the proof of the theorem below. }
+
+    (remainder to be written)
+
+    \begin{thm} 
+        main theorem determining $F(a,b,c,d,e,f,p)$ 
+    \end{thm}
+
+    % TODO: get a reference for the following fact (which we'll probably need)?
+    \begin{prop} 
+        For an odd prime $p$, the Legendre symbol $\legendre{-1}{p}$ is
+        given by 
+        \[ \legendre{-1}{p} = \begin{cases} 
+            1 & \text{if } p \cong 1 \pmod 4 \\ 
+            -1 & \text{if } p \cong 3 \pmod 4.  
+        \end{cases} \]
+    \end{prop}
+
+    \section{To the $p$-adics via Hensel's lemma} (to be written)
+
+    \section{To $\mathbb{Q}$ via Hasse-Minkowski} (to be written) '
 \end{document}
