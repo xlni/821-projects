@@ -198,46 +198,68 @@ r&0&0\\
 \end{tabu}
 $$
 \end{cor}
-In the next section, we determine how many solutions each of the corresponding conics has in $\P^2$. For now, we determine to which of these six matrices \(A\) corresponds:
+In the next section, we determine how many solutions each of the corresponding conics has in $\P^2$. For now, we determine to which of these six matrices \(A\) corresponds; however, we do not distinguish between the matrices (1) and (2) as the corresponding conics $X^2=0$ and $rX^2=0$ have equivalent vanishing sets.
 
-\textcolor{red}{WARNING: This ``theorem'' (and its ``proof'') are incorrect!}
 \begin{thm}
 Let
 \begin{align*}
-\alpha_0&=4acf-ae^2-b^2f+bde-cd^2,\\
-\alpha_1&=4ac+4af-b^2+4cf-d^2-e^2,\\
-\alpha_2&=a+c+f.
+\alpha&=4acf-ae^2-b^2f+bde-cd^2,\\
+\beta&=4ac+4af+4cf-b^2-d^2-e^2,
 \end{align*}
-Then \(A\) corresponds via Corollary~\ref{cor:sixcases} to:
+and let $\gamma$ be defined by the following procedure:
 \begin{enumerate}
-\item if $\alpha_0=\alpha_1=0$ and $\alpha_2$ is a nonzero quadratic residue;
-\item if $\alpha_0=\alpha_1=0$ and $\alpha_2$ is a nonzero quadratic nonresidue;
-\item if $\alpha_0=0$ and $\alpha_1$ is a nonzero quadratic residue;
-\item if $\alpha_0=0$ and $\alpha_1$ is a nonzero quadratic nonresidue;
-\item if $\alpha_0$ is a nonzero quadratic residue;
-\item if $\alpha_0$ is a nonzero quadratic nonresidue.
+\item Permute the coordinates of $A$ so that $4ac-b^2\ne 0$;
+\item If $(a,c)\ne(0,0)$, then let $\gamma=4ac-b^2$;
+\item Otherwise, let $\gamma=-1$.
+\end{enumerate}
+Then $A$ corresponds via Corollary~\ref{cor:sixcases} to
+\begin{enumerate}
+\item[(1) or (2)] if  $\alpha=\beta=0$;
+\item[(3)] if $\alpha=0$, $\beta\ne 0$, and $\gamma$ is a nonzero quadratic residue;
+\item[(4)] if $\alpha=0$, $\beta\ne 0$, and $\gamma$ is a nonzero quadratic nonresidue;
+\item[(5)] if $\alpha$ is a nonzero quadratic residue;
+\item[(6)] if $\alpha$ is a nonzero quadratic nonresidue.
 \end{enumerate}
 \end{thm}
 \begin{proof}
-Let $P\in\GL_3(\F_p)$ be such that $P^TAP$ is one of the six matrices in Corollary~\ref{cor:sixcases}; these six matrices are distinguished by their ranks and the products of their nonzero eigenvalues. Since $P$ is invertible, the rank of $P^TAP$ is equal to that of $A$.
-
-Let $P_1$, $P_2$, and $P_3$ denote the columns of $P$, which by the proof of Theorem~\ref{thm:diag}, form an orthogonal (with respect to the symmetric bilinear form defined by $A$) basis of eigenvectors of $A$. Let
-\begin{equation*}
-V=\Span\{P_i:AP_i\ne 0\}\subset\F_p^3.
-\end{equation*}
-Then $A$ restricts to an endomorphism $A|_V$ of $V$, and $P^TAP$ restricts to an endomorphism $P^TAP|_{P^{-1}V}$ of $P^{-1}V$. Moreover, $\det A|_V$ is equal to the product of the nonzero eigenvalues of $A$, and
-\begin{equation*}
-\det P^TAP|_{P^{-1}V}=\det P^T|_V\cdot\det A|_V\cdot\det P|_{P^{-1}V}=\det A|_V\cdot\det P^TP|_{P^{-1}V}
-\end{equation*}
-is equal to the product of the nonzero eigenvalues of $P^TAP$.
-
-Thus, it suffices to compute the eigenvalues of $A$.
-
-An easy \texttt{Magma} \cite{magma} computation shows that the characteristic polynomial of $A$ is given by
+Let $P\in\GL_3(\F_p)$ be such that $P^TAP$ is one of the six matrices in Corollary~\ref{cor:sixcases}; these six matrices are distinguished by their ranks and the products of their nonzero eigenvalues. Since $P$ is invertible, the rank of $P^TAP$ is equal to that of $A$. By the rank-nullity theory, the rank of $A$ is given by subtracting the multiplicity of the eigenvalue $0$ from $3$; this multiplicity is given by the number of times the characteristic polynomial of $A$ is divisible by $t$. A \texttt{Magma} \cite{magma} computation shows that the characteristic polynomial of $A$ is given by
 \begin{equation*}
 t^3+(-a-c-f)t^2+\tfrac{1}{4}(4ac+4af-b^2+4cf-d^2-e^2)t+\tfrac{1}{4}(-4acf+ae^2+b^2f-bde+cd^2).
 \end{equation*}
-By the rank-nullity theory, the rank of $A$ is given by subtracting the multiplicity $m$ of the eigenvalue $0$ from $3$; this multiplicity is given by the number of times the characteristic polynomial of $A$ is divisible by $t$. Dividing the characteristic polynomial through by $t^m$ and applying Vieta's formulas shows that the product of the nonzero eigenvalues of $A$ is given by $(-1)^{3-m}$ times the degree-$m$ coefficient of the characteristic polynomial. The result is now immediate.
+
+Thus, $A$ has rank $3$ when $\alpha=4\det A$ is nonzero; since
+\begin{equation*}
+\det P^TAP=\det P^T\cdot\det A\cdot\det P=\det A\cdot(\det P)^2,
+\end{equation*}
+the determinant of $A$ is a quadratic residue if and only if that of $P^TAP$ is. Cases (5) and (6) of the theorem are now immediate.
+
+Likewise, $A$ has rank $2$ when $\alpha=0$ and $\beta\ne 0$. Since $\beta$ is the sum of $4ac-b^2$, $4af-d^2$, and $4cf-e^2$, these cannot all be zero; the latter two are obtained from $4ac-b^2$ by permuting the coordinates of $A$, which justifies step (1) in computing $\gamma$. Thus, assume that step (1) has been performed. If $a\ne 0$, then the \texttt{Magma} method \texttt{DiagonalForm()} shows that $A$ diagonalizes to
+\begin{equation*}
+\begin{bmatrix}
+a&0&0\\
+0&\frac{4ac-b^2}{4a}&0\\
+0&0&0
+\end{bmatrix}
+\end{equation*}
+via some $P$. Thus, the product of the nonzero eigenvalues of this matrix is $\gamma=4ac-b^2$, up to a square; the case $c\ne 0$ is similar. Next, if $a=c=0$ and $f\ne 0$, then a similar \texttt{Magma} computation shows that $A$ diagonalizes to
+\begin{equation*}
+\begin{bmatrix}
+f&0&0\\
+0&-\frac{e^2}{4f}&0\\
+0&0&0
+\end{bmatrix}.
+\end{equation*}
+The product of the nonzero eigenvalues of this matrix is $\gamma=-1$, up to a square. Note that in this case the diagonalizing matrix $P$ is only well-defined if $e$ is nonzero as well, but this is clear as the condition $\alpha=0$ is equivalent to $bf=de$, and $b\ne 0$ as $b^2-4ac\ne 0$. Finally, if $a=c=f=0$, then either $d=0$ or $e=0$, and the same \texttt{Magma} computation shows that in either case $A$ diagonalizes to 
+\begin{equation*}
+\begin{bmatrix}
+b&0&0\\
+0&-b/4&0\\
+0&0&0
+\end{bmatrix}.
+\end{equation*}
+The product of the nonzero eigenvalues of this matrix is again $\gamma=-1$, up to a square. Since the matrices (3) and (4) are obtained from these diagonalized forms of $A$ by scaling coordinates, it is clear that $A$ corresponds to (3) if $\gamma$ is a quadratic residue and to (4) if it is not.
+
+Finally, $A$ has rank $1$ when $\alpha=\beta=0$, which establishes the first case.
 \end{proof}
 
     \section{Counting solutions of a conic in $\P^2$} 
