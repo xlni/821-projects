@@ -71,66 +71,9 @@
 
     \section{Introduction} 
     
-    % Get a reference for general nonsense over the reals
-    A \emph{conic section} on the real plane $\R^2$ is the solution set of 
-    a polynomial
-    \[ C: ax^2 + bxy + cy^2 + dx + ey + f = 0, \]
-    where the degree-2 coefficients $a, b, c$ are not all zero. More specifically,
-    $C$ is an affine plane algebraic curve, given by a degree 2 polynomial, over
-    the reals. This conic can be \emph{projectivized} by adding an additional
-    unknown to make the polynomial homogeneous:
-    \[ \widetilde{C}: aX^2 + bXY + cY^2 + dXZ + eXZ + fZ^2 = 0. \]
-    This gives a quadratic form on $\R^3$; when this form is degenerate, we
-    say that the original conic, $C$, is also degenerate.
     
-    The homogeneous part of $C$, $ax^2 + bxy + cy^2$, gives a quadratic form
-    on $\R^2$, with matrix
-    \[ \begin{bmatrix}
-        a & b \\
-        b & c
-    \end{bmatrix}. \]
-    The determinant of this matrix, called the \emph{discriminant} and
-    denoted $\Delta = b^2 - 4ac$, gives a characterization of the shape of $C$
-    when it is nondegenerate. Positive, zero, and negative discriminant
-    correspond to $C$ being an ellipse, a parabola, or a hyperbola. In the
-    case that $C$ is degenerate (i.e., that the matrix of the projectivized
-    conic is singular), we may instead see a pair of parallel or intersecting 
-    lines, a double line, a single point, or no points at all (when, say,
-    all the solutions are complex).
-    
-    The \emph{real} points of $C$ are fairly classical, and well-understood,
-    but we can also ask whether solutions exist in some other
-    field $k$. The situation when $k=\Q$ turns out to be quite complicated,
-    characterized by the Hasse-Minkowski theorem, which we quote a special
-    case of.
-    \begin{thm}[Hasse-Minkowski]
-        A quadratic form $C$ over $\Q$ has a solution if it has solutions
-        over all the completions of $\Q$, namely the reals $\R$ and the $p$-adic
-        numbers, $\Q_p$, for all primes $p$.
-    \end{thm}
-    The case when $k = \R$ is, as mentioned, classical. To solve over $\Q_p$,
-    we can simply ask for solutions in $\Z_p$, the $p$-adic integers. We
-    can in turn get these solutions through Hensel's lemma, which allows us
-    to lift solutions over the finite field $\F_p$ to $\Z_p$. Our ultimate
-    goal is to give a condition for rational points of a conic $C$, by lifting
-    a condition on $\F_p$-points.
-    
-    This paper is roughly divided into two parts. The bulk of the work 
-    is bootstraping this process by counting solutions over $\F_p$. To do this,
-    we study the projectivization of our chosen conic, discussed in
-    \S\ref{sec:projectivization-of-the-problem}. We  then diagonalize 
-    the projective curve through a procedure described in 
-    \S\ref{sec:diagonalizing-quadratic-forms}. We the work out several cases
-    of diagonalized curves on in \S\ref{sec:proj-solutions}, and finally
-    drop back down to the affine case in \S\ref{sec:affine-solutions}.
-    % TODO: reference our main result!
-    With our condition in hand, we can lift solutions to $\Z_p$ by way of
-    Hensel's lemma in \S\ref{sec:hensels-lemma}, and, finally, give 
-    existence of rational points on $\Q$ by way of Hasse-Minkowski in 
-    \S\ref{sec:hasse-minkowski}.
     
     \section{Projectivization of the problem}
-    \label{sec:projectivization-of-the-problem} 
 
     Let us  begin by fixing a conic
     \begin{equation}\label{eq:original-conic} 
@@ -362,7 +305,7 @@
 		\item $X^2 + rY^2 = 0$.  
 	\end{enumerate}
 	
-	The first of these has $|\P^1| = p+1$ solutions. 
+	The first of these has $|\P^1(\F_p)| = p+1$ solutions. 
 	
 	The second has one solution, namely $[0:1]$.
 	
@@ -417,8 +360,11 @@
 	
 	Suppose $-1$ is a nonresidue. There are no solutions with $Z=0$, so rewrite the
 	equations as above. By Proposition \ref{prop:circle-solutions} again, they each
-	have $p + 1$ solutions. \footnote{\textcolor{red}{add comment about isomorphism
-			to $\P^1$}}
+	have $p + 1$ solutions.
+
+    \begin{rem*}
+      In fact, it is well-known that any nondegenerate conic is isomorphic (as an algebraic variety) to $\P^1$ (see for instance \cite[Prop.~19.3.1]{vakil}). This explains why cases \eqref{case:rank3_x^2+y^2+z^2=0} and \eqref{case:rank3_x^2+y^2+rz^2=0} both have $|\P^1(\F_p)|=p+1$ solutions.
+    \end{rem*}
 	
 	\begin{prop}\label{prop:circle-solutions} 
 		For $a \neq 0$, the equation $x^2 + y^2 = a$ has $p - \legendre{-1}{p}$ 
@@ -502,9 +448,50 @@
 
     (remainder to be written)
 
-    \begin{thm} 
-        main theorem determining $F(a,b,c,d,e,f,p)$ 
-    \end{thm}
+    \begin{thm}
+Let $C$ be a conic as in (\ref{eq:original-conic}), and let $p$ be a prime. If $p=2$, then
+\begin{equation*}
+|C(\F_p)|=2 + b(-1)^{(a+d)(c+e) + f},
+\end{equation*}
+where $b$ is either $0$ or $1$. Otherwise, letting $\alpha$, $\beta$, and $\gamma$ be defined as in Theorem~\ref{thm:diag-P2}, we have
+\begin{equation*}
+|C(\F_p)|=\begin{cases}
+\textrm{If }\alpha=\beta=0\textrm{ or }\alpha\ne 0\textrm{, then}&\begin{cases}
+0&\textrm{if }a=b=c=0,\\
+p&\textrm{otherwise, if }4ac-b^2=0,\\
+p-1&\textrm{otherwise, if }\legendre{4ac-b^2}{p}=\legendre{-1}{p},\\
+p+1&\textrm{otherwise.}
+\end{cases}\\
+\textrm{If }\alpha=0\textrm{ and }\beta\ne 0\textrm{, then}&\begin{cases}
+p&\textrm{if }a=b=c=0,\\
+2p&\textrm{otherwise, if }4ac-b^2=0\textrm{ and }\legendre{-1}{p}=\legendre{\gamma}{p},\\
+0&\textrm{otherwise, if }4ac-b^2=0\textrm{ and }\legendre{-1}{p}=-\legendre{\gamma}{p},\\
+2p-1&\textrm{otherwise, if }\legendre{-1}{p}=\legendre{\gamma}{p},\\
+1&\textrm{otherwise.}\\
+\end{cases}\\
+\end{cases}
+\end{equation*}
+
+\end{thm}
+\begin{proof}
+\begin{itemize}
+\item If $\alpha=\beta=0$ or $\alpha\ne 0$:
+\begin{itemize}
+\item If $a=b=c=0$, then $(p+1)-(p+1)=0$
+\item If $4ac-b^2=0$, then $(p+1)-1=p$
+\item If $\legendre{4ac-b^2}{p}=\legendre{-1}{p}$, then $(p+1)-2=p-1$
+\item If $\legendre{4ac-b^2}{p}=-\legendre{-1}{p}$, then $(p+1)-0=p+1$
+\end{itemize}
+\item If $\alpha=0$, $\beta\ne 0$:
+\begin{itemize}
+\item If $a=b=c=0$, then $(2p+1)-(p+1)=p$
+\item If $4ac-b^2=0$ and $\legendre{-1}{p}=\legendre{\gamma}{p}$, then $(2p+1)-1=2p$
+\item If $4ac-b^2=0$ and $\legendre{-1}{p}=-\legendre{\gamma}{p}$, then $1-1=0$
+\item Otherwise, if $\legendre{-1}{p}=\legendre{\gamma}{p}$, then $(2p+1)-2=2p-1$
+\item Otherwise, if $\legendre{-1}{p}=-\legendre{\gamma}{p}$, then $1-0=1$
+\end{itemize}
+\end{itemize}
+\end{proof}
 
     % TODO: get a reference for the following fact (which we'll probably need)?
     \begin{prop} 
@@ -517,8 +504,6 @@
     \end{prop}
 
     \section{To the $p$-adics via Hensel's lemma}
-    \label{sec:hensels-lemma}
-    
 	In the preceding, we have been concerned with the number of solutions our conic $C$ has over $\F_p$. Now we will instead consider the question of existence of solutions over the $p$-adic integers, which we answer with a sufficient condition in Theorem \ref{thm:existence-over-Zp}. Despite only being concerned with existence, the classification and analysis of the preceding sections will still play a major role.
 	
 	We begin by recalling the definition of the $p$-adic integers and then stating Hensel's lemma, which will be our primary tool for this section.
@@ -571,10 +556,7 @@
 	\end{proof}
 	If $\widetilde{C}$ is a double line or has only a single solution, then Hensel's lemma is inconclusive as we do not have a solution mod $p$ satisfying the requisite condition.
 
-    \section{To $\mathbb{Q}$ via Hasse-Minkowski} 
-    \label{sec:hasse-minkowski}
-    
-    (to be written)
+    \section{To $\mathbb{Q}$ via Hasse-Minkowski} (to be written)
 
 \begin{filecontents}{references.bib}
 @book {omeara,
@@ -601,9 +583,20 @@ pages={235--265}
 	author={Will Sawin},
 	title={Answer to \href{https://mathoverflow.net/questions/108687}{\texttt{https://mathoverflow.net/questions/108687}}}
 }
+
+@book{vakil,
+title={\href{http://math.stanford.edu/~vakil/216blog/index.html}{Foundations of Algebraic Geometry}},
+author={Ravi Vakil},
+year={December 29, 2015}
+}
 \end{filecontents}
 
 \bibliographystyle{plain}
 \bibliography{references}
 
 \end{document}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:
