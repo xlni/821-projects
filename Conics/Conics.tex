@@ -206,13 +206,7 @@ Let
 \alpha&=4acf-ae^2-b^2f+bde-cd^2,\\
 \beta&=4ac+4af+4cf-b^2-d^2-e^2,
 \end{align*}
-and let $\gamma$ be defined by the following procedure:
-\begin{enumerate}
-\item Permute the coordinates of $A$ so that $4ac-b^2\ne 0$;
-\item If $(a,c)\ne(0,0)$, then let $\gamma=4ac-b^2$;
-\item Otherwise, let $\gamma=-1$.
-\end{enumerate}
-Then $A$ corresponds via Corollary~\ref{cor:sixcases} to
+and let $\gamma$ be defined by permuting the coordinates of $A$ so that $4ac-b^2\ne 0$, and setting $\gamma=4ac-b^2$. Then $A$ corresponds via Corollary~\ref{cor:sixcases} to
 \begin{enumerate}
 \item[(1) or (2)] if  $\alpha=\beta=0$;
 \item[(3)] if $\alpha=0$, $\beta\ne 0$, and $\gamma$ is a nonzero quadratic residue;
@@ -249,7 +243,7 @@ f&0&0\\
 0&0&0
 \end{bmatrix}.
 \end{equation*}
-The product of the nonzero eigenvalues of this matrix is $\gamma=-1$, up to a square. Note that in this case the diagonalizing matrix $P$ is only well-defined if $e$ is nonzero as well, but this is clear as the condition $\alpha=0$ is equivalent to $bf=de$, and $b\ne 0$ as $b^2-4ac\ne 0$. Finally, if $a=c=f=0$, then either $d=0$ or $e=0$, and the same \texttt{Magma} computation shows that in either case $A$ diagonalizes to 
+The product of the nonzero eigenvalues of this matrix is $\gamma=-1$, up to a square. Note that in this case the diagonalizing matrix $P$ is only well-defined if $e$ is nonzero as well, but this is clear as the condition $\alpha=0$ is equivalent to $bf=de$, and $b\ne 0$ as $4ac-b^2\ne 0$ (thus, $4ac-b^2=-b^2$ is also $-1$ up to a square). Finally, if $a=c=f=0$, then either $d=0$ or $e=0$, and the same \texttt{Magma} computation shows that in either case $A$ diagonalizes to 
 \begin{equation*}
 \begin{bmatrix}
 b&0&0\\
@@ -261,6 +255,16 @@ The product of the nonzero eigenvalues of this matrix is again $\gamma=-1$, up t
 
 Finally, $A$ has rank $1$ when $\alpha=\beta=0$, which establishes the first case.
 \end{proof}
+
+We will also need an analogous result for quadratic forms $ax^2+bxy+cy^2$ in two variables, which follows immediately from the previous theorem by setting $d=e=f=0$:
+\begin{cor}
+The matrix $\left[\begin{smallmatrix}a&b/2\\b/2&c\end{smallmatrix}\right]$ diagonalizes (as in Corollary~\ref{cor:sixcases}) to
+\begin{itemize}
+\item $\left[\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right]$ or $\left[\begin{smallmatrix}r&0\\0&0\end{smallmatrix}\right]$ if $4ac-b^2=0$;
+\item $\left[\begin{smallmatrix}1&0\\0&1\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonzero quadratic residue;
+\item $\left[\begin{smallmatrix}1&0\\0&r\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonzero quadratic nonresidue.
+\end{itemize}
+\end{cor}
 
     \section{Counting solutions of a conic in $\P^2$} 
 
