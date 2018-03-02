@@ -60,20 +60,76 @@
 
     \title{Conics (title tbd)} 
 
-    \maketitle
+\maketitle
 
-    \begin{abstract} 
-        We count the number of solutions of any affine plane conic modulo a prime.
-        We use this result to determine whether such a conic has rational solutions. 
-    \end{abstract}
+\begin{abstract} 
+	We count the number of solutions of any affine plane conic modulo a prime.
+	We use this result to determine whether such a conic has rational solutions. 
+\end{abstract}
 
-    \tableofcontents
+\tableofcontents
 
-    \section{Introduction} 
+\section{Introduction} 
+
+	% Get a reference for general nonsense over the reals
+	A \emph{conic section} on the real plane $\R^2$ is the solution set of 
+	a polynomial
+	\[ C: ax^2 + bxy + cy^2 + dx + ey + f = 0, \]
+	where the degree-2 coefficients $a, b, c$ are not all zero. More specifically,
+	$C$ is an affine plane algebraic curve, given by a degree 2 polynomial, over
+	the reals. This conic can be \emph{projectivized} by adding an additional
+	unknown to make the polynomial homogeneous:
+	\[ \widetilde{C}: aX^2 + bXY + cY^2 + dXZ + eXZ + fZ^2 = 0. \]
+	This gives a quadratic form on $\R^3$; when this form is degenerate, we
+	say that the original conic, $C$, is also degenerate.
+	
+	The homogeneous part of $C$, $ax^2 + bxy + cy^2$, gives a quadratic form
+	on $\R^2$, with matrix
+	\[ \begin{bmatrix}
+	a & b \\
+	b & c
+	\end{bmatrix}. \]
+	The determinant of this matrix, called the \emph{discriminant} and
+	denoted $\Delta = b^2 - 4ac$, gives a characterization of the shape of $C$
+	when it is nondegenerate. Positive, zero, and negative discriminant
+	correspond to $C$ being an ellipse, a parabola, or a hyperbola. In the
+	case that $C$ is degenerate (i.e., that the matrix of the projectivized
+	conic is singular), we may instead see a pair of parallel or intersecting 
+	lines, a double line, a single point, or no points at all (when, say,
+	all the solutions are complex).
+	
+	The \emph{real} points of $C$ are fairly classical, and well-understood,
+	but we can also ask whether solutions exist in some other
+	field $k$. The situation when $k=\Q$ turns out to be quite complicated,
+	characterized by the Hasse-Minkowski theorem, which we quote a special
+	case of.
+	\begin{thm}[Hasse-Minkowski]
+		A quadratic form $C$ over $\Q$ has a solution if it has solutions
+		over all the completions of $\Q$, namely the reals $\R$ and the $p$-adic
+		numbers, $\Q_p$, for all primes $p$.
+	\end{thm}
+	The case when $k = \R$ is, as mentioned, classical. To solve over $\Q_p$,
+	we can simply ask for solutions in $\Z_p$, the $p$-adic integers. We
+	can in turn get these solutions through Hensel's lemma, which allows us
+	to lift solutions over the finite field $\F_p$ to $\Z_p$. Our ultimate
+	goal is to give a condition for rational points of a conic $C$, by lifting
+	a condition on $\F_p$-points.
+	
+	This paper is roughly divided into two parts. The bulk of the work 
+	is bootstrapping this process by counting solutions over $\F_p$. To do this,
+	we study the projectivization of our chosen conic, discussed in
+	\S\ref{sec:projectivization-of-the-problem}. We  then diagonalize 
+	the projective curve through a procedure described in 
+	\S\ref{sec:diagonalizing-quadratic-forms}. We the work out several cases
+	of diagonalized curves on in \S\ref{sec:proj-solutions}, and finally
+	drop back down to the affine case in \S\ref{sec:affine-solutions}.
+	% TODO: reference our main result!
+	With our condition in hand, we can lift solutions to $\Z_p$ by way of
+	Hensel's lemma in \S\ref{sec:hensels-lemma}, and, finally, give 
+	existence of rational points on $\Q$ by way of Hasse-Minkowski in 
+	\S\ref{sec:hasse-minkowski}.
     
-    
-    
-    \section{Projectivization of the problem}
+    \section{Projectivization of the problem}\label{sec:projectivization-of-the-problem}
 
     Let us  begin by fixing a conic
     \begin{equation}\label{eq:original-conic} 
@@ -227,33 +283,88 @@
 	\end{equation*}
 	the determinant of $A$ is a quadratic residue if and only if that of $P^TAP$ is. Cases (5) and (6) of the theorem are now immediate.
 	
-	Likewise, $A$ has rank $2$ when $\alpha=0$ and $\beta\ne 0$. Since $\beta$ is the sum of $4ac-b^2$, $4af-d^2$, and $4cf-e^2$, these cannot all be zero; the latter two are obtained from $4ac-b^2$ by permuting the coordinates of $A$, which justifies step (1) in computing $\gamma$. Thus, assume that step (1) has been performed. If $a\ne 0$, then the \texttt{Magma} method \texttt{DiagonalForm()} shows that $A$ diagonalizes to
+	Likewise, $A$ has rank $2$ when $\alpha=0$ and $\beta\ne 0$. Since $\beta$ is the sum of $4ac-b^2$, $4af-d^2$, and $4cf-e^2$, these cannot all be zero; the latter two are obtained from $4ac-b^2$ by permuting the coordinates of $A$, which justifies step (1) in computing $\gamma$. Thus, assume that step (1) has been performed. If $a\ne 0$, then the \texttt{Magma} method \texttt{DiagonalForm()} shows that $A$ diagonalizes via
 	\begin{equation*}
-	\begin{bmatrix}
-	a&0&0\\
-	0&\frac{4ac-b^2}{4a}&0\\
-	0&0&0
-	\end{bmatrix}
+		\begin{bmatrix}
+			1 & -\dfrac{b}{2a} & \dfrac{be - 2cd}{4ac - b^2}\\
+			0 & 1 & \dfrac{-2ae + bd}{4ac - b^2} \\
+			0 & 0 & 1
+		\end{bmatrix}^\top
+		A
+		\begin{bmatrix}
+			1 & -\dfrac{b}{2a} & \dfrac{be - 2cd}{4ac - b^2}\\
+			0 & 1 & \dfrac{-2ae + bd}{4ac - b^2} \\
+			0 & 0 & 1
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+		a&0&0\\
+		0&\dfrac{4ac-b^2}{4a}&0\\
+		0&0&0
+		\end{bmatrix}.
 	\end{equation*}
-	via some $P$. Thus, the product of the nonzero eigenvalues of this matrix is $\gamma=4ac-b^2$, up to a square; the case $c\ne 0$ is similar. Next, if $a=c=0$ and $f\ne 0$, then a similar \texttt{Magma} computation shows that $A$ diagonalizes to
+	Thus, the product of the nonzero eigenvalues of this matrix is $\gamma=4ac-b^2$, up to a squar. The case $c\ne 0$ is similar.
+	
+	Next, if $a=c=0$ and $f\ne 0$, then a similar \texttt{Magma} computation shows that $A$ diagonalizes via
 	\begin{equation*}
-	\begin{bmatrix}
-	f&0&0\\
-	0&-\frac{e^2}{4f}&0\\
-	0&0&0
-	\end{bmatrix}.
+		\begin{bmatrix}
+			0 & 0 & 1\\
+			0 & 1 & \dfrac{2bf - de}{e^2}\\
+			1 & -\dfrac{e}{2f} & -\dfrac{b}{e}
+		\end{bmatrix}^\top
+		A
+		\begin{bmatrix}
+			0 & 0 & 1\\
+			0 & 1 & \dfrac{2bf - de}{e^2}\\
+			1 & -\dfrac{e}{2f} & -\dfrac{b}{e}
+		\end{bmatrix}
+		=
+		\begin{bmatrix}
+		f&0&0\\
+		0&-\dfrac{e^2}{4f}&0\\
+		0&0&0
+		\end{bmatrix}.
 	\end{equation*}
-	The product of the nonzero eigenvalues of this matrix is $\gamma=-1$, up to a square. Note that in this case the diagonalizing matrix $P$ is only well-defined if $e$ is nonzero as well, but this is clear as the condition $\alpha=0$ is equivalent to $bf=de$, and $b\ne 0$ as $4ac-b^2\ne 0$ (thus, $4ac-b^2=-b^2$ is also $-1$ up to a square). Finally, if $a=c=f=0$, then either $d=0$ or $e=0$, and the same \texttt{Magma} computation shows that in either case $A$ diagonalizes to 
-	\begin{equation*}
-	\begin{bmatrix}
-	b&0&0\\
-	0&-b/4&0\\
-	0&0&0
-	\end{bmatrix}.
-	\end{equation*}
+	The product of the nonzero eigenvalues of this matrix is $\gamma=-1$, up to a square. Note that in this case the diagonalizing matrix $P$ is only well-defined if $e$ is nonzero as well, but this is clear as the condition $\alpha=0$ is equivalent to $bf=de$, and $b\ne 0$ as $4ac-b^2\ne 0$ (thus, $4ac-b^2=-b^2$ is also $-1$ up to a square). Finally, if $a=c=f=0$, then either $d=0$ or $e=0$, and the same \texttt{Magma} computation shows
+	\begin{align*}
+		\begin{bmatrix}
+			1 & -1/2 & -e/b\\
+			1 & 1/2 & 0\\
+			0 & 0 & 1
+		\end{bmatrix}^\top
+		A
+		\begin{bmatrix}
+			1 & -1/2 & -e/b\\
+			1 & 1/2 & 0\\
+			0 & 0 & 1
+		\end{bmatrix}
+		&=
+		\begin{bmatrix}
+			b&0&0\\
+			0&-b/4&0\\
+			0&0&0
+		\end{bmatrix}\\
+		\begin{bmatrix}
+			1 & -1/2 & 0\\
+			1 & 1/2 & -d/b\\
+			0 & 0 & 1
+		\end{bmatrix}^\top
+		A
+		\begin{bmatrix}
+			1 & -1/2 & 0\\
+			1 & 1/2 & -d/b\\
+			0 & 0 & 1
+		\end{bmatrix}
+		&=
+		\begin{bmatrix}
+			b&0&0\\
+			0&-b/4&0\\
+			0&0&0
+		\end{bmatrix}.
+	\end{align*}
 	The product of the nonzero eigenvalues of this matrix is again $\gamma=-1$, up to a square. Since the matrices (3) and (4) are obtained from these diagonalized forms of $A$ by scaling coordinates, it is clear that $A$ corresponds to (3) if $\gamma$ is a quadratic residue and to (4) if it is not.
 	
-	Finally, $A$ has rank $1$ when $\alpha=\beta=0$, which establishes the first case.
+	And lastly, $A$ has rank $1$ when $\alpha=\beta=0$, which gives cases (1) and (2).
 	\end{proof}
 	
 	We will also need an analogous result for quadratic forms $ax^2+bxy+cy^2$ in two variables, which follows immediately from the previous theorem by setting $d=e=f=0$:
@@ -527,7 +638,7 @@ p&\textrm{if }a=b=c=0,\\
 	%\begin{defn}
 	%	The field of \emph{$p$-adic numbers} $\Q_p$ is the fraction field of $\Z_p$.
 	%\end{defn}
-	\subsection{Hensel's lemma}
+	\subsection{Hensel's lemma}\label{sec:hensels-lemma}
 	Hensel's lemma gives us a sufficient condition for the existence of roots over $\Z_p$. We refer the reader to \cite{henselMO} for a proof of the following.
 	\begin{thm}[Multivariate Hensel's lemma]\label{thm:hensels-one-eq}
 		Let $f \in \Z_p[x_1,\ldots,x_n]$ be a polynomial in $n$ variables and let $\gamma = (\gamma_1,\ldots,\gamma_n)\in \Z_p^n$ be such that $f(\gamma) = 0 \pmod p$ and $\frac{\partial f}{\partial x_i}(\gamma) \ncong 0 \pmod p$ for some $i\in \{1,\ldots,n\}$. Then there exists $\alpha \in \Z_p^n$ such that, for all $i$, $\alpha_i = \gamma_i \pmod p$ and $f(\alpha) = 0$.
@@ -556,7 +667,9 @@ p&\textrm{if }a=b=c=0,\\
 	\end{proof}
 	If $\widetilde{C}$ is a double line or has only a single solution, then Hensel's lemma is inconclusive as we do not have a solution mod $p$ satisfying the requisite condition.
 
-    \section{To $\mathbb{Q}$ via Hasse-Minkowski} (to be written)
+    \section{To $\mathbb{Q}$ via Hasse-Minkowski}\label{sec:hasse-minkowski}
+    
+    (to be written)
 
 \begin{filecontents}{references.bib}
 @book {omeara,
