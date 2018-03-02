@@ -560,49 +560,58 @@
     (remainder to be written)
 
     \begin{thm}
-Let $C$ be a conic as in (\ref{eq:original-conic}), and let $p$ be a prime. If $p=2$, then
-\begin{equation*}
-|C(\F_p)|=2 + b(-1)^{(a+d)(c+e) + f},
-\end{equation*}
-where $b$ is either $0$ or $1$. Otherwise, letting $\alpha$, $\beta$, and $\gamma$ be defined as in Theorem~\ref{thm:diag-P2}, we have
-\begin{equation*}
-|C(\F_p)|=\begin{cases}
-\textrm{If }\alpha=\beta=0\textrm{ or }\alpha\ne 0\textrm{, then}&\begin{cases}
-0&\textrm{if }a=b=c=0,\\
-p&\textrm{otherwise, if }4ac-b^2=0,\\
-p-1&\textrm{otherwise, if }\legendre{4ac-b^2}{p}=\legendre{-1}{p},\\
-p+1&\textrm{otherwise.}
-\end{cases}\\
-\textrm{If }\alpha=0\textrm{ and }\beta\ne 0\textrm{, then}&\begin{cases}
-p&\textrm{if }a=b=c=0,\\
-2p&\textrm{otherwise, if }4ac-b^2=0\textrm{ and }\legendre{-1}{p}=\legendre{\gamma}{p},\\
-0&\textrm{otherwise, if }4ac-b^2=0\textrm{ and }\legendre{-1}{p}=-\legendre{\gamma}{p},\\
-2p-1&\textrm{otherwise, if }\legendre{-1}{p}=\legendre{\gamma}{p},\\
-1&\textrm{otherwise.}\\
-\end{cases}\\
-\end{cases}
-\end{equation*}
-
-\end{thm}
-\begin{proof}
-\begin{itemize}
-\item If $\alpha=\beta=0$ or $\alpha\ne 0$:
-\begin{itemize}
-\item If $a=b=c=0$, then $(p+1)-(p+1)=0$
-\item If $4ac-b^2=0$, then $(p+1)-1=p$
-\item If $\legendre{4ac-b^2}{p}=\legendre{-1}{p}$, then $(p+1)-2=p-1$
-\item If $\legendre{4ac-b^2}{p}=-\legendre{-1}{p}$, then $(p+1)-0=p+1$
-\end{itemize}
-\item If $\alpha=0$, $\beta\ne 0$:
-\begin{itemize}
-\item If $a=b=c=0$, then $(2p+1)-(p+1)=p$
-\item If $4ac-b^2=0$ and $\legendre{-1}{p}=\legendre{\gamma}{p}$, then $(2p+1)-1=2p$
-\item If $4ac-b^2=0$ and $\legendre{-1}{p}=-\legendre{\gamma}{p}$, then $1-1=0$
-\item Otherwise, if $\legendre{-1}{p}=\legendre{\gamma}{p}$, then $(2p+1)-2=2p-1$
-\item Otherwise, if $\legendre{-1}{p}=-\legendre{\gamma}{p}$, then $1-0=1$
-\end{itemize}
-\end{itemize}
-\end{proof}
+	Let $C$ be a conic as in (\ref{eq:original-conic}), and let $p$ be a prime. If $p=2$, then
+	\begin{equation*}
+	|C(\F_p)|=2 + b(-1)^{(a+d)(c+e) + f},
+	\end{equation*}
+	where $b$ is either $0$ or $1$.
+	
+	If $p > 2$, then with $\alpha$, $\beta$, and $\gamma$ as defined in Theorem~\ref{thm:diag-P2}, we have
+	\begin{equation*}
+	|C(\F_p)|=\begin{cases}
+	\textrm{If }\alpha=\beta=0\textrm{ or }\alpha\ne 0\textrm{, then}&\begin{cases}
+	0&\textrm{if }a=b=c=0,\\
+	p&\textrm{otherwise, if }4ac-b^2=0,\\
+	p-1&\textrm{otherwise, if }\legendre{4ac-b^2}{p}=\legendre{-1}{p},\\
+	p+1&\textrm{otherwise.}
+	\end{cases}\\
+	\textrm{If }\alpha=0\textrm{ and }\beta\ne 0\textrm{, then}&\begin{cases}
+	p&\textrm{if }a=b=c=0,\\
+	2p&\textrm{otherwise, if }4ac-b^2=0\textrm{ and }\legendre{-1}{p}=\legendre{\gamma}{p},\\
+	0&\textrm{otherwise, if }4ac-b^2=0\textrm{ and }\legendre{-1}{p}=-\legendre{\gamma}{p},\\
+	2p-1&\textrm{otherwise, if }\legendre{-1}{p}=\legendre{\gamma}{p},\\
+	1&\textrm{otherwise.}\\
+	\end{cases}\\
+	\end{cases}
+	\end{equation*}
+	
+	\end{thm}
+	\begin{proof} The only thing that's really new here is the case of $p=2$. Fortunately there are very few conics over $\F_2$, and the solutions to 
+		\[ ax^2 + bxy + cy^2 + dx + ey + f = 0 \] 
+		are the same as the solutions to 
+		\[ bxy + (a+d)x + (c+e)y + f = 0.  \] 
+		At this point, one can simply list out all the
+		possibilities. It can be checked that the number of solutions in each case agrees with the expression in the theorem statement.
+		
+		The remainder is a synthesis of \S\ref{sec:diagonalizing-quadratic-forms}, \S\ref{sec:proj-solutions}, and Lemma \ref{lem:relate-solutions-affine-proj}.
+	\begin{itemize}
+	\item If $\alpha=\beta=0$ or $\alpha\ne 0$:
+	\begin{itemize}
+	\item If $a=b=c=0$, then $(p+1)-(p+1)=0$
+	\item If $4ac-b^2=0$, then $(p+1)-1=p$
+	\item If $\legendre{4ac-b^2}{p}=\legendre{-1}{p}$, then $(p+1)-2=p-1$
+	\item If $\legendre{4ac-b^2}{p}=-\legendre{-1}{p}$, then $(p+1)-0=p+1$
+	\end{itemize}
+	\item If $\alpha=0$, $\beta\ne 0$:
+	\begin{itemize}
+	\item If $a=b=c=0$, then $(2p+1)-(p+1)=p$
+	\item If $4ac-b^2=0$ and $\legendre{-1}{p}=\legendre{\gamma}{p}$, then $(2p+1)-1=2p$
+	\item If $4ac-b^2=0$ and $\legendre{-1}{p}=-\legendre{\gamma}{p}$, then $1-1=0$
+	\item Otherwise, if $\legendre{-1}{p}=\legendre{\gamma}{p}$, then $(2p+1)-2=2p-1$
+	\item Otherwise, if $\legendre{-1}{p}=-\legendre{\gamma}{p}$, then $1-0=1$
+	\end{itemize}
+	\end{itemize}
+	\end{proof}
 
     % TODO: get a reference for the following fact (which we'll probably need)?
     \begin{prop} 
