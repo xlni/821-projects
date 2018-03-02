@@ -120,7 +120,7 @@
     \end{equation} 
     on the projective line $\P^1$. Call this solution set $\widetilde{C}_0(\F_p)\subset \P^1$.  
 
-    \begin{lem} 
+    \begin{lem}\label{lem:relate-solutions-affine-proj}
         $|\widetilde{C}(\F_p)| = |C(\F_p)| + |\widetilde{C}_0(\F_p)|$.
     \end{lem} 
     \begin{proof}
@@ -200,7 +200,7 @@
 	\end{cor}
 	In the next section, we determine how many solutions each of the corresponding conics has in $\P^2$. For now, we determine to which of these six matrices \(A\) corresponds; however, we do not distinguish between the matrices (1) and (2) as the corresponding conics $X^2=0$ and $rX^2=0$ have equivalent vanishing sets.
 	
-	\begin{thm}
+	\begin{thm}\label{thm:diag-P2}
 	Let
 	\begin{align*}
 	\alpha&=4acf-ae^2-b^2f+bde-cd^2,\\
@@ -257,9 +257,10 @@
 	\end{proof}
 	
 	We will also need an analogous result for quadratic forms $ax^2+bxy+cy^2$ in two variables, which follows immediately from the previous theorem by setting $d=e=f=0$:
-	\begin{cor}
-	The matrix $\left[\begin{smallmatrix}a&b/2\\b/2&c\end{smallmatrix}\right]$ diagonalizes (as in Corollary~\ref{cor:sixcases}) to
+	\begin{cor}\label{cor:diag-P1}
+	The matrix $\left[\begin{smallmatrix}a&b/2\\b/2&c\end{smallmatrix}\right]$ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)$) to
 	\begin{itemize}
+	\item $\left[\begin{smallmatrix}0&0\\0&0\end{smallmatrix}\right]$ if $a=b=c=d=0$;
 	\item $\left[\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right]$ or $\left[\begin{smallmatrix}r&0\\0&0\end{smallmatrix}\right]$ if $4ac-b^2=0$;
 	\item $\left[\begin{smallmatrix}1&0\\0&1\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonzero quadratic residue;
 	\item $\left[\begin{smallmatrix}1&0\\0&r\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonzero quadratic nonresidue.
@@ -289,40 +290,19 @@
 	Note that each nonzero residue has exactly two square-roots (as we are assuming
 	$p > 2$ throughout).
 	
-	In \S\ref{sec:diagonalizing-quadratic-forms}, we showed that, for an
-	appropriate choice of coordinates, $aX^2 + bXY + cY^2$ can be rewritten as
-	\begin{equation}\label{eq:general-form-P1} 
-	a_1 X_1^2 + c_1 Y_1^2 = 0
-	\end{equation} 
-	and similarly, $aX^2 + bXY + cY^2 + dXZ + eYZ + fZ^2 = 0$ can be
-	rewritten as 
-	\begin{equation}\label{eq:general-form-P2} 
-	a_2 X_2^2 + c_2 Y_2^2 + f_2 Z_2^2 = 0.
-	\end{equation}
-	The different subscripts express that the base
-	changes involved for \eqref{eq:general-form-P1} and \eqref{eq:general-form-P2}
-	need not be the same!
+	Our goal is to count the number of solutions of a conic $C$ in $\A^2$. In light of Lemma \ref{lem:relate-solutions-affine-proj}, it suffices to count the number of points on $\widetilde{C}$ and $\widetilde{C}_0$. In the preceding section, we showed that conics in projective space are equivalent to certain representative forms.
 	
-	Recall that the assumptions on the original coefficients 
-	$a,b,c,d,e,f \in \Z$ were that 
-	\begin{itemize} 
-		\item not all of $a,b,c$ are zero, and
-		\item $\gcd(a,b,c,d,e,f) = 1$.  
-	\end{itemize} 
-	If $p$ divides $a,b$, and $c$, then $a_1 = c_1 = 0$ above. However, 
-	it will never be the case that $a_2 = c_2 = f_2 = 0$.
+	Now we count the number of solutions that each representative has.
 	
 	\subsection{Extraneous solutions}
 	\label{subsec:counting-P1-solutions}
 	
-	Fix a quadratic nonresidue $r \in \F_p$. By scaling the equation
-	\eqref{eq:general-form-P1} and by scaling and permuting the coordinates as
-	appropriate, we can obtain one of the following equivalent forms:
+	Fix a quadratic nonresidue $r \in \F_p$. By Corollary \ref{cor:diag-P1}, $\widetilde{C}_0$ is equivalent to one of the following:
 	\begin{enumerate} 
-		\item $0 = 0$ if both $a_1, c_1$ are zero, 
-		\item $X^2 = 0$ if exactly one of $a_1, c_1$ is zero, 
-		\item $X^2 + Y^2 = 0$ if $a_1 c_1$ is a nonzero quadratic residue, and \label{case:x^2+y^2=0}
-		\item $X^2 + rY^2 = 0$ if $a_1 c_1$ is a nonzero quadratic nonresidue.  
+		\item $0 = 0$, 
+		\item $X^2 = 0$,
+		\item $X^2 + Y^2 = 0$, and \label{case:x^2+y^2=0}
+		\item $X^2 + rY^2 = 0$.  
 	\end{enumerate}
 	
 	The first of these has $|\P^1| = p+1$ solutions. 
@@ -338,26 +318,22 @@
 	\subsection{Total solutions}
 	\label{subsec:counting-P2-solutions}
 	
-	Let $r$ be a quadratic nonresidue in $\F_p$ as before. Just as in
-	\S\ref{subsec:counting-P1-solutions}, we can rewrite \eqref{eq:general-form-P2}
-	as one of the following: 
+	Let $r$ be a quadratic nonresidue in $\F_p$ as before. By Theorem \ref{thm:diag-P2}, $\widetilde{C}$ is equivalent to one of the following:
 	\begin{enumerate} 
-		\item $X^2 = 0$ if two of $a_2, c_2, f_2$ are zero, 
-		\item\label{case:rank2_x^2+y^2=0} $X^2 + Y^2 = 0$ if exactly one of $a_2, c_2, f_2$ is zero,
-		and the product of the other two is a quadratic residue, 
-		\item\label{case:rank2_x^2+ry^2=0} $X^2 + rY^2 = 0$ if exactly one of $a_2, c_2, f_2$ is zero, 
-		and the product of the other two is a quadratic nonresidue, 
-		\item\label{case:rank3_x^2+y^2+z^2=0} $X^2 + Y^2 + Z^2 = 0$ if $a_2 c_2 f_2$ is a nonzero quadratic residue, and 
-		\item\label{case:rank3_x^2+y^2+rz^2=0} $X^2 + Y^2 + rZ^2 = 0$ if $a_2 c_2 f_2$ is
-		a nonzero quadratic nonresidue.  
+		\item\label{case:rank1_x^2=0} $X^2 = 0$,
+		\item\label{case:rank1_rx^2=0} $rX^2 = 0$,
+		\item\label{case:rank2_x^2+y^2=0} $X^2 + Y^2 = 0$, 
+		\item\label{case:rank2_x^2+ry^2=0} $X^2 + rY^2 = 0$,
+		\item\label{case:rank3_x^2+y^2+z^2=0} $X^2 + Y^2 + Z^2 = 0$, and 
+		\item\label{case:rank3_x^2+y^2+rz^2=0} $X^2 + Y^2 + rZ^2 = 0$.  
 	\end{enumerate}
 	
 	Now we count the number of solutions in each of these cases.
 	
-	\subsubsection*{Rank 1 (first case)} 
-	The equation $X^2 = 0$ has $p + 1$ solutions.
+	\subsubsection*{Rank 1: \eqref{case:rank1_x^2=0} and \eqref{case:rank1_rx^2=0}} 
+	The equations $X^2 = 0$ and $rX^2 = 0$ each have $p + 1$ solutions.
 	
-	\subsubsection*{Rank 2 (second and third cases)} 
+	\subsubsection*{Rank 2: \eqref{case:rank2_x^2+y^2=0} and \eqref{case:rank2_x^2+ry^2=0}} 
 	The only solution with $Y=0$ is $[0:0:1]$. So assume $Y \neq 0$, and rewrite the 
 	equations as $(X/Y)^2 = -1$ and $(X/Y)^2 = -r$ respectively.
 	
@@ -370,7 +346,7 @@
 	If $-1$ is a nonresidue, the situation is reversed, and $X^2 + Y^2 = 0$ has one
 	solution while $X^2 + rY^2 = 0$ has $2p + 1$ solutions.
 	
-	\subsubsection*{Rank 3 (fourth and fifth cases)} 
+	\subsubsection*{Rank 3: \eqref{case:rank3_x^2+y^2+z^2=0} and \eqref{case:rank3_x^2+y^2+rz^2=0}} 
 	Suppose $-1$ is a quadratic residue mod $p$. If $Z = 0$, then we are in the setting of
 	\S\ref{subsec:counting-P1-solutions} case \eqref{case:x^2+y^2=0}, which has two
 	solutions. Otherwise, we can divide by $Z$ and obtain 
