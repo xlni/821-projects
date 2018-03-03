@@ -217,13 +217,13 @@
 	Z
 	\end{bmatrix}.
 	\end{equation*}
-	The symmetric quadratic form $v^\top A v$ is precisely the equation for $\widetilde{C}$. In this sense, the matrix $A$ represents $\widetilde{C}$ in the coordinates $[X,Y,Z]$.
+	The quadratic form $v^\top A v$ is precisely the equation for $\widetilde{C}$. In this sense, the matrix $A$ represents $\widetilde{C}$ in the coordinates $[X,Y,Z]$.
 	
 	Now, any $P\in\GL_3(\F_p)$ gives rise to a change of coordinates $v\mapsto Pv$ in $\P^2$. Since
 	\begin{equation*}
 	(Pv)^\top A(Pv)=v^\top(P^\top AP)v,
 	\end{equation*}
-	the conic $\widetilde{C}$ is represented by the matrix $P^\top AP$ in the new coordinates. Since $P$ is invertible, the projective conic corresponding to the quadratic form given by $P^\top AP$ has the same number of solutions over $\F_p$ as $\widetilde{C}$. The following result is well-known (see for instance \cite[Prop.~42:1]{omeara}):
+	the matrix representing $\widetilde{C}$ is $P^\top AP$ in the new coordinates. This transformation $A \mapsto P^\top A P$ does not change the number of solutions of the corresponding conic, as $P$ is invertible. The following result is well-known (see for instance \cite[Prop.~42:1]{omeara}):
 	\begin{thm}
 	\label{thm:diag}
 	There exists some $P\in\GL_3(\F_p)$ such that $P^\top AP$ is diagonal.
@@ -399,6 +399,10 @@
 	\item $\left[\begin{smallmatrix}1&0\\0&r\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonzero quadratic nonresidue.
 	\end{itemize}
 	\end{cor}
+	
+	\begin{rem*}
+		The discussion in this section suggests a definition for a \emph{degenerate} conic over $\F_p$: they should be the conics whose corresponding quadratic form is degenerate, or equivalently, whose corresponding matrix is singular.
+	\end{rem*}
 
     \section{Counting solutions of a conic in $\P^2$}\label{sec:proj-solutions}
 	Our goal is to count the number of solutions of a conic $C$ in $\A^2$. By Lemma \ref{lem:relate-solutions-affine-proj}, it suffices to count the number of points on $\widetilde{C}$ and $\widetilde{C}_0$. In the preceding section, we showed that conics in projective space are equivalent to certain representative forms. Let us now count the number of solutions for each.
@@ -611,7 +615,7 @@
 		\cdots \to \Z/p^3 \to \Z/p^2 \to \Z/p.
 		\]
 	\end{defn}
-	In other words, elements of $\Z_p$ can be thought of as sequences $(a_1,a_2,a_3,\ldots)$ where $a_i \in \Z/p^i$ and $a_{i+1} \equiv a_i \pmod p^{i}$.
+	In other words, elements of $\Z_p$ can be thought of as sequences $(a_1,a_2,a_3,\ldots)$ where $a_i \in \Z/p^i$ and $a_{i+1} \equiv a_i \pmod {p^i}$.
 	
 	Such an element can alternatively be interpreted as the series
 	\[
@@ -628,7 +632,7 @@
 	%\end{defn}
 	Hensel's lemma gives us a sufficient condition for the existence of roots over $\Z_p$. We refer the reader to \cite{henselMO} for a proof of the following formulation.
 	\begin{thm}[Multivariate Hensel's lemma]\label{thm:hensels-one-eq}
-		Let $f \in \Z_p[x_1,\ldots,x_n]$ be a polynomial in $n$ variables and let $\gamma = (\gamma_1,\ldots,\gamma_n)\in \Z_p^n$ be such that $f(\gamma) = 0 \pmod p$ and $\frac{\partial f}{\partial x_i}(\gamma) \ncong 0 \pmod p$ for some $i\in \{1,\ldots,n\}$. Then there exists $\alpha \in \Z_p^n$ such that, for all $i$, $\alpha_i = \gamma_i \pmod p$ and $f(\alpha) = 0$.
+		Let $f \in \Z_p[x_1,\ldots,x_n]$ be a polynomial in $n$ variables and let $\gamma = (\gamma_1,\ldots,\gamma_n)\in \Z_p^n$ be such that $f(\gamma) = 0 \pmod p$ and $\frac{\partial f}{\partial x_i}(\gamma) \not\equiv 0 \pmod p$ for some $i\in \{1,\ldots,n\}$. Then there exists $\alpha \in \Z_p^n$ such that, for all $i$, $\alpha_i = \gamma_i \pmod p$ and $f(\alpha) = 0$.
 	\end{thm}
 	Using the results of Proposition \ref{prop:counting-P2-solutions} and Hensel's lemma, we deduce the following result.
 	\begin{thm}\label{thm:existence-over-Zp}
