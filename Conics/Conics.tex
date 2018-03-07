@@ -21,19 +21,19 @@
 \numberwithin{equation}{section} 
 \numberwithin{figure}{section}
 \theoremstyle{definition} 
-\newtheorem{example}{\protect\examplename}[section]
-\theoremstyle{remark} 
-\newtheorem*{rem*}{\protect\remarkname}
 \theoremstyle{plain} 
 \newtheorem{thm}{\protect\theoremname}[section]
-\theoremstyle{plain} 
-\newtheorem{cor}{\protect\corollaryname}[section]
+\newtheorem{example}[thm]{\protect\examplename}
+\theoremstyle{remark} 
+\newtheorem*{rem*}{\protect\remarkname}
+\theoremstyle{plain}
+\newtheorem{cor}[thm]{\protect\corollaryname}
 \theoremstyle{definition} 
-\newtheorem{defn}{\protect\definitionname}[section]
+\newtheorem{defn}[thm]{\protect\definitionname}
 \theoremstyle{plain} 
-\newtheorem{prop}{\protect\propositionname}[section]
+\newtheorem{prop}[thm]{\protect\propositionname}
 \theoremstyle{plain} 
-\newtheorem{lem}{\protect\lemmaname}[section]
+\newtheorem{lem}[thm]{\protect\lemmaname}
 
 \providecommand{\definitionname}{Definition}
 \providecommand{\examplename}{Example} 
@@ -126,7 +126,7 @@
 	existence of rational points in 
 	\S\ref{sec:hasse-minkowski}.
 
-	Xianglong wrote sections \S\ref{sec:projectivization-of-the-problem}, \ref{sec:proj-solutions}, \ref{sec:hensels-lemma}. Oron wrote sections \S\ref{sec:diagonalizing-quadratic-forms}, \ref{sec:affine-solutions} and helped with \S\ref{sec:proj-solutions} (Proposition \ref{prop:circle-solutions} especially). Miguel ran experimental tests to both motivate and verify our computations, wrote \S\ref{sec:intro}, and helped format, edit, and proofread.
+	\subsection*{Acknowledgements} Xianglong wrote sections \S\ref{sec:projectivization-of-the-problem}, \ref{sec:proj-solutions}, \ref{sec:hensels-lemma}. Oron wrote sections \S\ref{sec:diagonalizing-quadratic-forms}, \ref{sec:affine-solutions} and helped with \S\ref{sec:proj-solutions} (Proposition \ref{prop:circle-solutions} especially). Miguel ran experimental tests to both motivate and verify our computations, wrote \S\ref{sec:intro}, and helped format, edit, and proofread.
 	
 	We would like to thank the 18.821 course staff for organizing this project, and Rasmus Johansen in particular for his guidance and suggestions.    
     \section{Preliminaries}\label{sec:projectivization-of-the-problem}
@@ -239,17 +239,12 @@
 	corresponds to the conic defined by $\lambda_1x^2+\lambda_2y^2+\lambda_3z^2=0$ (note that we cannot have $\lambda_1=\lambda_2=\lambda_3=0$ by our initial assumptions). By further scaling and permuting coordinates as appropriate, we immediately obtain the following:
 	\begin{cor}
 	\label{cor:sixcases}
-	Fix an element $r\in\F_p$ that is not a square. There exists some $P\in\GL_3(\F_p)$ such that $P^\top AP$ is equal to one of the following:
+	Fix an element $r\in\F_p$ that is not a square. There exists some $P\in\GL_3(\F_p)$ such that $P^\top AP$ is equal to a (nonzero) scalar multiple of one of the following:
 	$$
 	\begin{tabu}{cccccc}
-	(1)&(2)&(3)&(4)&(5)&(6)\\
+	(1)&(2)&(3)&(4)&(5)\\
 	\begin{bmatrix}
 	1&0&0\\
-	0&0&0\\
-	0&0&0
-	\end{bmatrix}&
-	\begin{bmatrix}
-	r&0&0\\
 	0&0&0\\
 	0&0&0
 	\end{bmatrix}&
@@ -276,7 +271,7 @@
 	\end{tabu}
 	$$
 	\end{cor}
-	In the next section, we determine how many solutions each of the corresponding conics has in $\P^2$. For now, we determine to which of these six matrices $A$ corresponds. We do not need to distinguish between the matrices (1) and (2) as the corresponding conics $X^2=0$ and $rX^2=0$ have equivalent solution sets.
+	In the next section, we determine how many solutions each of the corresponding conics has in $\P^2$. For now, we determine to which of these five matrices $A$ corresponds. Note that we do not need to distinguish between scalar multiples of these matrices as the corresponding conics have equivalent solution sets.
 	
 	\begin{thm}\label{thm:diag-P2}
 	Let
@@ -286,11 +281,11 @@
 	\end{align*}
 	and let $\gamma$ be defined by permuting the coordinates of $A$ so that $4ac-b^2\ne 0$, and setting $\gamma=4ac-b^2$. Then $A$ corresponds via Corollary~\ref{cor:sixcases} to
 	\begin{enumerate}
-	\item[(1) or (2)] if  $\alpha=\beta=0$;
-	\item[(3)] if $\alpha=0$, $\beta\ne 0$, and $\gamma$ is a nonzero residue;
-	\item[(4)] if $\alpha=0$, $\beta\ne 0$, and $\gamma$ is a nonzero nonresidue;
-	\item[(5)] if $\alpha$ is a nonzero residue;
-	\item[(6)] if $\alpha$ is a nonzero nonresidue.
+	\item\label{case:1} if  $\alpha=\beta=0$;
+	\item\label{case:11} if $\alpha=0$, $\beta\ne 0$, and $\gamma$ is a nonzero residue;
+	\item\label{case:1r} if $\alpha=0$, $\beta\ne 0$, and $\gamma$ is a nonzero nonresidue;
+	\item\label{case:111} if $\alpha$ is a nonzero residue;
+	\item\label{case:11r} if $\alpha$ is a nonzero nonresidue.
 	\end{enumerate}
 	\end{thm}
 	\begin{proof}
@@ -299,9 +294,9 @@
 	t^3+(-a-c-f)t^2+\tfrac{1}{4}(4ac+4af-b^2+4cf-d^2-e^2)t+\tfrac{1}{4}(-4acf+ae^2+b^2f-bde+cd^2).
 	\end{equation*}
 	
-	Thus $A$ has rank $1$ when $\alpha=\beta=0$, which gives (1) and (2).
+	Thus $A$ has rank $1$ when $\alpha=\beta=0$, which gives \eqref{case:1}.
 	
-	Likewise, $A$ has rank $2$ when $\alpha=0$ and $\beta\ne 0$. Since $\beta$ is the sum of $4ac-b^2$, $4af-d^2$, and $4cf-e^2$, these cannot all be zero; the latter two are obtained from $4ac-b^2$ by permuting the coordinates of $A$, which justifies step (1) in computing $\gamma$. Thus, assume that step (1) has been performed. If $a\ne 0$, then the \texttt{Magma} method \texttt{DiagonalForm()} shows that $A$ diagonalizes via
+	Likewise, $A$ has rank $2$ when $\alpha=0$ and $\beta\ne 0$. Since $\beta$ is the sum of $4ac-b^2$, $4af-d^2$, and $4cf-e^2$, these cannot all be zero; the latter two are obtained from $4ac-b^2$ by permuting the coordinates of $A$, which justifies the computation of $\gamma$. Thus, assume that $\gamma$ has been determined in this manner. If $a\ne 0$, then the \texttt{Magma} method \texttt{DiagonalForm()} shows that $A$ diagonalizes via
 	\begin{equation*}
 		\begin{bmatrix}
 			1 & -\dfrac{b}{2a} & \dfrac{be - 2cd}{4ac - b^2}\\
@@ -380,20 +375,20 @@
 			0&0&0
 		\end{bmatrix}.
 	\end{align*}
-	The product of the nonzero eigenvalues of this matrix is again $\gamma=-1$, up to a square. Since the matrices (3) and (4) are obtained from these diagonalized forms of $A$ by scaling coordinates, it is clear that $A$ corresponds to (3) if $\gamma$ is a residue and to (4) if it is not.
+	The product of the nonzero eigenvalues of this matrix is again $\gamma=-1$, up to a square. Since the matrices \eqref{case:11} and \eqref{case:1r} are obtained from these diagonalized forms of $A$ by scaling coordinates, it is clear that $A$ corresponds to \eqref{case:11} if $\gamma$ is a residue and to \eqref{case:1r} if it is not.
 	
 	Lastly, $A$ has rank $3$ when $\alpha$ is nonzero. Since
 	\begin{equation*}
 	\det P^\top AP=\det P^\top \cdot\det A\cdot\det P=\det A\cdot(\det P)^2,
 	\end{equation*}
-	the determinant of $A$ is a quadratic residue if and only if that of $P^\top AP$ is. Cases (5) and (6) of the theorem follow.
+	the determinant of $A$ is a quadratic residue if and only if that of $P^\top AP$ is. Cases \eqref{case:111} and \eqref{case:11r} of the theorem follow.
 	\end{proof}
 	
 	We will also need an analogous result for quadratic forms $ax^2+bxy+cy^2$ in two variables, which follows immediately from the previous theorem by setting $d=e=f=0$:
 	\begin{cor}\label{cor:diag-P1}
 	The matrix $\left[\begin{smallmatrix}a&b/2\\b/2&c\end{smallmatrix}\right]$ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)$) to
 	\begin{itemize}
-	\item $\left[\begin{smallmatrix}0&0\\0&0\end{smallmatrix}\right]$ if $a=b=c=d=0$;
+	\item $\left[\begin{smallmatrix}0&0\\0&0\end{smallmatrix}\right]$ if $a=b=c=0$;
 	\item $\left[\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right]$ or $\left[\begin{smallmatrix}r&0\\0&0\end{smallmatrix}\right]$ if $4ac-b^2=0$;
 	\item $\left[\begin{smallmatrix}1&0\\0&1\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonzero quadratic residue;
 	\item $\left[\begin{smallmatrix}1&0\\0&r\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonzero quadratic nonresidue.
@@ -409,14 +404,14 @@
 	\begin{prop}\label{prop:counting-P1-solutions}
 		Fix a quadratic nonresidue $r \in \F_p$. For each case in Corollary \ref{cor:diag-P1}, the following states how many solutions it has in $\P^1$.
 		\begin{enumerate} 
-			\item $0 = 0$ has $p+1$ solutions.
+			\item\label{case:0} $0 = 0$ has $p+1$ solutions.
 			\item $X^2 = 0$ has $1$ solution, namely $[0:1]$.
 			\item $X^2 + Y^2 = 0$ has $2$ solutions if $-1$ is a residue, and $0$ solutions otherwise. \label{case:x^2+y^2=0}
 			\item $X^2 + rY^2 = 0$ has $0$ solutions if $-1$ is a residue, and $2$ solutions otherwise.
 		\end{enumerate}
 	\end{prop}
 	\begin{proof}
-		The first of these has $|\P^1| = p+1$ solutions. The second is clear.
+		The first of these has $|\P^1(\F_p)| = p+1$ solutions. The second is clear.
 		
 		Evidently $Y$ must be nonzero for the last two cases, so we can rewrite them as
 		$(X/Y)^2 = -1$ and $(X/Y)^2 = -r$ respectively. If $-1$ is a residue,
@@ -428,7 +423,6 @@
 		Let $r$ be a quadratic nonresidue in $\F_p$ as before. For each case in Theorem \ref{thm:diag-P2}, the following states how many solutions it has in $\P^2$. 
 		\begin{enumerate} 
 			\item\label{case:rank1_x^2=0} $X^2 = 0$ has $p+1$ solutions.
-			\item\label{case:rank1_rx^2=0} $rX^2 = 0$ has $p+1$ solutions.
 			\item\label{case:rank2_x^2+y^2=0} $X^2 + Y^2 = 0$ has $2p+1$ solutions if $-1$ is a residue, and $1$ solution otherwise, namely $[0:0:1]$.
 			\item\label{case:rank2_x^2+ry^2=0} $X^2 + rY^2 = 0$ has $1$ solution if $-1$ is a residue, namely $[0:0:1]$, and $2p+1$ solutions otherwise.
 			\item\label{case:rank3_x^2+y^2+z^2=0} $X^2 + Y^2 + Z^2 = 0$ has $p+1$ solutions.
@@ -437,8 +431,8 @@
 	\end{prop}
 	\begin{proof} We treat the cases by rank.
 		
-		\textit{Rank 1: \eqref{case:rank1_x^2=0} and \eqref{case:rank1_rx^2=0}.} 
-		The equations $X^2 = 0$ and $rX^2 = 0$ each have $|\P^1|=p + 1$ solutions.
+		\textit{Rank 1: \eqref{case:rank1_x^2=0}.} 
+		The equations $X^2 = 0$ and $rX^2 = 0$ each have $|\P^1(\F_p)|=p + 1$ solutions.
 		
 		\textit{Rank 2: \eqref{case:rank2_x^2+y^2=0} and \eqref{case:rank2_x^2+ry^2=0}.} 
 		The only solution with $Y=0$ is $[0:0:1]$. So assume $Y \neq 0$, and rewrite the 
@@ -471,7 +465,7 @@
 	\end{proof}
 
     \begin{rem*}
-      In fact, it is well-known that any nondegenerate conic is isomorphic (as an algebraic variety) to $\P^1$ (see for instance \cite[Prop.~19.3.1]{vakil}). This explains why cases \eqref{case:rank3_x^2+y^2+z^2=0} and \eqref{case:rank3_x^2+y^2+rz^2=0} both have $|\P^1|=p+1$ solutions.
+      In fact, it is well-known that any nondegenerate conic is isomorphic (as an algebraic variety) to $\P^1$ (see for instance \cite[Prop.~19.3.1]{vakil}). This explains why cases \eqref{case:rank3_x^2+y^2+z^2=0} and \eqref{case:rank3_x^2+y^2+rz^2=0} both have $|\P^1(\F_p)|=p+1$ solutions.
     \end{rem*}
 	
 	\begin{prop}\label{prop:circle-solutions} 
@@ -559,13 +553,15 @@
 	If $p > 2$, then with $\alpha$, $\beta$, and $\gamma$ as defined in Theorem~\ref{thm:diag-P2}, we have
 	\begin{equation*}
 	|C(\F_p)|=\begin{cases}
-	\textrm{If }\alpha=\beta=0\textrm{ or }\alpha\ne 0\textrm{, then}&\begin{cases}
+	\textrm{If }\alpha=\beta=0\textrm{ or }\alpha\ne 0\textrm{, then:}\\
+\qquad\begin{cases}
 	0&\textrm{if }a=b=c=0,\\
 	p&\textrm{otherwise, if }4ac-b^2=0,\\
 	p-1&\textrm{otherwise, if }\legendre{4ac-b^2}{p}=\legendre{-1}{p},\\
 	p+1&\textrm{otherwise.}
 	\end{cases}\\
-	\textrm{If }\alpha=0\textrm{ and }\beta\ne 0\textrm{, then}&\begin{cases}
+	\textrm{If }\alpha=0\textrm{ and }\beta\ne 0\textrm{, then:}\\
+\qquad\begin{cases}
 	p&\textrm{if }a=b=c=0,\\
 	2p&\textrm{otherwise, if }4ac-b^2=0\textrm{ and }\legendre{-1}{p}=\legendre{\gamma}{p},\\
 	0&\textrm{otherwise, if }4ac-b^2=0\textrm{ and }\legendre{-1}{p}=-\legendre{\gamma}{p},\\
@@ -580,27 +576,13 @@
 		\[ ax^2 + bxy + cy^2 + dx + ey + f = 0 \] 
 		are the same as the solutions to 
 		\[ bxy + (a+d)x + (c+e)y + f = 0.  \] 
-		At this point, one can simply list out all the
+		At this point, one can simply list all of the
 		possibilities. It can be checked that the number of solutions in each case agrees with the expression in the theorem statement.
 		
-		The remainder is a synthesis of \S\ref{sec:diagonalizing-quadratic-forms}, \S\ref{sec:proj-solutions}, and Lemma \ref{lem:relate-solutions-affine-proj}.
-	\begin{itemize}
-	\item If $\alpha=\beta=0$ or $\alpha\ne 0$:
-	\begin{itemize}
-	\item If $a=b=c=0$, then $(p+1)-(p+1)=0$
-	\item If $4ac-b^2=0$, then $(p+1)-1=p$
-	\item If $\legendre{4ac-b^2}{p}=\legendre{-1}{p}$, then $(p+1)-2=p-1$
-	\item If $\legendre{4ac-b^2}{p}=-\legendre{-1}{p}$, then $(p+1)-0=p+1$
-	\end{itemize}
-	\item If $\alpha=0$, $\beta\ne 0$:
-	\begin{itemize}
-	\item If $a=b=c=0$, then $(2p+1)-(p+1)=p$
-	\item If $4ac-b^2=0$ and $\legendre{-1}{p}=\legendre{\gamma}{p}$, then $(2p+1)-1=2p$
-	\item If $4ac-b^2=0$ and $\legendre{-1}{p}=-\legendre{\gamma}{p}$, then $1-1=0$
-	\item Otherwise, if $\legendre{-1}{p}=\legendre{\gamma}{p}$, then $(2p+1)-2=2p-1$
-	\item Otherwise, if $\legendre{-1}{p}=-\legendre{\gamma}{p}$, then $1-0=1$
-	\end{itemize}
-	\end{itemize}
+		The remainder is a synthesis of \S\ref{sec:diagonalizing-quadratic-forms}, \S\ref{sec:proj-solutions}, and Lemma~\ref{lem:relate-solutions-affine-proj}.
+
+        Consolidate with Example~4.4!
+        \textcolor{red}{Note that if we are in case \eqref{case:0} of Proposition~\ref{prop:counting-P1-solutions}, i.e., if $a=b=c=0$, then $\gamma$ is a residue if and only if $-1$ is. Thus, by Theorem~\ref{thm:diag-P2}, we cannot be in cases \eqref{case:rank2_x^2+y^2=0} or \eqref{case:rank2_x^2+ry^2=0} of Proposition~\ref{prop:counting-P2-solutions} where the projectivized conic has only $1$ solution. Were this the case, Lemma~\ref{lem:relate-solutions-affine-proj} would imply that our affine conic has a negative number (to be exact, $-p$) of solutions!}
 	\end{proof}
 
 	We remark that while the expression for $|C(\F_p)|$ given above appears complicated, it is easily computable. The only parts that may be non-obvious are the Legendre symbols, but with tools such as the law of quadratic reciprocity, these too are readily determined.
@@ -670,6 +652,8 @@
     
     We can assume that $a,c,f \in \Z$, and that their product is square-free. This can always be achieved by scaling the entire equation or by scaling individual coordinates. Once this is accomplished, $\det A = \pm p_1\cdots p_m$ for distinct primes $p_1,\ldots,p_m$. Call this set of primes $\mathcal{P}$.
     
+    The conic evidently has a solution in $\R$ if and only if $a$, $c$, and $f$ are neither all positive nor all negative.
+
     For each prime $p>2$ \emph{not} in $\mathcal{P}$, reducing mod $p$ gives a full-rank conic, to which Hensel's applies immediately and we deduce that our original conic has $\Q_p$-points.
     
     $\mathcal{P}$ is finite, so we only have finitely many other things to check. For each of these primes $p>2$, reducing mod $p$ gives a rank 2 conic. Depending on the coefficients and whether $-1$ is a residue (see \ref{prop:counting-P2-solutions}) we may either have two lines or a single solution. The former can be lifted with Hensel's.
