@@ -429,8 +429,8 @@
 		\begin{enumerate} 
 			\item\label{case:rank1_x^2=0} $X^2 = 0$ has $p+1$ solutions.
 			\item\label{case:rank1_rx^2=0} $rX^2 = 0$ has $p+1$ solutions.
-			\item\label{case:rank2_x^2+y^2=0} $X^2 + Y^2 = 0$ has $2p+1$ solutions if $-1$ is a nonresidue, and $1$ solution otherwise, namely $[0:0:1]$.
-			\item\label{case:rank2_x^2+ry^2=0} $X^2 + rY^2 = 0$ has $1$ solution if $-1$ is a nonresidue, namely $[0:0:1]$, and $2p+1$ solutions otherwise.
+			\item\label{case:rank2_x^2+y^2=0} $X^2 + Y^2 = 0$ has $2p+1$ solutions if $-1$ is a residue, and $1$ solution otherwise, namely $[0:0:1]$.
+			\item\label{case:rank2_x^2+ry^2=0} $X^2 + rY^2 = 0$ has $1$ solution if $-1$ is a residue, namely $[0:0:1]$, and $2p+1$ solutions otherwise.
 			\item\label{case:rank3_x^2+y^2+z^2=0} $X^2 + Y^2 + Z^2 = 0$ has $p+1$ solutions.
 			\item\label{case:rank3_x^2+y^2+rz^2=0} $X^2 + Y^2 + rZ^2 = 0$ has $p+1$ solutions.
 		\end{enumerate}
@@ -658,8 +658,31 @@
 	If $\widetilde{C}$ is a double line or has only a single solution, then Hensel's lemma is inconclusive as we do not have a solution mod $p$ satisfying the requisite condition.
 
     \section{To $\mathbb{Q}$ via Hasse-Minkowski}\label{sec:hasse-minkowski}
+    The following takes place in $\P^2$. We start with a conic over $\Q$, which we can diagonalize so that it is represented by the matrix
+    \[
+    	A= \begin{bmatrix}
+    		a & 0 & 0\\
+    		0 & c & 0\\
+    		0 & 0 & f
+    	\end{bmatrix}.
+    \]
+    First off, if $\det A = acf = 0$ then the equation has obvious solutions. So assume $\det A \neq 0$.
     
-    This still needs to be worked out and written! Prerequisites: $\R$ case and $\Z_2$ case. Also wonder if Theorem \ref{thm:existence-over-Zp} can be strengthened... as the strength of this section will greatly depend on it.
+    We can assume that $a,c,f \in \Z$, and that their product is square-free. This can always be achieved by scaling the entire equation or by scaling individual coordinates. (I don't know if these assumptions are helpful, but they can be made.) Once this is accomplished, $\det A = \pm p_1\cdots p_m$ for distinct primes $p_1,\ldots,p_m$. Call this set of primes $\mathcal{P}$.
+    
+    For each prime $p>2$ \emph{not} in $\mathcal{P}$, reducing mod $p$ gives a full-rank conic, to which Hensel's applies immediately and we deduce that our original conic has $\Q_p$-points.
+    
+    $\mathcal{P}$ is finite, so we only have finitely many other things to check. For each of these primes $p>2$, reducing mod $p$ gives a rank 2 conic. Depending on the coefficients and whether $-1$ is a residue (see \ref{prop:counting-P2-solutions}) we may either have two lines or a single solution. The former can be lifted with Hensel's.
+    
+    So what if we have the latter? In this case...
+    \begin{quotation}
+    	Can $A$ be written differently over $\Q_p$ so that its reduction mod $p$ is ``nicer'' to apply Hensel's to? Also, maybe Hensel's mod a higher power of the prime can tell us something?
+    \end{quotation}
+	I \emph{think} the answer to the first question is ``no'' because we already made the square-free assumption on $\det A$. I still haven't thought about the latter.
+	
+	Then there's also the pesky question of $p=2$ still.
+	
+	But this looks hopeful overall, since we only have to check $2$ and the primes which divide $\det A$ to come up with sufficient criteria for existence of $\Q$-points.
 
 \begin{filecontents}{references.bib}
 @book {omeara,
