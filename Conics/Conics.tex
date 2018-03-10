@@ -16,10 +16,12 @@
 \usepackage{filecontents}
 \usepackage[colorlinks=true]{hyperref}
 \usepackage{tabu}
+\usepackage{multicol}
 
 %Environments
 \numberwithin{equation}{section} 
 \numberwithin{figure}{section}
+\numberwithin{table}{section}
 \theoremstyle{definition} 
 \theoremstyle{plain} 
 \newtheorem{thm}{\protect\theoremname}[section]
@@ -56,22 +58,23 @@
 \newcommand{\GL}{\operatorname{GL}}
 \newcommand{\Span}{\operatorname{Span}}
 \newcommand{\trsp}[1]{{{#1}^{\top}\!\!}}
+\newcommand{\ndiv}{\!\nmid\!}
 
 \begin{document} 
-
-\title{Mod $p$ solutions to conics, and applications} 
-\author{Xianglong Ni, Oron Propp, and Miguel Young}
-\maketitle
-
-\begin{abstract} 
-	We count the number of solutions of any affine plane conic modulo a prime.
-	We use this result to determine whether such a conic has rational solutions. 
-\end{abstract}
-
-\tableofcontents
-
-\section{Introduction}\label{sec:intro} 
-
+	
+	\title{Mod $p$ solutions to conics, and applications} 
+	\author{Xianglong Ni, Oron Propp, and Miguel Young}
+	\maketitle
+	
+	\begin{abstract} 
+		We count the number of solutions of any affine plane conic modulo a prime.
+		We use this result to determine whether such a conic has rational solutions. 
+	\end{abstract}
+	
+	\tableofcontents
+	
+	\section{Introduction}\label{sec:intro} 
+	
 	% Get a reference for general nonsense over the reals
 	A \emph{conic section} on the real plane $\R^2$ is the solution set of 
 	a polynomial
@@ -127,83 +130,82 @@
 	drop back down to the affine case in \S\ref{sec:affine-solutions}. Our result
 	is a complete characterization of the number of solutions, given by 
 	Theorem \ref{thm:main-thm}.
-	In the second part, we can lift solutions to $\Z_p$ by way of
-	Hensel's lemma in \S\ref{sec:hensels-lemma}. Finally, using Hasse-Minkowski 
-	we give a criterion for  existence of rational points in  
-	\S\ref{sec:hasse-minkowski}.
-
-	\subsection*{Acknowledgements} Xianglong wrote sections \S\ref{sec:projectivization-of-the-problem}, \ref{sec:proj-solutions}, \ref{sec:hensels-lemma}. Oron wrote sections \S\ref{sec:diagonalizing-quadratic-forms}, \ref{sec:affine-solutions} and helped with \S\ref{sec:proj-solutions} (Proposition \ref{prop:circle-solutions} especially). Miguel ran experimental tests to both motivate and verify our computations, wrote \S\ref{sec:intro}, and helped format, edit, and proofread.
+	In the second part, we lift solutions to $\Z_p$ by way of
+	Hensel's lemma, and use Hasse-Minkowski 
+	to give a criterion for existence of rational points. This is the content of \S\ref{sec:rational-soln}.
 	
-	We would like to thank the 18.821 course staff for organizing this project, and Rasmus Johansen in particular for his guidance and suggestions.    
-    \section{Preliminaries}\label{sec:projectivization-of-the-problem}
-
-    Let us begin by fixing a conic
-    \begin{equation}\label{eq:original-conic} 
-        C \colon ax^2 + bxy + cy^2 + dx + ey + f = 0 
-    \end{equation} 
-    with integer coefficients. We require that at least one of 
-    $a$, $b$, and $c$ is nonzero, and that $\gcd(a,b,c,d,e,f)=1$.
-    Fix a base field $\F_p$ where $p$ is an odd prime. (We defer treatment of the case $p = 2$ to \S\ref{sec:affine-solutions}.)
-    \begin{defn}
-        Let $\A^n_{\F_p}$ denote $n$-dimensional affine space over $\F_p$. Define 
-        $n$-dimensional projective space over $\F_p$ as the quotient
-        \[ \P^n_{\F_p} = (\A^{n+1}_{\F_p}\setminus \{0\})/{\sim}, \]
-        where we declare that $(x_1,\ldots,x_{n+1}) \sim 
-        (\lambda x_1,\ldots,\lambda x_{n+1})$ for $\lambda$ a nonzero scalar. We
-        will primarialy work with $n = 2$, and suppress the ground field from the 
-        notation. We will write $[X:Y:Z]\in \P^2$ to denote the equivalence 
-        class of $(X,Y,Z)\in \A^3 \setminus \{0\}$.
-    \end{defn}
-
-    With this construction in mind, we can \emph{projectivize} our conic
-    \eqref{eq:original-conic} from $\A^2$ to $\P^2$, by writing it as a 
-    homogenous equation: 
-    \begin{equation}\label{eq:projective-conic} 
-        \widetilde{C} \colon aX^2 + bXY + cY^2 + dXZ + eYZ + fZ^2 = 0. 
-    \end{equation}
-    Note that homogeneity ensures it is well-defined to ask when this
-    equation has a solution in $\P^2$.
-
-    Let $C(\F_p)$ denote the solution set of \eqref{eq:original-conic} in $\A^2$. Our aim
-    is to characterize $|C(\F_p)|$ as a function of the coefficients $a,b,c,d,e,f$ and 
-    the prime $p$. The solutions of \eqref{eq:projective-conic} define a set
-    $\widetilde{C}(\F_p) \subset \P^2$.
-
-    There is an evident injection $C(\F_p) \rightarrowtail \widetilde{C}(\F_p)$ sending $(x,y)$ to
-    $[x:y:1]$. However, elements of $\widetilde{C}(\F_p)$ of the form $[X:Y:0]$ do not 
-    correspond to elements of $C(\F_p)$. 
-    These are solutions ``at infinity'' in the projective plane.
-    Thankfully, these extraneous solutions are easily characterized: they are the
-    solutions to the equation
-    \begin{equation}\label{eq:projective-conic-at-infinity} 
-        \widetilde{C}_0 \colon aX^2 + bXY + cY^2 = 0
-    \end{equation} 
-    on the projective line $\P^1$. Call this solution set $\widetilde{C}_0(\F_p)\subset \P^1$.  
-
-    \begin{lem}\label{lem:relate-solutions-affine-proj}
-        $|\widetilde{C}(\F_p)| = |C(\F_p)| + |\widetilde{C}_0(\F_p)|$.
-    \end{lem} 
-    \begin{proof}
-        A solution $[X:Y:Z]$ of $\widetilde{C}$ corresponds 
-        to a solution $(X/Z,Y/Z)$ of $C$ when $Z \neq 0$,
-        and to a solution $[X:Y]$ of $\widetilde{C}_0$ 
-        when $Z = 0$.  
-    \end{proof}
-    
-    We will also need a bit of number theory, since our characterization
-    involves the notion of quadratic residues:
-    \begin{defn}
-        The nonzero elements $\F_p^\times \subset \F_p$ form an abelian
-        group under multiplication, and the squaring map 
-	    \[ \F^\times_p \xrightarrow{x \mapsto x^2} \F^\times_p \]
-	    is a homomorphism. We will call the image of this map the
-	    \emph{quadratic residues mod $p$}, or just the \emph{residues} (where the
-	    prime $p$ is inferred from context). We will also regard $0\in\F_p$ as a residue.
-    \end{defn}
-    
-    If $p$ divides $x^2 - 1 = (x+1)(x-1)$, we must have $x \equiv \pm 1 \pmod{p}$, so 
-    the kernel of the map is $\{\pm 1\}$. Thus each nonzero residue has exactly two 
-    square roots. The cokernel of this map is also a group of order two: 
+	\subsection*{Acknowledgments} Oron wrote sections \S\ref{sec:diagonalizing-quadratic-forms} and \S\ref{sec:affine-solutions}. Together, Xianglong and Oron worked out much of \S\ref{sec:proj-solutions} and \S\ref{sec:rational-soln}, which were later written up by Xianglong (who also wrote \S\ref{sec:projectivization-of-the-problem}). Miguel ran experimental tests to both motivate and verify our computations, wrote \S\ref{sec:intro}, and helped format, edit, and proofread.
+	
+	We would like to thank the 18.821 course staff for organizing this project, and Rasmus Johansen in particular for his guidance and suggestions. \textcolor{blue}{[update with thanks to those who gave revision suggestions]}
+	\section{Preliminaries}\label{sec:projectivization-of-the-problem}
+	
+	Let us begin by fixing a conic
+	\begin{equation}\label{eq:original-conic} 
+	C \colon ax^2 + bxy + cy^2 + dx + ey + f = 0 
+	\end{equation} 
+	with integer coefficients. We require that at least one of 
+	$a$, $b$, and $c$ is nonzero, and that $\gcd(a,b,c,d,e,f)=1$.
+	Fix a base field $\F_p$ where $p$ is an odd prime. (We defer treatment of the case $p = 2$ to \S\ref{sec:affine-solutions}.)
+	\begin{defn}
+		Let $\A^n_{\F_p}$ denote $n$-dimensional affine space over $\F_p$. Define 
+		$n$-dimensional projective space over $\F_p$ as the quotient
+		\[ \P^n_{\F_p} = (\A^{n+1}_{\F_p}\setminus \{0\})/{\sim}, \]
+		where we declare that $(x_1,\ldots,x_{n+1}) \sim 
+		(\lambda x_1,\ldots,\lambda x_{n+1})$ for $\lambda$ a nonzero scalar. We
+		will primarialy work with $n = 2$, and suppress the ground field from the 
+		notation. We will write $[X:Y:Z]\in \P^2$ to denote the equivalence 
+		class of $(X,Y,Z)\in \A^3 \setminus \{0\}$.
+	\end{defn}
+	
+	With this construction in mind, we can \emph{projectivize} our conic
+	\eqref{eq:original-conic} from $\A^2$ to $\P^2$, by writing it as a 
+	homogenous equation: 
+	\begin{equation}\label{eq:projective-conic} 
+	\widetilde{C} \colon aX^2 + bXY + cY^2 + dXZ + eYZ + fZ^2 = 0. 
+	\end{equation}
+	Note that homogeneity ensures it is well-defined to ask when this
+	equation has a solution in $\P^2$.
+	
+	Let $C(\F_p)$ denote the solution set of \eqref{eq:original-conic} in $\A^2$. Our aim
+	is to characterize $|C(\F_p)|$ as a function of the coefficients $a,b,c,d,e,f$ and 
+	the prime $p$. The solutions of \eqref{eq:projective-conic} define a set
+	$\widetilde{C}(\F_p) \subset \P^2$.
+	
+	There is an evident injection $C(\F_p) \rightarrowtail \widetilde{C}(\F_p)$ sending $(x,y)$ to
+	$[x:y:1]$. However, elements of $\widetilde{C}(\F_p)$ of the form $[X:Y:0]$ do not 
+	correspond to elements of $C(\F_p)$. 
+	These are solutions ``at infinity'' in the projective plane.
+	Thankfully, these extraneous solutions are easily characterized: they are the
+	solutions to the equation
+	\begin{equation}\label{eq:projective-conic-at-infinity} 
+	\widetilde{C}_0 \colon aX^2 + bXY + cY^2 = 0
+	\end{equation} 
+	on the projective line $\P^1$. Call this solution set $\widetilde{C}_0(\F_p)\subset \P^1$.  
+	
+	\begin{lem}\label{lem:relate-solutions-affine-proj}
+		$|\widetilde{C}(\F_p)| = |C(\F_p)| + |\widetilde{C}_0(\F_p)|$.
+	\end{lem} 
+	\begin{proof}
+		A solution $[X:Y:Z]$ of $\widetilde{C}$ corresponds 
+		to a solution $(X/Z,Y/Z)$ of $C$ when $Z \neq 0$,
+		and to a solution $[X:Y]$ of $\widetilde{C}_0$ 
+		when $Z = 0$.  
+	\end{proof}
+	
+	We will also need a bit of number theory, since our characterization
+	involves the notion of quadratic residues:
+	\begin{defn}
+		The nonzero elements $\F_p^\times \subset \F_p$ form an abelian
+		group under multiplication, and the squaring map 
+		\[ \F^\times_p \xrightarrow{x \mapsto x^2} \F^\times_p \]
+		is a homomorphism. We will call the image of this map the
+		\emph{quadratic residues mod $p$}, or just the \emph{residues} (where the
+		prime $p$ is inferred from context). We will also regard $0\in\F_p$ as a residue.
+	\end{defn}
+	
+	If $p$ divides $x^2 - 1 = (x+1)(x-1)$, we must have $x \equiv \pm 1 \pmod{p}$, so 
+	the kernel of the map is $\{\pm 1\}$. Thus each nonzero residue has exactly two 
+	square roots. The cokernel of this map is also a group of order two: 
 	\[ \F_p^\times / (\F_p^\times)^2 \cong \{\pm 1\}.  \]
 	This gives a convenient characterization of quadratic residues:
 	\begin{defn}
@@ -216,12 +218,12 @@
 		with $\legendre{0}{p}$ defined as $0$.
 	\end{defn}
 	
-    \section{Diagonalization of quadratic forms}
-    \label{sec:diagonalizing-quadratic-forms} 
-
-    In this section, we aim to simplify the equation defining the projectivized conic $\widetilde{C}$ via coordinate-changes of $\P^2$. In this section,
-    we will make extensive use of \texttt{Magma} \cite{magma}, a computer 
-    algebra system. Let
+	\section{Diagonalization of quadratic forms}
+	\label{sec:diagonalizing-quadratic-forms} 
+	
+	In this section, we aim to simplify the equation defining the projectivized conic $\widetilde{C}$ via coordinate-changes of $\P^2$. In this section,
+	we will make extensive use of \texttt{Magma} \cite{magma}, a computer 
+	algebra system. Let
 	\begin{equation*}
 	A=\begin{bmatrix}
 	a&b/2&d/2\\
@@ -242,8 +244,8 @@
 	\end{equation*}
 	the matrix representing $\widetilde{C}$ is $\trsp{P}AP$ in the new coordinates. This transformation $A \mapsto \trsp{P}A P$ does not change the number of solutions of the corresponding conic, as $P$ is invertible. The following result is well-known (see for instance \cite[Prop.~42:1]{omeara}):
 	\begin{thm}
-	\label{thm:diag}
-	There exists some $P\in\GL_3(\F_p)$ such that $\trsp{P}AP$ is diagonal.
+		\label{thm:diag}
+		There exists some $P\in\GL_3(\F_p)$ such that $\trsp{P}AP$ is diagonal.
 	\end{thm}
 	This significantly simplifies the set of conics which we must consider: a diagonal matrix
 	\begin{equation*}
@@ -255,82 +257,82 @@
 	\end{equation*}
 	corresponds to the conic defined by $\lambda_1x^2+\lambda_2y^2+\lambda_3z^2=0$ (note that we cannot have $\lambda_1=\lambda_2=\lambda_3=0$ by our initial assumptions). By further scaling and permuting coordinates as appropriate, we immediately obtain the following:
 	\begin{cor}
-	\label{cor:sixcases}
-	Fix an element $r\in\F_p$ that is not a square. There exists some $P\in\GL_3(\F_p)$ such that $\trsp{P}AP$ is equal to a (nonzero) scalar multiple of one of the following:
-	$$
-	\begin{tabu}{cccccc}
-	(1)&(2)&(3)&(4)&(5)\\
-	\begin{bmatrix}
-	1&0&0\\
-	0&0&0\\
-	0&0&0
-	\end{bmatrix}&
-	\begin{bmatrix}
-	1&0&0\\
-	0&1&0\\
-	0&0&0
-	\end{bmatrix}&
-	\begin{bmatrix}
-	1&0&0\\
-	0&r&0\\
-	0&0&0
-	\end{bmatrix}&
-	\begin{bmatrix}
-	1&0&0\\
-	0&1&0\\
-	0&0&1
-	\end{bmatrix}&
-	\begin{bmatrix}
-	1&0&0\\
-	0&1&0\\
-	0&0&r
-	\end{bmatrix}
-	\end{tabu}
-	$$
+		\label{cor:sixcases}
+		Fix an element $r\in\F_p$ that is not a square. There exists some $P\in\GL_3(\F_p)$ such that $\trsp{P}AP$ is equal to a (nonzero) scalar multiple of one of the following:
+		$$
+		\begin{tabu}{cccccc}
+		(1)&(2)&(3)&(4)&(5)\\
+		\begin{bmatrix}
+		1&0&0\\
+		0&0&0\\
+		0&0&0
+		\end{bmatrix}&
+		\begin{bmatrix}
+		1&0&0\\
+		0&1&0\\
+		0&0&0
+		\end{bmatrix}&
+		\begin{bmatrix}
+		1&0&0\\
+		0&r&0\\
+		0&0&0
+		\end{bmatrix}&
+		\begin{bmatrix}
+		1&0&0\\
+		0&1&0\\
+		0&0&1
+		\end{bmatrix}&
+		\begin{bmatrix}
+		1&0&0\\
+		0&1&0\\
+		0&0&r
+		\end{bmatrix}
+		\end{tabu}
+		$$
 	\end{cor}
 	In the next section, we determine how many solutions each of the corresponding conics has in $\P^2$. For now, we determine to which of these five matrices $A$ corresponds. Note that we do not need to distinguish between scalar multiples of these matrices as the corresponding conics have equivalent solution sets.
 	
 	\begin{lem}
-	\label{thm:diag-P2}
-	   In the context of Corollary \ref{cor:sixcases}, let
-	   \begin{align*}
-	       \alpha &= 4acf - ae^2 - b^2f + bde - cd^2,\\
-	       \beta &= 4ac + 4af + 4cf - b^2 - d^2 - e^2, \\
-	       \gamma &= 4ac - b^2,
-	   \end{align*} 
-	   where the first two expressions are coefficients in the 
-	   characteristic polynomial of $A$. 
-	   Then, the matrix $A$ corresponds to one of the cases in 
-	   Corollary \ref{cor:sixcases} when
-	   \begin{enumerate}
-	       \item\label{case:1} $\alpha=\beta=0$;
-	       \item\label{case:11} $\alpha=0$, $\beta\ne 0$, 
-	           and $\gamma$ is a nonzero residue;
-	       \item\label{case:1r} $\alpha=0$, $\beta\ne 0$, 
-	           and $\gamma$ is a nonresidue;
-	       \item\label{case:111} $\alpha$ is a nonzero residue;
-	       \item\label{case:11r} $\alpha$ is a nonresidue.
-	   \end{enumerate}
+		\label{thm:diag-P2}
+		In the context of Corollary \ref{cor:sixcases}, let
+		\begin{align*}
+		\alpha &= 4acf - ae^2 - b^2f + bde - cd^2,\\
+		\beta &= 4ac + 4af + 4cf - b^2 - d^2 - e^2, \\
+		\gamma &= 4ac - b^2,
+		\end{align*} 
+		where the first two expressions are coefficients in the 
+		characteristic polynomial of $A$. 
+		Then, the matrix $A$ corresponds to one of the cases in 
+		Corollary \ref{cor:sixcases} when
+		\begin{enumerate}
+			\item\label{case:1} $\alpha=\beta=0$;
+			\item\label{case:11} $\alpha=0$, $\beta\ne 0$, 
+			and $\gamma$ is a nonzero residue;
+			\item\label{case:1r} $\alpha=0$, $\beta\ne 0$, 
+			and $\gamma$ is a nonresidue;
+			\item\label{case:111} $\alpha$ is a nonzero residue;
+			\item\label{case:11r} $\alpha$ is a nonresidue.
+		\end{enumerate}
 	\end{lem}
 	\begin{proof}
-	Let $P\in\GL_3(\F_p)$ be such that $P\trsp{P}AP$ is one of the six matrices in Corollary~\ref{cor:sixcases}; these six matrices are distinguished by their ranks and the products of their nonzero eigenvalues. Since $P$ is invertible, the rank of $\trsp{P}AP$ is equal to that of $A$. By the rank-nullity theorem, the rank of $A$ is given by 3 minus the multiplicity of the eigenvalue $0$: this multiplicity is the highest power of $t$ dividing the characteristic polynomial of $A$. A \texttt{Magma} computation shows that the characteristic polynomial of $A$ is given by
-	\begin{equation*}
-	t^3+(-a-c-f)t^2+\tfrac{1}{4}(4ac+4af-b^2+4cf-d^2-e^2)t+\tfrac{1}{4}(-4acf+ae^2+b^2f-bde+cd^2).
-	\end{equation*}
-	Thus $A$ has rank $1$ when $\alpha=\beta=0$, which gives \eqref{case:1}.
-	
-	Likewise, $A$ has rank $2$ when $\alpha=0$ and $\beta\ne 0$. Since $\beta$ is the sum of $4ac-b^2$, $4af-d^2$, and $4cf-e^2$, these cannot all be zero; the latter two are obtained from $4ac-b^2$ by permuting the coordinates of $A$, which justifies the computation of $\gamma$. Thus, assume that $\gamma$ has been determined in this manner. If $a\ne 0$, then the \texttt{Magma} method \texttt{DiagonalForm()} shows that $A$ diagonalizes via
-	\begin{equation*}
+		Let $P\in\GL_3(\F_p)$ be such that $P\trsp{P}AP$ is one of the six matrices in Corollary~\ref{cor:sixcases}; these six matrices are distinguished by their ranks and the products of their nonzero eigenvalues. Since $P$ is invertible, the rank of $\trsp{P}AP$ is equal to that of $A$. By the rank-nullity theorem, the rank of $A$ is given by 3 minus the multiplicity of the eigenvalue $0$: this multiplicity is the highest power of $t$ dividing the characteristic polynomial of $A$. A \texttt{Magma} computation shows that the characteristic polynomial of $A$ is given by
+		\begin{equation*}
+		t^3+(-a-c-f)t^2+\tfrac{1}{4}(4ac+4af-b^2+4cf-d^2-e^2)t+\tfrac{1}{4}(-4acf+ae^2+b^2f-bde+cd^2).
+		\end{equation*}
+		Thus $A$ has rank $1$ when $\alpha=\beta=0$, which gives \eqref{case:1}.
+		
+		Likewise, $A$ has rank $2$ when $\alpha=0$ and $\beta\ne 0$. Since $\beta$ is the sum of $4ac-b^2$, $4af-d^2$, and $4cf-e^2$, these cannot all be zero; the latter two are obtained from $4ac-b^2$ by permuting the coordinates of $A$, which justifies the computation of $\gamma$. Thus, assume that $\gamma$ has been determined in this manner. If $a\ne 0$, then the \texttt{Magma} method \texttt{DiagonalForm()} shows that $A$ diagonalizes via
+		\begin{equation*}
 		\begin{bmatrix}
-			1 & -\dfrac{b}{2a} & \dfrac{be - 2cd}{4ac - b^2}\\
-			0 & 1 & \dfrac{-2ae + bd}{4ac - b^2} \\
-			0 & 0 & 1
+		1 & -\dfrac{b}{2a} & \dfrac{be - 2cd}{4ac - b^2}\\
+		0 & 1 & \dfrac{-2ae + bd}{4ac - b^2} \\
+		0 & 0 & 1
 		\end{bmatrix}^\top\!
 		A
 		\begin{bmatrix}
-			1 & -\dfrac{b}{2a} & \dfrac{be - 2cd}{4ac - b^2}\\
-			0 & 1 & \dfrac{-2ae + bd}{4ac - b^2} \\
-			0 & 0 & 1
+		1 & -\dfrac{b}{2a} & \dfrac{be - 2cd}{4ac - b^2}\\
+		0 & 1 & \dfrac{-2ae + bd}{4ac - b^2} \\
+		0 & 0 & 1
 		\end{bmatrix}
 		=
 		\begin{bmatrix}
@@ -338,21 +340,21 @@
 		0&\dfrac{4ac-b^2}{4a}&0\\
 		0&0&0
 		\end{bmatrix}.
-	\end{equation*}
-	Thus, the product of the nonzero eigenvalues of this matrix is $\gamma=4ac-b^2$, up to a square. The case $c\ne 0$ is similar.
-	
-	Next, if $a=c=0$ and $f\ne 0$, then a similar \texttt{Magma} computation shows that $A$ diagonalizes via
-	\begin{equation*}
+		\end{equation*}
+		Thus, the product of the nonzero eigenvalues of this matrix is $\gamma=4ac-b^2$, up to a square. The case $c\ne 0$ is similar.
+		
+		Next, if $a=c=0$ and $f\ne 0$, then a similar \texttt{Magma} computation shows that $A$ diagonalizes via
+		\begin{equation*}
 		\begin{bmatrix}
-			0 & 0 & 1\\
-			0 & 1 & \dfrac{2bf - de}{e^2}\\
-			1 & -\dfrac{e}{2f} & -\dfrac{b}{e}
+		0 & 0 & 1\\
+		0 & 1 & \dfrac{2bf - de}{e^2}\\
+		1 & -\dfrac{e}{2f} & -\dfrac{b}{e}
 		\end{bmatrix}^\top\!
 		A
 		\begin{bmatrix}
-			0 & 0 & 1\\
-			0 & 1 & \dfrac{2bf - de}{e^2}\\
-			1 & -\dfrac{e}{2f} & -\dfrac{b}{e}
+		0 & 0 & 1\\
+		0 & 1 & \dfrac{2bf - de}{e^2}\\
+		1 & -\dfrac{e}{2f} & -\dfrac{b}{e}
 		\end{bmatrix}
 		=
 		\begin{bmatrix}
@@ -360,91 +362,91 @@
 		0&-\dfrac{e^2}{4f}&0\\
 		0&0&0
 		\end{bmatrix}.
-	\end{equation*}
-	The product of the nonzero eigenvalues of this matrix is $\gamma=-1$, up to a square. Note that in this case the diagonalizing matrix $P$ is only well-defined if $e$ is nonzero as well, but this is clear as the condition $\alpha=0$ is equivalent to $bf=de$, and $b\ne 0$ as $4ac-b^2\ne 0$ (thus, $4ac-b^2=-b^2$ is also $-1$ up to a square). Finally, if $a=c=f=0$, then either $d=0$ or $e=0$, and the same \texttt{Magma} computation shows
-	\begin{align*}
+		\end{equation*}
+		The product of the nonzero eigenvalues of this matrix is $\gamma=-1$, up to a square. Note that in this case the diagonalizing matrix $P$ is only well-defined if $e$ is nonzero as well, but this is clear as the condition $\alpha=0$ is equivalent to $bf=de$, and $b\ne 0$ as $4ac-b^2\ne 0$ (thus, $4ac-b^2=-b^2$ is also $-1$ up to a square). Finally, if $a=c=f=0$, then either $d=0$ or $e=0$, and the same \texttt{Magma} computation shows
+		\begin{align*}
 		\begin{bmatrix}
-			1 & -1/2 & -e/b\\
-			1 & 1/2 & 0\\
-			0 & 0 & 1
+		1 & -1/2 & -e/b\\
+		1 & 1/2 & 0\\
+		0 & 0 & 1
 		\end{bmatrix}^\top\!
 		A
 		\begin{bmatrix}
-			1 & -1/2 & -e/b\\
-			1 & 1/2 & 0\\
-			0 & 0 & 1
+		1 & -1/2 & -e/b\\
+		1 & 1/2 & 0\\
+		0 & 0 & 1
 		\end{bmatrix}
 		&=
 		\begin{bmatrix}
-			b&0&0\\
-			0&-b/4&0\\
-			0&0&0
+		b&0&0\\
+		0&-b/4&0\\
+		0&0&0
 		\end{bmatrix}\\
 		\begin{bmatrix}
-			1 & -1/2 & 0\\
-			1 & 1/2 & -d/b\\
-			0 & 0 & 1
+		1 & -1/2 & 0\\
+		1 & 1/2 & -d/b\\
+		0 & 0 & 1
 		\end{bmatrix}^\top\!
 		A
 		\begin{bmatrix}
-			1 & -1/2 & 0\\
-			1 & 1/2 & -d/b\\
-			0 & 0 & 1
+		1 & -1/2 & 0\\
+		1 & 1/2 & -d/b\\
+		0 & 0 & 1
 		\end{bmatrix}
 		&=
 		\begin{bmatrix}
-			b&0&0\\
-			0&-b/4&0\\
-			0&0&0
+		b&0&0\\
+		0&-b/4&0\\
+		0&0&0
 		\end{bmatrix}.
-	\end{align*}
-	The product of the nonzero eigenvalues of this matrix is again $\gamma=-1$, up to a square. Since the matrices \eqref{case:11} and \eqref{case:1r} are obtained from these diagonalized forms of $A$ by scaling coordinates, it is clear that $A$ corresponds to \eqref{case:11} if $\gamma$ is a residue and to \eqref{case:1r} if it is not.
-	
-	Lastly, $A$ has rank $3$ when $\alpha$ is nonzero. Since
-	\begin{equation*}
-	\det \trsp{P}AP=\det \trsp{P} \cdot\det A\cdot\det P=\det A\cdot(\det P)^2,
-	\end{equation*}
-	the determinant of $A$ is a quadratic residue if and only if that of $\trsp{P}AP$ is. Cases \eqref{case:111} and \eqref{case:11r} of the theorem follow.
+		\end{align*}
+		The product of the nonzero eigenvalues of this matrix is again $\gamma=-1$, up to a square. Since the matrices \eqref{case:11} and \eqref{case:1r} are obtained from these diagonalized forms of $A$ by scaling coordinates, it is clear that $A$ corresponds to \eqref{case:11} if $\gamma$ is a residue and to \eqref{case:1r} if it is not.
+		
+		Lastly, $A$ has rank $3$ when $\alpha$ is nonzero. Since
+		\begin{equation*}
+		\det \trsp{P}AP=\det \trsp{P} \cdot\det A\cdot\det P=\det A\cdot(\det P)^2,
+		\end{equation*}
+		the determinant of $A$ is a quadratic residue if and only if that of $\trsp{P}AP$ is. Cases \eqref{case:111} and \eqref{case:11r} of the theorem follow.
 	\end{proof}
 	
 	We will also need an analogous result for quadratic forms $ax^2+bxy+cy^2$ in two variables, which follows immediately from the lemma by setting $d=e=f=0$:
 	\begin{cor}\label{cor:diag-P1}
-	The matrix $\left[\begin{smallmatrix}a&b/2\\b/2&c\end{smallmatrix}\right]$ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)$) to
-	\begin{itemize}
-	\item $\left[\begin{smallmatrix}0&0\\0&0\end{smallmatrix}\right]$ if $a=b=c=0$;
-	\item $\left[\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right]$ or $\left[\begin{smallmatrix}r&0\\0&0\end{smallmatrix}\right]$ if $4ac-b^2=0$;
-	\item $\left[\begin{smallmatrix}1&0\\0&1\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonzero quadratic residue;
-	\item $\left[\begin{smallmatrix}1&0\\0&r\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonzero quadratic nonresidue.
-	\end{itemize}
+		The matrix $\left[\begin{smallmatrix}a&b/2\\b/2&c\end{smallmatrix}\right]$ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)$) to
+		\begin{itemize}
+			\item $\left[\begin{smallmatrix}0&0\\0&0\end{smallmatrix}\right]$ if $a=b=c=0$;
+			\item $\left[\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right]$ or $\left[\begin{smallmatrix}r&0\\0&0\end{smallmatrix}\right]$ if $4ac-b^2=0$;
+			\item $\left[\begin{smallmatrix}1&0\\0&1\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonzero quadratic residue;
+			\item $\left[\begin{smallmatrix}1&0\\0&r\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonzero quadratic nonresidue.
+		\end{itemize}
 	\end{cor}
 	
 	\begin{rem*}
 		The discussion in this section suggests a definition for a \emph{degenerate} conic over $\F_p$: they should be the conics whose corresponding quadratic form is degenerate, or equivalently, whose corresponding matrix is singular.
 	\end{rem*}
-
-    \section{Counting solutions of a conic in $\P^2$}
-    \label{sec:proj-solutions}
-    
-    Now that we have diagonalized our conics to a more easily-analyzed form, we can
-    work on solving the projectivized conics, $\widetilde{C}$ and 
-    $\widetilde{C}_0$. We will treat the easier $\P^1$ case first.
-    \begin{prop}[Counting Solutions in $\P^1$]
-        \label{prop:counting-P1-solutions}
-        Fix a prime $p$ and let $r$ be a nonresidue. When diagonalized,
-        $\widetilde{C}_0$ has one of the following forms:
-        \begin{enumerate}
-            \item \label{case:0} $0 = 0$, with $p+1$ solutions.
-            \item $X^2 = 0$, with $1$ solution, namely $[0:1]$.
-            \item \label{case:x^2+y^2=0} $X^2 + Y^2 = 0$, with 
-            $1 + \legendre{-1}{p}$ solutions.
-            \item $X^2 + rY^2 = 0$, with 
-            $1 - \legendre{-1}{p}$ solutions.
-        \end{enumerate}    
-    \end{prop}
+	
+	\section{Counting solutions of a conic in $\P^2$}
+	\label{sec:proj-solutions}
+	
+	Now that we have diagonalized our conics to a more easily-analyzed form, we can
+	work on solving the projectivized conics, $\widetilde{C}$ and 
+	$\widetilde{C}_0$. We will treat the easier $\P^1$ case first.
+	\begin{prop}[Counting Solutions in $\P^1$]
+		\label{prop:counting-P1-solutions}
+		Fix a prime $p$ and let $r$ be a nonresidue. When diagonalized,
+		$\widetilde{C}_0$ has one of the following forms:
+		\begin{enumerate}
+			\item \label{case:0} $0 = 0$, with $p+1$ solutions.
+			\item $X^2 = 0$, with $1$ solution, namely $[0:1]$.
+			\item \label{case:x^2+y^2=0} $X^2 + Y^2 = 0$, with 
+			$1 + \legendre{-1}{p}$ solutions.
+			\item $X^2 + rY^2 = 0$, with 
+			$1 - \legendre{-1}{p}$ solutions.
+		\end{enumerate}    
+	\end{prop}
 	\begin{proof}
-        The first and second cases are clear; note that $|\P^1| = p+1$.
-        
-        In the other two cases, $Y$ must be nonzero. We can write them as
+		The first and second cases are clear; note that $|\P^1| = p+1$.
+		
+		In the other two cases, $Y$ must be nonzero. We can write them as
 		$(X/Y)^2 = -1$ and $(X/Y)^2 = -r$ respectively. If $-1$ is a residue,
 		then $-r$ is not. It follows that $X^2 + Y^2 = 0$ has two solutions and $X^2 +
 		rY^2 = 0$ has none. If $-1$ is a nonresidue, the situation is reversed: $X^2 +
@@ -454,9 +456,9 @@
 	Now, let us treat the $\P^2$ case.
 	
 	\begin{prop}[Counting Solutions in $\P^2$]
-	   \label{prop:counting-P2-solutions}
-	   Fix a prime and let $r$ be a nonresidue. When diagonalized $\widetilde{C}$ 
-	   has one of the following forms:
+		\label{prop:counting-P2-solutions}
+		Fix a prime and let $r$ be a nonresidue. When diagonalized $\widetilde{C}$ 
+		has one of the following forms:
 		\begin{enumerate} 
 			\item\label{case:rank1_x^2=0} $X^2 = 0$, with $p+1$ solutions.
 			\item\label{case:rank2_x^2+y^2=0} $X^2 + Y^2 = 0$, with
@@ -507,10 +509,10 @@
 		equations as above. By Proposition \ref{prop:circle-solutions} again, they each
 		have $p + 1$ solutions.
 	\end{proof}
-
-    \begin{rem*}
-      In fact, it is well-known that any nondegenerate conic is isomorphic (as an algebraic variety) to $\P^1$ (see for instance \cite[Prop.~19.3.1]{vakil}). This explains why cases \eqref{case:rank3_x^2+y^2+z^2=0} and \eqref{case:rank3_x^2+y^2+rz^2=0} both have $|\P^1|=p+1$ solutions.
-    \end{rem*}
+	
+	\begin{rem*}
+		In fact, it is well-known that any nondegenerate conic is isomorphic (as an algebraic variety) to $\P^1$ (see for instance \cite[Prop.~19.3.1]{vakil}). This explains why cases \eqref{case:rank3_x^2+y^2+z^2=0} and \eqref{case:rank3_x^2+y^2+rz^2=0} both have $|\P^1|=p+1$ solutions.
+	\end{rem*}
 	
 	\begin{prop}\label{prop:circle-solutions} 
 		For $a \neq 0$, the equation $x^2 + y^2 = a$ has $p - \legendre{-1}{p}$ 
@@ -559,13 +561,13 @@
 				\multicolumn{4}{c}{\# soln. in $\{Z=0\}$}  \\ \hline
 				rank of proj. & \# soln. in $\mathbb{P}^2$ & $0$ & $1$ & $2$ & $p + 1$\\
 				\hline \hline
-				$1$ & $p+1$ & N/A\textsuperscript{\ref{case:NA(p+1)-0,2}} & $x^2$ & N/A\textsuperscript{\ref{case:NA(p+1)-0,2}} & 1 \\
+				$1$ & $p+1$ & \emph{N/A}\textsuperscript{\ref{case:NA(p+1)-0,2}} & $X^2$ & \emph{N/A}\textsuperscript{\ref{case:NA(p+1)-0,2}} & $Z^2$ \\
 				\hline
-				$2$ & $1$ & $x^2 + y^2$ & $x^2 + 1$ & N/A & N/A \\
+				$2$ & $1$ & $X^2 + Y^2$ & $X^2 + Z^2$ & \emph{N/A} & \emph{N/A} \\
 				\hline
-				$2$ &	$2p+1$ & N/A\textsuperscript{\ref{case:NA(2p+1)-0}} & $x^2 + x$ & $xy$ & $x$ \\
+				$2$ &	$2p+1$ & \emph{N/A}\textsuperscript{\ref{case:NA(2p+1)-0}} & $X^2 + XZ$ & $XY$ & $XZ$ \\
 				\hline
-				$3$ & $p+1$ & $x^2 + y^2 + 1$ & $x+y^2$ & $x^2 + 2y^2 + 1$ & N/A\textsuperscript{\ref{case:NA(p+1)-(p+1)}} \\
+				$3$ & $p+1$ & $X^2 + Y^2 + Z^2$ & $XZ+Y^2$ & $X^2 + 2Y^2 + Z^2$ & \emph{N/A}\textsuperscript{\ref{case:NA(p+1)-(p+1)}} \\
 				\hline
 			\end{tabular}
 		\end{center} 
@@ -581,47 +583,47 @@
 			have a projectivization of rank 3.
 		\end{enumerate} 
 	\end{example}
-
-    \section{Counting solutions of a conic in $\A^2$}
-    \label{sec:affine-solutions}
 	
-	We can now use Lemma \label{lem:relate-solutions-affine-proj} to combine the
+	\section{Counting solutions of a conic in $\A^2$}
+	\label{sec:affine-solutions}
+	
+	We can now use Lemma \ref{lem:relate-solutions-affine-proj} to combine the
 	results from the previous section into our main theorem.
 	
-    \begin{thm}[Counting Solutions in $\A^2$]
-        \label{thm:main-thm}
-	   Let $C$ be a conic as in (\ref{eq:original-conic}), and fix a prime $p$.
-	   
-	   If $p$ is even, then
-	   \begin{equation*}
-	       |C(\F_p)| = 2 + b(-1)^{(a + d)(c + e) + f},
-	   \end{equation*}
-	   where $b$ is either $0$ or $1$.
-	
-	   If $p$ is odd, let $\alpha$, $\beta$, and $\gamma$ be as defined in 
-	   Lemma \ref{thm:diag-P2}, and $\Delta = b^2-4ac$ is the discriminant. 
-	   If $\alpha$ and $\beta$ are both zero or
-	   $\alpha$ is nonzero, we have one of the following cases, in order
-	   of precedence:
-	   \begin{enumerate}
-	       \item All of $a$, $b$ and $c$ vanish, and $C(\F_p)$ is empty.
-	       \item $\Delta = 0$, and $|C(\F_p)| = p$.
-	       \item $\Delta \neq 0$, and,
-	       \[ |C(\F_p)| = p - \legendre{-\Delta}{p}\legendre{-1}{p}. \]
-	   \end{enumerate}
-	   If instead only $\alpha$ vanishes, then one of the following holds, again
-	   in order of precedence:
-	   \begin{enumerate}
-	       \item All of $a$, $b$ and $c$ vanish, and $|C(\F_p)|=p$.
-	       \item If $\Delta = 0$, then
-	       \[ |C(\F_p) = p\left(1 + \legendre{\gamma}{p}\legendre{-1}{p}\right). \]
-	       \item $\Delta \neq 0$, and,
-	       \[ |C(\F_p) = p\left(1 + \legendre{\gamma}{p}\legendre{-1}{p}\right)
-	               - \legendre{\gamma}{p}\legendre{-1}{p}. \]
-	   \end{enumerate}
+	\begin{thm}[Counting Solutions in $\A^2$]
+		\label{thm:main-thm}
+		Let $C$ be a conic as in (\ref{eq:original-conic}), and fix a prime $p$.
+		
+		If $p$ is even, then
+		\begin{equation*}
+		|C(\F_p)| = 2 + b(-1)^{(a + d)(c + e) + f},
+		\end{equation*}
+		where $b$ is either $0$ or $1$.
+		
+		If $p$ is odd, let $\alpha$, $\beta$, and $\gamma$ be as defined in 
+		Lemma \ref{thm:diag-P2}, and $\Delta = b^2-4ac$ is the discriminant. 
+		If $\alpha$ and $\beta$ are both zero or
+		$\alpha$ is nonzero, we have one of the following cases, in order
+		of precedence:
+		\begin{enumerate}
+			\item All of $a$, $b$ and $c$ vanish, and $C(\F_p)$ is empty.
+			\item $\Delta = 0$, and $|C(\F_p)| = p$.
+			\item $\Delta \neq 0$, and,
+			\[ |C(\F_p)| = p - \legendre{-\Delta}{p}\legendre{-1}{p}. \]
+		\end{enumerate}
+		If instead only $\alpha$ vanishes, then one of the following holds, again
+		in order of precedence:
+		\begin{enumerate}
+			\item All of $a$, $b$ and $c$ vanish, and $|C(\F_p)|=p$.
+			\item If $\Delta = 0$, then
+			\[ |C(\F_p)| = p\left(1 + \legendre{\gamma}{p}\legendre{-1}{p}\right). \]
+			\item $\Delta \neq 0$, and,
+			\[ |C(\F_p)| = p\left(1 + \legendre{\gamma}{p}\legendre{-1}{p}\right)
+			- \legendre{\gamma}{p}\legendre{-1}{p}. \]
+		\end{enumerate}
 	\end{thm}
 	\begin{proof} 
-	The case $p=2$ is very simple and can be checked by hand. There are very few conics over $\F_2$, and the solutions to 
+		The case $p=2$ is very simple and can be checked by hand. There are very few conics over $\F_2$, and the solutions to 
 		\[ ax^2 + bxy + cy^2 + dx + ey + f = 0 \] 
 		are the same as the solutions to 
 		\[ bxy + (a+d)x + (c+e)y + f = 0.  \] 
@@ -633,129 +635,208 @@
 	\end{proof}
 	
 	\begin{comment}
-        Consolidate with Example~4.4!
-        \textcolor{red}{Note that if we are in case \eqref{case:0} of Proposition~\ref{prop:counting-P1-solutions}, i.e., if $a=b=c=0$, then $\gamma$ is a residue if and only if $-1$ is. Thus, by Theorem~\ref{thm:diag-P2}, we cannot be in cases \eqref{case:rank2_x^2+y^2=0} or \eqref{case:rank2_x^2+ry^2=0} of Proposition~\ref{prop:counting-P2-solutions} where the projectivized conic has only $1$ solution. Were this the case, Lemma~\ref{lem:relate-solutions-affine-proj} would imply that our affine conic has a negative number (to be exact, $-p$) of solutions!}
-        \end{comment}
-
-	We remark that while the expression for $|C(\F_p)|$ given above appears complicated, it is easily computable. The only parts that may be non-obvious are the Legendre symbols, but with tools such as the law of quadratic reciprocity, these too are readily determined.
-
-    \section{To the $p$-adics via Hensel's lemma}\label{sec:hensels-lemma}
-	Until now, we have been concerned with the number of solutions our conic $C$ has over $\F_p$. Now we will study solutions over the $p$-adic integers. We will give a sufficient condition for their existence in Theorem \ref{thm:existence-over-Zp}. Despite only being concerned with existence, the classification and analysis of the preceding sections will still be helpful.
+	Consolidate with Example~4.4!
+	\textcolor{red}{Note that if we are in case \eqref{case:0} of Proposition~\ref{prop:counting-P1-solutions}, i.e., if $a=b=c=0$, then $\gamma$ is a residue if and only if $-1$ is. Thus, by Theorem~\ref{thm:diag-P2}, we cannot be in cases \eqref{case:rank2_x^2+y^2=0} or \eqref{case:rank2_x^2+ry^2=0} of Proposition~\ref{prop:counting-P2-solutions} where the projectivized conic has only $1$ solution. Were this the case, Lemma~\ref{lem:relate-solutions-affine-proj} would imply that our affine conic has a negative number (to be exact, $-p$) of solutions!}
+	\end{comment}
 	
-	We begin by recalling the definition of the $p$-adic integers and then stating Hensel's lemma, which will be our primary tool for this section.
+	We remark that while the expression for $|C(\F_p)|$ given above appears complicated, it is easily computable. The only parts that may be non-obvious are the Legendre symbols, but with tools such as the law of quadratic reciprocity, these too are readily determined.
+	
+	\section{Rational Solutions in $\P^2$}\label{sec:rational-soln}
+	Until now, we have been concerned with the number of solutions our conic $C$ has over $\F_p$. Next we will study solutions over the rationals $\Q$. 
+	We will only ask about existence, but even so, the classification and analysis of the preceding sections will still be helpful.
+	
+	Our goal is to lay out a procedure that can determine whether an arbitrary conic has a solution in $\P^2$ over $\Q$. First, by the methods of \S\ref{sec:diagonalizing-quadratic-forms}, we may perform a change of basis so that our conic is given by an equation
+	\[
+		aX^2 + bY^2 + cZ^2 = 0.
+	\]
+	If one of these coefficients is zero, say $c$, then we are done: $[0:0:1]$ is a rational solution. So hereafter we assume that $abc\neq 0$. We are able to scale the entire equation by any nonzero constant without altering its solution set, and we are also able to scale individual coefficients by nonzero squares without affecting the existence of solutions. Using these observations, we can assume that $abc$ is square-free, in the sense that $p^2\ndiv abc$ for all $p$.
+	
+	We make this a bit more precise. Given a prime $p$, a nonzero rational number $q$ can be uniquely expressed as $p^{\nu_p(q)}\frac{m}{n}$ where $\nu_p(q),m,n\in\Z$ and $p\ndiv m,n$. The number $\nu_p(q)$ is the \emph{$p$-adic valuation} of $q$.
+	
+	Define
+	\[
+		t_p(a) = \begin{cases}
+			1 & \text{if } \nu_p(b)\equiv\nu_p(c) \pmod 2 \text{ and } \nu_p(a) \not\equiv \nu_p(b),\nu_p(c) \pmod 2,\\
+			0 & \text{otherwise,}
+		\end{cases}
+	\]
+	with $t_p(b)$ and $t_p(c)$ defined analogously. Then if we set
+	\begin{align*}
+		a' = \frac{|a|}{a}\prod_{p \text{ prime}} p^{t_p(a)}
+	\end{align*}
+	and likewise for $b'$ and $c'$, the conic
+	\[
+		a'X^2 + b'Y^2 + c'Z^2 = 0
+	\]
+	is equivalent to our original conic. This new conic has the property that $a',b',c'\in \Z$ and $a'b'c'$ is a nonzero, square-free integer.
+	
+	Having massaged our conic into this form, the remaining work is taken care of by the following theorem, which is the main result of this section.
+	\begin{thm}\label{thm:rational-solutions}
+		Let $a,b,c$ be nonzero integers such that $p^2 \ndiv abc$ for all primes $p$. Then the equation
+		\begin{equation}\label{eq:diag-squarefree-conic}
+			aX^2 + bY^2 + cZ^2 = 0
+		\end{equation}
+		has a solution in $\P^2_\Q$ exactly when all of the following conditions are met.
+		\begin{enumerate}
+			\item\label{cond:real-soln} At least one of $a,b,c$ is positive, and at least one is negative.
+			\item\label{cond:Qp-soln} For all primes $p>2$ dividing $c$, $\legendre{-ab}{p} = 1$. The analogous conditions for primes $p>2$ dividing $a$ or $b$ are required as well.
+			\item\label{cond:Q2-soln} The matching conic in Table \ref{table:Q2-diag-conics} has a solution in $\P^2_{\Q_2}$. (This condition will be explained below; see Lemma \ref{lem:squares-in-Q2}.) \textcolor{blue}{[I'm not sure I like this, mostly because of the forward-reference, but idk how to get around it... the theorem statement could be postponed to the end but I think having it here helps with motivation]}
+		\end{enumerate}
+	\end{thm}
+	We prove this theorem through a sequence of lemmas. The overall strategy is guided by the Hasse-Minkowski theorem, which states that a homogeneous quadratic has a solution in $\P^n_\Q$ if and only if it has a solution in $\P^n_F$ for every completion $F$ of $\Q$. We will use this theorem with $n=2$.
+	
+	One completion of $\Q$ is $\R$. This case is easy: a necessary and sufficient condition for a solution to \eqref{eq:diag-squarefree-conic} in $\P^2_\R$ is given by \eqref{cond:real-soln} above.
+	
+	The remaining completions are the fields of $p$-adic numbers $\Q_p$, whose definition we review now.
 	\begin{defn}
 		The ring of \emph{$p$-adic integers} $\Z_p$ is the inverse limit of
 		\[
 		\cdots \to \Z/p^3 \to \Z/p^2 \to \Z/p.
 		\]
 	\end{defn}
-	In other words, elements of $\Z_p$ can be thought of as sequences $(a_1,a_2,a_3,\ldots)$ where $a_i \in \Z/p^i$ and $a_{i+1} \equiv a_i \pmod {p^i}$.
+	In other words, elements of $\Z_p$ are sequences $(a_1,a_2,a_3,\ldots)$ where $a_i \in \Z/p^i$ and $a_{i+1} \equiv a_i \pmod {p^i}$.
 	
-	Such an element can alternatively be interpreted as the series
+	Such an element can also be interpreted as the series
 	\[
 	b_0 + b_1 p + b_2 p^2 + b_3 p^3 + \cdots
 	\]
 	where $b_0 = a_1$ and $b_i = (a_{i+1} - a_i)/p^i$ for $i \geq 1$. Addition and multiplication are done as expected with ``rightwards carrying.''
 	
-	%We will be particularly interested in the ``mod $p$'' map $\kappa\colon \Z_p \to \F_p$, whose kernel is the unique maximal ideal $(p) \subset \Z_p$. This implies that $\kappa^{-1}(\F_p^\times)$ is the set of units in $\Z_p$.
-		
-	% TODO: uncomment when needed (when used in section 7?)
-	%Since $\Z_p$ is an integral domain, we are justified in taking its fraction field:
-	%\begin{defn}
-	%	The field of \emph{$p$-adic numbers} $\Q_p$ is the fraction field of $\Z_p$.
-	%\end{defn}
-	Hensel's lemma gives us a sufficient condition for the existence of roots over $\Z_p$. We refer the reader to \cite{henselMO} for a proof of the following formulation.
-	\begin{thm}[Multivariate Hensel's lemma]\label{thm:hensels-one-eq}
-		Let $f \in \Z_p[x_1,\ldots,x_n]$ be a polynomial in $n$ variables and let $\gamma = (\gamma_1,\ldots,\gamma_n)\in \Z_p^n$ be such that $f(\gamma) = 0 \pmod p$ and $\frac{\partial f}{\partial x_i}(\gamma) \not\equiv 0 \pmod p$ for some $i\in \{1,\ldots,n\}$. Then there exists $\alpha \in \Z_p^n$ such that, for all $i$, $\alpha_i = \gamma_i \pmod p$ and $f(\alpha) = 0$.
-	\end{thm}
-	Using the results of Proposition \ref{prop:counting-P2-solutions} and Hensel's lemma, we deduce the following result.
-	\begin{thm}\label{thm:existence-over-Zp}
-		Let $p$ be an odd prime. Let $C$ denote the conic \eqref{eq:original-conic} and $\widetilde{C}$ its projectivization \eqref{eq:projective-conic}. Then if $\widetilde{C}$ is either full rank or the union of two distinct lines over $\F_p$, the original conic $C$ has a solution over $\Z_p$.
-		
-		Explicitly,
-		\begin{itemize}
-			\item If $-1$ is a residue mod $p$ and $\widetilde{C}$ is equivalent to \eqref{case:rank2_x^2+y^2=0}, \eqref{case:rank3_x^2+y^2+z^2=0}, or \eqref{case:rank3_x^2+y^2+rz^2=0} of Proposition \ref{prop:counting-P2-solutions}, then $C$ has a solution over $\Z_p$.
-			\item If $-1$ is a nonresidue mod $p$ and $\widetilde{C}$ is equivalent to \eqref{case:rank2_x^2+ry^2=0}, \eqref{case:rank3_x^2+y^2+z^2=0}, or \eqref{case:rank3_x^2+y^2+rz^2=0} of Proposition \ref{prop:counting-P2-solutions}, then $C$ has a solution over $\Z_p$.
-		\end{itemize}
-	\end{thm}
+	Since $\Z_p$ is an integral domain, we are justified in taking its fraction field:
+	\begin{defn}
+		The field of \emph{$p$-adic numbers} $\Q_p$ is the fraction field of $\Z_p$.
+	\end{defn}
+	Since the units in $\Z_p$ are the elements with $b_0 \neq 0$, constructing $\Q_p$ amounts to inverting $p$ in $\Z_p$. Thus elements of $\Q_p$ can also be interpreted as series, though they are allowed to start from negative powers of $p$.
+	
+	We refer the reader to \cite{henselMO} for a proof of the following formulation of Hensel's lemma. \textcolor{blue}{[still need to do something about this reference maybe]}
+	\begin{lem}[Multivariate Hensel's lemma]\label{thm:hensels-one-eq}
+		Let $k$ be a nonnegative integer. Let $f \in \Z_p[x_1,\ldots,x_n]$ be a polynomial in $n$ variables and suppose $\gamma = (\gamma_1,\ldots,\gamma_n)\in \Z_p^n$ satisfies $f(\gamma) = 0 \pmod {p^{2k+1}}$ and $\frac{\partial f}{\partial x_i}(\gamma) \not\equiv 0 \pmod {p^{k+1}}$ for some $i\in \{1,\ldots,n\}$. Then there exists $\alpha \in \Z_p^n$ such that, for all $i$, $\alpha_i = \gamma_i \pmod {p^{2k+1}}$ and $f(\alpha) = 0$.
+	\end{lem}
+	To determine whether \eqref{eq:diag-squarefree-conic} has a solution in $\P^2_{\Q_p}$, we will make extensive use of this result. Note that, because the equation is homogeneous, existence of a solution over $\Q_p$ is the same as existence of a solution over $\Z_p$.
+	
+	The following two lemmas address existence of solutions in $\Q_p$ for $p>2$.
+	\begin{lem}
+		With the setup of Theorem \ref{thm:rational-solutions}, if $p > 2$ is a prime that does not divide $abc$, then \eqref{eq:diag-squarefree-conic} has a solution in $\P^2_{\Q_p}$.
+	\end{lem}
 	\begin{proof}
-		We need a point of $C$ over $\F_p$ where not all partial derivatives of the conic vanish, i.e. a \emph{non-singular} point. A non-singular point of $C$ corresponds to a non-singular point of $\widetilde{C}$ not lying in $\{Z=0\}$.
-		
-		If $\widetilde{C}$ has full rank, it is equivalent to
-		\[
-		X^2 + Y^2 + Z^2 = 0 \text{ or } X^2 + Y^2 + rZ^2 = 0
-		\]
-		where $r$ is a nonresidue. In each case, the condition of having a non-vanishing partial derivative is precisely that one of the coordinates must be nonzero---but this is automatically satisfied in $\P^2$.
-		
-		If $\widetilde{C}$ consists of two distinct lines, its only singular point is where the two lines intersect. We recall from \S\ref{sec:proj-solutions} that $\widetilde{C}$ has $2p+1$ points in $\P^2$, at most $p+1$ of which are extraneous. It follows that $C$ has a non-singular point.
+		We will apply Hensel's lemma with $k=0$. By Proposition \ref{prop:counting-P2-solutions}, \eqref{eq:diag-squarefree-conic} has $p+1$ solutions in $\P^2_{\F_p}$. The condition on partial derivatives is automatically satisfied: for any $[X:Y:Z]\in \P^2$ one of $X,Y,Z$ is nonzero, and thus one of $2aX, 2bY, 2cZ$ is as well. Hence any of the solutions over $\F_p$ can be lifted via Hensel's lemma to a solution over $\Q_p$.
 	\end{proof}
-	If $\widetilde{C}$ is a double line or has only a single solution, then Hensel's lemma is inconclusive as we do not have a solution mod $p$ satisfying the requisite condition.
 
-    \section{To $\mathbb{Q}$ via Hasse-Minkowski}\label{sec:hasse-minkowski}
-    The following takes place in $\P^2$. We start with a conic over $\Q$, which we can diagonalize so that it is represented by the matrix
-    \[
-    	A= \begin{bmatrix}
-    		a & 0 & 0\\
-    		0 & c & 0\\
-    		0 & 0 & f
-    	\end{bmatrix}.
-    \]
-    First off, if $\det A = acf = 0$ then the equation has obvious solutions. So assume $\det A \neq 0$.
-    
-    We can assume that $a,c,f \in \Z$, and that their product is square-free. This can always be achieved by scaling the entire equation or by scaling individual coordinates. Once this is accomplished, $\det A = \pm p_1\cdots p_m$ for distinct primes $p_1,\ldots,p_m$. Call this set of primes $\mathcal{P}$.
-    
-    The conic evidently has a solution in $\R$ if and only if $a$, $c$, and $f$ are neither all positive nor all negative.
-
-    For each prime $p>2$ \emph{not} in $\mathcal{P}$, reducing mod $p$ gives a full-rank conic, to which Hensel's applies immediately and we deduce that our original conic has $\Q_p$-points.
-    
-    $\mathcal{P}$ is finite, so we only have finitely many other things to check. For each of these primes $p>2$, reducing mod $p$ gives a rank 2 conic. Depending on the coefficients and whether $-1$ is a residue (see \ref{prop:counting-P2-solutions}) we may either have two lines or a single solution. The former can be lifted with Hensel's.
-    
-    So what if we have the latter? In this case...
-    \begin{quotation}
-    	Can $A$ be written differently over $\Q_p$ so that its reduction mod $p$ is ``nicer'' to apply Hensel's to? Also, maybe Hensel's mod a higher power of the prime can tell us something?
-    \end{quotation}
-	I \emph{think} the answer to the first question is ``no'' because we already made the square-free assumption on $\det A$. I still haven't thought about the latter.
+	\begin{lem}
+		With the setup of Theorem \ref{thm:rational-solutions}, suppose $p > 2$ is a prime that divides $abc$---assume $p|c$. Then \eqref{eq:diag-squarefree-conic} has a solution in $\P^2_{\Q_p}$ if and only if $\legendre{-ab}{p}=1$ (condition \eqref{cond:Qp-soln} of Theorem \ref{thm:rational-solutions}).
+	\end{lem}
+	\begin{proof}
+		When we reduce mod $p$, \eqref{eq:diag-squarefree-conic} becomes
+		\begin{equation}\label{eq:p|abc-modp}
+			aX^2 + bY^2 \equiv 0 \pmod p
+		\end{equation}
+		If $\legendre{-ab}{p}=1$, then take $s\in \F_p$ such that $s^2 = -ab$, and $[s:a:0]$ is a solution satisfying the hypotheses of Hensel's lemma with $k=0$. Thus \eqref{eq:diag-squarefree-conic} has a solution over $\Z_p$ in this case.
+		
+		Suppose instead that $\legendre{-ab}{p}=-1$. For the sake of contradiction, assume a solution $[X:Y:Z]$ existed over $\Q_p$. By scaling as needed, we can assume that $X,Y,Z\in \Z_p$ and not all of them are divisible by $p$. Since $-ab$ is a nonresidue, \eqref{eq:p|abc-modp} entails $X,Y \equiv 0 \pmod p$ (c.f. \S\ref{sec:proj-solutions}). Then we can write
+		\[
+			ap^2 (X/p)^2 + bp^2 (Y/p)^2 + cZ^2 = 0
+		\]
+		but we assumed that $p^2\ndiv c$, so this implies $p|Z$ and we have a contradiction.
+	\end{proof}
+	This leaves only the case of $\Q_2$ to consider. Unfortunately, the situation is more complicated here, and it is responsible for the contrived final condition of Theorem \ref{thm:rational-solutions}.
 	
-	Then there's also the pesky question of $p=2$ still.
+	\begin{lem}\label{lem:squares-in-Q2}
+		Let
+		\[
+			a = 2^{2m + i}(1 + j\cdot 2 + k \cdot 4+ \cdots)
+		\]
+		where $m$ is an integer and each of $i,j,k$ is either 0 or 1. Define
+		\[
+			\bar{a} = 2^i 3^j 5^k.
+		\]
+		Then $a/\bar{a}$ is a square in $\Q_p$.
+	\end{lem}
+	\begin{proof}
+		We claim that if $s\in \Z_2$ is congruent to $1\pmod 8$, then it is a square. Consider the equation $x^2 - s=0$. Applying Hensel's lemma with $k=1$ to the solution $x = 1$ shows that it can be lifted to a solution in $\Z_2$ as desired.
+		
+		Now note that $2^{-2m} a/\bar{a} \equiv 1 \pmod 8$, from which it follows that $a/\bar{a}$ is a square.
+	\end{proof}
+	Using this lemma and the reasoning at start of this section, we can scale \eqref{eq:diag-squarefree-conic} over $\Q_2$ so that $abc$ is square free. The result will be one of the equations listed in Table \ref{table:Q2-diag-conics}. Many of these have solutions mod 8 which can be lifted using Hensel's lemma (where we use $k=1$). The other ones do not, and the claim is that they have no solutions over $\Q_2$.
 	
-	But this looks hopeful overall, since we only have to check $2$ and the primes which divide $\det A$ to come up with sufficient criteria for existence of $\Q$-points.
+	We prove this claim for the equation $X^2 + Y^2 + Z^2 = 0$ and omit the rest. Suppose a solution $[X:Y:Z]$ existed over $\Q_2$. We can assume that $X,Y,Z\in \Z_2$ and that not all of them are divisible by 2. However, 1 is the only odd residue mod 8, from which it is easy to check that $X^2 + Y^2 + Z^2 = 0$ has no such solutions mod 8 (let alone such a solution over $\Z_2$).
+	\begin{table}[h]
+		\begin{tabular}{|c|l|}
+			\hline
+			& Has a solution in $\P^2_{\Q_2}$?\\
+			\hline
+			\hline 
+			$X^2 + Y^2 + Z^2 = 0$ & No \\ 
+			\hline 
+			$2X^2 + Y^2 + Z^2 = 0$ & No \\ 
+			\hline 
+			$3X^2 + Y^2 + Z^2 = 0$ & Yes, lift $[1:1:2]$ \\ 
+			\hline 
+			$5X^2 + Y^2 + Z^2 = 0$ & No \\ 
+			\hline 
+			$6X^2 + Y^2 + Z^2 = 0$ & Yes, lift $[1:1:1]$ \\ 
+			\hline 
+			$10X^2 + Y^2 + Z^2 = 0$ & No \\ 
+			\hline 
+			$15X^2 + Y^2 + Z^2 = 0$ & Yes, lift $[1:1:0]$ \\ 
+			\hline 
+			$30X^2 + Y^2 + Z^2 = 0$ & Yes, lift $[1:1:1]$ \\ 
+			\hline 
+			$3X^2 + 2Y^2 + Z^2 = 0$ & No \\ 
+			\hline 
+			$5X^2 + 2Y^2 + Z^2 = 0$ & Yes, lift $[1:1:1]$ \\ 
+			\hline 
+			$5X^2 + 3Y^2 + Z^2 = 0$ & Yes, lift $[1:1:0]$ \\ 
+			\hline 
+			$6X^2 + 5Y^2 + Z^2 = 0$ & No \\ 
+			\hline 
+			$10X^2 + 3Y^2 + Z^2 = 0$ & No \\ 
+			\hline 
+			$15X^2 + 2Y^2 + Z^2 = 0$ & Yes, lift $[1:0:1]$ \\ 
+			\hline 
+			$5X^2 + 3Y^2 + 2Z^2 = 0$ & Yes, lift $[1:1:0]$ \\ 
+			\hline 
+		\end{tabular}
+		\caption{An exhaustive list of representative conics over $\Q_2$. Here, ``lift'' means to apply Hensel's lemma with $k=1$ to the specified mod 8 solution.
+		\textcolor{blue}{[idk why there's no space between this and the table. feel free to pretty this up]}} \label{table:Q2-diag-conics}
+	\end{table}
 
-\begin{filecontents}{references.bib}
-@book {omeara,
-    AUTHOR = {O'Meara, O. Timothy},
-     TITLE = {\href{https://link.springer.com/book/10.1007\%2F978-3-642-62031-7}{Introduction to quadratic forms}},
-    SERIES = {Classics in Mathematics},
-      NOTE = {Reprint of the 1973 edition},
- PUBLISHER = {Springer-Verlag, Berlin},
-      YEAR = {2000},
-     PAGES = {xiv+342},
-      ISBN = {3-540-66564-1},
-   MRCLASS = {11Exx},
-  MRNUMBER = {1754311},
-}
-@article{magma,
-author={Wieb Bosma and John Cannon and Catherine Playoust},
-title={\href{http://www.sciencedirect.com/science/article/pii/S074771719690125X}{The Magma algebra system {I}: The user language}},
-journal={Journal of Symbolic Computation},
-volume={24},
-year={1997},
-pages={235--265}
-}
-@misc{henselMO,
-	author={Will Sawin},
-	title={Answer to \href{https://mathoverflow.net/questions/108687}{\texttt{https://mathoverflow.net/questions/108687}}}
-}
-
-@book{vakil,
-title={\href{http://math.stanford.edu/~vakil/216blog/index.html}{Foundations of Algebraic Geometry}},
-author={Ravi Vakil},
-year={December 29, 2015}
-}
-\end{filecontents}
-
-\bibliographystyle{plain}
-\bibliography{references}
-
+	With the question of $p=2$ settled, this concludes the proof of Theorem \ref{thm:rational-solutions}. We comment that the powerful machinery of Hilbert symbols can be used to deduce the same result, and we leave this to the curious reader to verify.
+	\begin{filecontents}{references.bib}
+		@book {omeara,
+			AUTHOR = {O'Meara, O. Timothy},
+			TITLE = {\href{https://link.springer.com/book/10.1007\%2F978-3-642-62031-7}{Introduction to quadratic forms}},
+			SERIES = {Classics in Mathematics},
+			NOTE = {Reprint of the 1973 edition},
+			PUBLISHER = {Springer-Verlag, Berlin},
+			YEAR = {2000},
+			PAGES = {xiv+342},
+			ISBN = {3-540-66564-1},
+			MRCLASS = {11Exx},
+			MRNUMBER = {1754311},
+		}
+		@article{magma,
+			author={Wieb Bosma and John Cannon and Catherine Playoust},
+			title={\href{http://www.sciencedirect.com/science/article/pii/S074771719690125X}{The Magma algebra system {I}: The user language}},
+			journal={Journal of Symbolic Computation},
+			volume={24},
+			year={1997},
+			pages={235--265}
+		}
+		@misc{henselMO,
+			author={Will Sawin},
+			title={Answer to \href{https://mathoverflow.net/questions/108687}{\texttt{https://mathoverflow.net/questions/108687}}}
+		}
+		
+		@book{vakil,
+			title={\href{http://math.stanford.edu/~vakil/216blog/index.html}{Foundations of Algebraic Geometry}},
+			author={Ravi Vakil},
+			year={December 29, 2015}
+		}
+	\end{filecontents}
+	
+	\bibliographystyle{plain}
+	\bibliography{references}
+	
 \end{document}
 
 %%% Local Variables:
