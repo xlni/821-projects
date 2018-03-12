@@ -99,21 +99,20 @@
 	degenerate when the matrix of $\widetilde{C}$ is singular. The curve
 	will instead look like a pair of parallel or intersecting line, a double
 	line (where each point of the line is a solution of the conic and its 
-	derivative), a single point, or no points at all.
+	derivative), a single point, or no points at all. 
 	
 	The above discussion of the \emph{real} points of $C$ is fairly classical,
 	and a full classification is well-understood. We can instead ask that solutions
-	be in some other field $k$.
-	The situation when $k=\Q$ turns out to be quite complicated. It is
+	be in some other field $K$.
+	The situation when $K=\Q$ turns out to be quite complicated. It is
 	characterized by the Hasse-Minkowski theorem, which we quote a special
 	case of.
 	\begin{thm}[Hasse-Minkowski]
-		A quadratic form $C$ over $\Q$ has a solution if and only if it h
-		as solutions
-		over all the completions of $\Q$, namely the reals, $\R$, and the $p$-adic
+		A quadratic form $C$ over $\Q$ has a solution if and only if it has solutions
+		over all the completions of $\Q$, namely, the reals, $\R$, and the $p$-adic
 		numbers, $\Q_p$, for all primes $p$.
 	\end{thm}
-	The case when $k = \R$ is, as mentioned, classical. To solve over $\Q_p$,
+	The case when $K = \R$ is, as mentioned, classical. To solve over $\Q_p$,
 	we can simply ask for solutions in $\Z_p$, the $p$-adic integers. We
 	can in turn get these solutions through Hensel's lemma, which allows us
 	to lift solutions over the finite field $\F_p$ to $\Z_p$. Our ultimate
@@ -136,7 +135,10 @@
 	
 	\subsection*{Acknowledgments} Oron wrote sections \S\ref{sec:diagonalizing-quadratic-forms} and \S\ref{sec:affine-solutions}. Together, Xianglong and Oron worked out much of \S\ref{sec:proj-solutions} and \S\ref{sec:rational-soln}, which were later written up by Xianglong (who also wrote \S\ref{sec:projectivization-of-the-problem}). Miguel ran experimental tests to both motivate and verify our computations, wrote \S\ref{sec:intro}, and helped format, edit, and proofread.
 	
-	We would like to thank the 18.821 course staff for organizing this project, and Rasmus Johansen in particular for his guidance and suggestions. \textcolor{blue}{[update with thanks to those who gave revision suggestions]}
+	We would like to thank the 18.821 course staff for organizing this project, and Rasmus Johansen in particular for his guidance and suggestions. We are also grateful
+	to Ari Nieh and Stuart Thomson for their feedback on our write-up.
+	
+	
 	\section{Preliminaries}\label{sec:projectivization-of-the-problem}
 	
 	Let us begin by fixing a conic
@@ -315,7 +317,7 @@
 		\end{enumerate}
 	\end{lem}
 	\begin{proof}
-		Let $P\in\GL_3(\F_p)$ be such that $P\trsp{P}AP$ is one of the six matrices in Corollary~\ref{cor:sixcases}; these six matrices are distinguished by their ranks and the products of their nonzero eigenvalues. Since $P$ is invertible, the rank of $\trsp{P}AP$ is equal to that of $A$. By the rank-nullity theorem, the rank of $A$ is given by 3 minus the multiplicity of the eigenvalue $0$: this multiplicity is the highest power of $t$ dividing the characteristic polynomial of $A$. A \texttt{Magma} computation shows that the characteristic polynomial of $A$ is given by
+		Let $P\in\GL_3(\F_p)$ be such that $\trsp{P}AP$ is one of the six matrices in Corollary~\ref{cor:sixcases}; these six matrices are distinguished by their ranks and the products of their nonzero eigenvalues. Since $P$ is invertible, the rank of $\trsp{P}AP$ is equal to that of $A$. By the rank-nullity theorem, the rank of $A$ is given by 3 minus the multiplicity of the eigenvalue $0$: this multiplicity is the highest power of $t$ dividing the characteristic polynomial of $A$. A \texttt{Magma} computation shows that the characteristic polynomial of $A$ is given by
 		\begin{equation*}
 		t^3+(-a-c-f)t^2+\tfrac{1}{4}(4ac+4af-b^2+4cf-d^2-e^2)t+\tfrac{1}{4}(-4acf+ae^2+b^2f-bde+cd^2).
 		\end{equation*}
@@ -556,10 +558,10 @@
 		solutions. The entries marked ``N/A'' are impossible and explanation is given
 		afterwards. For all other entries, examples are given for the specific case
 		$p=3$.  
-		\begin{center} % TODO: convert to booktabs
+		\begin{center}
 			\begin{tabular}{c|c|c|c|c|c}  \multicolumn{2}{c|}{} &
-				\multicolumn{4}{c}{\# soln. in $\{Z=0\}$}  \\ \hline
-				rank of proj. & \# soln. in $\mathbb{P}^2$ & $0$ & $1$ & $2$ & $p + 1$\\
+				\multicolumn{4}{c}{sol. in $\{Z=0\}$}  \\ \hline
+				rank of proj. & sol. in $\mathbb{P}^2$ & $0$ & $1$ & $2$ & $p + 1$\\
 				\hline \hline
 				$1$ & $p+1$ & \emph{N/A}\textsuperscript{\ref{case:NA(p+1)-0,2}} & $X^2$ & \emph{N/A}\textsuperscript{\ref{case:NA(p+1)-0,2}} & $Z^2$ \\
 				\hline
@@ -671,7 +673,7 @@
 	is equivalent to our original conic. This new conic has the property that $a',b',c'\in \Z$ and $a'b'c'$ is a nonzero, square-free integer.
 	
 	Having massaged our conic into this form, the remaining work is taken care of by the following theorem, which is the main result of this section.
-	\begin{thm}\label{thm:rational-solutions}
+	\begin{thm}[Existence of Rational Solutions]\label{thm:rational-solutions}
 		Let $a,b,c$ be nonzero integers such that $p^2 \ndiv abc$ for all primes $p$. Then the equation
 		\begin{equation}\label{eq:diag-squarefree-conic}
 			aX^2 + bY^2 + cZ^2 = 0
@@ -680,14 +682,27 @@
 		\begin{enumerate}
 			\item\label{cond:real-soln} At least one of $a,b,c$ is positive, and at least one is negative.
 			\item\label{cond:Qp-soln} For all primes $p>2$ dividing $c$, $\legendre{-ab}{p} = 1$. The analogous conditions for primes $p>2$ dividing $a$ or $b$ are required as well.
-			\item\label{cond:Q2-soln} The matching conic in Table \ref{table:Q2-diag-conics} has a solution in $\P^2_{\Q_2}$. (This condition will be explained below; see Lemma \ref{lem:squares-in-Q2}.) \textcolor{blue}{[I'm not sure I like this, mostly because of the forward-reference, but idk how to get around it... the theorem statement could be postponed to the end but I think having it here helps with motivation]}
+			\item\label{cond:Q2-soln} We can perform a $2$-adic lift of this conic; that
+			is, the coresponding conic in Table \ref{table:Q2-diag-conics} has a solution 
+			in $\P^2_{\Q_2}$.\footnote{This condition will be explained in Lemma 
+			\ref{lem:squares-in-Q2}. Unfortunately, the case $p=2$ is pathological,
+			and requires special treatment.}
 		\end{enumerate}
 	\end{thm}
-	We prove this theorem through a sequence of lemmas. The overall strategy is guided by the Hasse-Minkowski theorem, which states that a homogeneous quadratic has a solution in $\P^n_\Q$ if and only if it has a solution in $\P^n_F$ for every completion $F$ of $\Q$. We will use this theorem with $n=2$.
+	We prove this theorem through a sequence of lemmas. In particular, we will verify
+	existence of solutions in $\R$, the $p$-adic numbers $\Q_p$ for $p$ odd, and $\Q_2$.
+	We can then apply the Hasse-Minkowski theorem, which states that a homogeneous quadratic
+	has a solution in $\P^n_\Q$ if and only if it has a solution in $\P^n_K$ for 
+	every completion $K$ of $\Q$, namely, $\R$ and $\Q_p$ for $p$ prime.
+	We will use the case $n=2$. As noted above, the case $K = \Q_2$ is treated separately, 
+	for technical reasons.
 	
-	One completion of $\Q$ is $\R$. This case is easy: a necessary and sufficient condition for a solution to \eqref{eq:diag-squarefree-conic} in $\P^2_\R$ is given by \eqref{cond:real-soln} above.
+	The case $K=\R$ is easy. A necessary and sufficient condition for a solution 
+	to \eqref{eq:diag-squarefree-conic} in $\P^2_\R$ is given by 
+	\eqref{cond:real-soln} above.
 	
-	The remaining completions are the fields of $p$-adic numbers $\Q_p$, whose definition we review now.
+	The remaining completions are the fields of $p$-adic numbers $\Q_p$, whose definition 
+	we review now.
 	\begin{defn}
 		The ring of \emph{$p$-adic integers} $\Z_p$ is the inverse limit of
 		\[
@@ -714,7 +729,7 @@
 	\end{lem}
 	To determine whether \eqref{eq:diag-squarefree-conic} has a solution in $\P^2_{\Q_p}$, we will make extensive use of this result. Note that, because the equation is homogeneous, existence of a solution over $\Q_p$ is the same as existence of a solution over $\Z_p$.
 	
-	The following two lemmas address existence of solutions in $\Q_p$ for $p>2$.
+	The following two lemmas address existence of solutions in $\Q_p$ for odd $p$.
 	\begin{lem}
 		With the setup of Theorem \ref{thm:rational-solutions}, if $p > 2$ is a prime that does not divide $abc$, then \eqref{eq:diag-squarefree-conic} has a solution in $\P^2_{\Q_p}$.
 	\end{lem}
@@ -738,7 +753,10 @@
 		\]
 		but we assumed that $p^2\ndiv c$, so this implies $p|Z$ and we have a contradiction.
 	\end{proof}
-	This leaves only the case of $\Q_2$ to consider. Unfortunately, the situation is more complicated here, and it is responsible for the contrived final condition of Theorem \ref{thm:rational-solutions}.
+	This leaves only the case $K = \Q_2$ to consider. The situation is more contrived here,
+	 and it is responsible for the contrived final condition of Theorem 
+	 \ref{thm:rational-solutions}. We'll need the following characterization of squares
+	 in $\Q_2$.
 	
 	\begin{lem}\label{lem:squares-in-Q2}
 		Let
@@ -753,16 +771,14 @@
 	\end{lem}
 	\begin{proof}
 		We claim that if $s\in \Z_2$ is congruent to $1\pmod 8$, then it is a square. Consider the equation $x^2 - s=0$. Applying Hensel's lemma with $k=1$ to the solution $x = 1$ shows that it can be lifted to a solution in $\Z_2$ as desired.
-		
-		Now note that $2^{-2m} a/\bar{a} \equiv 1 \pmod 8$, from which it follows that $a/\bar{a}$ is a square.
+		Note that $2^{-2m} a/\bar{a} \equiv 1 \pmod 8$; it follows that $a/\bar{a}$ is a square.
 	\end{proof}
 	Using this lemma and the reasoning at start of this section, we can scale \eqref{eq:diag-squarefree-conic} over $\Q_2$ so that $abc$ is square free. The result will be one of the equations listed in Table \ref{table:Q2-diag-conics}. Many of these have solutions mod 8 which can be lifted using Hensel's lemma (where we use $k=1$). The other ones do not, and the claim is that they have no solutions over $\Q_2$.
 	
 	We prove this claim for the equation $X^2 + Y^2 + Z^2 = 0$ and omit the rest. Suppose a solution $[X:Y:Z]$ existed over $\Q_2$. We can assume that $X,Y,Z\in \Z_2$ and that not all of them are divisible by 2. However, 1 is the only odd residue mod 8, from which it is easy to check that $X^2 + Y^2 + Z^2 = 0$ has no such solutions mod 8 (let alone such a solution over $\Z_2$).
 	\begin{table}[h]
-		\begin{tabular}{|c|l|}
-			\hline
-			& Has a solution in $\P^2_{\Q_2}$?\\
+		\begin{tabular}{r|l}
+			& Solution in $\P^2_{\Q_2}$\\
 			\hline
 			\hline 
 			$X^2 + Y^2 + Z^2 = 0$ & No \\ 
@@ -794,10 +810,12 @@
 			$15X^2 + 2Y^2 + Z^2 = 0$ & Yes, lift $[1:0:1]$ \\ 
 			\hline 
 			$5X^2 + 3Y^2 + 2Z^2 = 0$ & Yes, lift $[1:1:0]$ \\ 
-			\hline 
+			\hline
+			\multicolumn{2}{c}{}
 		\end{tabular}
-		\caption{An exhaustive list of representative conics over $\Q_2$. Here, ``lift'' means to apply Hensel's lemma with $k=1$ to the specified mod 8 solution.
-		\textcolor{blue}{[idk why there's no space between this and the table. feel free to pretty this up]}} \label{table:Q2-diag-conics}
+		
+		\caption{An exhaustive list of representative conics over $\Q_2$. Here, ``lift'' means to apply Hensel's lemma with $k=1$ to the specified mod 8 solution.}
+		 \label{table:Q2-diag-conics}
 	\end{table}
 
 	With the question of $p=2$ settled, this concludes the proof of Theorem \ref{thm:rational-solutions}. We comment that the powerful machinery of Hilbert symbols can be used to deduce the same result, and we leave this to the curious reader to verify.
