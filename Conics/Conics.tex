@@ -17,6 +17,8 @@
 \usepackage[colorlinks=true]{hyperref}
 \usepackage{tabu}
 \usepackage{multicol}
+\usepackage{booktabs}
+\usepackage{centernot}
 
 %Environments
 \numberwithin{equation}{section} 
@@ -58,7 +60,7 @@
 \newcommand{\GL}{\operatorname{GL}}
 \newcommand{\Span}{\operatorname{Span}}
 \newcommand{\trsp}[1]{{{#1}^{\top}\!\!}}
-\newcommand{\ndiv}{\!\nmid\!}
+\newcommand{\ndiv}{\centernot|}
 
 \begin{document} 
 	
@@ -97,7 +99,7 @@
 	correspond to $C$ being an ellipse, a parabola, or a hyperbola. The
 	projectivized conic also gives rise to a quadratic form; we say $C$ is
 	degenerate when the matrix of $\widetilde{C}$ is singular. The curve
-	will instead look like a pair of parallel or intersecting line, a double
+	will instead look like a pair of parallel or intersecting lines, a double
 	line (where each point of the line is a solution of the conic and its 
 	derivative), a single point, or no points at all. 
 	
@@ -105,9 +107,9 @@
 	and a full classification is well-understood. We can instead ask that solutions
 	be in some other field $K$.
 	The situation when $K=\Q$ turns out to be quite complicated. It is
-	characterized by the Hasse-Minkowski theorem, which we quote a special
-	case of.
-	\begin{thm}[Hasse-Minkowski]
+	characterized by the Hasse--Minkowski theorem, of which we quote a special
+	case:
+	\begin{thm}[Hasse--Minkowski]
 		A quadratic form $C$ over $\Q$ has a solution if and only if it has solutions
 		over all the completions of $\Q$, namely, the reals, $\R$, and the $p$-adic
 		numbers, $\Q_p$, for all primes $p$.
@@ -115,28 +117,28 @@
 	The case when $K = \R$ is, as mentioned, classical. To solve over $\Q_p$,
 	we can simply ask for solutions in $\Z_p$, the $p$-adic integers. We
 	can in turn get these solutions through Hensel's lemma, which allows us
-	to lift solutions over the finite field $\F_p$ to $\Z_p$. Our ultimate
-	goal is to give a condition for rational points of a conic $C$, by lifting
-	a condition on $\F_p$-points.
+	to lift solutions from the finite field $\F_p$ to $\Z_p$. Our ultimate
+	goal is to determine when there exist rational points on a given conic $C$, by lifting
+	a characterization of its $\F_p$-points.
 	
 	This paper is roughly divided into two parts. The first part
 	is bootstrapping this process by counting solutions over $\F_p$. To do this,
 	we study the projectivization of our chosen conic, discussed in
 	\S\ref{sec:projectivization-of-the-problem}. We then diagonalize 
 	the projective curve through a procedure described in 
-	\S\ref{sec:diagonalizing-quadratic-forms}. We then work out several cases
+	\S\ref{sec:diagonalizing-quadratic-forms}, reducing to a finite number of cases. We work out these cases
 	of diagonalized curves in \S\ref{sec:proj-solutions}, and finally
 	drop back down to the affine case in \S\ref{sec:affine-solutions}. Our result
 	is a complete characterization of the number of solutions, given by 
 	Theorem \ref{thm:main-thm}.
 	In the second part, we lift solutions to $\Z_p$ by way of
-	Hensel's lemma, and use Hasse-Minkowski 
-	to give a criterion for existence of rational points. This is the content of \S\ref{sec:rational-soln}.
+	Hensel's lemma, and use the Hasse--Minkowski theorem
+	to completely characterize existence of rational points. This is the content of \S\ref{sec:rational-soln}; our main result is Theorem~\ref{thm:rational-solutions}.
 	
 	\subsection*{Acknowledgments} Oron wrote sections \S\ref{sec:diagonalizing-quadratic-forms} and \S\ref{sec:affine-solutions}. Together, Xianglong and Oron worked out much of \S\ref{sec:proj-solutions} and \S\ref{sec:rational-soln}, which were later written up by Xianglong (who also wrote \S\ref{sec:projectivization-of-the-problem}). Miguel ran experimental tests to both motivate and verify our computations, wrote \S\ref{sec:intro}, and helped format, edit, and proofread.
 	
 	We would like to thank the 18.821 course staff for organizing this project, and Rasmus Johansen in particular for his guidance and suggestions. We are also grateful
-	to Ari Nieh and Stuart Thomson for their feedback on our write-up.
+	to Ari Nieh and Stuart Thomson for their feedback on a draft of this paper.
 	
 	
 	\section{Preliminaries}\label{sec:projectivization-of-the-problem}
@@ -154,7 +156,7 @@
 		\[ \P^n_{\F_p} = (\A^{n+1}_{\F_p}\setminus \{0\})/{\sim}, \]
 		where we declare that $(x_1,\ldots,x_{n+1}) \sim 
 		(\lambda x_1,\ldots,\lambda x_{n+1})$ for $\lambda$ a nonzero scalar. We
-		will primarialy work with $n = 2$, and suppress the ground field from the 
+		will primarily work with $n = 2$, and suppress the ground field from the 
 		notation. We will write $[X:Y:Z]\in \P^2$ to denote the equivalence 
 		class of $(X,Y,Z)\in \A^3 \setminus \{0\}$.
 	\end{defn}
@@ -205,7 +207,7 @@
 		prime $p$ is inferred from context). We will also regard $0\in\F_p$ as a residue.
 	\end{defn}
 	
-	If $p$ divides $x^2 - 1 = (x+1)(x-1)$, we must have $x \equiv \pm 1 \pmod{p}$, so 
+	If $p$ divides $x^2 - 1 = (x+1)(x-1)$, we must have $x \equiv \pm 1 \bmod{p}$, so 
 	the kernel of the map is $\{\pm 1\}$. Thus each nonzero residue has exactly two 
 	square roots. The cokernel of this map is also a group of order two: 
 	\[ \F_p^\times / (\F_p^\times)^2 \cong \{\pm 1\}.  \]
@@ -223,7 +225,7 @@
 	\section{Diagonalization of quadratic forms}
 	\label{sec:diagonalizing-quadratic-forms} 
 	
-	In this section, we aim to simplify the equation defining the projectivized conic $\widetilde{C}$ via coordinate-changes of $\P^2$. In this section,
+	In this section, we aim to simplify the equation defining the projectivized conic $\widetilde{C}$ via coordinate-changes of $\P^2$. In doing so,
 	we will make extensive use of \texttt{Magma} \cite{magma}, a computer 
 	algebra system. Let
 	\begin{equation*}
@@ -299,11 +301,12 @@
 		In the context of Corollary \ref{cor:sixcases}, let
 		\begin{align*}
 		\alpha &= 4acf - ae^2 - b^2f + bde - cd^2,\\
-		\beta &= 4ac + 4af + 4cf - b^2 - d^2 - e^2, \\
-		\gamma &= 4ac - b^2,
-		\end{align*} 
-		where the first two expressions are coefficients in the 
-		characteristic polynomial of $A$. 
+		\beta &= 4ac + 4af + 4cf - b^2 - d^2 - e^2,
+		\end{align*}
+        and let $\gamma$ be the first nonzero element of the tuple
+        \begin{equation*}
+        (4ac-b^2,4af-d^2,4cf-e^2).
+        \end{equation*}
 		Then, the matrix $A$ corresponds to one of the cases in 
 		Corollary \ref{cor:sixcases} when
 		\begin{enumerate}
@@ -317,7 +320,7 @@
 		\end{enumerate}
 	\end{lem}
 	\begin{proof}
-		Let $P\in\GL_3(\F_p)$ be such that $\trsp{P}AP$ is one of the six matrices in Corollary~\ref{cor:sixcases}; these six matrices are distinguished by their ranks and the products of their nonzero eigenvalues. Since $P$ is invertible, the rank of $\trsp{P}AP$ is equal to that of $A$. By the rank-nullity theorem, the rank of $A$ is given by 3 minus the multiplicity of the eigenvalue $0$: this multiplicity is the highest power of $t$ dividing the characteristic polynomial of $A$. A \texttt{Magma} computation shows that the characteristic polynomial of $A$ is given by
+		Let $P\in\GL_3(\F_p)$ be such that $\trsp{P}AP$ is a (nonzero) scalar multiple of one of the six matrices in Corollary~\ref{cor:sixcases}; these six matrices are distinguished by their ranks and the products of their nonzero eigenvalues. Since $P$ is invertible, the rank of $\trsp{P}AP$ is equal to that of $A$. By the rank-nullity theorem, the rank of $A$ is given by 3 minus the multiplicity of the eigenvalue $0$: this multiplicity is the highest power of $t$ dividing the characteristic polynomial of $A$. A \texttt{Magma} computation shows that the characteristic polynomial of $A$ is given by
 		\begin{equation*}
 		t^3+(-a-c-f)t^2+\tfrac{1}{4}(4ac+4af-b^2+4cf-d^2-e^2)t+\tfrac{1}{4}(-4acf+ae^2+b^2f-bde+cd^2).
 		\end{equation*}
@@ -413,10 +416,10 @@
 	
 	We will also need an analogous result for quadratic forms $ax^2+bxy+cy^2$ in two variables, which follows immediately from the lemma by setting $d=e=f=0$:
 	\begin{cor}\label{cor:diag-P1}
-		The matrix $\left[\begin{smallmatrix}a&b/2\\b/2&c\end{smallmatrix}\right]$ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)$) to
+		The matrix $\left[\begin{smallmatrix}a&b/2\\b/2&c\end{smallmatrix}\right]$ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)$) to a (nonzero) scalar multiple of
 		\begin{itemize}
 			\item $\left[\begin{smallmatrix}0&0\\0&0\end{smallmatrix}\right]$ if $a=b=c=0$;
-			\item $\left[\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right]$ or $\left[\begin{smallmatrix}r&0\\0&0\end{smallmatrix}\right]$ if $4ac-b^2=0$;
+			\item $\left[\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right]$ if $4ac-b^2=0$;
 			\item $\left[\begin{smallmatrix}1&0\\0&1\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonzero quadratic residue;
 			\item $\left[\begin{smallmatrix}1&0\\0&r\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonzero quadratic nonresidue.
 		\end{itemize}
@@ -471,8 +474,7 @@
 			\item\label{case:rank3_x^2+y^2+rz^2=0} $X^2 + Y^2 + rZ^2 = 0$ has $p+1$ solutions.
 		\end{enumerate}
 		Note that the first three equations have $p$ times plus $1$ the number
-		of solutions of the corresponding equaton in Proposition 
-		\label{prop:counting-P1-solutions}
+		of solutions of the corresponding equaton in Proposition~\ref{prop:counting-P1-solutions}.
 	\end{prop}
 	\begin{proof} We treat the cases by rank.
 		
@@ -496,9 +498,9 @@
 		
 		\noindent
 		\textit{Rank 3: \eqref{case:rank3_x^2+y^2+z^2=0} and \eqref{case:rank3_x^2+y^2+rz^2=0}.} 
-		Suppose $-1$ is a residue. If $Z = 0$, then we are in the setting of
-		Proposition \ref{prop:counting-P1-solutions} case \eqref{case:x^2+y^2=0}, which has two
-		solutions. Otherwise, we can divide by $Z$ and obtain 
+		Suppose $-1$ is a residue. If $Z = 0$, then we are in the setting of case \eqref{case:x^2+y^2=0} of
+		Proposition \ref{prop:counting-P1-solutions}, which has two
+		solutions. Otherwise, we can divide by $Z^2$ and obtain 
 		\begin{align*} 
 		(X/Z)^2 + (Y/Z)^2 &= -1 \\ 
 		(X/Z)^2 + (Y/Z)^2 &= -r 
@@ -521,10 +523,10 @@
 		solutions over $\F_p$.
 	\end{prop} 
 	\begin{proof} 
-		Let $C_a$ denote the conic $x^2 + y^2 = a$. 
+		Let $C_a$ denote the (affine) conic $x^2 + y^2 = a$. 
 		First we will show the statement for $a=1$.
 		
-		Let $T$ denote the square-roots of $-1$ in $\F_p$. In the case
+		Let $T$ denote the set of square-roots of $-1$ in $\F_p$. In the case
 		that $-1$ is a nonresidue, $T$ is empty. Consider the maps $f\colon C_1(\F_p)
 		\setminus (1,0) \to \F_p \setminus T$ and $g\colon \F_p
 		\setminus T \to C_1(\F_p) \setminus (1,0)$ defined by 
@@ -590,7 +592,7 @@
 	\label{sec:affine-solutions}
 	
 	We can now use Lemma \ref{lem:relate-solutions-affine-proj} to combine the
-	results from the previous section into our main theorem.
+	results from the previous two sections into our main theorem.
 	
 	\begin{thm}[Counting Solutions in $\A^2$]
 		\label{thm:main-thm}
@@ -603,7 +605,7 @@
 		where $b$ is either $0$ or $1$.
 		
 		If $p$ is odd, let $\alpha$, $\beta$, and $\gamma$ be as defined in 
-		Lemma \ref{thm:diag-P2}, and $\Delta = b^2-4ac$ is the discriminant. 
+		Lemma \ref{thm:diag-P2}, and let $\Delta = b^2-4ac$ be the discriminant. 
 		If $\alpha$ and $\beta$ are both zero or
 		$\alpha$ is nonzero, we have one of the following cases, in order
 		of precedence:
@@ -625,7 +627,7 @@
 		\end{enumerate}
 	\end{thm}
 	\begin{proof} 
-		The case $p=2$ is very simple and can be checked by hand. There are very few conics over $\F_2$, and the solutions to 
+		The case $p=2$ is very simple and can be checked by hand. There are very few conics over $\F_2$ ($56$, to be exact), and the solutions to 
 		\[ ax^2 + bxy + cy^2 + dx + ey + f = 0 \] 
 		are the same as the solutions to 
 		\[ bxy + (a+d)x + (c+e)y + f = 0.  \] 
@@ -658,7 +660,7 @@
 	Define
 	\[
 		t_p(a) = \begin{cases}
-			1 & \text{if } \nu_p(b)\equiv\nu_p(c) \pmod 2 \text{ and } \nu_p(a) \not\equiv \nu_p(b),\nu_p(c) \pmod 2,\\
+			1 & \text{if } \nu_p(a)\not\equiv\nu_p(b)\equiv\nu_p(c)\bmod 2,\\
 			0 & \text{otherwise,}
 		\end{cases}
 	\]
@@ -691,7 +693,7 @@
 	\end{thm}
 	We prove this theorem through a sequence of lemmas. In particular, we will verify
 	existence of solutions in $\R$, the $p$-adic numbers $\Q_p$ for $p$ odd, and $\Q_2$.
-	We can then apply the Hasse-Minkowski theorem, which states that a homogeneous quadratic
+	We can then apply the Hasse--Minkowski theorem, which states that a homogeneous quadratic
 	has a solution in $\P^n_\Q$ if and only if it has a solution in $\P^n_K$ for 
 	every completion $K$ of $\Q$, namely, $\R$ and $\Q_p$ for $p$ prime.
 	We will use the case $n=2$. As noted above, the case $K = \Q_2$ is treated separately, 
@@ -709,7 +711,7 @@
 		\cdots \to \Z/p^3 \to \Z/p^2 \to \Z/p.
 		\]
 	\end{defn}
-	In other words, elements of $\Z_p$ are sequences $(a_1,a_2,a_3,\ldots)$ where $a_i \in \Z/p^i$ and $a_{i+1} \equiv a_i \pmod {p^i}$.
+	In other words, elements of $\Z_p$ are sequences $(a_1,a_2,a_3,\ldots)$ where $a_i \in \Z/p^i$ and $a_{i+1} \equiv a_i\bmod {p^i}$.
 	
 	Such an element can also be interpreted as the series
 	\[
@@ -725,7 +727,7 @@
 	
 	We refer the reader to \cite{henselMO} for a proof of the following formulation of Hensel's lemma. \textcolor{blue}{[still need to do something about this reference maybe]}
 	\begin{lem}[Multivariate Hensel's lemma]\label{thm:hensels-one-eq}
-		Let $k$ be a nonnegative integer. Let $f \in \Z_p[x_1,\ldots,x_n]$ be a polynomial in $n$ variables and suppose $\gamma = (\gamma_1,\ldots,\gamma_n)\in \Z_p^n$ satisfies $f(\gamma) = 0 \pmod {p^{2k+1}}$ and $\frac{\partial f}{\partial x_i}(\gamma) \not\equiv 0 \pmod {p^{k+1}}$ for some $i\in \{1,\ldots,n\}$. Then there exists $\alpha \in \Z_p^n$ such that, for all $i$, $\alpha_i = \gamma_i \pmod {p^{2k+1}}$ and $f(\alpha) = 0$.
+		Let $k$ be a nonnegative integer. Let $f \in \Z_p[x_1,\ldots,x_n]$ be a polynomial in $n$ variables and suppose $a = (a_1,\ldots,a_n)\in \Z_p^n$ satisfies $f(a) = 0 \bmod {p^{2k+1}}$ and $\frac{\partial f}{\partial x_i}(\gamma) \not\equiv 0 \bmod {p^{k+1}}$ for some $i\in \{1,\ldots,n\}$. Then there exists $\widetilde{a} \in \Z_p^n$ such that, for all $i$, $\widetilde{a}_i\equiv a_i \bmod {p^{2k+1}}$ and $f(\widetilde{a}) = 0$.
 	\end{lem}
 	To determine whether \eqref{eq:diag-squarefree-conic} has a solution in $\P^2_{\Q_p}$, we will make extensive use of this result. Note that, because the equation is homogeneous, existence of a solution over $\Q_p$ is the same as existence of a solution over $\Z_p$.
 	
@@ -737,17 +739,19 @@
 		We will apply Hensel's lemma with $k=0$. By Proposition \ref{prop:counting-P2-solutions}, \eqref{eq:diag-squarefree-conic} has $p+1$ solutions in $\P^2_{\F_p}$. The condition on partial derivatives is automatically satisfied: for any $[X:Y:Z]\in \P^2$ one of $X,Y,Z$ is nonzero, and thus one of $2aX, 2bY, 2cZ$ is as well. Hence any of the solutions over $\F_p$ can be lifted via Hensel's lemma to a solution over $\Q_p$.
 	\end{proof}
 
+    Otherwise, if $p\mid abc$, then $p$ divides either $a$, $b$, or $c$. We treat the last case; the other two cases are analogous.
+
 	\begin{lem}
-		With the setup of Theorem \ref{thm:rational-solutions}, suppose $p > 2$ is a prime that divides $abc$---assume $p|c$. Then \eqref{eq:diag-squarefree-conic} has a solution in $\P^2_{\Q_p}$ if and only if $\legendre{-ab}{p}=1$ (condition \eqref{cond:Qp-soln} of Theorem \ref{thm:rational-solutions}).
+		With the setup of Theorem \ref{thm:rational-solutions}, suppose $p > 2$ is a prime dividing $c$. Then \eqref{eq:diag-squarefree-conic} has a solution in $\P^2_{\Q_p}$ if and only if $\legendre{-ab}{p}=1$ (condition \eqref{cond:Qp-soln} of Theorem \ref{thm:rational-solutions}).
 	\end{lem}
 	\begin{proof}
 		When we reduce mod $p$, \eqref{eq:diag-squarefree-conic} becomes
 		\begin{equation}\label{eq:p|abc-modp}
-			aX^2 + bY^2 \equiv 0 \pmod p
+			aX^2 + bY^2 \equiv 0 \bmod p
 		\end{equation}
 		If $\legendre{-ab}{p}=1$, then take $s\in \F_p$ such that $s^2 = -ab$, and $[s:a:0]$ is a solution satisfying the hypotheses of Hensel's lemma with $k=0$. Thus \eqref{eq:diag-squarefree-conic} has a solution over $\Z_p$ in this case.
 		
-		Suppose instead that $\legendre{-ab}{p}=-1$. For the sake of contradiction, assume a solution $[X:Y:Z]$ existed over $\Q_p$. By scaling as needed, we can assume that $X,Y,Z\in \Z_p$ and not all of them are divisible by $p$. Since $-ab$ is a nonresidue, \eqref{eq:p|abc-modp} entails $X,Y \equiv 0 \pmod p$ (c.f. \S\ref{sec:proj-solutions}). Then we can write
+		Suppose instead that $\legendre{-ab}{p}=-1$. For the sake of contradiction, assume a solution $[X:Y:Z]$ existed over $\Q_p$. By scaling as needed, we can assume that $X,Y,Z\in \Z_p$ and not all of them are divisible by $p$. Since $-ab$ is a nonresidue, \eqref{eq:p|abc-modp} entails $X,Y \equiv 0 \bmod p$ (c.f. \S\ref{sec:proj-solutions}). Then we can write
 		\[
 			ap^2 (X/p)^2 + bp^2 (Y/p)^2 + cZ^2 = 0
 		\]
@@ -770,47 +774,33 @@
 		Then $a/\bar{a}$ is a square in $\Q_2$.
 	\end{lem}
 	\begin{proof}
-		We claim that if $s\in \Z_2$ is congruent to $1\pmod 8$, then it is a square. Consider the equation $x^2 - s=0$. Applying Hensel's lemma with $k=1$ to the solution $x = 1$ shows that it can be lifted to a solution in $\Z_2$ as desired.
-		Note that $2^{-2m} a/\bar{a} \equiv 1 \pmod 8$; it follows that $a/\bar{a}$ is a square.
+		We claim that if $s\in \Z_2$ is congruent to $1\bmod 8$, then it is a square. Consider the equation $x^2 - s=0$. Applying Hensel's lemma with $k=1$ to the solution $x = 1$ shows that it can be lifted to a solution in $\Z_2$ as desired.
+		By checking each case for $j$ and $k$, one sees that $2^{-2m} a/\bar{a} \equiv 1 \bmod 8$; it follows that $a/\bar{a}$ is a square.
 	\end{proof}
-	Using this lemma and the reasoning at start of this section, we can scale \eqref{eq:diag-squarefree-conic} over $\Q_2$ so that $abc$ is square free. The result will be one of the equations listed in Table \ref{table:Q2-diag-conics}. Many of these have solutions mod 8 which can be lifted using Hensel's lemma (where we use $k=1$). The other ones do not, and the claim is that they have no solutions over $\Q_2$.
+	Using this lemma and the reasoning at the start of this section, we can scale \eqref{eq:diag-squarefree-conic} over $\Q_2$ so that $abc$ is square free. The result will be one of the equations listed in Table \ref{table:Q2-diag-conics}. Many of these have solutions mod 8 which can be lifted using Hensel's lemma (where we use $k=1$). The other ones do not, and the claim is that they have no solutions over $\Q_2$.
 	
-	We prove this claim for the equation $X^2 + Y^2 + Z^2 = 0$ and omit the rest. Suppose a solution $[X:Y:Z]$ existed over $\Q_2$. We can assume that $X,Y,Z\in \Z_2$ and that not all of them are divisible by 2. However, 1 is the only odd residue mod 8, from which it is easy to check that $X^2 + Y^2 + Z^2 = 0$ has no such solutions mod 8 (let alone such a solution over $\Z_2$).
+	We prove this claim for the equation $X^2 + Y^2 + Z^2 = 0$ and omit the rest (which are similar). Suppose a solution $[X:Y:Z]$ existed over $\Q_2$. We can assume that $X,Y,Z\in \Z_2$ and that not all of them are divisible by 2. However, 1 is the only odd residue mod 8, from which it is easy to check that $X^2 + Y^2 + Z^2 = 0$ has no such solutions mod 8 (let alone such a solution over $\Z_2$).
 	\begin{table}[h]
-		\begin{tabular}{r|l}
-			& Solution in $\P^2_{\Q_2}$\\
-			\hline
-			\hline 
+		\begin{tabular}{r@{\hskip 18pt}l}
+            \toprule
+			Equation & Solution in $\P^2_{\Q_2}$\\
+            \midrule
 			$X^2 + Y^2 + Z^2 = 0$ & No \\ 
-			\hline 
 			$2X^2 + Y^2 + Z^2 = 0$ & No \\ 
-			\hline 
 			$3X^2 + Y^2 + Z^2 = 0$ & Yes, lift $[1:1:2]$ \\ 
-			\hline 
 			$5X^2 + Y^2 + Z^2 = 0$ & No \\ 
-			\hline 
 			$6X^2 + Y^2 + Z^2 = 0$ & Yes, lift $[1:1:1]$ \\ 
-			\hline 
 			$10X^2 + Y^2 + Z^2 = 0$ & No \\ 
-			\hline 
 			$15X^2 + Y^2 + Z^2 = 0$ & Yes, lift $[1:1:0]$ \\ 
-			\hline 
 			$30X^2 + Y^2 + Z^2 = 0$ & Yes, lift $[1:1:1]$ \\ 
-			\hline 
-			$3X^2 + 2Y^2 + Z^2 = 0$ & No \\ 
-			\hline 
+			$3X^2 + 2Y^2 + Z^2 = 0$ & No \\
 			$5X^2 + 2Y^2 + Z^2 = 0$ & Yes, lift $[1:1:1]$ \\ 
-			\hline 
 			$5X^2 + 3Y^2 + Z^2 = 0$ & Yes, lift $[1:1:0]$ \\ 
-			\hline 
 			$6X^2 + 5Y^2 + Z^2 = 0$ & No \\ 
-			\hline 
 			$10X^2 + 3Y^2 + Z^2 = 0$ & No \\ 
-			\hline 
 			$15X^2 + 2Y^2 + Z^2 = 0$ & Yes, lift $[1:0:1]$ \\ 
-			\hline 
 			$5X^2 + 3Y^2 + 2Z^2 = 0$ & Yes, lift $[1:1:0]$ \\ 
-			\hline
+			\bottomrule
 			\multicolumn{2}{c}{}
 		\end{tabular}
 		
