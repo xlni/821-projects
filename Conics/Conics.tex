@@ -47,6 +47,8 @@
 \providecommand{\corollaryname}{Corollary}
 \providecommand{\theoremname}{Theorem}
 
+\setcounter{tocdepth}{1}
+
 %macros, etc.
 \newcommand{\legendre}[2]{\genfrac{(}{)}{}{}{#1}{#2}}
 \renewcommand{\arraystretch}{1.2} 
@@ -64,7 +66,7 @@
 
 \begin{document} 
 	
-	\title{Mod $p$ solutions to conics, and applications} 
+	\title{Solutions to Conics Modulo a Prime and in the Rational Numbers} 
 	\author{Xianglong Ni, Oron Propp, and Miguel Young}
 	\maketitle
 	
@@ -108,7 +110,7 @@
 	be in some other field $K$.
 	The situation when $K=\Q$ turns out to be quite complicated. It is
 	characterized by the Hasse--Minkowski theorem, of which we quote a special
-	case:
+	case (see for instance \cite[\S IV.3, Thm.~8]{serre}):
 	\begin{thm}[Hasse--Minkowski]
 		A quadratic form $C$ over $\Q$ has a solution if and only if it has solutions
 		over all the completions of $\Q$, namely, the reals, $\R$, and the $p$-adic
@@ -210,7 +212,9 @@
 	If $p$ divides $x^2 - 1 = (x+1)(x-1)$, we must have $x \equiv \pm 1 \bmod{p}$, so 
 	the kernel of the map is $\{\pm 1\}$. Thus each nonzero residue has exactly two 
 	square roots. The cokernel of this map is also a group of order two: 
-	\[ \F_p^\times / (\F_p^\times)^2 \cong \{\pm 1\}.  \]
+	\begin{equation}\label{eqn:cokersquare}
+\F_p^\times / (\F_p^\times)^2 \cong \{\pm 1\}.
+\end{equation}
 	This gives a convenient characterization of quadratic residues:
 	\begin{defn}
 		The \emph{Legendre symbol} is the cokernel map    
@@ -242,11 +246,11 @@
 	\end{equation*}
 	The quadratic form $\trsp{v} A v$ is precisely the equation for $\widetilde{C}$. In this sense, the matrix $A$ represents $\widetilde{C}$ in the coordinates $[X,Y,Z]$.
 	
-	Now, any $P\in\GL_3(\F_p)$ gives rise to a change of coordinates $v\mapsto Pv$ in $\P^2$. Since
+	Now, any $P\in\GL_3(\F_p)$ gives rise to a change of coordinates $v\mapsto Pv$ in $\A^3$, which descends to an automorphism of $\P^2$. Since
 	\begin{equation*}
 	\trsp{(Pv)} A(Pv)=\trsp{v}(\trsp{P} AP)v,
 	\end{equation*}
-	the matrix representing $\widetilde{C}$ is $\trsp{P}AP$ in the new coordinates. This transformation $A \mapsto \trsp{P}A P$ does not change the number of solutions of the corresponding conic, as $P$ is invertible. The following result is well-known (see for instance \cite[Prop.~42:1]{omeara}):
+	the matrix representing $\widetilde{C}$ is $\trsp{P}AP$ in the new coordinates. This transformation $A \mapsto \trsp{P}A P$ does not change the number of solutions of the corresponding conic, as $P$ is invertible. The following result is well-known (see for instance \cite[Prop.~42:1]{omeara}), and thus we state it without proof:
 	\begin{thm}
 		\label{thm:diag}
 		There exists some $P\in\GL_3(\F_p)$ such that $\trsp{P}AP$ is diagonal.
@@ -259,7 +263,7 @@
 	0&0&\lambda_3
 	\end{bmatrix}
 	\end{equation*}
-	corresponds to the conic defined by $\lambda_1x^2+\lambda_2y^2+\lambda_3z^2=0$ (note that we cannot have $\lambda_1=\lambda_2=\lambda_3=0$ by our initial assumptions). By further scaling and permuting coordinates as appropriate, we immediately obtain the following:
+	corresponds to the conic defined by $\lambda_1X^2+\lambda_2Y^2+\lambda_3Z^2=0$ (note that we cannot have $\lambda_1=\lambda_2=\lambda_3=0$ by our initial assumptions). Furthermore, scaling any of the coordinates of $\A^3$ by a constant scales the corresponding coefficient of this diagonal form by a square: for instance, after the change of coordinates $X\mapsto sX$, the coefficient $\lambda_1$ becomes $\lambda_1/s^2$. Thus, by \eqref{eqn:cokersquare}, we may assume that each $\lambda_i$ is either $1$, $0$, or $r$, for a fixed nonresidue $r\in\F_p$. This gives $8$ possibilities for $A$; by further scaling and permuting coordinates in each of these cases, we obtain the following:
 	\begin{cor}
 		\label{cor:sixcases}
 		Fix an element $r\in\F_p$ that is not a square. There exists some $P\in\GL_3(\F_p)$ such that $\trsp{P}AP$ is equal to a (nonzero) scalar multiple of one of the following:
@@ -294,39 +298,43 @@
 		\end{tabu}
 		$$
 	\end{cor}
-	In the next section, we determine how many solutions each of the corresponding conics has in $\P^2$. For now, we determine to which of these five matrices $A$ corresponds. Note that we do not need to distinguish between scalar multiples of these matrices as the corresponding conics have equivalent solution sets.
+	Note that we need not distinguish between (nonzero) scalar multiples of these matrices as the corresponding conics have equivalent solution sets. In the next section, we determine how many solutions each of the corresponding conics has in $\P^2$. For now, we determine to which of these five matrices $A$ corresponds.
 	
 	\begin{lem}
 		\label{thm:diag-P2}
-		In the context of Corollary \ref{cor:sixcases}, let
+		In the context of Corollary~\ref{cor:sixcases}, let
 		\begin{align*}
-		\alpha &= 4acf - ae^2 - b^2f + bde - cd^2,\\
+		\alpha &= 4acf + bde - ae^2 - fb^2 - cd^2,\\
 		\beta &= 4ac + 4af + 4cf - b^2 - d^2 - e^2,
 		\end{align*}
         and let $\gamma$ be the first nonzero element of the tuple
         \begin{equation*}
         (4ac-b^2,4af-d^2,4cf-e^2).
         \end{equation*}
-		Then, the matrix $A$ corresponds to one of the cases in 
-		Corollary \ref{cor:sixcases} when
+		The matrix $A$ corresponds via Corollary~\ref{cor:sixcases} to case
 		\begin{enumerate}
-			\item\label{case:1} $\alpha=\beta=0$;
-			\item\label{case:11} $\alpha=0$, $\beta\ne 0$, 
+          \leftskip 12pt
+			\item\label{case:1} if $\alpha=\beta=0$;
+			\item\label{case:11} if $\alpha=0$, $\beta\ne 0$, 
 			and $\gamma$ is a nonzero residue;
-			\item\label{case:1r} $\alpha=0$, $\beta\ne 0$, 
+			\item\label{case:1r} if $\alpha=0$, $\beta\ne 0$, 
 			and $\gamma$ is a nonresidue;
-			\item\label{case:111} $\alpha$ is a nonzero residue;
-			\item\label{case:11r} $\alpha$ is a nonresidue.
+			\item[(4) or (5)]\label{case:rank3} if $\alpha$ is nonzero.
 		\end{enumerate}
 	\end{lem}
+    Note that we do not distinguish between cases (4) and (5) as the corresponding conics will be shown to have the same number of solutions in \S\ref{sec:proj-solutions}.
 	\begin{proof}
-		Let $P\in\GL_3(\F_p)$ be such that $\trsp{P}AP$ is a (nonzero) scalar multiple of one of the six matrices in Corollary~\ref{cor:sixcases}; these six matrices are distinguished by their ranks and the products of their nonzero eigenvalues. Since $P$ is invertible, the rank of $\trsp{P}AP$ is equal to that of $A$. By the rank-nullity theorem, the rank of $A$ is given by 3 minus the multiplicity of the eigenvalue $0$: this multiplicity is the highest power of $t$ dividing the characteristic polynomial of $A$. A \texttt{Magma} computation shows that the characteristic polynomial of $A$ is given by
+		Let $P\in\GL_3(\F_p)$ be such that $\trsp{P}AP$ is a (nonzero) scalar multiple of one of the five matrices in Corollary~\ref{cor:sixcases}; since $P$ is invertible, the rank of $\trsp{P}AP$ is equal to that of $A$. By the rank-nullity theorem, the rank of $A$ is given by subtracting from $3$ the multiplicity of the eigenvalue $0$: this multiplicity is the highest power of $t$ dividing the characteristic polynomial of $A$. A \texttt{Magma} computation shows that the characteristic polynomial of $A$ is given by
 		\begin{equation*}
-		t^3+(-a-c-f)t^2+\tfrac{1}{4}(4ac+4af-b^2+4cf-d^2-e^2)t+\tfrac{1}{4}(-4acf+ae^2+b^2f-bde+cd^2).
+		t^3+(-a-c-f)t^2+\tfrac{1}{4}(4ac+4af+4cf-b^2-d^2-e^2)t+\tfrac{1}{4}(-4acf - bde + ae^2 + fb^2 + cd^2).
 		\end{equation*}
-		Thus $A$ has rank $1$ when $\alpha=\beta=0$, which gives \eqref{case:1}.
+        The constant coefficient of this polynomial vanishes precisely when $\alpha$ does, and its degree-$1$ coefficient vanishes precisely when $\beta$ does. We now divide into three cases depending the rank of $A$, which corresponds by the preceding discussion to the vanishing of $\alpha$ and $\beta$:
+
+		\textbf{Rank 1.} The rank of $A$ is $1$ when $\alpha=\beta=0$, which gives case \eqref{case:1} of the lemma.
 		
-		Likewise, $A$ has rank $2$ when $\alpha=0$ and $\beta\ne 0$. Since $\beta$ is the sum of $4ac-b^2$, $4af-d^2$, and $4cf-e^2$, these cannot all be zero; the latter two are obtained from $4ac-b^2$ by permuting the coordinates of $A$, which justifies the computation of $\gamma$. Thus, assume that $\gamma$ has been determined in this manner. If $a\ne 0$, then the \texttt{Magma} method \texttt{DiagonalForm()} shows that $A$ diagonalizes via
+		\textbf{Rank 2.} Likewise, the rank of $A$ is $2$ when $\alpha=0$ and $\beta\ne 0$. Since $\beta$ is the sum of $4ac-b^2$, $4af-d^2$, and $4cf-e^2$, these cannot all be zero, which justifies the definition of $\gamma$. Permute the coordinates $X$, $Y$, and $Z$ of $\A^3$ so that $\gamma$ is given by $4ac-b^2$ (for instance, if $\gamma=4af-d^2$, the permutation $[X,Y,Z]\mapsto[X,Z,Y]$ permutes these coefficients appropriately). Note that $\alpha$ and $\beta$ are invariant under such permutations. We proceed by further breaking into four cases depending on the entries of $A$, and explicitly diagonalizing $A$ in each case:
+
+\emph{Case 1: $a\ne 0$.} Here the \texttt{Magma} method \texttt{DiagonalForm()} shows that $A$ diagonalizes via
 		\begin{equation*}
 		\begin{bmatrix}
 		1 & -\dfrac{b}{2a} & \dfrac{be - 2cd}{4ac - b^2}\\
@@ -346,9 +354,11 @@
 		0&0&0
 		\end{bmatrix}.
 		\end{equation*}
-		Thus, the product of the nonzero eigenvalues of this matrix is $\gamma=4ac-b^2$, up to a square. The case $c\ne 0$ is similar.
+		Scaling $X\mapsto aX$ and $Y\mapsto Y/2$ shows that this diagonal matrix corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:11} if $\gamma=4ac-b^2$ is a nonzero residue and to \eqref{case:1r} if it is not.
+
+        \emph{Case 2: $a=0$ and $c\ne 0$.} After permuting coordinates via $[X,Y,Z]\mapsto[Y,X,Z]$, the previous case applies with $\gamma$ unchanged.
 		
-		Next, if $a=c=0$ and $f\ne 0$, then a similar \texttt{Magma} computation shows that $A$ diagonalizes via
+		\emph{Case 3: $a=c=0$ and $f\ne 0$.} Here a similar \texttt{Magma} computation shows that $A$ diagonalizes via
 		\begin{equation*}
 		\begin{bmatrix}
 		0 & 0 & 1\\
@@ -368,8 +378,10 @@
 		0&0&0
 		\end{bmatrix}.
 		\end{equation*}
-		The product of the nonzero eigenvalues of this matrix is $\gamma=-1$, up to a square. Note that in this case the diagonalizing matrix $P$ is only well-defined if $e$ is nonzero as well, but this is clear as the condition $\alpha=0$ is equivalent to $bf=de$, and $b\ne 0$ as $4ac-b^2\ne 0$ (thus, $4ac-b^2=-b^2$ is also $-1$ up to a square). Finally, if $a=c=f=0$, then either $d=0$ or $e=0$, and the same \texttt{Magma} computation shows
-		\begin{align*}
+		Scaling $X\mapsto fX$ and $Y\mapsto(e/2)Y$ shows that this diagonal matrix corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:11} if $-1$ is a nonzero residue and to \eqref{case:1r} if it is not. In this case, the diagonalizing matrix $P$ is only well-defined if $e$ is nonzero as well, but this is clear as the condition $\alpha=0$ is equivalent to $bf=de$, and $b\ne 0$ as $\gamma=4ac-b^2=-b^2\ne 0$. Thus, $\gamma$ is a residue if and only if $-1$ is, which gives the desired result.
+
+\emph{Case 4: $a=c=f=0$.} Here either $d=0$ or $e=0$, and the same \texttt{Magma} computation shows that
+		\begin{equation*}
 		\begin{bmatrix}
 		1 & -1/2 & -e/b\\
 		1 & 1/2 & 0\\
@@ -381,12 +393,15 @@
 		1 & 1/2 & 0\\
 		0 & 0 & 1
 		\end{bmatrix}
-		&=
+		=
 		\begin{bmatrix}
 		b&0&0\\
 		0&-b/4&0\\
 		0&0&0
-		\end{bmatrix}\\
+		\end{bmatrix}
+\end{equation*}
+when $d=0$ and
+\begin{equation*}
 		\begin{bmatrix}
 		1 & -1/2 & 0\\
 		1 & 1/2 & -d/b\\
@@ -398,25 +413,26 @@
 		1 & 1/2 & -d/b\\
 		0 & 0 & 1
 		\end{bmatrix}
-		&=
+		=
 		\begin{bmatrix}
 		b&0&0\\
 		0&-b/4&0\\
 		0&0&0
 		\end{bmatrix}.
-		\end{align*}
-		The product of the nonzero eigenvalues of this matrix is again $\gamma=-1$, up to a square. Since the matrices \eqref{case:11} and \eqref{case:1r} are obtained from these diagonalized forms of $A$ by scaling coordinates, it is clear that $A$ corresponds to \eqref{case:11} if $\gamma$ is a residue and to \eqref{case:1r} if it is not.
-		
-		Lastly, $A$ has rank $3$ when $\alpha$ is nonzero. Since
-		\begin{equation*}
-		\det \trsp{P}AP=\det \trsp{P} \cdot\det A\cdot\det P=\det A\cdot(\det P)^2,
 		\end{equation*}
-		the determinant of $A$ is a quadratic residue if and only if that of $\trsp{P}AP$ is. Cases \eqref{case:111} and \eqref{case:11r} of the theorem follow.
+when $e=0$.
+		In either case, scaling $Y\mapsto Y/2$ shows that the diagonal matrix corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:11} if $-1$ is a nonzero residue and to \eqref{case:1r} if it is not. As before, $\gamma$ is a residue if and only if $-1$ is, giving the desired result.
+
+		\textbf{Rank 3.} Lastly, $A$ has rank $3$ when $\alpha$ is nonzero; the final case of the theorem follows.
 	\end{proof}
 	
 	We will also need an analogous result for quadratic forms $ax^2+bxy+cy^2$ in two variables, which follows immediately from the lemma by setting $d=e=f=0$:
 	\begin{cor}\label{cor:diag-P1}
-		The matrix $\left[\begin{smallmatrix}a&b/2\\b/2&c\end{smallmatrix}\right]$ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)$) to a (nonzero) scalar multiple of
+		The matrix
+\begin{equation*}
+\begin{bmatrix}a&b/2\\b/2&c\end{bmatrix}
+\end{equation*}
+diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)$) to a (nonzero) scalar multiple of
 		\begin{itemize}
 			\item $\left[\begin{smallmatrix}0&0\\0&0\end{smallmatrix}\right]$ if $a=b=c=0$;
 			\item $\left[\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right]$ if $4ac-b^2=0$;
@@ -474,7 +490,7 @@
 			\item\label{case:rank3_x^2+y^2+rz^2=0} $X^2 + Y^2 + rZ^2 = 0$ has $p+1$ solutions.
 		\end{enumerate}
 		Note that the first three equations have $p$ times plus $1$ the number
-		of solutions of the corresponding equaton in Proposition~\ref{prop:counting-P1-solutions}.
+		of solutions of the corresponding equation in Proposition~\ref{prop:counting-P1-solutions}.
 	\end{prop}
 	\begin{proof} We treat the cases by rank.
 		
@@ -596,7 +612,7 @@
 	
 	\begin{thm}[Counting Solutions in $\A^2$]
 		\label{thm:main-thm}
-		Let $C$ be a conic as in (\ref{eq:original-conic}), and fix a prime $p$.
+		Let $C$ be a conic as in (\ref{eq:original-conic}), and fix a prime $p$. We regard the coefficients of $C$ as lying in $\F_p$.
 		
 		If $p$ is even, then
 		\begin{equation*}
@@ -607,21 +623,21 @@
 		If $p$ is odd, let $\alpha$, $\beta$, and $\gamma$ be as defined in 
 		Lemma \ref{thm:diag-P2}, and let $\Delta = b^2-4ac$ be the discriminant. 
 		If $\alpha$ and $\beta$ are both zero or
-		$\alpha$ is nonzero, we have one of the following cases, in order
-		of precedence:
+		$\alpha$ is nonzero, then:
 		\begin{enumerate}
-			\item All of $a$, $b$ and $c$ vanish, and $C(\F_p)$ is empty.
-			\item $\Delta = 0$, and $|C(\F_p)| = p$.
-			\item $\Delta \neq 0$, and,
+			\item If $a=b=c=0$, then $C(\F_p)$ is empty.
+			\item\label{case:Deltazero} Otherwise, if $\Delta = 0$, then $|C(\F_p)| = p$.
+			\item\label{case:Deltanonzero} If $\Delta \neq 0$, then
 			\[ |C(\F_p)| = p - \legendre{-\Delta}{p}\legendre{-1}{p}. \]
 		\end{enumerate}
-		If instead only $\alpha$ vanishes, then one of the following holds, again
-		in order of precedence:
+        In particular, when $C$ is nondegenerate over $\F_p$, either case \eqref{case:Deltazero} or \eqref{case:Deltanonzero} applies depending on $\Delta$, and $C$ has either $p-1$, $p$, or $p+1$ solutions in $\A^2$.
+
+		If instead only $\alpha$ vanishes, then:
 		\begin{enumerate}
-			\item All of $a$, $b$ and $c$ vanish, and $|C(\F_p)|=p$.
-			\item If $\Delta = 0$, then
+			\item If $a=b=c=0$, then $|C(\F_p)|=p$.
+			\item Otherwise, if $\Delta = 0$, then
 			\[ |C(\F_p)| = p\left(1 + \legendre{\gamma}{p}\legendre{-1}{p}\right). \]
-			\item $\Delta \neq 0$, and,
+			\item If $\Delta \neq 0$, then
 			\[ |C(\F_p)| = p\left(1 + \legendre{\gamma}{p}\legendre{-1}{p}\right)
 			- \legendre{\gamma}{p}\legendre{-1}{p}. \]
 		\end{enumerate}
@@ -840,6 +856,18 @@
 			author={Ravi Vakil},
 			year={December 29, 2015}
 		}
+
+@book {serre,
+    AUTHOR = {Serre, J.-P.},
+     TITLE = {A course in arithmetic},
+      NOTE = {Translated from the French,
+              Graduate Texts in Mathematics, No. 7},
+ PUBLISHER = {Springer-Verlag, New York-Heidelberg},
+      YEAR = {1973},
+     PAGES = {viii+115},
+   MRCLASS = {12-02 (10CXX 10DXX)},
+  MRNUMBER = {0344216},
+}
 	\end{filecontents}
 	
 	\bibliographystyle{plain}
