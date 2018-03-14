@@ -334,93 +334,28 @@
 		or $0$ if none exists. The matrix $A$ corresponds via Corollary~\ref{cor:sixcases} to case
 		\begin{enumerate}
           \leftskip 12pt
-			\item\label{case:1} if $\alpha=\gamma=0$ and either $a=0$ or $e=bd/2a$;
+			\item\label{case:1} if $\alpha=\gamma=0$;
 			\item\label{case:11} if $\alpha=0$ 
 			and $\gamma$ is a nonzero residue;
 			\item\label{case:1r} if $\alpha=0$ 
 			and $\gamma$ is a nonresidue;
-			\item[(4) or (5)]\label{case:rank3} if $\alpha$ is nonzero or if $\alpha=\gamma=0$ and $a\ne 0$ and $e=-bd/2a\ne 0$.
+			\item[(4) or (5)]\label{case:rank3} if $\alpha$ is nonzero.
 		\end{enumerate}
 	\end{lem}
     Note that we do not distinguish between cases (4) and (5) as the corresponding conics will be shown to have the same number of solutions in \S\ref{sec:proj-solutions}.
 	\begin{proof}
 		Let $P\in\GL_3(\F_p)$ be such that $\trsp{P}AP$ is a (nonzero) scalar multiple of one of the five matrices in Corollary~\ref{cor:sixcases}; since $P$ is invertible, the rank of $\trsp{P}AP$ is equal to that of $A$. We now divide into three cases depending on the vanishing of $\alpha$ and $\gamma$:
 
-		\textbf{Case 1: $\alpha=0$ and $\gamma=0$.}
-        
-\emph{Sub-case 1: $a\ne 0$.} Here we may write $c=b^2/4a$, $f=d^2/4a$, and $e=\pm bd/2a$. If $e=bd/2a$, then the \texttt{Magma} method \texttt{DiagonalForm()} shows that $A$ diagonalizes via
+		\textbf{Case 1: $\alpha=\gamma=0$.} We claim that in this case $A$ has rank $1$, hence corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:1}. It suffices to show that all $2\times 2$ minors of $A$ vanish. The $(1,1)$, $(2,2)$, and $(3,3)$ minors of $A$ all vanish by assumption, so by symmetry it suffices to show that the $(1,2)$, $(1,3)$, and $(2,3)$ minors vanish, that is, that
 \begin{equation*}
-\begin{bmatrix}
-1&0&0\\
--d/2a&0&1\\
--b/2a&1&0
-\end{bmatrix}^\top\!
-A
-\begin{bmatrix}
-1&0&0\\
--d/2a&0&1\\
--b/2a&1&0
-\end{bmatrix}
-=
-\begin{bmatrix}
-a&0&0\\
-0&0&0\\
-0&0&0
-\end{bmatrix}.
+de-2bf=be-2cd=bd-2ae=0.
 \end{equation*}
-Thus, $A$ corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:1}. If $e=-bd/2a$, then a similar \texttt{Magma} computation shows that $A$ diagonalizes via
-\begin{equation*}
-\begin{bmatrix}
-1&0&0\\
-(-b-d)/2a&1&1\\
-(b-d)/4a&-1/2&1/2\\
-\end{bmatrix}^\top\!
-A
-\begin{bmatrix}
-1&0&0\\
-(-b-d)/2a&1&1\\
-(b-d)/4a&-1/2&1/2\\
-\end{bmatrix}
-=
-\begin{bmatrix}
-a&0&0\\
-0&2e&0\\
-0&0&e/2
-\end{bmatrix}.
-\end{equation*}
-Thus, $A$ corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:1} if $e=0$ and to the final case otherwise.
-
-\emph{Sub-case 2: $a=0$ and $c\ne 0$.}  Here $b=d=0$, and a similar \texttt{Magma} computation shows that $A$ diagonalizes via
-\begin{equation*}
-\begin{bmatrix}
-0&1&0\\
-0&-e/2c&1\\
-1&0&0\\
-\end{bmatrix}^\top\!
-A
-\begin{bmatrix}
-0&1&0\\
-0&-e/2c&1\\
-1&0&0\\
-\end{bmatrix}
-=
-\begin{bmatrix}
-c&0&0\\
-0&0&0\\
-0&0&0\\
-\end{bmatrix}.
-\end{equation*}
-Thus, $A$ corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:1}.
-
-\emph{Sub-case 3: $a=c=0$.} Here $b=d=e=0$ as well, hence $A$ is given by
-\begin{equation*}
-\begin{bmatrix}
-0&0&0\\
-0&0&0\\
-0&0&f\\
-\end{bmatrix}
-\end{equation*}
-and corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:1}.
+We show that the first expression vanishes; the other two are similar. We have
+\begin{align*}
+\alpha&=(4ac-b^2)+c(4af-d^2)+a(4cf-e^2)+bde-8acf\\
+&=bde-2ae^2=b(de-2bf)+2b^2f-2ae^2=b(de-2bf)=0,
+\end{align*}
+so either $de-2bf=0$ or $b=0$; in the latter case, we either have $a=d=0$ or $c=e=0$, so in all cases $de-2bf=0$, as desired.
 
 		\textbf{Case 2: $\alpha=0$ and $\gamma\ne 0$.} Permute the coordinates $X$, $Y$, and $Z$ of $\A^3$ so that $\gamma$ is given by $4ac-b^2$ (for instance, if $\gamma=4af-d^2$, the permutation $[X,Y,Z]\mapsto[X,Z,Y]$ permutes these coefficients appropriately). Note that $\alpha$ is invariant under such permutations. We proceed by further breaking into four sub-cases depending on the entries of $A$, and explicitly diagonalizing $A$ in each case:
 
