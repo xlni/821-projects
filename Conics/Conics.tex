@@ -89,30 +89,28 @@
 	where the degree-2 coefficients $a, b, c$ are not all zero. This conic can be \emph{projectivized} by adding an additional
 	unknown to make the polynomial homogeneous:
 	\[ \widetilde{C}: aX^2 + bXY + cY^2 + dXZ + eXZ + fZ^2 = 0. \]
-	This gives a quadratic form on $\R^3$; when this form is degenerate
-	(i.e., when its matrix is singular), we also say that the original conic, $C$, 
-	is degenerate.
+	This gives a quadratic form on $\R^3$; when this form is degenerate, we
+	say that the original conic, $C$, is also degenerate.
 	
 	The homogeneous part of $C$, $ax^2 + bxy + cy^2$, gives a quadratic form
-	on $\trsp{v}Av$, for $v\in\R^2$, with matrix
-	\[ A = \begin{bmatrix}
+	on $\R^2$, with matrix
+	\[ \begin{bmatrix}
 	a & b/2 \\
 	b/2 & c
 	\end{bmatrix}. \]
-	The determinant of $A$ times $-4$ is called the \emph{discriminant} of
-	the conic:
-	\[ \Delta = b^2 - 4ac = -4 \det A. \]
-	This quantity gives a characterization of the shape of $C$
+	The determinant of this matrix, called the \emph{discriminant} and
+	denoted $-4\Delta = b^2 - 4ac$, gives a characterization of the shape of $C$
 	when it is nondegenerate. Positive, zero, and negative discriminant
-	correspond to $C$ being an ellipse, a parabola, or a hyperbola. If
-	$C$ is degenerate, the curve
+	correspond to $C$ being an ellipse, a parabola, or a hyperbola. The
+	projectivized conic also gives rise to a quadratic form; we say $C$ is
+	degenerate when the matrix of $\widetilde{C}$ is singular. The curve
 	will instead look like a pair of parallel or intersecting lines, a double
 	line (where each point of the line is a solution of the conic and its 
 	derivative), a single point, or no points at all. 
 	
-	The above discussion of the \emph{real} points of $C$ is classical, known to 
-	Descartes and Fermat, and a full classification of solutions is well-understood. 
-	We can instead ask that solutions be in some other field $K$.
+	The above discussion of the \emph{real} points of $C$ is fairly classical,
+	and a full classification is well-understood. We can instead ask that solutions
+	be in some other field $K$.
 	The situation when $K=\Q$ turns out to be quite complicated. It is
 	characterized by the Hasse--Minkowski theorem, of which we quote a special
 	case (see for instance \cite[\S IV.3, Thm.~8]{serre}):
@@ -121,21 +119,19 @@
 		over all the completions of $\Q$, namely, the reals, $\R$, and the $p$-adic
 		numbers, $\Q_p$, for all primes $p$.
 	\end{thm}
-	The case over the reals is easy, because we can take square roots. 
-    Finding a solution over $\Q_p$ is somewhat more roundabout. We instead ask for solutions
-	in $\Z_p$, the $p$-adic integers. Hensel's lemma
-	(see Lemma \ref{thm:hensels-one-eq}) allows us to ``lift'' solutions from the finite
-	field $\F_p$ up to $\Z_p$, i.e., given a solution in $\F_p$, we can find a solution
-	in $\Z_p$ (assuming certain criteria). Our ultimate
+	The case when $K = \R$ is, as mentioned, classical. To solve over $\Q_p$,
+	we can simply ask for solutions in $\Z_p$, the $p$-adic integers. We
+	can in turn get these solutions through Hensel's lemma, which allows us
+	to lift solutions from the finite field $\F_p$ to $\Z_p$. Our ultimate
 	goal is to determine when there exist rational points on a given conic $C$, by lifting
 	a characterization of its $\F_p$-points.
-		
-	This paper is roughly divided into two parts. In the first part, we perform
-	bootstraping by counting solutions over $\F_p$. To do this,
+	
+	This paper is roughly divided into two parts. The first part
+	is bootstrapping this process by counting solutions over $\F_p$. To do this,
 	we study the projectivization of our chosen conic, discussed in
 	\S\ref{sec:projectivization-of-the-problem}. We then diagonalize 
 	the projective curve through a procedure described in 
-	\S\ref{sec:diagonalizing-quadratic-forms}, reducing to a tractable number of cases. Next, we work out these cases
+	\S\ref{sec:diagonalizing-quadratic-forms}, reducing to a finite number of cases. We work out these cases
 	of diagonalized curves in \S\ref{sec:proj-solutions}, and finally
 	drop back down to the affine case in \S\ref{sec:affine-solutions}. Our result
 	is a complete characterization of the number of solutions, given by 
@@ -158,21 +154,16 @@
 	\end{equation} 
 	with integer coefficients. We require that at least one of 
 	$a$, $b$, and $c$ is nonzero, and that $\gcd(a,b,c,d,e,f)=1$.
-	Fix a base field $\F_p$ where $p$ is an odd prime. We defer treatment of the case $p = 2$ to \S\ref{sec:affine-solutions}.
+	Fix a base field $\F_p$ where $p$ is an odd prime. (We defer treatment of the case $p = 2$ to \S\ref{sec:affine-solutions}.)
 	\begin{defn}
 		Let $\A^n_{\F_p}$ denote $n$-dimensional affine space over $\F_p$. Define 
 		$n$-dimensional projective space over $\F_p$ as the quotient
 		\[ \P^n_{\F_p} = (\A^{n+1}_{\F_p}\setminus \{0\})/{\sim}, \]
 		where we declare that $(x_1,\ldots,x_{n+1}) \sim 
-		(\lambda x_1,\ldots,\lambda x_{n+1})$ for $\lambda$ any nonzero scalar. 
-		Throughout, we will work only with $n = 1, 2$, and suppress the ground field
-		from the notation when it is clear from context.
-		
-		We will write $[X:Y:Z]\in \P^2$ to denote the equivalence 
-		class of $(X,Y,Z)\in \A^3 \setminus \{0\}$. We call these \emph{homogeneous
-		coordinates}. By multiplying by an appropriate scalar, all points in $\P^2$ are
-		of the form $[X:Y:1]$ or $[X:1:0]$, where the latter make up the \emph{line at
-		infinity}.
+		(\lambda x_1,\ldots,\lambda x_{n+1})$ for $\lambda$ a nonzero scalar. We
+		will primarily work with $n = 2$, and suppress the ground field from the 
+		notation. We will write $[X:Y:Z]\in \P^2$ to denote the equivalence 
+		class of $(X,Y,Z)\in \A^3 \setminus \{0\}$.
 	\end{defn}
 	
 	With this construction in mind, we can \emph{projectivize} our conic
@@ -181,28 +172,24 @@
 	\begin{equation}\label{eq:projective-conic} 
 	\widetilde{C} \colon aX^2 + bXY + cY^2 + dXZ + eYZ + fZ^2 = 0. 
 	\end{equation}
-	Note that homogeneity ensures the value at a point on $\P^2$ is defined up to scaling,
-	so it makes sense to ask when it vanishes.
+	Note that homogeneity ensures it is well-defined to ask when this
+	equation has a solution in $\P^2$.
 	
 	Let $C(\F_p)$ denote the solution set of \eqref{eq:original-conic} in $\A^2$. Our aim
 	is to characterize $|C(\F_p)|$ as a function of the coefficients $a,b,c,d,e,f$ and 
 	the prime $p$. The solutions of \eqref{eq:projective-conic} define a set
 	$\widetilde{C}(\F_p) \subset \P^2$.
 	
-	There is an evident injection $C(\F_p) \rightarrowtail \widetilde{C}(\F_p)$,
-	coming from the inclusion 
-	\begin{eqnarray*}
-	    \A^2 &\rightarrowtail& \P^2 \\
-	    (x,y) &\mapsto& [x:y:1]
-	\end{eqnarray*}
-	However, elements of $\widetilde{C}(\F_p)$ of the form $[X:Y:0]$ 
-	(solutions ``at infinity'') do not correspond to elements of $C(\F_p)$.
+	There is an evident injection $C(\F_p) \rightarrowtail \widetilde{C}(\F_p)$ sending $(x,y)$ to
+	$[x:y:1]$. However, elements of $\widetilde{C}(\F_p)$ of the form $[X:Y:0]$ do not 
+	correspond to elements of $C(\F_p)$. 
+	These are solutions ``at infinity'' in the projective plane.
 	Thankfully, these extraneous solutions are easily characterized: they are the
 	solutions to the equation
 	\begin{equation}\label{eq:projective-conic-at-infinity} 
 	\widetilde{C}_0 \colon aX^2 + bXY + cY^2 = 0
 	\end{equation} 
-	on the projective line $\P^1$. We will call this solution set $\widetilde{C}_0(\F_p)\subset \P^1$.  
+	on the projective line $\P^1$. Call this solution set $\widetilde{C}_0(\F_p)\subset \P^1$.  
 	
 	\begin{lem}\label{lem:relate-solutions-affine-proj}
 		$|\widetilde{C}(\F_p)| = |C(\F_p)| + |\widetilde{C}_0(\F_p)|$.
@@ -236,15 +223,10 @@
 		The \emph{Legendre symbol} is the cokernel map    
 		\[ \legendre{\cdot}{p}: 
 		\F_p^\times \to \F_p^\times / (\F_p^\times)^2 \cong \{\pm 1\}, \]
-		defined as
-		\[ \legendre{a}{p} = \begin{cases}
-		    1 & a \text{ is a nonzero residue} \\
-		    -1 & a \text{ is a nonresidue} \\
-		    0 & a = 0
-		\end{cases} \]
-		Defining the Legendre symbol for $0$ extends this map to a 
-		multiplication-respecting map
-		\[ \F_p \to \{-1,0,1\}. \]
+		where $\legendre{a}{p}$ is $-1$ if $a$ is a nonresidue,
+		and $1$ if $a$ is a nonzero residue. This map extends to a multiplication-respecting map
+		\[ \F_p \to \{-1,0,1\} \]
+		with $\legendre{0}{p}$ defined as $0$.
 	\end{defn}
 	
 	\section{Diagonalization of quadratic forms}
@@ -324,38 +306,107 @@
 	\begin{lem}
 		\label{thm:diag-P2}
 		In the context of Corollary~\ref{cor:sixcases}, let
-		\begin{align*}
-		\alpha &= 4acf + bde - ae^2 - fb^2 - cd^2,\\
-		\beta &= 4ac + 4af + 4cf - b^2 - d^2 - e^2,
-		\end{align*}
+		\begin{equation*}
+		\alpha=4\cdot\det A= 4acf + bde - ae^2 - fb^2 - cd^2,
+		\end{equation*}
         and let $\gamma$ be the first nonzero element of the tuple
         \begin{equation*}
-        (4ac-b^2,4af-d^2,4cf-e^2).
+        (4ac-b^2,4af-d^2,4cf-e^2),
         \end{equation*}
-		The matrix $A$ corresponds via Corollary~\ref{cor:sixcases} to case
+		or $0$ if none exists. The matrix $A$ corresponds via Corollary~\ref{cor:sixcases} to case
 		\begin{enumerate}
           \leftskip 12pt
-			\item\label{case:1} if $\alpha=\beta=0$;
-			\item\label{case:11} if $\alpha=0$, $\beta\ne 0$, 
+			\item\label{case:1} if $\alpha=\gamma=0$ and either $a=0$ or $e=bd/2a$;
+			\item\label{case:11} if $\alpha=0$ 
 			and $\gamma$ is a nonzero residue;
-			\item\label{case:1r} if $\alpha=0$, $\beta\ne 0$, 
+			\item\label{case:1r} if $\alpha=0$ 
 			and $\gamma$ is a nonresidue;
-			\item[(4) or (5)]\label{case:rank3} if $\alpha$ is nonzero.
+			\item[(4) or (5)]\label{case:rank3} if $\alpha$ is nonzero or if $\alpha=\gamma=0$ and $a\ne 0$ and $e=-bd/2a\ne 0$.
 		\end{enumerate}
 	\end{lem}
     Note that we do not distinguish between cases (4) and (5) as the corresponding conics will be shown to have the same number of solutions in \S\ref{sec:proj-solutions}.
 	\begin{proof}
-		Let $P\in\GL_3(\F_p)$ be such that $\trsp{P}AP$ is a (nonzero) scalar multiple of one of the five matrices in Corollary~\ref{cor:sixcases}; since $P$ is invertible, the rank of $\trsp{P}AP$ is equal to that of $A$. By the rank-nullity theorem, the rank of $A$ is given by subtracting from $3$ the multiplicity of the eigenvalue $0$: this multiplicity is the highest power of $t$ dividing the characteristic polynomial of $A$. A \texttt{Magma} computation shows that the characteristic polynomial of $A$ is given by
-		\begin{equation*}
-		t^3+(-a-c-f)t^2+\tfrac{1}{4}(4ac+4af+4cf-b^2-d^2-e^2)t+\tfrac{1}{4}(-4acf - bde + ae^2 + fb^2 + cd^2).
-		\end{equation*}
-        The constant coefficient of this polynomial vanishes precisely when $\alpha$ does, and its degree-$1$ coefficient vanishes precisely when $\beta$ does. We now divide into three cases depending the rank of $A$, which corresponds by the preceding discussion to the vanishing of $\alpha$ and $\beta$:
+		Let $P\in\GL_3(\F_p)$ be such that $\trsp{P}AP$ is a (nonzero) scalar multiple of one of the five matrices in Corollary~\ref{cor:sixcases}; since $P$ is invertible, the rank of $\trsp{P}AP$ is equal to that of $A$. We now divide into three cases depending on the vanishing of $\alpha$ and $\gamma$:
 
-		\textbf{Rank 1.} The rank of $A$ is $1$ when $\alpha=\beta=0$, which gives case \eqref{case:1} of the lemma.
-		
-		\textbf{Rank 2.} Likewise, the rank of $A$ is $2$ when $\alpha=0$ and $\beta\ne 0$. Since $\beta$ is the sum of $4ac-b^2$, $4af-d^2$, and $4cf-e^2$, these cannot all be zero, which justifies the definition of $\gamma$. Permute the coordinates $X$, $Y$, and $Z$ of $\A^3$ so that $\gamma$ is given by $4ac-b^2$ (for instance, if $\gamma=4af-d^2$, the permutation $[X,Y,Z]\mapsto[X,Z,Y]$ permutes these coefficients appropriately). Note that $\alpha$ and $\beta$ are invariant under such permutations. We proceed by further breaking into four cases depending on the entries of $A$, and explicitly diagonalizing $A$ in each case:
+		\textbf{Case 1: $\alpha=0$ and $\gamma=0$.}
+        
+\emph{Sub-case 1: $a\ne 0$.} Here we may write $c=b^2/4a$, $f=d^2/4a$, and $e=\pm bd/2a$. If $e=bd/2a$, then the \texttt{Magma} method \texttt{DiagonalForm()} shows that $A$ diagonalizes via
+\begin{equation*}
+\begin{bmatrix}
+1&0&0\\
+-d/2a&0&1\\
+-b/2a&1&0
+\end{bmatrix}^\top\!
+A
+\begin{bmatrix}
+1&0&0\\
+-d/2a&0&1\\
+-b/2a&1&0
+\end{bmatrix}
+=
+\begin{bmatrix}
+a&0&0\\
+0&0&0\\
+0&0&0
+\end{bmatrix}.
+\end{equation*}
+Thus, $A$ corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:1}. If $e=-bd/2a$, then a similar \texttt{Magma} computation shows that $A$ diagonalizes via
+\begin{equation*}
+\begin{bmatrix}
+1&0&0\\
+(-b-d)/2a&1&1\\
+(b-d)/4a&-1/2&1/2\\
+\end{bmatrix}^\top\!
+A
+\begin{bmatrix}
+1&0&0\\
+(-b-d)/2a&1&1\\
+(b-d)/4a&-1/2&1/2\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+a&0&0\\
+0&2e&0\\
+0&0&e/2
+\end{bmatrix}.
+\end{equation*}
+Thus, $A$ corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:1} if $e=0$ and to the final case otherwise.
 
-\emph{Case 1: $a\ne 0$.} Here the \texttt{Magma} method \texttt{DiagonalForm()} shows that $A$ diagonalizes via
+\emph{Sub-case 2: $a=0$ and $c\ne 0$.}  Here $b=d=0$, and a similar \texttt{Magma} computation shows that $A$ diagonalizes via
+\begin{equation*}
+\begin{bmatrix}
+0&1&0\\
+0&-e/2c&1\\
+1&0&0\\
+\end{bmatrix}^\top\!
+A
+\begin{bmatrix}
+0&1&0\\
+0&-e/2c&1\\
+1&0&0\\
+\end{bmatrix}
+=
+\begin{bmatrix}
+c&0&0\\
+0&0&0\\
+0&0&0\\
+\end{bmatrix}.
+\end{equation*}
+Thus, $A$ corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:1}.
+
+\emph{Sub-case 3: $a=c=0$.} Here $b=d=e=0$ as well, hence $A$ is given by
+\begin{equation*}
+\begin{bmatrix}
+0&0&0\\
+0&0&0\\
+0&0&f\\
+\end{bmatrix}
+\end{equation*}
+and corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:1}.
+
+		\textbf{Case 2: $\alpha=0$ and $\gamma\ne 0$.} Permute the coordinates $X$, $Y$, and $Z$ of $\A^3$ so that $\gamma$ is given by $4ac-b^2$ (for instance, if $\gamma=4af-d^2$, the permutation $[X,Y,Z]\mapsto[X,Z,Y]$ permutes these coefficients appropriately). Note that $\alpha$ is invariant under such permutations. We proceed by further breaking into four sub-cases depending on the entries of $A$, and explicitly diagonalizing $A$ in each case:
+
+\emph{Sub-case 1: $a\ne 0$.} Here a similar \texttt{Magma} computation shows that $A$ diagonalizes via
 		\begin{equation*}
 		\begin{bmatrix}
 		1 & -\dfrac{b}{2a} & \dfrac{be - 2cd}{4ac - b^2}\\
@@ -377,9 +428,9 @@
 		\end{equation*}
 		Scaling $X\mapsto aX$ and $Y\mapsto Y/2$ shows that this diagonal matrix corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:11} if $\gamma=4ac-b^2$ is a nonzero residue and to \eqref{case:1r} if it is not.
 
-        \emph{Case 2: $a=0$ and $c\ne 0$.} After permuting coordinates via $[X,Y,Z]\mapsto[Y,X,Z]$, the previous case applies with $\gamma$ unchanged.
-		
-		\emph{Case 3: $a=c=0$ and $f\ne 0$.} Here a similar \texttt{Magma} computation shows that $A$ diagonalizes via
+        \emph{Sub-case 2: $a=0$ and $c\ne 0$.} After permuting coordinates via $[X,Y,Z]\mapsto[Y,X,Z]$, the previous case applies with $\gamma$ unchanged.
+
+		\emph{Sub-case 3: $a=c=0$ and $f\ne 0$.} Here a similar \texttt{Magma} computation shows that $A$ diagonalizes via
 		\begin{equation*}
 		\begin{bmatrix}
 		0 & 0 & 1\\
@@ -401,7 +452,7 @@
 		\end{equation*}
 		Scaling $X\mapsto fX$ and $Y\mapsto(e/2)Y$ shows that this diagonal matrix corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:11} if $-1$ is a nonzero residue and to \eqref{case:1r} if it is not. In this case, the diagonalizing matrix $P$ is only well-defined if $e$ is nonzero as well, but this is clear as the condition $\alpha=0$ is equivalent to $bf=de$, and $b\ne 0$ as $\gamma=4ac-b^2=-b^2\ne 0$. Thus, $\gamma$ is a residue if and only if $-1$ is, which gives the desired result.
 
-\emph{Case 4: $a=c=f=0$.} Here either $d=0$ or $e=0$, and the same \texttt{Magma} computation shows that
+\emph{Sub-case 4: $a=c=f=0$.} Here either $d=0$ or $e=0$, and the same \texttt{Magma} computation shows that
 		\begin{equation*}
 		\begin{bmatrix}
 		1 & -1/2 & -e/b\\
@@ -444,7 +495,7 @@ when $d=0$ and
 when $e=0$.
 		In either case, scaling $Y\mapsto Y/2$ shows that the diagonal matrix corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:11} if $-1$ is a nonzero residue and to \eqref{case:1r} if it is not. As before, $\gamma$ is a residue if and only if $-1$ is, giving the desired result.
 
-		\textbf{Rank 3.} Lastly, $A$ has rank $3$ when $\alpha$ is nonzero; the final case of the theorem follows.
+		\textbf{Case 4: $\alpha\ne 0$.} Here, $A$ has rank $3$, so it corresponds to the final case.
 	\end{proof}
 	
 	We will also need an analogous result for quadratic forms $ax^2+bxy+cy^2$ in two variables, which follows immediately from the lemma by setting $d=e=f=0$:
