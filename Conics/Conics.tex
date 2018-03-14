@@ -20,6 +20,9 @@
 \usepackage{booktabs}
 \usepackage{centernot}
 
+\definecolor{zaffre}{rgb}{0.0, 0.08, 0.66}
+\hypersetup{colorlinks=true,allcolors=zaffre}
+
 %Environments
 \numberwithin{equation}{section} 
 \numberwithin{figure}{section}
@@ -586,22 +589,20 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 	These comments are summarized in Table \ref{table:all-possibilities}, which also gives examples over $\F_3$ for all the other combinations, showing that they are actually possible.
 	
 	\begin{table}[h]
-		\begin{tabular}{c|c|c|c|c|c}  \multicolumn{2}{c|}{} &
-			\multicolumn{4}{c}{\small{$|\widetilde{C}_0(\F_p)|$ (extraneous solutions)}}  \\ \hline
-			\small{rank of $\widetilde{C}$} & \small{$|\widetilde{C}(\F_p)|$} & $0$ & $1$ & $2$ & $p + 1$\\
-			\hline \hline
+		\begin{tabular}{cccccc}
+          \toprule
+ \multicolumn{2}{c}{} &
+			\multicolumn{4}{c}{$|\widetilde{C}_0(\F_p)|$}  \\\cmidrule(r){3-6}
+			rank of $\widetilde{C}$ & $|\widetilde{C}(\F_p)|$ & $0$ & $1$ & $2$ & $p + 1$\\
+			\midrule
 			$1$ & $p+1$ & N/A\textsuperscript{\eqref{case:NA(p+1)-0,2}} & $X^2$ & N/A\textsuperscript{\eqref{case:NA(p+1)-0,2}} & $Z^2$ \\
-			\hline
 			$2$ & $1$ & $X^2 + Y^2$ & $X^2 + Z^2$ & N/A\textsuperscript{\eqref{case:small-big}} & N/A\textsuperscript{\eqref{case:small-big}} \\
-			\hline
 			$2$ &	$2p+1$ & N/A\textsuperscript{\eqref{case:NA(2p+1)-0}} & $X^2 + XZ$ & $XY$ & $XZ$ \\
-			\hline
 			$3$ & $p+1$ & $X^2 + Y^2 + Z^2$ & $XZ+Y^2$ & $X^2 + 2Y^2 + Z^2$ & N/A\textsuperscript{\eqref{case:NA(p+1)-(p+1)}} \\
-			\hline
+			\bottomrule
 			\multicolumn{2}{c}{}
 		\end{tabular}
-		\caption{The entries marked ``N/A'' are impossible according to the reasoning above. For all other entries, examples are given for the specific case
-			$p=3$.}\label{table:all-possibilities}
+		\caption{Examples of projective conics $\widetilde{C}$ for the case $p=3$, along with their ranks, number of solutions $|\widetilde{C}(\F_p)|$ in $\P^2$, and number of extraneous solutions $|\widetilde{C}_0(\F_p)|$. The entries marked ``N/A\textsuperscript{($i$)}'' are impossible according to the reasoning in item ($i$) of the above list.}\label{table:all-possibilities}
 	\end{table}
 	
 	Now we give an explicit formula for $|C(\F_p)|$ in terms of the coefficients of $C$ and the prime $p$.
@@ -675,10 +676,10 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 		\begin{equation}\label{eq:diag-Q-conic}
 		aX^2 + bY^2 + cZ^2 = 0
 		\end{equation}
-		has a solution in $\P^2_\Q$. Then it has infinitely many such solutions.
+		has a solution in $\P^2_\Q$. Then it has infinitely many solutions.
 	\end{lem}
 	\begin{proof}
-		Suppose $[X:Y:Z]\in \P^2_\Q$ is a solution, and assume that $Z_0 \neq 0$. Then if we let $x_0 = X/Z$ and $y_0 = Y/Z$, the point $(x_0,y_0) \in \A^2_\Q$ is a solution to the affine conic
+		Suppose $[X:Y:Z]\in \P^2_\Q$ is a solution, and assume without loss of generality that $Z\neq 0$. Then if we let $x_0 = X/Z$ and $y_0 = Y/Z$, the point $(x_0,y_0) \in \A^2_\Q$ is a solution to the affine conic
 		\[
 		ax^2 + by^2 + c = 0.
 		\]
@@ -759,7 +760,7 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 	
 	We refer the reader to \cite[Thm.~6.7]{bilu} for a proof of the following formulation of Hensel's lemma.
 	\begin{lem}[Multivariate Hensel's lemma]\label{thm:hensels-one-eq}
-		Let $k$ be a nonnegative integer. Let $f \in \Z_p[x_1,\ldots,x_n]$ be a polynomial in $n$ variables and suppose $a = (a_1,\ldots,a_n)\in \Z_p^n$ satisfies $f(a) = 0 \bmod {p^{2k+1}}$ and $\frac{\partial f}{\partial x_i}(\gamma) \not\equiv 0 \bmod {p^{k+1}}$ for some $i\in \{1,\ldots,n\}$. Then there exists $\widetilde{a} \in \Z_p^n$ such that, for all $i$, $\widetilde{a}_i\equiv a_i \bmod {p^{2k+1}}$ and $f(\widetilde{a}) = 0$.
+		Let $k$ be a nonnegative integer. Let $f \in \Z_p[x_1,\ldots,x_n]$ be a polynomial in $n$ variables and suppose $a = (a_1,\ldots,a_n)\in \Z_p^n$ satisfies $f(a) = 0 \bmod {p^{2k+1}}$ and $\frac{\partial f}{\partial x_i}(a) \not\equiv 0 \bmod {p^{k+1}}$ for some $i\in \{1,\ldots,n\}$. Then there exists $\widetilde{a} \in \Z_p^n$ such that, for all $i$, $\widetilde{a}_i\equiv a_i \bmod {p^{2k+1}}$ and $f(\widetilde{a}) = 0$.
 	\end{lem}
 	To determine whether \eqref{eq:diag-squarefree-conic} has a solution in $\P^2_{\Q_p}$, we will make extensive use of this result. Note that, because the equation is homogeneous, existence of a solution over $\Q_p$ is the same as existence of a solution over $\Z_p$.
 	
@@ -865,7 +866,7 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 		@misc{bilu,
 			author={Yuri Bilu},
 			title={\href{https://www.math.u-bordeaux.fr/~abesheno/bilu.pdf}{$p$-adic numbers and Diophantine equations}},
-			year={September 29, 2014}
+			year={accessed September 29, 2014}
 		}
 		@misc{henselMO,
 			author={Will Sawin},
@@ -875,7 +876,7 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 		@book{vakil,
 			title={\href{http://math.stanford.edu/~vakil/216blog/index.html}{Foundations of Algebraic Geometry}},
 			author={Ravi Vakil},
-			year={December 29, 2015}
+			year={December 29, 2015 version}
 		}
 
 @book {serre,
