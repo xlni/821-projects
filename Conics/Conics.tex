@@ -681,13 +681,13 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 		\[
 		ax^2 + by^2 + c = 0.
 		\]
-		Let $q\in \Q$. Consider the line
+		Take $q\in \Q$ with $bq^2 \neq -a$. Consider the line
 		\[
 		\ell_q\colon y = q(x-x_0) + y_0
 		\]
-		of slope $q$ passing through $(x_0,y_0)$. Substituting this into the equation for the affine conic gives a quadratic in $x$ with rational coefficients, one of whose solutions is $x_0$ by construction. By Vieta's formulas, the other solution is also rational. Call it $x_q$, and let $y_q = q(x_q - x_0) + y_0$. Hence $(x_q,y_q)$ is also a rational solution to the conic. One can check that only value of $q$ for which $x_0 = x_q$ is $q = -ax_0 / by_0$, as this is when $\ell_q$ is tangent to the conic. Since the family of lines $\{\ell_q \mid q\in\Q\}$ intersect only at $(x_0,y_0)$, it follows that
+		of slope $q$ passing through $(x_0,y_0)$. Substituting this into the equation for the affine conic gives a quadratic in $x$ with rational coefficients, one of whose solutions is $x_0$ by construction. By Vieta's formulas, the other solution is also rational. Call it $x_q$, and let $y_q = q(x_q - x_0) + y_0$. Hence $(x_q,y_q)$ is also a rational solution to the conic. One can check that only value of $q$ for which $x_0 = x_q$ is $q = -ax_0 / by_0$, as this is when $\ell_q$ is tangent to the conic. Since the family of lines $\{\ell_q\}$ intersect only at $(x_0,y_0)$, it follows that
 		\[
-		\{(x_q,y_q) \mid q\in\Q\}
+		\{(x_q,y_q) \mid q\in\Q,\, bq^2 \neq -a\}
 		\]
 		is an infinite family of distinct solutions to the affine conic (thus giving an infinite family of solutions to the projective conic \eqref{eq:diag-Q-conic} as well).
 	\end{proof}
