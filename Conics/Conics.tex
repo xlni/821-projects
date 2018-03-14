@@ -448,51 +448,51 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 	\section{Counting solutions of a conic in $\P^2$}
 	\label{sec:proj-solutions}
 	
-	Now that we have diagonalized our conics to a more easily-analyzed form, we can
-	work on solving the projectivized conics, $\widetilde{C}$ and 
-	$\widetilde{C}_0$. We will treat the easier $\P^1$ case first.
+	In order to determine the number of points a conic $C$ has in $\A^2$, it suffices by Lemma \ref{lem:relate-solutions-affine-proj} to count the number of points on $\widetilde{C}\subset \P^2$ and $\widetilde{C}_0\subset \P^1$. In the preceding section, we showed that these projective conics are equivalent to certain representative forms. Now we compute the number of solutions of each.
+	
+	We will treat $\widetilde{C}_0$ first.
 	\begin{prop}[Counting Solutions in $\P^1$]
 		\label{prop:counting-P1-solutions}
-		Fix a prime $p$ and let $r$ be a nonresidue. When diagonalized,
-		$\widetilde{C}_0$ has one of the following forms:
+		Let $r\in \F_p$ be a nonresidue. Then $\widetilde{C}_0$ is equivalent to one of the following over $\F_p$:
 		\begin{enumerate}
 			\item \label{case:0} $0 = 0$, with $p+1$ solutions.
-			\item $X^2 = 0$, with $1$ solution, namely $[0:1]$.
+			\item $X^2 = 0$, with $1$ solution.
 			\item \label{case:x^2+y^2=0} $X^2 + Y^2 = 0$, with 
 			$1 + \legendre{-1}{p}$ solutions.
 			\item $X^2 + rY^2 = 0$, with 
 			$1 - \legendre{-1}{p}$ solutions.
-		\end{enumerate}    
+		\end{enumerate}
 	\end{prop}
 	\begin{proof}
-		The first and second cases are clear; note that $|\P^1| = p+1$.
+		$\widetilde{C}_0$ being equivalent to one of the four cases is just a restatement of Corollary~\ref{cor:diag-P1}.
 		
-		In the other two cases, $Y$ must be nonzero. We can write them as
+		In the first case, every point in $\P^1$ is a solution, and $|\P^1| = p+1$. In the second case, $[0:1]$ is the only solution.
+		
+		In the other two cases, a solution must have nonzero $Y$. We can write the equations as
 		$(X/Y)^2 = -1$ and $(X/Y)^2 = -r$ respectively. If $-1$ is a residue,
 		then $-r$ is not. It follows that $X^2 + Y^2 = 0$ has two solutions and $X^2 +
 		rY^2 = 0$ has none. If $-1$ is a nonresidue, the situation is reversed: $X^2 +
 		Y^2 = 0$ has no solutions and $X^2 + rY^2 = 0$ has two solutions.
 	\end{proof}
 	
-	Now, let us treat the $\P^2$ case.
+	Now we do a similar analysis for $\widetilde{C}$.
 	
 	\begin{prop}[Counting Solutions in $\P^2$]
 		\label{prop:counting-P2-solutions}
-		Fix a prime and let $r$ be a nonresidue. When diagonalized $\widetilde{C}$ 
-		has one of the following forms:
+		Let $r\in \F_p$ be a nonresidue. Then $\widetilde{C}$ is equivalent to one of the following over $\F_p$:
 		\begin{enumerate} 
 			\item\label{case:rank1_x^2=0} $X^2 = 0$, with $p+1$ solutions.
 			\item\label{case:rank2_x^2+y^2=0} $X^2 + Y^2 = 0$, with
 			$p(1+\legendre{-1}{p}) + 1$ solutions.
 			\item\label{case:rank2_x^2+ry^2=0} $X^2 + rY^2 = 0$, with
-			$p(1+\legendre{-1}{p}) - 1$ solutions.
-			\item\label{case:rank3_x^2+y^2+z^2=0} $X^2 + Y^2 + Z^2 = 0$ has $p+1$ solutions.
-			\item\label{case:rank3_x^2+y^2+rz^2=0} $X^2 + Y^2 + rZ^2 = 0$ has $p+1$ solutions.
+			$p(1-\legendre{-1}{p}) + 1$ solutions.
+			\item\label{case:rank3_x^2+y^2+z^2=0} $X^2 + Y^2 + Z^2 = 0$, with $p+1$ solutions.
+			\item\label{case:rank3_x^2+y^2+rz^2=0} $X^2 + Y^2 + rZ^2 = 0$, with $p+1$ solutions.
 		\end{enumerate}
-		Note that the first three equations have $p$ times plus $1$ the number
-		of solutions of the corresponding equation in Proposition~\ref{prop:counting-P1-solutions}.
+		In particular, if $\widetilde{C}$ is nondegenerate (i.e. has rank 3), it has $p+1$ solutions.
 	\end{prop}
-	\begin{proof} We treat the cases by rank.
+	\begin{proof}
+		$\widetilde{C}$ being equivalent to one of the five cases is just a restatement of Corollary~\ref{cor:sixcases}. We treat the cases by rank.
 		
 		\noindent
 		\textit{Rank 1: \eqref{case:rank1_x^2=0}.} 
@@ -568,47 +568,43 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 		p - \legendre{-1}{p}. \qedhere \] 
 	\end{proof}
 	
-	\begin{example}[A zoo of possibilities]
-		\label{exa:all-possibilities}
-		
-		In the table below, the first two columns reflect the discussion
-		immediately preceding. The remaining columns consider the number of extraneous
-		solutions. The entries marked ``N/A'' are impossible and explanation is given
-		afterwards. For all other entries, examples are given for the specific case
-		$p=3$.  
-		\begin{center}
-			\begin{tabular}{c|c|c|c|c|c}  \multicolumn{2}{c|}{} &
-				\multicolumn{4}{c}{sol. in $\{Z=0\}$}  \\ \hline
-				rank of proj. & sol. in $\mathbb{P}^2$ & $0$ & $1$ & $2$ & $p + 1$\\
-				\hline \hline
-				$1$ & $p+1$ & \emph{N/A}\textsuperscript{\ref{case:NA(p+1)-0,2}} & $X^2$ & \emph{N/A}\textsuperscript{\ref{case:NA(p+1)-0,2}} & $Z^2$ \\
-				\hline
-				$2$ & $1$ & $X^2 + Y^2$ & $X^2 + Z^2$ & \emph{N/A} & \emph{N/A} \\
-				\hline
-				$2$ &	$2p+1$ & \emph{N/A}\textsuperscript{\ref{case:NA(2p+1)-0}} & $X^2 + XZ$ & $XY$ & $XZ$ \\
-				\hline
-				$3$ & $p+1$ & $X^2 + Y^2 + Z^2$ & $XZ+Y^2$ & $X^2 + 2Y^2 + Z^2$ & \emph{N/A}\textsuperscript{\ref{case:NA(p+1)-(p+1)}} \\
-				\hline
-			\end{tabular}
-		\end{center} 
-		\begin{enumerate}
-			\item\label{case:NA(p+1)-0,2} When the projectivization has rank 1, it is a double line. If this
-			line is distinct from $\{Z = 0\}$, they meet at exactly one point. 
-			Otherwise they are the same line, giving $p+1$ solutions in $\{Z=0\}$. 
-			\item\label{case:NA(2p+1)-0} When the projectivization has rank 2 and has $2p + 1$ solutions, it
-			is the union of two intersecting lines. These lines cannot be disjoint 
-			from $\{Z=0\}$.
-			\item\label{case:NA(p+1)-(p+1)} There are $p+1$ solutions in $\{Z = 0\}$ only when the 
-			coefficients $a,b,c$ are all zero. In particular, such a conic cannot 
-			have a projectivization of rank 3.
-		\end{enumerate} 
-	\end{example}
-	
 	\section{Counting solutions of a conic in $\A^2$}
 	\label{sec:affine-solutions}
 	
 	We can now use Lemma \ref{lem:relate-solutions-affine-proj} to combine the
-	results from the previous two sections into our main theorem.
+	results from the previous two sections into a statement about solutions in $\A^2$. Proposition \ref{prop:counting-P2-solutions} tells us that the projectivized conic $\widetilde{C}$ has $1$, $p+1$, or $2p+1$ solutions in total. Proposition \ref{prop:counting-P1-solutions} says that $0$, $1$, $2$, or $p+1$ of these solutions are extraneous, in that they lie ``at infinity'' in the projective plane and should be deducted from the total in order to determine the number of solutions in $\A^2$.
+	
+	However, not all combinations of the above are possible---we cannot have one solution to $\widetilde{C}$ but two solutions to $\widetilde{C}_0$, for example. The following observations eliminate some more cases:
+	\begin{enumerate}
+		\item\label{case:small-big} Any case where $|\widetilde{C}_0(\F_p)| > |\widetilde{C}(\F_p)|$ is obviously impossible.
+		\item\label{case:NA(p+1)-0,2} When $\widetilde{C}$ has rank 1, it is given by an equation of the form $L^2 = 0$, where $L$ is linear in $X,Y,Z$. If $\{L=0\}$ coincides with $\{Z = 0\}$, then $p+1$ solutions are extraneous. Otherwise, $\{L=0\}$ and $\{Z=0\}$ intersect at one point, so there is one extraneous solution.
+		\item\label{case:NA(2p+1)-0} When $\widetilde{C}$ has rank 2 and has $2p + 1$ solutions, it
+		is given by an equation of the form $L_1 L_2 = 0$ where $L_1,L_2$ are linear in $X,Y,Z$ and are not multiples of each other. The solution set to $\widetilde{C}$ is $\{L_1 = 0\}\cup\{L_2 = 0\}$, and necessarily intersects $\{Z = 0\}$.
+		\item\label{case:NA(p+1)-(p+1)} There are $p+1$ solutions in $\{Z = 0\}$ only when the 
+		coefficients $a,b,c$ are all zero. This cannot happen when $\widetilde{C}$ has rank 3.
+	\end{enumerate}
+	These comments are summarized in Table \ref{table:all-possibilities}, which also gives examples over $\F_3$ for all the other combinations, showing that they are actually possible.
+	
+	\begin{table}[h]
+		\begin{tabular}{c|c|c|c|c|c}  \multicolumn{2}{c|}{} &
+			\multicolumn{4}{c}{\small{$|\widetilde{C}_0(\F_p)|$ (extraneous solutions)}}  \\ \hline
+			\small{rank of $\widetilde{C}$} & \small{$|\widetilde{C}(\F_p)|$} & $0$ & $1$ & $2$ & $p + 1$\\
+			\hline \hline
+			$1$ & $p+1$ & N/A\textsuperscript{\eqref{case:NA(p+1)-0,2}} & $X^2$ & N/A\textsuperscript{\eqref{case:NA(p+1)-0,2}} & $Z^2$ \\
+			\hline
+			$2$ & $1$ & $X^2 + Y^2$ & $X^2 + Z^2$ & N/A\textsuperscript{\eqref{case:small-big}} & N/A\textsuperscript{\eqref{case:small-big}} \\
+			\hline
+			$2$ &	$2p+1$ & N/A\textsuperscript{\eqref{case:NA(2p+1)-0}} & $X^2 + XZ$ & $XY$ & $XZ$ \\
+			\hline
+			$3$ & $p+1$ & $X^2 + Y^2 + Z^2$ & $XZ+Y^2$ & $X^2 + 2Y^2 + Z^2$ & N/A\textsuperscript{\eqref{case:NA(p+1)-(p+1)}} \\
+			\hline
+			\multicolumn{2}{c}{}
+		\end{tabular}
+		\caption{The entries marked ``N/A'' are impossible according to the reasoning above. For all other entries, examples are given for the specific case
+			$p=3$.}\label{table:all-possibilities}
+	\end{table}
+	
+	Now we give an explicit formula for $|C(\F_p)|$ in terms of the coefficients of $C$ and the prime $p$.
 	
 	\begin{thm}[Counting Solutions in $\A^2$]
 		\label{thm:main-thm}
@@ -662,31 +658,58 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 	We remark that while the expression for $|C(\F_p)|$ given above appears complicated, it is easily computable. The only parts that may be non-obvious are the Legendre symbols, but with tools such as the law of quadratic reciprocity, these too are readily determined.
 	
 	\section{Rational Solutions in $\P^2$}\label{sec:rational-soln}
-	Until now, we have been concerned with the number of solutions our conic $C$ has over $\F_p$. Next we will study solutions over the rationals $\Q$. 
-	We will only ask about existence, but even so, the classification and analysis of the preceding sections will still be helpful.
+	We have shown how to determine the number of solutions to a conic in $\P^2_{\F_p}$. In this section, we will lay out a procedure to do the same in $\P^2_\Q$. Despite being primarily concerned with the rationals, our analysis of solutions over $\F_p$ will still play a role. Moreover, in the course of proving Theorem \ref{thm:rational-solutions}, we obtain criteria for the existence of solutions in the $p$-adics as well.
 	
-	Our goal is to lay out a procedure that can determine whether an arbitrary conic has a solution in $\P^2$ over $\Q$. First, by the methods of \S\ref{sec:diagonalizing-quadratic-forms}, we may perform a change of basis so that our conic is given by an equation
+	Given a conic, we may perform a change of basis so that it has the equation
 	\[
-		aX^2 + bY^2 + cZ^2 = 0.
+	aX^2 + bY^2 + cZ^2 = 0
 	\]
-	If one of these coefficients is zero, say $c$, then we are done: $[0:0:1]$ is a rational solution. So hereafter we assume that $abc\neq 0$. We are able to scale the entire equation by any nonzero constant without altering its solution set, and we are also able to scale individual coefficients by nonzero squares without affecting the existence of solutions. Using these observations, we can assume that $abc$ is square-free, in the sense that $p^2\ndiv abc$ for all $p$.
+	where at least one coefficient is nonzero, using the methods of \S\ref{sec:diagonalizing-quadratic-forms}.
+	
+	Let us first consider the degenerate cases where one or two of the coefficients are zero. If $b=c=0$ then there are infinitely many rational solutions.
+	If instead only $c$ is zero, then the conic becomes $aX^2 + bY^2 = 0$. Thus if $-ab$ has a rational square root, the conic has infinitely many rational solutions. Otherwise it has only the solution $[0:0:1]$.
+	
+	Having addressed the degenerate cases, hereafter we assume that $abc\neq 0$.
+	\begin{lem}\label{lem:infinitely-many-Q-soln}
+		Suppose $a,b,c$ are nonzero rational numbers and
+		\begin{equation}\label{eq:diag-Q-conic}
+		aX^2 + bY^2 + cZ^2 = 0
+		\end{equation}
+		has a solution in $\P^2_\Q$. Then it has infinitely many such solutions.
+	\end{lem}
+	\begin{proof}
+		Suppose $[X:Y:Z]\in \P^2_\Q$ is a solution, and assume that $Z_0 \neq 0$. Then if we let $x_0 = X/Z$ and $y_0 = Y/Z$, the point $(x_0,y_0) \in \A^2_\Q$ is a solution to the affine conic
+		\[
+		ax^2 + by^2 + c = 0.
+		\]
+		Let $q\in \Q$. Consider the line
+		\[
+		\ell_q\colon y = q(x-x_0) + y_0
+		\]
+		of slope $q$ passing through $(x_0,y_0)$. Substituting this into the equation for the affine conic gives a quadratic in $x$ with rational coefficients, one of whose solutions is $x_0$ by construction. By Vieta's formulas, the other solution is also rational. Call it $x_q$, and let $y_q = q(x_q - x_0) + y_0$. Hence $(x_q,y_q)$ is also a rational solution to the conic. One can check that only value of $q$ for which $x_0 = x_q$ is $q = -ax_0 / by_0$, as this is when $\ell_q$ is tangent to the conic. Since the family of lines $\{\ell_q \mid q\in\Q\}$ intersect only at $(x_0,y_0)$, it follows that
+		\[
+		\{(x_q,y_q) \mid q\in\Q\}
+		\]
+		is an infinite family of distinct solutions to the affine conic (thus giving an infinite family of solutions to the projective conic \eqref{eq:diag-Q-conic} as well).
+	\end{proof}
+	This shows that the conic \eqref{eq:diag-Q-conic} has either infinitely many rational solutions, or none at all. The question now reduces to existence. Note that we are able to scale \eqref{eq:diag-Q-conic} by any nonzero constant without altering its solution set, and we are also able to scale individual coefficients by nonzero squares without affecting the existence of solutions. Using these observations, we can assume that $abc$ is square-free, in the sense that $p^2\ndiv abc$ for all $p$.
 	
 	We make this a bit more precise. Given a prime $p$, a nonzero rational number $q$ can be uniquely expressed as $p^{\nu_p(q)}\frac{m}{n}$ where $\nu_p(q),m,n\in\Z$ and $p\ndiv m,n$. The number $\nu_p(q)$ is the \emph{$p$-adic valuation} of $q$.
 	
 	Define
 	\[
-		t_p(a) = \begin{cases}
-			1 & \text{if } \nu_p(a)\not\equiv\nu_p(b)\equiv\nu_p(c)\bmod 2,\\
-			0 & \text{otherwise,}
-		\end{cases}
+	t_p(a) = \begin{cases}
+	1 & \text{if } \nu_p(a)\not\equiv\nu_p(b)\equiv\nu_p(c)\bmod 2,\\
+	0 & \text{otherwise,}
+	\end{cases}
 	\]
 	with $t_p(b)$ and $t_p(c)$ defined analogously. Then if we set
-	\begin{align*}
-		a' = \frac{|a|}{a}\prod_{p \text{ prime}} p^{t_p(a)}
-	\end{align*}
+	\begin{equation}\label{eq:t_p-squarefree}
+	a' = \frac{|a|}{a}\prod_{p \text{ prime}} p^{t_p(a)}
+	\end{equation}
 	and likewise for $b'$ and $c'$, the conic
 	\[
-		a'X^2 + b'Y^2 + c'Z^2 = 0
+	a'X^2 + b'Y^2 + c'Z^2 = 0
 	\]
 	is equivalent to our original conic. This new conic has the property that $a',b',c'\in \Z$ and $a'b'c'$ is a nonzero, square-free integer.
 	
@@ -694,26 +717,19 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 	\begin{thm}[Existence of Rational Solutions]\label{thm:rational-solutions}
 		Let $a,b,c$ be nonzero integers such that $p^2 \ndiv abc$ for all primes $p$. Then the equation
 		\begin{equation}\label{eq:diag-squarefree-conic}
-			aX^2 + bY^2 + cZ^2 = 0
+		aX^2 + bY^2 + cZ^2 = 0
 		\end{equation}
 		has a solution in $\P^2_\Q$ exactly when all of the following conditions are met.
 		\begin{enumerate}
 			\item\label{cond:real-soln} At least one of $a,b,c$ is positive, and at least one is negative.
 			\item\label{cond:Qp-soln} For all primes $p>2$ dividing $c$, $\legendre{-ab}{p} = 1$. The analogous conditions for primes $p>2$ dividing $a$ or $b$ are required as well.
-			\item\label{cond:Q2-soln} We can perform a $2$-adic lift of this conic; that
-			is, the coresponding conic in Table \ref{table:Q2-diag-conics} has a solution 
-			in $\P^2_{\Q_2}$.\footnote{This condition will be explained in Lemma 
-			\ref{lem:squares-in-Q2}. Unfortunately, the case $p=2$ is pathological,
-			and requires special treatment.}
+			\item\label{cond:Q2-soln} Over the $2$-adics, the coresponding conic in Table \ref{table:Q2-diag-conics} has a solution. (This condition will be explained below; see also Lemma 
+			\ref{lem:squares-in-Q2}.)
 		\end{enumerate}
+		Moreover, if \eqref{eq:diag-squarefree-conic} has a solution in $\P^2_\Q$, then it has infinitely many such solutions.
 	\end{thm}
-	We prove this theorem through a sequence of lemmas. In particular, we will verify
-	existence of solutions in $\R$, the $p$-adic numbers $\Q_p$ for $p$ odd, and $\Q_2$.
-	We can then apply the Hasse--Minkowski theorem, which states that a homogeneous quadratic
-	has a solution in $\P^n_\Q$ if and only if it has a solution in $\P^n_K$ for 
-	every completion $K$ of $\Q$, namely, $\R$ and $\Q_p$ for $p$ prime.
-	We will use the case $n=2$. As noted above, the case $K = \Q_2$ is treated separately, 
-	for technical reasons.
+	The last claim is just a restatement of Lemma \ref{lem:infinitely-many-Q-soln}.
+	We prove this theorem through a sequence of lemmas. The overall strategy is guided by the Hasse--Minkowski theorem, which states that a homogeneous quadratic has a solution in $\P^n_\Q$ if and only if it has a solution in $\P^n_K$ for every completion $K$ of $\Q$. These completions are the reals $\R$ and the $p$-adics $\Q_p$ for each prime $p$, which we define below.
 	
 	The case $K=\R$ is easy. A necessary and sufficient condition for a solution 
 	to \eqref{eq:diag-squarefree-conic} in $\P^2_\R$ is given by 
@@ -741,7 +757,7 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 	\end{defn}
 	Since the units in $\Z_p$ are the elements with $b_0 \neq 0$, constructing $\Q_p$ amounts to inverting $p$ in $\Z_p$. Thus elements of $\Q_p$ can also be interpreted as series, though they are allowed to start from negative powers of $p$.
 	
-	We refer the reader to \cite{henselMO} for a proof of the following formulation of Hensel's lemma. \textcolor{blue}{[still need to do something about this reference maybe]}
+	We refer the reader to \cite[Thm.~6.7]{bilu} for a proof of the following formulation of Hensel's lemma.
 	\begin{lem}[Multivariate Hensel's lemma]\label{thm:hensels-one-eq}
 		Let $k$ be a nonnegative integer. Let $f \in \Z_p[x_1,\ldots,x_n]$ be a polynomial in $n$ variables and suppose $a = (a_1,\ldots,a_n)\in \Z_p^n$ satisfies $f(a) = 0 \bmod {p^{2k+1}}$ and $\frac{\partial f}{\partial x_i}(\gamma) \not\equiv 0 \bmod {p^{k+1}}$ for some $i\in \{1,\ldots,n\}$. Then there exists $\widetilde{a} \in \Z_p^n$ such that, for all $i$, $\widetilde{a}_i\equiv a_i \bmod {p^{2k+1}}$ and $f(\widetilde{a}) = 0$.
 	\end{lem}
@@ -754,53 +770,50 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 	\begin{proof}
 		We will apply Hensel's lemma with $k=0$. By Proposition \ref{prop:counting-P2-solutions}, \eqref{eq:diag-squarefree-conic} has $p+1$ solutions in $\P^2_{\F_p}$. The condition on partial derivatives is automatically satisfied: for any $[X:Y:Z]\in \P^2$ one of $X,Y,Z$ is nonzero, and thus one of $2aX, 2bY, 2cZ$ is as well. Hence any of the solutions over $\F_p$ can be lifted via Hensel's lemma to a solution over $\Q_p$.
 	\end{proof}
-
-    Otherwise, if $p\mid abc$, then $p$ divides either $a$, $b$, or $c$. We treat the last case; the other two cases are analogous.
-
+	
+	Otherwise, if $p\mid abc$, then $p$ divides either $a$, $b$, or $c$. We treat the last case; the other two cases are analogous.
+	
 	\begin{lem}
 		With the setup of Theorem \ref{thm:rational-solutions}, suppose $p > 2$ is a prime dividing $c$. Then \eqref{eq:diag-squarefree-conic} has a solution in $\P^2_{\Q_p}$ if and only if $\legendre{-ab}{p}=1$ (condition \eqref{cond:Qp-soln} of Theorem \ref{thm:rational-solutions}).
 	\end{lem}
 	\begin{proof}
 		When we reduce mod $p$, \eqref{eq:diag-squarefree-conic} becomes
 		\begin{equation}\label{eq:p|abc-modp}
-			aX^2 + bY^2 \equiv 0 \bmod p
+		aX^2 + bY^2 \equiv 0 \bmod p
 		\end{equation}
 		If $\legendre{-ab}{p}=1$, then take $s\in \F_p$ such that $s^2 = -ab$, and $[s:a:0]$ is a solution satisfying the hypotheses of Hensel's lemma with $k=0$. Thus \eqref{eq:diag-squarefree-conic} has a solution over $\Z_p$ in this case.
 		
 		Suppose instead that $\legendre{-ab}{p}=-1$. For the sake of contradiction, assume a solution $[X:Y:Z]$ existed over $\Q_p$. By scaling as needed, we can assume that $X,Y,Z\in \Z_p$ and not all of them are divisible by $p$. Since $-ab$ is a nonresidue, \eqref{eq:p|abc-modp} entails $X,Y \equiv 0 \bmod p$ (c.f. \S\ref{sec:proj-solutions}). Then we can write
 		\[
-			ap^2 (X/p)^2 + bp^2 (Y/p)^2 + cZ^2 = 0
+		ap^2 (X/p)^2 + bp^2 (Y/p)^2 + cZ^2 = 0
 		\]
 		but we assumed that $p^2\ndiv c$, so this implies $p|Z$ and we have a contradiction.
 	\end{proof}
 	This leaves only the case $K = \Q_2$ to consider. The situation is more contrived here,
-	 and it is responsible for the contrived final condition of Theorem 
-	 \ref{thm:rational-solutions}. We'll need the following characterization of squares
-	 in $\Q_2$.
+	and it is responsible for the final condition of Theorem 
+	\ref{thm:rational-solutions}. We'll need the following characterization of squares
+	in $\Q_2$.
 	
 	\begin{lem}\label{lem:squares-in-Q2}
 		Let
 		\[
-			a = 2^{2m + i}(1 + j\cdot 2 + k \cdot 4+ \cdots)
+		a = 2^{2m + i}(1 + j\cdot 2 + k \cdot 4+ \cdots)
 		\]
 		where $m$ is an integer and each of $i,j,k$ is either 0 or 1. Define
 		\[
-			\bar{a} = 2^i 3^j 5^k.
+		\bar{a} = 2^i 3^j 5^k.
 		\]
 		Then $a/\bar{a}$ is a square in $\Q_2$.
 	\end{lem}
 	\begin{proof}
 		We claim that if $s\in \Z_2$ is congruent to $1\bmod 8$, then it is a square. Consider the equation $x^2 - s=0$. Applying Hensel's lemma with $k=1$ to the solution $x = 1$ shows that it can be lifted to a solution in $\Z_2$ as desired.
-		By checking each case for $j$ and $k$, one sees that $2^{-2m} a/\bar{a} \equiv 1 \bmod 8$; it follows that $a/\bar{a}$ is a square.
+		By checking each case for $j$ and $k$, one sees that $2^{-2m} a/\bar{a} \equiv 1 \bmod 8$, from which it follows that $a/\bar{a}$ is a square.
 	\end{proof}
-	Using this lemma and the reasoning at the start of this section, we can scale \eqref{eq:diag-squarefree-conic} over $\Q_2$ so that $abc$ is square free. The result will be one of the equations listed in Table \ref{table:Q2-diag-conics}. Many of these have solutions mod 8 which can be lifted using Hensel's lemma (where we use $k=1$). The other ones do not, and the claim is that they have no solutions over $\Q_2$.
-	
-	We prove this claim for the equation $X^2 + Y^2 + Z^2 = 0$ and omit the rest (which are similar). Suppose a solution $[X:Y:Z]$ existed over $\Q_2$. We can assume that $X,Y,Z\in \Z_2$ and that not all of them are divisible by 2. However, 1 is the only odd residue mod 8, from which it is easy to check that $X^2 + Y^2 + Z^2 = 0$ has no such solutions mod 8 (let alone such a solution over $\Z_2$).
 	\begin{table}[h]
 		\begin{tabular}{r@{\hskip 18pt}l}
-            \toprule
+			\toprule
 			Equation & Solution in $\P^2_{\Q_2}$\\
-            \midrule
+			\midrule
 			$X^2 + Y^2 + Z^2 = 0$ & No \\ 
 			$2X^2 + Y^2 + Z^2 = 0$ & No \\ 
 			$3X^2 + Y^2 + Z^2 = 0$ & Yes, lift $[1:1:2]$ \\ 
@@ -821,9 +834,12 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 		\end{tabular}
 		
 		\caption{An exhaustive list of representative conics over $\Q_2$. Here, ``lift'' means to apply Hensel's lemma with $k=1$ to the specified mod 8 solution.}
-		 \label{table:Q2-diag-conics}
+		\label{table:Q2-diag-conics}
 	\end{table}
-
+	Thus we can scale the coordinates of \eqref{eq:diag-squarefree-conic} over $\Q_2$ so that the coefficients each have the form $2^i 3^j 5^k$ as in the lemma. Then, using \eqref{eq:t_p-squarefree}, we can make their product square-free. The result will be one of the equations listed in Table \ref{table:Q2-diag-conics}. Many of these have solutions mod 8 which can be lifted using Hensel's lemma (where we use $k=1$). The other ones do not, and the claim is that they have no solutions over $\Q_2$.
+	
+	We prove this claim for the equation $X^2 + Y^2 + Z^2 = 0$ and omit the rest (which are similar). Suppose a solution $[X:Y:Z]$ existed over $\Q_2$. We can assume that $X,Y,Z\in \Z_2$ and that not all of them are divisible by 2. However, 1 is the only odd residue mod 8, from which it is easy to check that $X^2 + Y^2 + Z^2 = 0$ has no such solutions mod 8 (let alone such a solution over $\Z_2$).
+	
 	With the question of $p=2$ settled, this concludes the proof of Theorem \ref{thm:rational-solutions}. We comment that the powerful machinery of Hilbert symbols can be used to deduce the same result, and we leave this to the curious reader to verify.
 	\begin{filecontents}{references.bib}
 		@book {omeara,
@@ -845,6 +861,11 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 			volume={24},
 			year={1997},
 			pages={235--265}
+		}
+		@misc{bilu,
+			author={Yuri Bilu},
+			title={\href{https://www.math.u-bordeaux.fr/~abesheno/bilu.pdf}{$p$-adic numbers and Diophantine equations}},
+			year={September 29, 2014}
 		}
 		@misc{henselMO,
 			author={Will Sawin},
