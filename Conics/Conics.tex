@@ -448,7 +448,7 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 		The discussion in this section suggests a definition for a \emph{degenerate} conic over $\F_p$: they should be the conics whose corresponding quadratic form is degenerate, or equivalently, whose corresponding matrix is singular.
 	\end{rem*}
 	
-	\section{Counting solutions of a conic in $\P^2$}
+	\section{Projective solutions modulo $p$}
 	\label{sec:proj-solutions}
 	
 	In order to determine the number of points a conic $C$ has in $\A^2$, it suffices by Lemma \ref{lem:relate-solutions-affine-proj} to count the number of points on $\widetilde{C}\subset \P^2$ and $\widetilde{C}_0\subset \P^1$. In the preceding section, we showed that these projective conics are equivalent to certain representative forms. Now we compute the number of solutions of each.
@@ -568,7 +568,7 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 		p - \legendre{-1}{p}. \qedhere \] 
 	\end{proof}
 	
-	\section{Counting solutions of a conic in $\A^2$}
+	\section{Affine solutions modulo $p$}
 	\label{sec:affine-solutions}
 	
 	We can now use Lemma \ref{lem:relate-solutions-affine-proj} to combine the
@@ -655,7 +655,8 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 	
 	We remark that while the expression for $|C(\F_p)|$ given above appears complicated, it is easily computable. The only parts that may be non-obvious are the Legendre symbols, but with tools such as the law of quadratic reciprocity, these too are readily determined.
 	
-	\section{Rational Solutions in $\P^2$}\label{sec:rational-soln}
+	\section{Projective rational solutions}
+	\label{sec:rational-soln}
 	We have shown how to determine the number of solutions to a conic in $\P^2_{\F_p}$. In this section, we will lay out a procedure to do the same in $\P^2_\Q$. Despite being primarily concerned with the rationals, our analysis of solutions over $\F_p$ will still play a role. Moreover, in the course of proving Theorem \ref{thm:rational-solutions}, we obtain criteria for the existence of solutions in the $p$-adics as well.
 	
 	Given a conic, we may perform a change of basis so that it has the equation
