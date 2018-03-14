@@ -498,25 +498,22 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 		$\widetilde{C}$ being equivalent to one of the five cases is just a restatement of Corollary~\ref{cor:sixcases}. We treat the cases by rank.
 		
 		\noindent
-		\textit{Rank 1: \eqref{case:rank1_x^2=0}.} 
+		\textbf{Rank 1: \eqref{case:rank1_x^2=0}.}
 		The equations $X^2 = 0$ and $rX^2 = 0$ each have $|\P^1|=p + 1$ solutions.
 		
 		\noindent
-		\textit{Rank 2: \eqref{case:rank2_x^2+y^2=0} and \eqref{case:rank2_x^2+ry^2=0}.} 
-		The only solution with $Y=0$ is $[0:0:1]$. So assume $Y \neq 0$, and rewrite the 
-		equations as $(X/Y)^2 = -1$ and $(X/Y)^2 = -r$ respectively.
+		\textbf{Rank 2: \eqref{case:rank2_x^2+y^2=0} and \eqref{case:rank2_x^2+ry^2=0}.} 
+		If $-1$ is a residue, pick $s\in \F_p$ with $s^2 = -1$. The equation $X^2 + Y^2 = 0$ factors as
+		\[
+			(X + sY)(X - sY) = 0
+		\]
+		and thus its solution set is the union of two lines: $\{X + sY = 0\} \cup \{X - sY = 0\}$. Each line has $p+1$ points, and they intersect at the point $[0:0:1]$. Hence there are $2p+1$ solutions to $X^2 + Y^2 = 0$. On the other hand, $-r$ is a nonresidue, so $X^2 + rY^2 = 0$ has only the solution $[0:0:1]$.
 		
-		Suppose $-1$ is a residue. The equation $(X/Y)^2 = -1$ gives
-		two possibilities for $X/Y$, and thus $2p$ solutions in $\P^2$. Hence
-		$X^2 + Y^2 = 0$ has $2p + 1$ solutions in total. On the other hand, $(X/Y)^2 =
-		-r$ has no solutions, meaning $[0:0:1]$ is the only solution to $X^2 + rY^2 =
-		0$.
-		
-		If $-1$ is a nonresidue, the situation is reversed, and $X^2 + Y^2 = 0$ has one
-		solution while $X^2 + rY^2 = 0$ has $2p + 1$ solutions.
+		If $-1$ is a nonresidue (meaning $-r$ is a residue), the situation is reversed: $X^2 + Y^2 = 0$ has one
+		solution while $X^2 + rY^2 = 0$ factors into two lines and has $2p + 1$ solutions.
 		
 		\noindent
-		\textit{Rank 3: \eqref{case:rank3_x^2+y^2+z^2=0} and \eqref{case:rank3_x^2+y^2+rz^2=0}.} 
+		\textbf{Rank 3: \eqref{case:rank3_x^2+y^2+z^2=0} and \eqref{case:rank3_x^2+y^2+rz^2=0}.} 
 		Suppose $-1$ is a residue. If $Z = 0$, then we are in the setting of case \eqref{case:x^2+y^2=0} of
 		Proposition \ref{prop:counting-P1-solutions}, which has two
 		solutions. Otherwise, we can divide by $Z^2$ and obtain 
@@ -575,7 +572,7 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 	\label{sec:affine-solutions}
 	
 	We can now use Lemma \ref{lem:relate-solutions-affine-proj} to combine the
-	results from the previous two sections into a statement about solutions in $\A^2$. Proposition \ref{prop:counting-P2-solutions} tells us that the projectivized conic $\widetilde{C}$ has $1$, $p+1$, or $2p+1$ solutions in total. Proposition \ref{prop:counting-P1-solutions} says that $0$, $1$, $2$, or $p+1$ of these solutions are extraneous, in that they lie ``at infinity'' in the projective plane and should be deducted from the total in order to determine the number of solutions in $\A^2$.
+	results from the previous two sections into a statement about solutions in $\A^2$. Proposition \ref{prop:counting-P2-solutions} tells us that the projectivized conic $\widetilde{C}$ has $1$, $p+1$, or $2p+1$ solutions in total. Proposition \ref{prop:counting-P1-solutions} says that $0$, $1$, $2$, or $p+1$ of these correspond to points of $\widetilde{C}\cap \{Z = 0\} = \widetilde{C}_0$ and are extraneous, in that they lie ``at infinity'' in the projective plane. These need to be deducted from the total in order to determine the number of solutions in $\A^2$.
 	
 	However, not all combinations of the above are possible---we cannot have one solution to $\widetilde{C}$ but two solutions to $\widetilde{C}_0$, for example. The following observations eliminate some more cases:
 	\begin{enumerate}
@@ -727,7 +724,7 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 			\item\label{cond:Q2-soln} Over the $2$-adics, the coresponding conic in Table \ref{table:Q2-diag-conics} has a solution. (This condition will be explained below; see also Lemma 
 			\ref{lem:squares-in-Q2}.)
 		\end{enumerate}
-		Moreover, if \eqref{eq:diag-squarefree-conic} has a solution in $\P^2_\Q$, then it has infinitely many such solutions.
+		Moreover, if \eqref{eq:diag-squarefree-conic} has a solution in $\P^2_\Q$, then it has infinitely many solutions.
 	\end{thm}
 	The last claim is just a restatement of Lemma \ref{lem:infinitely-many-Q-soln}.
 	We prove this theorem through a sequence of lemmas. The overall strategy is guided by the Hasse--Minkowski theorem, which states that a homogeneous quadratic has a solution in $\P^n_\Q$ if and only if it has a solution in $\P^n_K$ for every completion $K$ of $\Q$. These completions are the reals $\R$ and the $p$-adics $\Q_p$ for each prime $p$, which we define below.
