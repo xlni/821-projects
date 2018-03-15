@@ -684,7 +684,15 @@ when $e=0$.
 	\textcolor{red}{Note that if we are in case \eqref{case:0} of Proposition~\ref{prop:counting-P1-solutions}, i.e., if $a=b=c=0$, then $\gamma$ is a residue if and only if $-1$ is. Thus, by Theorem~\ref{thm:diag-P2}, we cannot be in cases \eqref{case:rank2_x^2+y^2=0} or \eqref{case:rank2_x^2+ry^2=0} of Proposition~\ref{prop:counting-P2-solutions} where the projectivized conic has only $1$ solution. Were this the case, Lemma~\ref{lem:relate-solutions-affine-proj} would imply that our affine conic has a negative number (to be exact, $-p$) of solutions!}
 	\end{comment}
 	
-	The expression for $|C(\F_p)|$ given above is easily computable. The only parts that may be non-obvious are the Legendre symbols $\legendre{-\beta}{p}$ and $\legendre{\Delta}{p}$, but with tools such as the law of quadratic reciprocity, these too are readily determined.
+	\begin{rem*}
+	   The expression for $|C(\F_p)|$ given above is easily computable. The only parts that may be non-obvious are the Legendre symbols, but with tools such as the law of quadratic reciprocity or tables of residues, these are easily computable. In
+	   fact, we have computationally verified this result for the odd primes $3$, $5$, 
+	   $7$, and $11$; going further is difficult, since manually solving all conics
+	   mod $p$ is $O(p^8)$ in time.
+	\end{rem*}
+
+	
+	
 	
 	\section{Projective rational solutions}
 	\label{sec:rational-soln}
