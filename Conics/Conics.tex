@@ -131,7 +131,7 @@
 	a characterization of its $\F_p$-points.
 		
 	This paper is roughly divided into two parts. In the first part, we perform
-	bootstraping by counting solutions over $\F_p$. To do this,
+	bootstrapping by counting solutions over $\F_p$. To do this,
 	we study the projectivization of our chosen conic, discussed in
 	\S\ref{sec:projectivization-of-the-problem}. We then diagonalize 
 	the projective curve through a procedure described in 
@@ -144,7 +144,7 @@
 	Hensel's lemma, and use the Hasse--Minkowski theorem
 	to completely characterize existence of rational points. This is the content of \S\ref{sec:rational-soln}; our main result is Theorem~\ref{thm:rational-solutions}.
 	
-	\subsection*{Acknowledgments} Oron wrote sections \S\ref{sec:diagonalizing-quadratic-forms} and \S\ref{sec:affine-solutions}. Together, Xianglong and Oron worked out much of \S\ref{sec:proj-solutions} and \S\ref{sec:rational-soln}, which were later written up by Xianglong (who also wrote \S\ref{sec:projectivization-of-the-problem}). Miguel ran experimental tests to both motivate and verify our computations, wrote \S\ref{sec:intro}, and helped format, edit, and proofread.
+	\subsection*{Acknowledgments} Oron wrote sections \S\ref{sec:diagonalizing-quadratic-forms} and \S\ref{sec:affine-solutions}. Together, Xianglong and Oron worked out much of \S\ref{sec:proj-solutions} and \S\ref{sec:rational-soln}, which were later written up by Xianglong (who also wrote \S\ref{sec:projectivization-of-the-problem}). Miguel wrote \S\ref{sec:intro}, ran experimental tests, and helped format and edit. Miguel also discovered an error in the diagonalization process while verifying cases of the main theorem by computer; Oron and Xianglong used this data to repair it.
 	
 	We would like to thank the 18.821 course staff for organizing this project, and Rasmus Johansen in particular for his guidance and suggestions. We are also grateful
 	to Ari Nieh and Stuart Thomson for their feedback on a draft of this paper.
@@ -685,8 +685,7 @@ when $e=0$.
 	\end{comment}
 	
 	\begin{rem*}
-	   The expression for $|C(\F_p)|$ given above is easily computable. The only parts that may be non-obvious are the Legendre symbols, but with tools such as the law of quadratic reciprocity or tables of residues, these are easily computable. In
-	   fact, we have computationally verified this result for the odd primes $3$, $5$, 
+	   The expression for $|C(\F_p)|$ given above is easily computable. The only parts that may be non-obvious are the Legendre symbols, but these are easy to calculate using the law of quadratic reciprocity or tables of residues. We have computationally verified this result for the odd primes $3$, $5$, 
 	   $7$, and $11$; going further is difficult, since manually solving all conics
 	   mod $p$ is $O(p^8)$ in time.
 	\end{rem*}
