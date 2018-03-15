@@ -327,37 +327,35 @@
 		\begin{equation*}
 		\alpha=4\cdot\det A= 4acf + bde - ae^2 - fb^2 - cd^2,
 		\end{equation*}
-        and let $\gamma$ be the first nonzero element of the tuple
+        and let $\beta$ be the first nonzero element of the tuple
         \begin{equation*}
         (4ac-b^2,4af-d^2,4cf-e^2),
         \end{equation*}
 		or $0$ if none exists. The matrix $A$ corresponds via Corollary~\ref{cor:sixcases} to case
 		\begin{enumerate}
           \leftskip 12pt
-			\item\label{case:1} if $\alpha=\gamma=0$;
+			\item\label{case:1} if $\alpha=\beta=0$;
 			\item\label{case:11} if $\alpha=0$ 
-			and $\gamma$ is a nonzero residue;
+			and $\beta$ is a nonzero residue;
 			\item\label{case:1r} if $\alpha=0$ 
-			and $\gamma$ is a nonresidue;
+			and $\beta$ is a nonresidue;
 			\item[(4) or (5)]\label{case:rank3} if $\alpha$ is nonzero.
 		\end{enumerate}
 	\end{lem}
     Note that we do not distinguish between cases (4) and (5) as the corresponding conics will be shown to have the same number of solutions in \S\ref{sec:proj-solutions}.
 	\begin{proof}
-		Let $P\in\GL_3(\F_p)$ be such that $\trsp{P}AP$ is a (nonzero) scalar multiple of one of the five matrices in Corollary~\ref{cor:sixcases}; since $P$ is invertible, the rank of $\trsp{P}AP$ is equal to that of $A$. We now divide into three cases depending on the vanishing of $\alpha$ and $\gamma$:
+		Let $P\in\GL_3(\F_p)$ be such that $\trsp{P}AP$ is a (nonzero) scalar multiple of one of the five matrices in Corollary~\ref{cor:sixcases}. Since $P$ is invertible, the rank of $\trsp{P}AP$ is equal to that of $A$. There are three cases to consider depending on the vanishing of $\alpha$ and $\beta$:
 
-		\textbf{Case 1: $\alpha=\gamma=0$.} We claim that in this case $A$ has rank $1$, hence corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:1}. It suffices to show that all $2\times 2$ minors of $A$ vanish. The $(1,1)$, $(2,2)$, and $(3,3)$ minors of $A$ all vanish by assumption, so by symmetry it suffices to show that the $(1,2)$, $(1,3)$, and $(2,3)$ minors vanish, that is, that
-\begin{equation*}
-de-2bf=be-2cd=bd-2ae=0.
-\end{equation*}
-We show that the first expression vanishes; the other two are similar. We have
-\begin{align*}
-\alpha&=(4ac-b^2)+c(4af-d^2)+a(4cf-e^2)+bde-8acf\\
-&=bde-2ae^2=b(de-2bf)+2b^2f-2ae^2=b(de-2bf)=0,
-\end{align*}
-so either $de-2bf=0$ or $b=0$; in the latter case, we either have $a=d=0$ or $c=e=0$, so in all cases $de-2bf=0$, as desired.
+		\textbf{Case 1: $\alpha=\beta=0$.} We claim that in this case $A$ has rank $1$, hence corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:1}. It suffices to show that all $2\times 2$ minors $A_{i,j}$ of $A$ vanish, where $A_{i,j}$ is the determinant of the matrix obtained by deleting the $i$th row and $j$th column of $A$. By assumption, $A_{1,1}=A_{2,2}=A_{3,3}=0$. We need only show that $A_{1,2}=(2bf-de)/4$ vanishes, and then the claim follows for all other minors by symmetry.
+	We have
+	\begin{align*}
+	\alpha&=(4ac-b^2)+c(4af-d^2)+a(4cf-e^2)+bde-8acf\\
+	&=bde-8acf = bde-2ae^2\\
+	&=b(de-2bf)+2b^2f-2ae^2=b(de-2bf)=0,
+	\end{align*}
+	where we have used $A_{1,1}=A_{2,2}=A_{3,3}=0$. So either $de-2bf=0$ or $b=0$. In the latter case, $A_{3,3}=0$ implies $ac=0$, but then either $a=d=0$ (from $A_{2,2}=0$) or $c=e=0$ (from $A_{1,1}=0$). Thus we necessarily have $de-2bf=0$ as desired.
 
-		\textbf{Case 2: $\alpha=0$ and $\gamma\ne 0$.} Permute the coordinates $X$, $Y$, and $Z$ of $\A^3$ so that $\gamma$ is given by $4ac-b^2$ (for instance, if $\gamma=4af-d^2$, the permutation $[X,Y,Z]\mapsto[X,Z,Y]$ permutes these coefficients appropriately). Note that $\alpha$ is invariant under such permutations. We proceed by further breaking into four sub-cases depending on the entries of $A$, and explicitly diagonalizing $A$ in each case:
+		\textbf{Case 2: $\alpha=0$ and $\beta\ne 0$.} Permute the coordinates $X$, $Y$, and $Z$ of $\A^3$ so that $\beta$ is given by $4ac-b^2$ (for instance, if $\beta=4af-d^2$, the permutation $[X,Y,Z]\mapsto[X,Z,Y]$ permutes these coefficients appropriately). Note that $\alpha$ is invariant under such permutations. We proceed by further breaking into four sub-cases depending on the entries of $A$, and explicitly diagonalizing $A$ in each case:
 
 \emph{Sub-case 1: $a\ne 0$.} Here a similar \texttt{Magma} computation shows that $A$ diagonalizes via
 		\begin{equation*}
@@ -379,9 +377,9 @@ so either $de-2bf=0$ or $b=0$; in the latter case, we either have $a=d=0$ or $c=
 		0&0&0
 		\end{bmatrix}.
 		\end{equation*}
-		Scaling $X\mapsto aX$ and $Y\mapsto Y/2$ shows that this diagonal matrix corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:11} if $\gamma=4ac-b^2$ is a nonzero residue and to \eqref{case:1r} if it is not.
+		Scaling $X\mapsto aX$ and $Y\mapsto Y/2$ shows that this diagonal matrix corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:11} if $\beta=4ac-b^2$ is a nonzero residue and to \eqref{case:1r} if it is not.
 
-        \emph{Sub-case 2: $a=0$ and $c\ne 0$.} After permuting coordinates via $[X,Y,Z]\mapsto[Y,X,Z]$, the previous case applies with $\gamma$ unchanged.
+        \emph{Sub-case 2: $a=0$ and $c\ne 0$.} After permuting coordinates via $[X,Y,Z]\mapsto[Y,X,Z]$, the previous case applies with $\beta$ unchanged.
 
 		\emph{Sub-case 3: $a=c=0$ and $f\ne 0$.} Here a similar \texttt{Magma} computation shows that $A$ diagonalizes via
 		\begin{equation*}
@@ -403,7 +401,7 @@ so either $de-2bf=0$ or $b=0$; in the latter case, we either have $a=d=0$ or $c=
 		0&0&0
 		\end{bmatrix}.
 		\end{equation*}
-		Scaling $X\mapsto fX$ and $Y\mapsto(e/2)Y$ shows that this diagonal matrix corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:11} if $-1$ is a nonzero residue and to \eqref{case:1r} if it is not. In this case, the diagonalizing matrix $P$ is only well-defined if $e$ is nonzero as well, but this is clear as the condition $\alpha=0$ is equivalent to $bf=de$, and $b\ne 0$ as $\gamma=4ac-b^2=-b^2\ne 0$. Thus, $\gamma$ is a residue if and only if $-1$ is, which gives the desired result.
+		Scaling $X\mapsto fX$ and $Y\mapsto(e/2)Y$ shows that this diagonal matrix corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:11} if $-1$ is a nonzero residue and to \eqref{case:1r} if it is not. In this case, the diagonalizing matrix $P$ is only well-defined if $e$ is nonzero as well, but this is clear as the condition $\alpha=0$ is equivalent to $bf=de$, and $b\ne 0$ as $\beta=4ac-b^2=-b^2\ne 0$. Thus, $\beta$ is a residue if and only if $-1$ is, which gives the desired result.
 
 \emph{Sub-case 4: $a=c=f=0$.} Here either $d=0$ or $e=0$, and the same \texttt{Magma} computation shows that
 		\begin{equation*}
@@ -446,21 +444,21 @@ when $d=0$ and
 		\end{bmatrix}.
 		\end{equation*}
 when $e=0$.
-		In either case, scaling $Y\mapsto Y/2$ shows that the diagonal matrix corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:11} if $-1$ is a nonzero residue and to \eqref{case:1r} if it is not. As before, $\gamma$ is a residue if and only if $-1$ is, giving the desired result.
+		In either case, scaling $Y\mapsto Y/2$ shows that the diagonal matrix corresponds via Corollary~\ref{cor:sixcases} to \eqref{case:11} if $-1$ is a nonzero residue and to \eqref{case:1r} if it is not. As before, $\beta$ is a residue if and only if $-1$ is, giving the desired result.
 
-		\textbf{Case 4: $\alpha\ne 0$.} Here, $A$ has rank $3$, so it corresponds to the final case.
+		\textbf{Case 3: $\alpha\ne 0$.} Here, $A$ has rank $3$, so it corresponds to the final case.
 	\end{proof}
 	
 	We will also need an analogous result for quadratic forms $ax^2+bxy+cy^2$ in two variables, which follows immediately from the lemma by setting $d=e=f=0$:
 	\begin{cor}\label{cor:diag-P1}
-		The matrix
-\begin{equation*}
-\begin{bmatrix}a&b/2\\b/2&c\end{bmatrix}
-\end{equation*}
-diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)$) to a (nonzero) scalar multiple of
+	The matrix
+	\begin{equation*}
+	\begin{bmatrix}a&b/2\\b/2&c\end{bmatrix}
+	\end{equation*}
+	diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)$) to a (nonzero) scalar multiple of
 		\begin{itemize}
 			\item $\left[\begin{smallmatrix}0&0\\0&0\end{smallmatrix}\right]$ if $a=b=c=0$;
-			\item $\left[\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right]$ if $4ac-b^2=0$;
+			\item $\left[\begin{smallmatrix}1&0\\0&0\end{smallmatrix}\right]$ if $4ac-b^2=0$ and at least one of $a,b,c$ is nonzero;
 			\item $\left[\begin{smallmatrix}1&0\\0&1\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonzero residue;
 			\item $\left[\begin{smallmatrix}1&0\\0&r\end{smallmatrix}\right]$ if $4ac-b^2$ is a nonresidue.
 		\end{itemize}
@@ -628,7 +626,11 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 	
 	\begin{thm}[Counting Solutions in $\A^2$]
 		\label{thm:main-thm}
-		Let $C$ be a conic as in (\ref{eq:original-conic}), and fix a prime $p$. We regard the coefficients of $C$ as lying in $\F_p$.
+		Let $C$ be a conic
+		\[
+			C \colon ax^2 + bxy + cy^2 + dx + ey + f = 0,
+		\]
+		and fix a prime $p$. We regard the coefficients of $C$ as lying in $\F_p$.
 		
 		If $p$ is even, then
 		\begin{equation*}
@@ -636,26 +638,33 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 		\end{equation*}
 		where $b$ is either $0$ or $1$.
 		
-		If $p$ is odd, let $\alpha$, $\beta$, and $\gamma$ be as defined in 
-		Lemma \ref{thm:diag-P2}, and let $\Delta = b^2-4ac$ be the discriminant. 
-		If $\alpha$ and $\beta$ are both zero or
-		$\alpha$ is nonzero, then:
+		If $p$ is odd, let $\alpha$ and $\beta$ be as defined in 
+		Lemma \ref{thm:diag-P2}, and let $\Delta = b^2-4ac$ be the discriminant. Then:
 		\begin{enumerate}
-			\item If $a=b=c=0$, then $C(\F_p)$ is empty.
-			\item\label{case:Deltazero} Otherwise, if $\Delta = 0$, then $|C(\F_p)| = p$.
-			\item\label{case:Deltanonzero} If $\Delta \neq 0$, then
-			\[ |C(\F_p)| = p - \legendre{-\Delta}{p}\legendre{-1}{p}. \]
-		\end{enumerate}
-        In particular, when $C$ is nondegenerate over $\F_p$, either case \eqref{case:Deltazero} or \eqref{case:Deltanonzero} applies depending on $\Delta$, and $C$ has either $p-1$, $p$, or $p+1$ solutions in $\A^2$.
-
-		If instead only $\alpha$ vanishes, then:
-		\begin{enumerate}
-			\item If $a=b=c=0$, then $|C(\F_p)|=p$.
-			\item Otherwise, if $\Delta = 0$, then
-			\[ |C(\F_p)| = p\left(1 + \legendre{\gamma}{p}\legendre{-1}{p}\right). \]
-			\item If $\Delta \neq 0$, then
-			\[ |C(\F_p)| = p\left(1 + \legendre{\gamma}{p}\legendre{-1}{p}\right)
-			- \legendre{\gamma}{p}\legendre{-1}{p}. \]
+			\item If $\alpha = 0$,
+			\begin{enumerate}
+				\item $\beta = 0$,
+				\begin{enumerate}
+					\item and $a=b=c=0$, then $|C(\F_p)| = 0$;
+					\item otherwise, $|C(\F_p)|=p$.
+				\end{enumerate}
+				\item $-\beta$ is a nonresidue,
+				\begin{enumerate}
+					\item and $\Delta = 0$, then $|C(\F_p)| = 0$;
+					\item otherwise, $|C(\F_p)| = 1$.
+				\end{enumerate}
+				\item $-\beta$ is a nonzero residue,
+				\begin{enumerate}
+					\item and $a=b=c=0$, then $|C(\F_p)| = p$;
+					\item or if $\Delta = 0$ with at least one of $a,b,c$ nonzero, then $|C(\F_p)| = 2p$;
+					\item otherwise, $|C(\F_p)| = 2p-1$.
+				\end{enumerate}
+			\end{enumerate}
+			\item If $\alpha \neq 0$, then
+			\[
+				|C(\F_p)| = p - \legendre{\Delta}{p}.
+			\]
+			In particular, when $C$ is nondegenerate and $\Delta \neq 0$, this expression shows that $C$ has $p\pm 1$ solutions in $\A^2$.
 		\end{enumerate}
 	\end{thm}
 	\begin{proof} 
@@ -667,7 +676,7 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 		possibilities. It can be checked that the number of solutions in each case agrees with the expression in the theorem statement.
 		
 		The remainder is a synthesis of \S\ref{sec:diagonalizing-quadratic-forms}, 
-		\S\ref{sec:proj-solutions}, and Lemma~\ref{lem:relate-solutions-affine-proj}.
+		\S\ref{sec:proj-solutions}, Lemma~\ref{lem:relate-solutions-affine-proj}, and Table \ref{table:all-possibilities}.
 	\end{proof}
 	
 	\begin{comment}
@@ -675,7 +684,7 @@ diagonalizes (as in Corollary~\ref{cor:sixcases}, though with $P \in \GL_2(\F_p)
 	\textcolor{red}{Note that if we are in case \eqref{case:0} of Proposition~\ref{prop:counting-P1-solutions}, i.e., if $a=b=c=0$, then $\gamma$ is a residue if and only if $-1$ is. Thus, by Theorem~\ref{thm:diag-P2}, we cannot be in cases \eqref{case:rank2_x^2+y^2=0} or \eqref{case:rank2_x^2+ry^2=0} of Proposition~\ref{prop:counting-P2-solutions} where the projectivized conic has only $1$ solution. Were this the case, Lemma~\ref{lem:relate-solutions-affine-proj} would imply that our affine conic has a negative number (to be exact, $-p$) of solutions!}
 	\end{comment}
 	
-	We remark that while the expression for $|C(\F_p)|$ given above appears complicated, it is easily computable. The only parts that may be non-obvious are the Legendre symbols, but with tools such as the law of quadratic reciprocity, these too are readily determined.
+	The expression for $|C(\F_p)|$ given above is easily computable. The only parts that may be non-obvious are the Legendre symbols $\legendre{-\beta}{p}$ and $\legendre{\Delta}{p}$, but with tools such as the law of quadratic reciprocity, these too are readily determined.
 	
 	\section{Projective rational solutions}
 	\label{sec:rational-soln}
