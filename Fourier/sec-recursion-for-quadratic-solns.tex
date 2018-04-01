@@ -1,0 +1,32 @@
+\section{Recursion for solutions to a quadratic}\label{sec:recursion-for-quadratic-solns}
+Let $f_n(a)$ denote the number of solutions to the equation
+\[
+	x_1^2 + \cdots + x_n^2 = a
+\]
+in $\F_p^n$. Note that if $a = c^2 a'$ for some nonzero $c \in \F_p$, then $f_n(a) = f_n(a')$. Thus $f_n(a)$ depends only on the Legendre symbol $\legendre{a}{p}$ whose definition we recall now:
+\begin{defn}
+	The \emph{Legendre symbol} $\legendre{a}{p}$ is defined to be
+	\[
+		\legendre{a}{p} = \begin{cases}
+			0 & \text{if }a = 0,\\
+			1 & \text{if }a\text{ is a nonzero square mod }p, and\\
+			-1 & \text{if }a\text{ is not a square mod }p.
+		\end{cases}
+	\]
+\end{defn}
+Fix a non-square $r\in \F_p$. The only values that $f_n$ assumes are then $f_n(0)$, $f_n(1)$, and $f_n(r)$. We now give recursions for computing these values.
+
+We have
+\begin{align*}
+	f_{n+1}(a) &= \sum_{i = 0}^{p-1} f_n(i) f_1(a-i)\\
+	&= f_n(0) f_1(a) + \sum_{i =1}^{p-1} f_n(i) f_1(a-i).
+\end{align*}
+Observe that
+\[
+	f_1(a) = 1+\legendre{a}{p}
+\]
+and, for $i \neq 0$,
+\[
+	f_n(i) = \frac{1}{2}\left[\left(1 + \legendre{i}{p}\right)f_n(1) + \left(1 - \legendre{i}{p}\right) f_n(r)\right].
+\]
+Substituting these into the expression for $f_{n+1}(a)$ gives (after some manipulation which we spare the reader)

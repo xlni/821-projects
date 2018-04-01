@@ -25,9 +25,9 @@ In fact, the set of $\lambda$ such that $\langle \lambda \rangle^\bot$ is tangen
 \[
 	\left\{ \lambda = (\lambda_1,\lambda_2,\lambda_3) \mid \frac{1}{3} \lambda_1^2 + \frac{1}{3} \lambda_2^2 - \frac{1}{2} \lambda_3^2 = 0 \right\} \subset V^*.
 \]
-This is a conic in $V^*$, and it is dual to our original conic in a sense that we will soon explain. Let us we write $Q^*$ for the equation of this dual conic. Observe that $Q^*(0,-2,1) > 0$ while $Q^*(0,0,1) < 0$. It turns out that the sign of $Q^*(\lambda)$ is all one needs to classify the intersection $\langle \lambda \rangle^\bot \cap S$.
+This is a conic in $V^*$, and it is dual to our original conic in a sense that we will soon explain. Let us we write $Q^*$ for the equation of this dual conic. Observe that $Q^*(0,-2,1) > 0$ while $Q^*(0,0,1) < 0$. It turns out that the sign of $Q^*(\lambda)$ is all one needs to classify the intersection $\langle \lambda \rangle^\bot \cap S$. Equivalently, one needs only consider the existence of square-roots of $Q^*(\lambda)$---a notion which, unlike ``sign,'' still makes sense over $\F_p$.
 
-Now we consider the general situation in $n$ variables over $\F_p$. For convenience, we will assume that $p>2$. To a homogeneous quadratic
+Now we consider the general situation in $n$ variables over a field $k$. We will require that $\operatorname{char} k \neq 2$, and that the product of two non-squares in $k$ is a square. The fields $\Q$, $\R$, and $\F_p$ for $p>2$ are examples. To a homogeneous quadratic
 \[
 	Q = \sum_{1 \leq i \leq j \leq n} c_{i,j} x_i x_j 
 \]
@@ -52,25 +52,25 @@ The conic $S = \{Q = 0\}$ is \emph{non-degenerate} if the matrix $A$ is invertib
 	\]
 	Also define
 	\[
-		kO(A) \coloneqq \{ cg \mid c\in \F_p, g\in O(A)\}.
+		kO(A) \coloneqq \{ cg \mid c\in k, g\in O(A)\}.
 	\]
 \end{defn}
 
 We are interested in this group because elements of $kO(A)$ map $S$ to itself.
 \begin{defn}
-	A group $G$ acts \emph{transitively} on a set $S$ if for all $a,b\in S$, there exists $g\in G$ such that $g\cdot a = b$. Equivalently, the only orbit of the action is the entirety of $S$.
+	A group $G$ acts \emph{transitively} on a set $X$ if for all $a,b\in X$, there exists $g\in G$ such that $g\cdot a = b$. Equivalently, the only orbit of the action is the entirety of $X$.
 \end{defn}
 
-\begin{prop}
+\begin{prop}\label{prop:OA-transitive-action}
 	The group $kO(A)$ acts transitively on each of the following sets:
 	\begin{enumerate}
-		\item $S = \{x \in V \mid x\neq 0, x^\top A x = 0\}$,
-		\item $\{ x\in V \mid x^\top A x \text{ is a nonzero square in } \F_p\}$, and
-		\item $\{ x\in V \mid x^\top A x \text{ is not a square in }\F_p\}$.
+		\item $S_0(A) \coloneqq \{x \in V \mid x\neq 0, x^\top A x = 0\}$,
+		\item $S_+(A) \coloneqq \{ x\in V \mid x^\top A x \text{ is a nonzero square in } k\}$, and
+		\item $S_-(A) \coloneqq \{ x\in V \mid x^\top A x \text{ is not a square in } k\}$.
 	\end{enumerate}
 \end{prop}
 \begin{proof}
-	It is an elementary fact that if $a,b\in \F_p$ are not squares, then $b/a \in \F_p$ is a square. Hence if $u,v\in V$ belong to the same set above, we can assume $u^\top A u = v^\top A v$ (as it can be achieved by scaling).
+	If $u,v\in V$ belong to the same set above, we can assume $u^\top A u = v^\top A v$ (as it can be achieved by scaling). This relies on our assumption that the quotient of two non-squares is a square in $k$.
 	
 	If $u$ and $v$ are linearly dependent then the result is immediate, so suppose otherwise. Take a basis $\{u,v,e_3,\ldots,e_n\}$ and apply Gram-Schmidt to it, obtaining an orthogonal basis $\{u, w_2, w_3, \ldots,w_n\}$. Now consider the basis
 	\[
@@ -83,3 +83,34 @@ We are interested in this group because elements of $kO(A)$ map $S$ to itself.
 	\]
 	It is straightforward to verify that the linear transformation which interchanges $u$ and $v$ while fixing $w_3,\ldots,w_n$ is an element of $O(A)$.
 \end{proof}
+
+Note that left-multiplication by an element $g \in O(A)$ on $V$ induces right-multiplication by $g^{-1}$ on $V^*$.
+
+Now suppose that $\lambda^\top,\lambda'^\top$ both belong to $S_0(A^{-1})$. Then by Proposition \ref{prop:OA-transitive-action}, there exists $g$ such that $g \in O(A^{-1})$ and $g \lambda^\top = \lambda'^\top$. If $\lambda x = 0$, then
+\[
+	\lambda' (g^\top)^{-1} x = \lambda x = 0
+\]
+and thus $(g^\top)^{-1}$ maps $\langle \lambda \rangle^\bot$ to $\langle \lambda' \rangle^\bot$. Moreover, since $g \in O(A^{-1})$, inverting the identity $g^\top A^{-1} g = A^{-1}$ shows that $(g^\top)^{-1} \in O(A)$.
+
+Thus we get a map
+\[
+	(g^\top)^{-1} \colon S \cap \langle \lambda \rangle^\bot \to S \cap \langle \lambda' \rangle^\bot
+\]
+which is a bijection.
+
+Specializing back to $k=\F_p$ for $p>2$ a prime, we conclude that $\Phi(\IND_S)$ assumes only a few values: specifically, it has the form
+\begin{equation}\label{eq:FT-quadratic-constants-TBD}
+	\Phi(\IND_S)(\lambda) = \begin{cases}
+		\Phi(\IND_S)(0) & \text{if } \lambda = 0,\\
+		N_0 & \text{if } \lambda \in S_0(A^{-1}),\\
+		N_+ & \text{if } \lambda \in S_+(A^{-1}), \text{ and}\\
+		N_- & \text{if } \lambda \in S_-(A^{-1}),
+	\end{cases}
+\end{equation}
+for constants $\Phi(\IND_S)(0), N_0, N_+, N_-$ to be determined. Let $Q^*$ be the quadratic given by
+\[
+	Q^*(\lambda) = \lambda A^{-1} \lambda^\top.
+\]
+Then the above equivalently states that for nonzero $\lambda$, the value of $\Phi(\IND_S)(\lambda)$ depends only on the number of square roots of $Q^*(\lambda)$.
+
+In Appendix \ref{sec:recursion-for-quadratic-solns} we give a recursive procedure for computing the constants in \eqref{eq:FT-quadratic-constants-TBD}.
