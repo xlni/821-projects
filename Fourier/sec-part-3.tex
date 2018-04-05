@@ -1,0 +1,221 @@
+\newcommand{\Mat}{\operatorname{Mat}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\fact}{\operatorname{fact}}
+
+\section{$S$ is the set of nilpotent $n\times n$ matrices}
+
+In this section, we consider the case where $V$ is the space of $n\times n$ matrices with entries in $\F_p$, and $S$ is the subset of all nilpotent matrices. We assume $n\ge 2$, as when $n=1$ the problem is trivial. As before, to compute $\Phi(\IND_S)$, we must determine $|\ker\lambda\cap S|$ for a given $\lambda\in V^*$. We begin by identifying $V^*$ with $V$ via the nondegenerate symmetric bilinear form
+\begin{align*}
+V\times V&\to\F_p,\\
+(A,B)&\mapsto\tr(AB).
+\end{align*}
+Under this identification, $\lambda$ corresponds to a matrix $M_\lambda\in V$, and we have
+\begin{equation*}
+\ker\lambda\cap S=\{A\in S:\tr(AM_\lambda)=0\}.
+\end{equation*}
+Our goal is to describe the cardinality of this set in terms of the matrix $M_\lambda$.
+\begin{lem}
+\label{lem:sim}
+The value $|\ker\lambda\cap S|$ depends only on $M_\lambda$ up to similarity.
+\end{lem}
+\begin{proof}
+Let $P\in V$ be invertible. Then for any $A\in S$, we have
+\begin{equation*}
+\tr(AP^{-1}M_\lambda P)=\tr(PAP^{-1}M_\lambda),
+\end{equation*}
+so it suffices to show that the invertible elements of $V$ act on $S$ by conjugation. Indeed, since $A$ is nilpotent, there exists some $k>0$ such that $A^k=0$, whence
+\begin{equation*}
+(PAP^{-1})^k=PA^kP^{-1}=0
+\end{equation*}
+as well.
+\end{proof}
+This lemma allows us to replace $M_\lambda$ by any matrix similar to it, thus simplifying the set of matrices we must consider. Our next step is to obtain convenient representatives for the similarity classes in $V$.
+\begin{notation}
+Given a monic polynomial
+\begin{equation*}
+f(x)=a_0+a_1x+\cdots+a_{d-1}x^{d-1}+x^d,
+\end{equation*}
+its \emph{companion matrix} is the $d\times d$ matrix
+\begin{equation*}
+C(f)=\begin{bmatrix}
+0&0&\cdots&0&-a_0\\
+1&0&\cdots&0&-a_1\\
+0&1&\cdots&0&-a_2\\
+\vdots&\vdots&\ddots&\vdots&\vdots\\
+0&0&\cdots&1&-a_{d-1}
+\end{bmatrix}.
+\end{equation*}
+\end{notation}
+\begin{thm}
+Let $M\in V$. There exists a unique invertible $P\in V$ such that $P^{-1}MP$ is of the block form
+\begin{equation}
+\label{eqn:rcf}
+\begin{bmatrix}
+C(f_1)&0&\cdots&0\\
+0&C(f_2)&\cdots&0\\
+\vdots&\vdots&\ddots&\vdots\\
+0&0&\cdots&C(f_m)
+\end{bmatrix}
+\end{equation}
+for monic polynomials $f_1,\ldots,f_m\in\F_p[x]$. We say that such a matrix is in \emph{rational canonical form}. Moreover, the polynomials $f_1,\ldots,f_m$, called the \emph{invariant factors} of $M$, satisfy
+\begin{enumerate}
+\item $f_i\mid f_{i+1}$ for all $i=1,\ldots,m-1$;\label{item:div}
+\item $f_m$ is the minimal polynomial of $M$;\label{item:min}
+\item $f_1\cdots f_m$ is the characteristic polynomial of $M$.\label{item:char}
+\end{enumerate}
+\end{thm}
+\begin{proof}
+Regard $\F_p^n$ as an $\F_p[x]$-module, with $x$ acting via the endomorphism $M$. By the structure theorem for finitely-generated modules over a principal ideal domain, we have a decomposition
+\begin{equation*}
+\F_p^n\cong\F_p[x]/(f_1)\oplus\cdots\oplus\F_p[x]/(f_m)
+\end{equation*}
+of $\F_p[x]$-modules, where the $f_i$ are monic, uniquely determined, and satisfy \eqref{item:div}. Note that this decomposition has no free part, as any free $\F_p[x]$-module is infinite-dimensional as an $\F_p$-vector space. The endomorphism of $\F_p[x]/(f_i)$ corresponding to $M$ has minimal (and hence characteristic) polynomial $f_i$, by definition; with respect to the basis
+\begin{equation*}
+\{1,x,\ldots,x^{\deg f_i-1}\},
+\end{equation*}
+it is given by $C(f_i)$. The remaining assertions are now immediate.
+\end{proof}
+In view of Lemma~\ref{lem:sim}, this result shows that we need only consider matrices $M_\lambda$ in rational canonical form; in fact, we lose no information by considering only the invariant factors of $M_\lambda$. Our next step is to attach a coarser combinatorial invariant to $M_\lambda$ via these polynomials.
+\begin{defn}
+Let $M\in V$, and let $f_1,\ldots,f_m$ be its invariant factors. Given a monic polynomial $f\in\F_p[x]$, write
+\begin{equation*}
+f=g_1^{e_1}\cdots g_j^{e_j}
+\end{equation*}
+for its factorization into irreducible polynomials over $\F_p$, and let $\fact(f)$ denote the following \emph{multiset} of ordered pairs of integers (so multiple instances of the same pair are permitted):
+\begin{equation*}
+\{(\deg g_1,e_1),\ldots,(\deg g_j,e_j)\}.
+\end{equation*}
+We define the \emph{factorization datum} of $M$ to be the tuple
+\begin{equation*}
+\fact(M)=(\fact(f_1),\ldots,\fact(f_m)).
+\end{equation*}
+\end{defn}
+\begin{example}
+Consider the following $4\times 4$ matrix with entries in $\F_3$:
+\begin{equation*}
+M=\begin{bmatrix}
+0&2&1&0\\
+2&1&2&1\\
+0&1&2&1\\
+0&2&2&0
+\end{bmatrix}.
+\end{equation*}
+Its rational canonical form is given by
+\begin{equation*}
+\begin{bmatrix}
+1&2&0&2\\
+1&1&0&2\\
+2&1&2&2\\
+0&2&1&1
+\end{bmatrix}^{-1}
+M
+\begin{bmatrix}
+1&2&0&2\\
+1&1&0&2\\
+2&1&2&2\\
+0&2&1&1
+\end{bmatrix}
+=
+\begin{bmatrix}
+1&0&0&0\\
+0&0&0&1\\
+0&1&0&1\\
+0&0&1&2
+\end{bmatrix}.
+\end{equation*}
+Thus, $M$ has invariant factors
+\begin{align*}
+f_1&=x+2,\\
+f_2&=x^3+x^2+2x+2=(x+2)(x+1)^2,
+\end{align*}
+and factorization datum
+\begin{equation*}
+\fact(M)=(\{(1,1)\},\{(1,1),(1,2)\}).
+\end{equation*}
+\end{example}
+While $M_\lambda$ is \emph{not} determined up to conjugacy by its factorization datum
+
+\begin{conj}
+\label{conj:main}
+Let $\lambda\in V^*$. Then
+\begin{enumerate}[(i)]
+\item $|\ker\lambda\cap S|$ depends only on $\fact(M_\lambda)$.
+\item $|\ker\lambda\cap S|$ is contained in the set
+\begin{equation*}
+\{p^{(n^2-n)},p^{(n^2-n-1)}\}\cup\{p^{(n^2-n-1)}\pm(p-1)p^i:(n^2-n-2)/2\le i\le n^2-n-2\}.
+\end{equation*}
+\item For $n=2,3$, the values of $|\ker\lambda\cap S|$ are entirely characterized by Table~\ref{tab:lowdim}. For $n=4$, the values of $|\ker\lambda\cap S|$ are characterized by Table~\ref{tab:lowdim} whenever $\fact(M_\lambda)$ appears in its rightmost column (see Remark~\ref{rem:conj} below).\label{item:conjlown}
+\end{enumerate}
+\end{conj}
+\begin{rem}
+\label{rem:conj}
+\begin{enumerate}
+\item When $n=4$, Conjecture~\ref{conj:main}\eqref{item:conjlown} excludes the three factorization data
+\begin{gather*}
+(\{(2,1),(2,1)\}),\\
+(\{(1,1),(1,1),(1,1),(1,1)\}),\\
+(\{(1,1)\},\{(1,1),(1,1),(1,1)\}).
+\end{gather*}
+This is because none of these data arise as some $\fact(M_\lambda)$ when $p=2$: indeed, modulo $2$ there is only one irreducible degree-$2$ polynomial and only two distinct linear polynomials. While these data do all arise for larger $p$, computational limitations have restricted us to computing only in the case $p=2$ when $n=4$, so the values of $|\ker\lambda\cap S|$ are unknown in these cases.
+\end{enumerate}
+\end{rem}
+
+\begin{table}[h]
+\begin{tabular}{ccc}
+\toprule
+$n$&$|\ker\lambda\cap S|$&$\fact(M_\lambda)$\\
+\midrule
+\multirow{4}{*}{$2$}&$1$&$(\{(2,1)\})$\\
+\cmidrule(l){2-3}
+&$p$&$(\{(1,2)\})$\\
+\cmidrule(l){2-3}
+&$2p-1$&$(\{(1,1),(1,1)\})$\\
+\cmidrule(l){2-3}
+&$p^2$&$(\{(1,1)\},\{(1,1)\})$\\
+\midrule
+\multirow{8}{*}{$3$}&$p^5-(p-1)p^2$&$(\{(1,1),(2,1)\})$\\
+\cmidrule(l){2-3}
+&\multirow{3}{*}{$p^5$}&$(\{(1,3)\})$\\
+&&$(\{(1,1),(1,2)\})$\\
+&&$(\{(1,1)\},\{(1,2)\})$\\
+\cmidrule(l){2-3}
+&\multirow{2}{*}{$p^4+(p-1)p^2$}&$(\{(3,1)\})$\\
+&&$(\{(1,1),(1,1),(1,1)\})$\\
+\cmidrule(l){2-3}
+&$p^5+(p-1)p^3$&$(\{(1,1)\},\{(1,1),(1,1)\})$\\
+\cmidrule(l){2-3}
+&$p^6$&$(\{(1,1)\},\{(1,1)\},\{(1,1)\})$\\
+\midrule
+\multirow{17}{*}{$4$}&$p^{11}-(p-1)p^6$&$(\{(1,1)\},\{(1,1),(2,1)\})$\\
+\cmidrule(l){2-3}
+&\multirow{2}{*}{$p^{11}-(p-1)p^5$}&$(\{(4,1)\})$\\
+&&$(\{(1,1),(1,1),(2,1)\})$\\
+\cmidrule(l){2-3}
+&\multirow{9}{*}{$p^{11}$}&$(\{(1,4)\})$\\
+&&$(\{(2,2)\})$\\
+&&$(\{(1,1),(1,3)\})$\\
+&&$(\{(1,1)\},\{(1,3)\})$\\
+&&$(\{(1,2)\},\{(1,2)\})$\\
+&&$(\{(1,2),(1,2)\})$\\
+&&$(\{(1,2),(2,1)\})$\\
+&&$(\{(1,1)\},\{(1,1),(1,2)\})$\\
+&&$(\{(1,1)\},\{(1,1)\},\{(1,2)\})$\\
+\cmidrule(l){2-3}
+&$p^{11}+(p-1)p^5$&$(\{(1,1),(3,1)\})$\\
+\cmidrule(l){2-3}
+&\multirow{2}{*}{$p^{11}+(p-1)p^7$}&$(\{(2,1)\},\{(2,1)\})$\\
+&&$(\{(1,1),(1,1)\},\{(1,1),(1,1)\})$\\
+\cmidrule(l){2-3}
+&$p^{11}+(p-1)p^8$&$(\{(1,1)\},\{(1,1)\},\{(1,1),(1,1)\})$\\
+\cmidrule(l){2-3}
+&$p^{12}$&$(\{(1,1)\},\{(1,1)\},\{(1,1)\},\{(1,1)\})$\\
+\bottomrule\\
+\end{tabular}
+\label{tab:lowdim}
+\caption{For $n=2,3,4$, the second column lists all observed values of $|\ker\lambda\cap S|$ in terms of $p$, and the third column lists the factorization data associated to the elements $\lambda\in V^*$ observed to give rise to a particular value in the second column (see Remark~\ref{rem:conj}).}
+\end{table}
+
+%%% Local Variables:
+%%% mode: latex
+%%% TeX-master: t
+%%% End:

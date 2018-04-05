@@ -17,6 +17,8 @@
 \usepackage{booktabs}
 \usepackage{centernot}
 \usepackage{bbm} % for blackboard bold 1 indicator functions
+\usepackage{multirow}
+\usepackage{enumerate}
 
 \definecolor{zaffre}{rgb}{0.0, 0.08, 0.66}
 \hypersetup{colorlinks=true,allcolors=zaffre}
@@ -30,7 +32,7 @@
 \newtheorem{thm}{\protect\theoremname}[section]
 \newtheorem{example}[thm]{\protect\examplename}
 \theoremstyle{remark} 
-\newtheorem*{rem*}{\protect\remarkname}
+\newtheorem{rem}[thm]{\protect\remarkname}
 \theoremstyle{plain}
 \newtheorem{cor}[thm]{\protect\corollaryname}
 \theoremstyle{definition} 
@@ -39,6 +41,9 @@
 \newtheorem{prop}[thm]{\protect\propositionname}
 \theoremstyle{plain} 
 \newtheorem{lem}[thm]{\protect\lemmaname}
+\newtheorem{conj}[thm]{Conjecture}
+\theoremstyle{definition}
+\newtheorem{notation}[thm]{Notation}
 
 \providecommand{\definitionname}{Definition}
 \providecommand{\examplename}{Example} 
