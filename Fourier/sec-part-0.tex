@@ -1,1 +1,50 @@
 \section{$S$ is a linear subspace of $V$}
+
+Let us being with a warmup. Consider the case of a subspace $W$ of our vector space $V$.
+A classical theorem of linear algebra allows us to decompose $V$:
+\begin{prop}
+    The \emph{orthogonal complement} of $W$ is the subspace    
+    \[ W^\perp = \{ v \in V \,|\, \langle v, w \rangle = 0 \text{ for all } w \in W \}. \]
+    Any element $x\in V$ may be uniquely written as a sum $x = w + w'$, where $w\in W$
+    and $w'\in W^\perp$.
+\end{prop}
+
+Before we consider the Fourier transform over the whole space $V$, consider what
+it does to elements of $W$:
+\begin{lem}
+    \label{lem:subspace-transform-on-subspace}
+    Suppose $\lambda\in W$ is nonzero. Then, $\Phi(\IND_W)(\lambda) = 0$.
+    \begin{proof}
+        We prove this by induction on the dimension of $W$. Fix any element $w\in W$,
+        and let $U\subset W$ be the line spanned by it. Then,   
+        \[ \Phi(\IND_W)(\lambda) = 
+            \sum_{x\in W/U} 
+                \exp \left(\frac{2\pi i}{p} \langle \lambda, x \rangle\right) +
+            \sum_{x\in U} 
+                \exp \left(\frac{2\pi i}{p} \langle \lambda, x \rangle\right). \]
+        It is easy to see that the rightmost term is zero:
+        \[ \sum_{x\in U} 
+                \exp \left(\frac{2\pi i}{p} \langle \lambda, x \rangle\right) =
+            \sum_{x\in \F_p} 
+                \exp \left(\frac{2\pi i}{p} x \langle \lambda, w \rangle\right) = 0,
+                \]
+        since $\langle \lambda, w \rangle \neq 0$. Since the dimension of $W/U$ is less
+        than that of $W$, we can continue repeating this process until there's nothing left.
+    \end{proof}
+\end{lem}
+We can now put these facts together to prove our result:
+\begin{thm}
+    $\Phi(\IND_W) = |W| \IND_{W^\perp}$.
+    \begin{proof}
+        Given $\lambda\in V$, split it into orthogonal parts as $\lambda = w + w'$. Then,
+        \[ \Phi(\IND_W)(w + w') = 
+            \sum_{x\in W} 
+                \exp \left(\frac{2\pi i}{p} \langle w + w', x \rangle\right) = 
+            \sum_{x\in W} 
+                \exp \left(\frac{2\pi i}{p} \langle w, x \rangle\right). \]
+        If $w\neq 0$, by Lemma \ref{lem:subspace-transform-on-subspace}, the whole
+        sum will vanish; otherwise, the exponent will be constantly $1$, and add up to
+        $|W|$. In the case that $w = 0$, $\lambda\in W^\perp$, as desired.
+    \end{proof}
+\end{thm}
+TODO: geometric intution?

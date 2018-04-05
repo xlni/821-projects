@@ -39,7 +39,7 @@ finite Fourier transform.
         \sum_{x\in\F_p} \exp \left(\frac{2\pi i}{p} \lambda(x)\right) f(x). \]
 \end{defn}
 
-Our goal is to explore this transform. We will study \emph{indicator functions}; for
+Our goal is to explore the effect of this transform on \emph{indicator functions}; for
 some fixed $\F_p$-vector space $V$, and a subset $S\subset V$, define
 \[ \IND_S(x) = \begin{cases}
     1 & x \in V \\
@@ -48,5 +48,16 @@ some fixed $\F_p$-vector space $V$, and a subset $S\subset V$, define
 In this situation, the Fourier transform is somewhat simpler, and is entirely
 determined by what a functional $\lambda$ does on the subset $S$.
 \[ \Phi(\IND_S)(\lambda) = \sum_{x\in S} \exp \left(\frac{2\pi i}{p} \lambda(x)\right). \]
+Noting that $\IND_S = 1 - \IND_{V\setminus S}$, we can write the Fourier transform as
+\[ \Phi(\IND_S)(\lambda) = 1 - \sum_{x\not\in S} \exp \left(\frac{2\pi i}{p} \lambda(x)\right), \]
+which will be occasionally convenient. 
+
+\begin{rem}
+    Throughout, for each vector space $V$, we implicitly pick an isomorphism 
+    $V\cong\F_p^n$, i.e., an explicit basis. This
+    entitles us to an inner product on $V$, as well as an isomorphism between $V$ and
+    $V^*$, where all functionals are of the form $x \mapsto \langle \lambda, x \rangle$
+    for some $\lambda\in V$. By abuse of notation, $\lambda$ also denotes the functional.
+\end{rem}
 
 TODO: summary of results.
