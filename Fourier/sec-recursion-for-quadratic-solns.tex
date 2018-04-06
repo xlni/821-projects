@@ -1,32 +1,69 @@
-\section{Recursion for solutions to a quadratic}\label{sec:recursion-for-quadratic-solns}
-Let $f_n(a)$ denote the number of solutions to the equation
-\[
-	x_1^2 + \cdots + x_n^2 = a
-\]
-in $\F_p^n$. Note that if $a = c^2 a'$ for some nonzero $c \in \F_p$, then $f_n(a) = f_n(a')$. Thus $f_n(a)$ depends only on the Legendre symbol $\legendre{a}{p}$ whose definition we recall now:
+\section{Counting solutions to a quadratic}\label{sec:recursion-for-quadratic-solns}
+Fix a prime field $\F_p$ with $p>2$, and a non-square $r\in \F_p$.
+This appendix computes the number of solutions to each of the equations
+\begin{align}
+	x_1^2 + x_2^2 + \cdots + x_n^2 &= a \label{eq:AppendixA-1}\\
+	rx_1^2 + x_2^2 + \cdots + x_n^2 &= a \label{eq:AppendixA-r}
+\end{align}
+in the variables $x_1,\ldots, x_n$, as $a \in \F_p$ varies. Let $f_n (a)$ denote the number of solutions to \eqref{eq:AppendixA-1} and $g_n (a)$ the number of solutions to \eqref{eq:AppendixA-r}.
+
+First we note that if $c \in \F_p$ is nonzero, then $f_n (a) = f_n (c^2 a)$ and $g_n (a) = g_n (c^2 a)$, because we can scale solutions by a factor of $c$. This means that the values of $f_n (a)$ and $g_n (a)$ depend only on the Legendre symbol $\legendre{a}{p}$, which we define now.
 \begin{defn}
 	The \emph{Legendre symbol} $\legendre{a}{p}$ is defined to be
 	\[
-		\legendre{a}{p} = \begin{cases}
-			0 & \text{if }a = 0,\\
-			1 & \text{if }a\text{ is a nonzero square mod }p, and\\
-			-1 & \text{if }a\text{ is not a square mod }p.
-		\end{cases}
+	\legendre{a}{p} = \begin{cases}
+	0 & \text{if }a = 0,\\
+	1 & \text{if }a\text{ is a nonzero square mod }p, \text{ and}\\
+	-1 & \text{if }a\text{ is not a square mod }p.
+	\end{cases}
 	\]
 \end{defn}
-Fix a non-square $r\in \F_p$. The only values that $f_n$ assumes are then $f_n(0)$, $f_n(1)$, and $f_n(r)$. We now give recursions for computing these values.
 
-We have
+Thus the values of interest are $f_n (0), f_n(1), f_n(r), g_n(0), g_n(1)$, and $g_n(r)$.
+
+Let us consider $f_n$ first. We have
 \begin{align*}
-	f_{n+1}(a) &= \sum_{i = 0}^{p-1} f_n(i) f_1(a-i)\\
-	&= f_n(0) f_1(a) + \sum_{i =1}^{p-1} f_n(i) f_1(a-i).
+	f_{n+1}(a) &= \left(1 + \legendre{a}{p}\right) f_n(0) + \sum_{i =1}^{p-1} \left(1 + \legendre{a-i}{p}\right)f_n(i) .
 \end{align*}
-Observe that
-\[
-	f_1(a) = 1+\legendre{a}{p}
-\]
-and, for $i \neq 0$,
+Observe that for $i \neq 0$,
 \[
 	f_n(i) = \frac{1}{2}\left[\left(1 + \legendre{i}{p}\right)f_n(1) + \left(1 - \legendre{i}{p}\right) f_n(r)\right].
 \]
-Substituting these into the expression for $f_{n+1}(a)$ gives (after some manipulation which we spare the reader)
+Using the facts that
+\begin{align*}
+	\sum_{i=1}^{p-1} \legendre{i}{p} &= 0,\\
+	\sum_{i=1}^{p-1} \legendre{a-i}{p} &= -\legendre{a}{i},\\
+	\sum_{i=1}^{p-1} \legendre{ai -i^2}{p} &= \sum_{i=1}^{p-1} \legendre{ai^{-1} - 1}{p} = \begin{cases}
+		-\legendre{-1}{p} & \text{if }a\neq 0, \text{ and}\\
+		(p-1)\legendre{-1}{p} & \text{if }a=0,
+	\end{cases}
+\end{align*}
+substituting the expression for $f_n(i)$ into the one for $f_{n+1}(a)$ gives (after some manipulation which we spare the reader)
+\begin{align*}
+	f_{n+1}(0) &= f_n(0) + \frac{p-1}{2}\left(1+\legendre{-1}{p}\right) f_n(1) + \frac{p-1}{2}\left(1-\legendre{-1}{p}\right) f_n(r)\\
+	f_{n+1}(1) &= 2f_n(0) + \frac{1}{2}\left(p-2-\legendre{-1}{p}\right) f_n(1) + \frac{1}{2}\left(p-2+\legendre{-1}{p}\right) f_n(r)\\
+	f_{n+1}(r) &= \frac{1}{2}\left(p-\legendre{-1}{p}\right) f_n(1) + \frac{1}{2}\left(p+\legendre{-1}{p}\right) f_n(r)
+\end{align*}
+Actually, $g_n$ satisfies the exact same recursions---just replace $f$ by $g$ throughout. The only difference is that it has different initial values:
+\[
+	f_1(0) = 1 ,\: f_1(1) = 2 ,\: f_1(r) = 0,
+\]
+while
+\[
+	g_1(0) = 1 ,\: g_1(1) = 0 ,\: g_1(r) = 2.
+\]
+For the reader who wishes to implement these recursions, we offer the following additional facts which may aid in the process:
+\begin{itemize}
+	\item Each point in $\F_p^n$ is a solution to \eqref{eq:AppendixA-1} for exactly one value of $a$, and likewise for \eqref{eq:AppendixA-r}. Thus
+	\begin{align*}
+		f_n(0) + \frac{p-1}{2}f_n(1) + \frac{p-1}{2}f_n(r) &= p^n,\\
+		g_n(0) + \frac{p-1}{2}g_n(1) + \frac{p-1}{2}g_n(r) &= p^n.
+	\end{align*}
+	\item We can multiply \eqref{eq:AppendixA-1} or \eqref{eq:AppendixA-r} by $r$ and then use the trick preceding \eqref{eq:Q1} in \S\ref{sec:partb} to turn an even number of non-square coefficients into square coefficients. This entails:
+	\begin{align*}
+		f_{2n}(1) &= f_{2n}(r),\\
+		g_{2n}(1) &= g_{2n}(r),\\
+		f_{2n+1}(1) &= g_{2n+1}(r),\\
+		g_{2n+1}(1) &= f_{2n+1}(r).
+	\end{align*}
+\end{itemize}
