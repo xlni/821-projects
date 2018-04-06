@@ -1,0 +1,18 @@
+\begin{thebibliography}{1}
+
+\bibitem{magma}
+Wieb Bosma, John Cannon, and Catherine Playoust.
+\newblock
+  \href{http://www.sciencedirect.com/science/article/pii/S074771719690125X}{The
+  Magma algebra system {I}: The user language}.
+\newblock {\em Journal of Symbolic Computation}, 24:235--265, 1997.
+
+\bibitem{omeara}
+O.~Timothy O'Meara.
+\newblock {\em
+  \href{https://link.springer.com/book/10.1007\%2F978-3-642-62031-7}{Introduction
+  to quadratic forms}}.
+\newblock Classics in Mathematics. Springer-Verlag, Berlin, 2000.
+\newblock Reprint of the 1973 edition.
+
+\end{thebibliography}

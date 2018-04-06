@@ -1,0 +1,9 @@
+\contentsline {section}{\tocsection {}{}{info}}{1}{section*.1}
+\contentsline {section}{\tocsection {}{1}{Introduction}}{2}{section.1}
+\contentsline {subsection}{\tocsubsection {}{}{Acknowledgments}}{3}{section*.3}
+\contentsline {section}{\tocsection {}{2}{Conical subsets of $V$}}{3}{section.2}
+\contentsline {section}{\tocsection {}{3}{Homogeneous quadratics in $n$ variables}}{5}{section.3}
+\contentsline {section}{\tocsection {}{4}{Homogeneous polynomials in 2 variables}}{8}{section.4}
+\contentsline {section}{\tocsection {}{5}{Nilpotent $n\times n$ matrices}}{10}{section.5}
+\contentsline {section}{\tocsection {Appendix}{A}{Counting solutions to a quadratic}}{17}{appendix.A}
+\contentsline {section}{\tocsection {Appendix}{}{References}}{18}{section*.9}
