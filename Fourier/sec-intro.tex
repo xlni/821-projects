@@ -39,25 +39,18 @@ finite Fourier transform.
         \sum_{x\in\F_p} \exp \left(\frac{2\pi i}{p} \lambda(x)\right) f(x). \]
 \end{defn}
 
-Our goal is to explore the effect of this transform on \emph{indicator functions}; for
-some fixed $\F_p$-vector space $V$, and a subset $S\subset V$, define
+It is evident from its definition that the Fourier transform is a \emph{linear} map from the space of $\C$-valued functions on $V$ to the space of $\C$-valued functions on $V^*$. In this paper, we will consider only finite-dimensional (and thus finite) $V$. Then, all functions on $V$ are linear combinations of indicator functions, where for a subset $S\subset V$ we define
 \[ \IND_S(x) = \begin{cases}
-    1 & x \in V \\
-    0 & \text{otherwise}     
+1 & x \in V \\
+0 & \text{otherwise.}     
 \end{cases} \]
-In this situation, the Fourier transform is somewhat simpler, and is entirely
-determined by what a functional $\lambda$ does on the subset $S$.
-\[ \Phi(\IND_S)(\lambda) = \sum_{x\in S} \exp \left(\frac{2\pi i}{p} \lambda(x)\right). \]
-Noting that $\IND_S = 1 - \IND_{V\setminus S}$, we can write the Fourier transform as
-\[ \Phi(\IND_S)(\lambda) = 1 - \sum_{x\not\in S} \exp \left(\frac{2\pi i}{p} \lambda(x)\right), \]
-which will be occasionally convenient. 
+Thus it is reasonable to focus on these functions specifically. One could take this to an extreme and compute the Fourier transform $\Phi(\IND_{\{v\}})$ for each $v\in V$, and then dismissively say that the Fourier transform of any function is just a linear combination of these:
+\[
+	\Phi(f) = \sum_{v\in V} f(v)\Phi(\IND_{\{v\}}).
+\]
 
-\begin{rem}
-    Throughout, for each vector space $V$, we implicitly pick an isomorphism 
-    $V\cong\F_p^n$, i.e., an explicit basis. This
-    entitles us to an inner product on $V$, as well as an isomorphism between $V$ and
-    $V^*$, where all functionals are of the form $x \mapsto \langle \lambda, x \rangle$
-    for some $\lambda\in V$. By abuse of notation, $\lambda$ also denotes the functional.
-\end{rem}
+While this is true, it alone is hardly an answer to the question ``what is $\Phi(f)$?'' As we will demonstrate in this paper, this question often admits a much more elegant answer than the above.
 
-TODO: summary of results.
+In what follows, we will exclusively consider $\Phi(\IND_S)$ for \emph{conical} subsets $S\subset V$, meaning that $S$ is preserved under scaling. We will see in \S\ref{sec:part0} that $\Phi(\IND_S)$ has a simpler description in this case, and also compute the Fourier transform for when $S$ is a subspace of $V$. In sections \S\ref{sec:part1} and \S\ref{sec:part2} we consider two situations in which $S$ is related to polynomial equations. Finally, in \S\ref{sec:part3} we analyze the case when $S$ is the set of nilpotent $n\times n$ matrices in the space $V$ of all $n\times n$ matrices.
+
+\textcolor{red}{put acknowledgments here}
