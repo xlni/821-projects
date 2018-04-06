@@ -1,9 +1,9 @@
 \section{Homogeneous quadratics in $n$ variables}\label{sec:part1}
-In this section we consider the case when
+In this section we consider the case when $V = \F_p^n$ and
 \[
 	S = \{(x_1,\ldots,x_n) \mid Q(x_1,\ldots,x_n) = 0\}
 \]
-where $Q$ is a homogeneous quadratic. In order to compute $\Phi(\IND_S)$, we must determine $|\ker \lambda \cap S|$ for given $\lambda \in V^*$. If we think of elements of $V$ as column vectors, then elements $\lambda \in V^*$ can be thought of as row vectors, with
+where $Q$ is a homogeneous quadratic. In order to compute $\Phi(\IND_S)$ using Lemma \ref{lem:FT-conical-subset}, we must determine $|\ker \lambda \cap S|$ given a $\lambda \in V^*$. If we think of elements of $V$ as column vectors, then elements $\lambda \in V^*$ can be thought of as row vectors, with
 \[
 	\ker \lambda = \langle \lambda \rangle^\bot = \{x \in V \mid \lambda x =0\}.
 \]
@@ -171,5 +171,5 @@ In Appendix \ref{sec:recursion-for-quadratic-solns} we give recursions $f_n, g_n
 	\[
 		N_- = \frac{pg_{n-1}(0) - f_n(0)}{p-1}.
 	\]
-	Actually, because $n$ is even, $f_{n-1}(0) = g_{n-1}(0)$ (c.f. Appendix \ref{sec:recursion-for-quadratic-solns}). So we in fact have $N_+ = N_-$.
+	If $n$ is even, then $f_{n-1}(0) = g_{n-1}(0)$ (c.f. Appendix \ref{sec:recursion-for-quadratic-solns}) and thus $N_+ = N_-$.
 \end{example}

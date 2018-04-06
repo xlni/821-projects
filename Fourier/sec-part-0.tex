@@ -1,5 +1,5 @@
 \section{Conical subsets of $V$}\label{sec:part0}
-\textcolor{red}{moved some stuff here from first section, will edit some later---need to put lemma in here somewhere}
+\textcolor{red}{moved some stuff here from first section, needs to be edited}
 
 In this situation, the Fourier transform is somewhat simpler, and is entirely
 determined by what a functional $\lambda$ does on the subset $S$.
@@ -7,6 +7,14 @@ determined by what a functional $\lambda$ does on the subset $S$.
 Noting that $\IND_S = 1 - \IND_{V\setminus S}$, we can write the Fourier transform as
 \[ \Phi(\IND_S)(\lambda) = 1 - \sum_{x\not\in S} \exp \left(\frac{2\pi i}{p} \lambda(x)\right), \]
 which will be occasionally convenient. 
+
+\textcolor{red}{need the below lemma for later parts too; I suggest you prove it and then use it to prove your thing about subspaces}
+\begin{lem}\label{lem:FT-conical-subset}
+	For a conical subset $S \subset V$,
+	\[
+	\Phi(\IND_S)(\lambda) = \frac{p|S \cap \ker \lambda| - |S|}{p-1}.
+	\]
+\end{lem}
 
 \begin{rem}
 	Throughout, for each vector space $V$, we implicitly pick an isomorphism 
@@ -49,7 +57,7 @@ it does to elements of $W$:
     \end{proof}
 \end{lem}
 We can now put these facts together to prove our result:
-\begin{thm}
+\begin{thm}\label{thm:FT-subspace}
     $\Phi(\IND_W) = |W| \IND_{W^\perp}$.
     \begin{proof}
         Given $\lambda\in V$, split it into orthogonal parts as $\lambda = w + w'$. Then,

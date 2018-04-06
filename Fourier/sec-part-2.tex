@@ -41,7 +41,7 @@ We will now give a very simple description of $\Phi(\IND_S)$.
 	\[
 		|S \cap \ker \lambda| = N
 	\]
-	and thus, by \textcolor{red}{(REFERENCE LEMMA)},
+	and thus, by Lemma \ref{lem:FT-conical-subset},
 	\begin{align*}
 		\Phi (\IND_S) (\lambda) &= \frac{p|S\cap \ker \lambda| - |S|}{p-1}\\
 		&= \frac{pN_\lambda - p^2}{p-1}.\qedhere
@@ -69,7 +69,7 @@ Using the fact that $S$ is the union of the above lines, we can write
 	\Phi(\IND_S) &= \Phi\left( \sum \IND_{\ell_i} - p\IND_{\{0\}} \right)\\
 	&= p\left(\sum \IND_{\ell_i^\bot} - \IND_{V^*}\right).
 \end{align*}
-where we have used the linearity of $\Phi$ together with \textcolor{red}{(REFERENCE)}. A polynomial $P$ is in $\ell_i^\bot$ when it vanishes on $\ell_i$. If $P$ vanishes at $N$ points in total, then it vanishes on $(N - 1)/(p-1)$ of the lines $\ell_i$. This gives another proof of Theorem \ref{thm:part2thm}.
+where we have used the linearity of $\Phi$ together with Theorem \ref{thm:FT-subspace}. A polynomial $P$ is in $\ell_i^\bot$ when it vanishes on $\ell_i$. If $P$ vanishes at $N$ points in total, then it vanishes on $(N - 1)/(p-1)$ of the lines $\ell_i$. This gives another proof of Theorem \ref{thm:part2thm}.
 
 What is the ``geometry'' of these hyperplanes $\ell_i^\bot$? If $n < p$ then clearly not all $p+1$ of the lines $\ell_i$ can be linearly independent. We claim, however, that every subset of size at most $n+1$ is indeed linearly independent.
 
