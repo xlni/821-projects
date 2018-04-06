@@ -1,2 +1,20 @@
-\section{$S$ is the solution set of a homogeneous quadratic}\label{sec:part2}
-placeholder
+\section{Homogeneous polynomials in 2 variables}\label{sec:part2}
+In the preceding section, we considered degree $2$ homogeneous polynomials in $n$ variables. Now we will instead consider degree $n$ homogeneous polynomials in $2$ variables. However, we will set things up quite differently.
+
+Let $\F_p[x,y]_n$ denote the space of homogeneous polynomials of degree $n$ over $\F_p$. It is an $(n+1)$-dimensional vector space, spanned by the basis elements
+\[
+	\{x^n, x^{n-1}y, \ldots, xy^{n-1}, y^n\}.
+\]
+Now define $V$ to be the dual space of this vector space:
+\[
+	V \coloneqq \left(\F_p[x,y]_n\right)^*.
+\]
+Of particular algebraic interest are the elements of $V$ which are given by \emph{evaluation}---these are the functionals of the form
+\[
+	\F_p[x,y]_n \ni P \mapsto P(a,b) \in \F_p
+\]
+for some $a,b\in \F_p$. However, this set is not conical for $n>1$. So we will instead let $S$ be the set
+\[
+	S=\{\xi_{a,b,c} \in V \mid \xi_{a,b,c}(P) = cP(a,b)\}.
+\]
+The Fourier transform of $\IND_S$ will be a $\C$-valued function on $V^*$, which is the double dual of $\F_p[x,y]_n$. Since $\F_p[x,y]_n$ is finite dimensional, it is canonically isomorphic to its double dual, so we will identify $V^* = \F_p[x,y]_n$.

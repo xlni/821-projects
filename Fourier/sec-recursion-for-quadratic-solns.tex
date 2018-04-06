@@ -40,9 +40,9 @@ Using the facts that
 \end{align*}
 substituting the expression for $f_n(i)$ into the one for $f_{n+1}(a)$ gives (after some manipulation which we spare the reader)
 \begin{align*}
-	f_{n+1}(0) &= f_n(0) + \frac{p-1}{2}\left(1+\legendre{-1}{p}\right) f_n(1) + \frac{p-1}{2}\left(1-\legendre{-1}{p}\right) f_n(r)\\
-	f_{n+1}(1) &= 2f_n(0) + \frac{1}{2}\left(p-2-\legendre{-1}{p}\right) f_n(1) + \frac{1}{2}\left(p-2+\legendre{-1}{p}\right) f_n(r)\\
-	f_{n+1}(r) &= \frac{1}{2}\left(p-\legendre{-1}{p}\right) f_n(1) + \frac{1}{2}\left(p+\legendre{-1}{p}\right) f_n(r)
+	f_{n+1}(0) &= f_n(0) + \frac{p-1}{2}\left(1+\legendre{-1}{p}\right) f_n(1) + \frac{p-1}{2}\left(1-\legendre{-1}{p}\right) f_n(r),\\
+	f_{n+1}(1) &= 2f_n(0) + \frac{1}{2}\left(p-2-\legendre{-1}{p}\right) f_n(1) + \frac{1}{2}\left(p-2+\legendre{-1}{p}\right) f_n(r),\\
+	f_{n+1}(r) &= \frac{1}{2}\left(p-\legendre{-1}{p}\right) f_n(1) + \frac{1}{2}\left(p+\legendre{-1}{p}\right) f_n(r).
 \end{align*}
 Actually, $g_n$ satisfies the exact same recursions---just replace $f$ by $g$ throughout. The only difference is that it has different initial values:
 \[
