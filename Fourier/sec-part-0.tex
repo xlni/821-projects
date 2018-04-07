@@ -1,31 +1,61 @@
 \section{Conical subsets of $V$}\label{sec:part0}
-\textcolor{red}{moved some stuff here from first section, needs to be edited}
 
-In this situation, the Fourier transform is somewhat simpler, and is entirely
-determined by what a functional $\lambda$ does on the subset $S$.
-\[ \Phi(\IND_S)(\lambda) = \sum_{x\in S} \exp \left(\frac{2\pi i}{p} \lambda(x)\right). \]
-Noting that $\IND_S = 1 - \IND_{V\setminus S}$, we can write the Fourier transform as
-\[ \Phi(\IND_S)(\lambda) = 1 - \sum_{x\not\in S} \exp \left(\frac{2\pi i}{p} \lambda(x)\right), \]
-which will be occasionally convenient. 
-
-\textcolor{red}{need the below lemma for later parts too; I suggest you prove it and then use it to prove your thing about subspaces}
-\begin{lem}\label{lem:FT-conical-subset}
-	For a conical subset $S \subset V$,
-	\[
-	\Phi(\IND_S)(\lambda) = \frac{p|S \cap \ker \lambda| - |S|}{p-1}.
-	\]
-\end{lem}
-
-\begin{rem}
-	Throughout, for each vector space $V$, we implicitly pick an isomorphism 
+Let $V$ be an $\F_p$ vector space.
+Throughout the rest of paper, for all such $V$, we implicitly pick an isomorphism 
 	$V\cong\F_p^n$, i.e., an explicit basis. This
 	entitles us to an inner product on $V$, as well as an isomorphism between $V$ and
 	$V^*$, where all functionals are of the form $x \mapsto \langle \lambda, x \rangle$
 	for some $\lambda\in V$. By abuse of notation, $\lambda$ also denotes the functional.
-\end{rem}
 
-Let us being with a warmup. Consider the case of a subspace $W$ of our vector space $V$.
-A classical theorem of linear algebra allows us to decompose $V$:
+We are interested in indicator functions of conical subsets of $V$:
+\begin{defn}
+    A subset $S\subset V$ is called \emph{conical} if it is closed under scaling,
+    i.e., for all $x\in \F_p$, $xS = S$.    
+\end{defn}
+Since we're studying indicator functions, we can simplify our expression for 
+$\Phi(\IND_S)$:
+\[ \Phi(\IND_S)(\lambda) = \sum_{x\in S} \exp \left(\frac{2\pi i}{p} \lambda(x)\right). \]
+Noting that $\IND_S = 1 - \IND_{V\setminus S}$, we can further write the Fourier transform as
+\[ \Phi(\IND_S)(\lambda) = 1 - \sum_{x\not\in S} \exp \left(\frac{2\pi i}{p} \lambda(x)\right), \]
+which will be occasionally convenient. The following lemma further reduces this expression,
+which will be useful throughout the paper.
+\begin{lem}\label{lem:FT-conical-subset}
+	For a conical subset $S \subset V$,
+	\[ \Phi(\IND_S)(\lambda) = \frac{p|S \cap \ker \lambda| - |S|}{p-1}. \]
+	\begin{proof}
+	   The key insight is that a conical set can be viewed as a collection of lines.
+	   Define $S\P = (S\setminus\{0\}) / {\sim}$, where we declare that 
+	   $x \sim a x$, for all $a\in\F_p^\times$ and
+	   $x\in S$ (as one might define projective space). Let $[x]$ denote the class
+	   of $x$ in $S\P$. We can then write the Fourier transform as follows:
+	   \[ \Phi(\IND_S)(\lambda) = 
+	           1 + \sum_{[x]\in S\P} 
+	               \sum_{a\in\F_p^\times} \exp \left(\frac{2\pi i a}{p} \lambda(x)\right) \]
+	   If $\lambda(x)$ vanishes, then the inner sum is just $p-1$; if it doesn't, then it's
+	   a sum of equal powers of all the roots of unity, except $1$, so the inner sum is $-1$.
+	   Thus,
+	   \begin{eqnarray*}
+	       \Phi(\IND_S)(\lambda)
+	       &=& 1 + 
+	           (p-1)|S\P \cap \ker \lambda| - 
+	           |S\P \setminus \ker\lambda| \\
+	       &=& 1 + 
+	           (p-1)|S\P \cap \ker \lambda| - 
+	           (|S\P| - |S\P \cap \ker\lambda|) \\
+	       &=& 1 + 
+	           p|S\P \cap \ker \lambda| - |S\P|
+	   \end{eqnarray*}
+	   Note now that $|S\P| = \frac{|S| - 1}{p-1}$, by definition. If we substitute
+	   this in, we find that 
+	   \[ \Phi(\IND_S)(\lambda) = \frac{p|S \cap \ker \lambda| - |S|}{p-1}, \]
+	   as desired.
+	\end{proof}
+\end{lem}
+
+The simplest conical set is a linear subspace $W$ of $V$.
+To show the power of Lemma \ref{lem:FT-conical-subset}, we use it to compute $\IND_W$
+as a warmup. We'll need a classical theorem of linear algebra allows us to decompose $V$
+along $W$:
 \begin{prop}
     The \emph{orthogonal complement} of $W$ is the subspace    
     \[ W^\perp = \{ v \in V \,|\, \langle v, w \rangle = 0 \text{ for all } w \in W \}. \]
@@ -33,42 +63,17 @@ A classical theorem of linear algebra allows us to decompose $V$:
     and $w'\in W^\perp$.
 \end{prop}
 
-Before we consider the Fourier transform over the whole space $V$, consider what
-it does to elements of $W$:
-\begin{lem}
-    \label{lem:subspace-transform-on-subspace}
-    Suppose $\lambda\in W$ is nonzero. Then, $\Phi(\IND_W)(\lambda) = 0$.
-    \begin{proof}
-        We prove this by induction on the dimension of $W$. Fix any element $w\in W$,
-        and let $U\subset W$ be the line spanned by it. Then,   
-        \[ \Phi(\IND_W)(\lambda) = 
-            \sum_{x\in W/U} 
-                \exp \left(\frac{2\pi i}{p} \langle \lambda, x \rangle\right) +
-            \sum_{x\in U} 
-                \exp \left(\frac{2\pi i}{p} \langle \lambda, x \rangle\right). \]
-        It is easy to see that the rightmost term is zero:
-        \[ \sum_{x\in U} 
-                \exp \left(\frac{2\pi i}{p} \langle \lambda, x \rangle\right) =
-            \sum_{x\in \F_p} 
-                \exp \left(\frac{2\pi i}{p} x \langle \lambda, w \rangle\right) = 0,
-                \]
-        since $\langle \lambda, w \rangle \neq 0$. Since the dimension of $W/U$ is less
-        than that of $W$, we can continue repeating this process until there's nothing left.
-    \end{proof}
-\end{lem}
-We can now put these facts together to prove our result:
 \begin{thm}\label{thm:FT-subspace}
     $\Phi(\IND_W) = |W| \IND_{W^\perp}$.
     \begin{proof}
-        Given $\lambda\in V$, split it into orthogonal parts as $\lambda = w + w'$. Then,
-        \[ \Phi(\IND_W)(w + w') = 
-            \sum_{x\in W} 
-                \exp \left(\frac{2\pi i}{p} \langle w + w', x \rangle\right) = 
-            \sum_{x\in W} 
-                \exp \left(\frac{2\pi i}{p} \langle w, x \rangle\right). \]
-        If $w\neq 0$, by Lemma \ref{lem:subspace-transform-on-subspace}, the whole
-        sum will vanish; otherwise, the exponent will be constantly $1$, and add up to
-        $|W|$. In the case that $w = 0$, $\lambda\in W^\perp$, as desired.
+        By Lemma \ref{lem:FT-conical-subset}, we need only compute what 
+        $|W\cap\ker\lambda|$. We can split $\lambda$ into orthogonal parts $w + w'$.
+        Then, for $x\in W$,
+        \[ \langle w + w', x \rangle = \langle w, x \rangle + \langle w', x \rangle
+            = \langle w, x \rangle. \]
+        Thus, $x\in W\cap\ker\lambda$ iff $w = 0$, i.e., $\lambda\in W^\perp$. Since
+        this is independent of $x$, $W\cap\ker\lambda$ is either all of $W$ or zero,
+        depending on if $\lambda$ is in $W^\perp$ or not. Plugging this into the
+        formula of Lemma \ref{lem:FT-conical-subset} gives our result.
     \end{proof}
 \end{thm}
-TODO: geometric intution?
