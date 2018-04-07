@@ -1,5 +1,5 @@
 \section{Homogeneous quadratics in $n$ variables}\label{sec:part1}
-In this section we consider the case when $V = \F_p^n$ and
+Having established the needed groundwork in the preceding section, we move on to computing examples of the Fourier transform $\Phi(\IND_S)$. In this section we consider the case when $V = \F_p^n$ and
 \[
 	S = \{(x_1,\ldots,x_n) \mid Q(x_1,\ldots,x_n) = 0\}
 \]
@@ -8,7 +8,7 @@ where $Q$ is a homogeneous quadratic. In order to compute $\Phi(\IND_S)$ using L
 	\ker \lambda = \langle \lambda \rangle^\bot = \{x \in V \mid \lambda x =0\}.
 \]
 
-We begin with an illustrative example over the reals before considering the situation over $\F_p$. Let $Q = 3x_1^2 + 3x_2^2 - 2x_3^2$. The conic $S = \{Q = 0\}$ is depicted in Figure~\ref{fig:conic-with-plane}.
+We begin with an illustrative example over the reals before considering the situation over $\F_p$. Let $Q = 3x_1^2 + 3x_2^2 - 2x_3^2$. The quadric $S = \{Q = 0\}$ is depicted in Figure~\ref{fig:conic-with-plane}.
 \begin{figure}[h]
 	\centering
 	\includegraphics[width=0.6\linewidth]{conic-with-plane}
@@ -19,13 +19,13 @@ The intersection $\langle \lambda \rangle^\bot \cap S$ has three possible shapes
 \begin{itemize}
 	\item a pair of lines intersecting at the origin (which is the case depicted with $\lambda = (0,-2,1)$),
 	\item the origin alone (e.g. $\lambda = (0,0,1)$), and
-	\item a single line, which happens when $\langle \lambda \rangle^\bot$ is tangent to the conic (e.g. $\lambda = (0,-\sqrt{3},\sqrt{2})$).
+	\item a single line, which happens when $\langle \lambda \rangle^\bot$ is tangent to the quadric (e.g. $\lambda = (0,-\sqrt{3},\sqrt{2})$).
 \end{itemize}
-In fact, the set of $\lambda$ such that $\langle \lambda \rangle^\bot$ is tangent to the conic is given by
+In fact, the set of $\lambda$ such that $\langle \lambda \rangle^\bot$ is tangent to the quadric is given by
 \[
 	\left\{ \lambda = (\lambda_1,\lambda_2,\lambda_3) \mid \frac{1}{3} \lambda_1^2 + \frac{1}{3} \lambda_2^2 - \frac{1}{2} \lambda_3^2 = 0 \right\} \subset V^*.
 \]
-This is a conic in $V^*$, and it is dual to our original conic in a sense that we will soon explain. Let us we write $Q^*$ for the equation of this dual conic. Observe that $Q^*(0,-2,1) > 0$ while $Q^*(0,0,1) < 0$. It turns out that the sign of $Q^*(\lambda)$ is all one needs to classify the intersection $\langle \lambda \rangle^\bot \cap S$. Equivalently, one needs only consider the existence of square-roots of $Q^*(\lambda)$---a notion which, unlike ``sign,'' still makes sense over $\F_p$.
+This is a quadric in $V^*$, and it is dual to our original quadric in a sense that we will soon explain. Let us we write $Q^*$ for the equation of this dual quadric. Observe that $Q^*(0,-2,1) > 0$ while $Q^*(0,0,1) < 0$. It turns out that the sign of $Q^*(\lambda)$ is all one needs to classify the intersection $\langle \lambda \rangle^\bot \cap S$. Equivalently, one needs only consider the existence of square-roots of $Q^*(\lambda)$---a notion which, unlike ``sign,'' still makes sense over $\F_p$.
 
 Now we consider the general situation in $n$ variables over a field $k$. We will require that $\operatorname{char} k \neq 2$, and that the product of two non-squares in $k$ is a square. The fields $\Q$, $\R$, and $\F_p$ for $p>2$ are examples. To a homogeneous quadratic
 \[
@@ -43,7 +43,7 @@ Then, if $x = (x_1,\ldots,x_n)^\top$, we have
 \[
 	Q(x) = x^\top A x.
 \]
-The conic $S = \{Q = 0\}$ is \emph{non-degenerate} if the matrix $A$ is invertible. We will assume that this is the case.
+The quadric $S = \{Q = 0\}$ is \emph{non-degenerate} if the matrix $A$ is invertible. We will assume that this is the case.
 
 \begin{defn}
 	The \emph{orthogonal group of $A$}, denoted $O(A)$, is defined to be
@@ -98,22 +98,27 @@ Thus we get a map
 \]
 which is a bijection.
 
-Specializing back to $k=\F_p$ for $p>2$ a prime, we conclude that $\Phi(\IND_S)$ assumes only a few values: specifically, it has the form
-\begin{equation}\label{eq:FT-quadratic-constants-TBD}
+Specializing back to $k=\F_p$ for $p>2$ a prime, we conclude that $\Phi(\IND_S)$ assumes only a few values.
+
+\begin{thm}\label{thm:FT-quadratic-constants-TBD}
+	Let $p > 2$ be a prime and let $Q(x_1,\ldots,x_n)$ be a homogeneous non-degenerate quadratic. Write $S$ for the quadric $\{Q = 0\}$ in $V=\F_p^n$. Then,
+	\begin{equation}
 	\Phi(\IND_S)(\lambda) = \begin{cases}
-		\Phi(\IND_S)(0) & \text{if } \lambda = 0,\\
-		N_0 & \text{if } \lambda \in S_0(A^{-1}),\\
-		N_+ & \text{if } \lambda \in S_+(A^{-1}), \text{ and}\\
-		N_- & \text{if } \lambda \in S_-(A^{-1}),
+	\Phi(\IND_S)(0) & \text{if } \lambda = 0,\\
+	N_0 & \text{if } \lambda \in S_0(A^{-1}),\\
+	N_+ & \text{if } \lambda \in S_+(A^{-1}), \text{ and}\\
+	N_- & \text{if } \lambda \in S_-(A^{-1}),
 	\end{cases}
-\end{equation}
-for constants $\Phi(\IND_S)(0), N_0, N_+, N_-$ to be determined. Let $Q^*$ be the quadratic given by
+	\end{equation}
+	for some constants $N_0$, $N_+$, and $N_-$.
+\end{thm}
+Let $Q^*$ be the quadratic given by
 \[
 	Q^*(\lambda) = \lambda A^{-1} \lambda^\top.
 \]
 Then the above equivalently states that for nonzero $\lambda$, the value of $\Phi(\IND_S)(\lambda)$ depends only on the number of square roots of $Q^*(\lambda)$.
 
-Now we compute the constants in \eqref{eq:FT-quadratic-constants-TBD}. It is a well-known fact (see for example \cite[Prop.~42:1]{omeara}) that there exists an invertible $n\times n$ matrix $P$ such that $P^\top A P$ is diagonal. The matrix $P$ defines a change of coordinates, where in the new coordinates the equation of the quadric is
+Now we compute the constants in Theorem \ref{thm:FT-quadratic-constants-TBD}. It is a well-known fact (see for example \cite[Prop.~42:1]{omeara}) that there exists an invertible $n\times n$ matrix $P$ such that $P^\top A P$ is diagonal. The matrix $P$ defines a change of coordinates, where in the new coordinates the equation of the quadric is
 \[
 x^\top P^\top A P x = 0.
 \]
@@ -132,7 +137,7 @@ This shows that we can reduce to the two following forms:
 x_1^2 + x_2^2 + \cdots + x_n^2 &= 0\text{ or} \tag{Q1}\label{eq:Q1}\\ 
 rx_1^2 + x_2^2 + \cdots + x_n^2 &= 0. \tag{Q2}\label{eq:Q2}
 \end{align}
-In Appendix \ref{sec:recursion-for-quadratic-solns} we give recursions $f_n, g_n$ for computing the number of solutions to such equations. We conclude this section by giving an example of how to compute the constants in \eqref{eq:FT-quadratic-constants-TBD} from $f_n$ and $g_n$.
+In Appendix \ref{sec:recursion-for-quadratic-solns} we give recursions $f_n, g_n$ for computing the number of solutions to such equations. We conclude this section by giving an example of how to compute the constants in Theorem \ref{thm:FT-quadratic-constants-TBD} from $f_n$ and $g_n$.
 
 \begin{example}
 	Suppose our equation is to the form \eqref{eq:Q1} and $-1$ is a square mod $p$. Then $\Phi(\IND_S)(0)$ is the total number of points on the quadric, which in this case is $f_n (0)$:
