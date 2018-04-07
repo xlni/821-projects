@@ -39,7 +39,7 @@ finite Fourier transform.
         \sum_{x\in\F_p} \exp \left(\frac{2\pi i}{p} \lambda(x)\right) f(x). \]
 \end{defn}
 
-It is evident from its definition that the Fourier transform is a \emph{linear} map from the space of $\C$-valued functions on $V$ to the space of $\C$-valued functions on $V^*$. In this paper, we will consider only finite-dimensional (and thus finite) $V$. Then, all functions on $V$ are linear combinations of indicator functions, where for a subset $S\subset V$ we define
+It is evident from its definition that the Fourier transform is a \emph{linear} map from the space of $\C$-valued functions on $V$ to the space of $\C$-valued functions on $V^*$. In this paper, we will consider only finite-dimensional (and thus finite) $V$. Then, all functions on $V$ are complex linear combinations of indicator functions, where for a subset $S\subset V$ we define
 \[ \IND_S(x) = \begin{cases}
 1 & x \in V \\
 0 & \text{otherwise.}     
@@ -50,6 +50,7 @@ Thus it is reasonable to focus on these functions specifically. One could take t
 \]
 
 While this is true, it alone is hardly an answer to the question ``what is $\Phi(f)$?'' As we will demonstrate in this paper, this question often admits a much more elegant answer than the above.
+
 
 In what follows, we will exclusively consider $\Phi(\IND_S)$ for \emph{conical} subsets $S\subset V$, meaning that $S$ is preserved under scaling. We will see in \S\ref{sec:part0} that $\Phi(\IND_S)$ has a simpler description in this case, and also compute the Fourier transform for when $S$ is a subspace of $V$. In sections \S\ref{sec:part1} and \S\ref{sec:part2} we consider two situations in which $S$ is related to polynomial equations. Finally, in \S\ref{sec:part3} we analyze the case when $S$ is the set of nilpotent $n\times n$ matrices in the space $V$ of all $n\times n$ matrices.
 
