@@ -8,24 +8,24 @@ where $Q$ is a homogeneous quadratic. In order to compute $\Phi(\IND_S)$ using L
 	\ker \lambda = \langle \lambda \rangle^\bot = \{x \in V \mid \lambda x =0\}.
 \]
 
-We begin with an illustrative example over the reals before considering the situation over $\F_p$. Let $Q = 3x_1^2 + 3x_2^2 - 2x_3^2$. The quadric $S = \{Q = 0\}$ is depicted in Figure~\ref{fig:conic-with-plane}.
-\begin{figure}[h]
-	\centering
-	\includegraphics[width=0.6\linewidth]{conic-with-plane}
-	\caption{}
-	\label{fig:conic-with-plane}
-\end{figure}
+We begin with an illustrative example over the reals before considering the situation over $\F_p$. Let $Q = 3x_1^2 + 3x_2^2 - 2x_3^2$.
 The intersection $\langle \lambda \rangle^\bot \cap S$ has three possible shapes:
 \begin{itemize}
-	\item a pair of lines intersecting at the origin (which is the case depicted with $\lambda = (0,-2,1)$),
+	\item a pair of lines intersecting at the origin (which depicted in Figure~\ref{fig:conic-with-plane} with $\lambda = (0,-2,1)$),
 	\item the origin alone (e.g. $\lambda = (0,0,1)$), and
 	\item a single line, which happens when $\langle \lambda \rangle^\bot$ is tangent to the quadric (e.g. $\lambda = (0,-\sqrt{3},\sqrt{2})$).
 \end{itemize}
+\begin{figure}[h]
+	\centering
+	\includegraphics[width=0.6\linewidth]{conic-with-plane}
+	\caption{When $\lambda=(0,-2,1)$, the intersection of $S = \{3x_1^2 + 2x_2^2 - 2x_3^2 = 0\}$ with the hyperplane $\langle \lambda \rangle^\bot$ is a pair of lines through the origin.}
+	\label{fig:conic-with-plane}
+\end{figure}
 In fact, the set of $\lambda$ such that $\langle \lambda \rangle^\bot$ is tangent to the quadric is given by
 \[
 	\left\{ \lambda = (\lambda_1,\lambda_2,\lambda_3) \mid \frac{1}{3} \lambda_1^2 + \frac{1}{3} \lambda_2^2 - \frac{1}{2} \lambda_3^2 = 0 \right\} \subset V^*.
 \]
-This is a quadric in $V^*$, and it is dual to our original quadric in a sense that we will soon explain. Let us we write $Q^*$ for the equation of this dual quadric. Observe that $Q^*(0,-2,1) > 0$ while $Q^*(0,0,1) < 0$. It turns out that the sign of $Q^*(\lambda)$ is all one needs to classify the intersection $\langle \lambda \rangle^\bot \cap S$. Equivalently, one needs only consider the existence of square-roots of $Q^*(\lambda)$---a notion which, unlike ``sign,'' still makes sense over $\F_p$.
+This is a quadric in $V^*$, and it is dual to our original quadric in a sense that we will soon explain. Let us write $Q^*$ for the equation of this dual quadric. Observe that $Q^*(0,-2,1) > 0$ while $Q^*(0,0,1) < 0$. It turns out that the sign of $Q^*(\lambda)$ is all one needs to classify the intersection $\langle \lambda \rangle^\bot \cap S$. Equivalently, one needs only consider the existence of square-roots of $Q^*(\lambda)$---a notion which, unlike ``sign,'' still makes sense over $\F_p$.
 
 Now we consider the general situation in $n$ variables over a field $k$. We will require that $\operatorname{char} k \neq 2$, and that the product of two non-squares in $k$ is a square. The fields $\Q$, $\R$, and $\F_p$ for $p>2$ are examples. To a homogeneous quadratic
 \[
@@ -140,15 +140,15 @@ rx_1^2 + x_2^2 + \cdots + x_n^2 &= 0. \tag{Q2}\label{eq:Q2}
 In Appendix \ref{sec:recursion-for-quadratic-solns} we give recursions $f_n, g_n$ for computing the number of solutions to such equations. We conclude this section by giving an example of how to compute the constants in Theorem \ref{thm:FT-quadratic-constants-TBD} from $f_n$ and $g_n$.
 
 \begin{example}
-	Suppose our equation is to the form \eqref{eq:Q1} and $-1$ is a square mod $p$. Then $\Phi(\IND_S)(0)$ is the total number of points on the quadric, which in this case is $f_n (0)$:
+	Suppose our equation is of the form \eqref{eq:Q1} and $-1$ is a square mod $p$. Then $\Phi(\IND_S)(0)$ is the total number of points on the quadric, which in this case is $f_n (0)$:
 	\[
 		\Phi(\IND_S)(0) = f_n(0).
 	\]
 	To compute $N_0$, observe that \eqref{eq:Q1} is equivalent to
-	\[
+	\begin{equation}\label{eq:Q1-1equiv}
 		-x_1^2 + x_2^2 + \cdots + x_n^2 = 0
-	\]
-	because $-1$ is a square. Consider $\lambda = (1,1,0,0,\ldots,0)$. Its kernel is the hyperplane $\{x_1 + x_2 = 0\}$. Substituting $x_1 = -x_2$ into the above gives
+	\end{equation}
+	because $-1$ is a square. Consider $\lambda = (1,1,0,0,\ldots,0)$. Its kernel is the hyperplane $\{x_1 + x_2 = 0\}$. Substituting $x_1 = -x_2$ into \eqref{eq:Q1-1equiv} gives
 	\[
 	x_3^2 + \cdots + x_n^2 = 0.
 	\]
@@ -165,10 +165,10 @@ In Appendix \ref{sec:recursion-for-quadratic-solns} we give recursions $f_n, g_n
 	N_+ = \frac{p f_{n-1}(0) - f_n(0)}{p-1}.
 	\]
 	Finally, to compute $N_-$, we note that \eqref{eq:Q1} is also equivalent to the quadric
-	\[
+	\begin{equation}\label{eq:Q1rrequiv}
 		rx_1^2 + rx_2^2 + x_3^2 + \cdots + x_n^2 = 0
-	\]
-	and we can take $\lambda = (1,0,0,\ldots,0)$ and consider the intersection of its kernel with this quadric. Setting $\{x_1 = 0\}$ gives the equation
+	\end{equation}
+	and we can take $\lambda = (1,0,0,\ldots,0)$ and consider the intersection of its kernel with this quadric. Setting $\{x_1 = 0\}$ in \eqref{eq:Q1rrequiv} gives the equation
 	\[
 		rx_2^2 + x_3^2 + \cdots + x_n^2 = 0
 	\]
