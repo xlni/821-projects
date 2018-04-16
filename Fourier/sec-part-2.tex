@@ -9,11 +9,17 @@ Now define $V$ to be the dual space of this vector space:
 \[
 	V \coloneqq \left(\F_p[x,y]_n\right)^*.
 \]
-Of particular algebraic interest are the elements of $V$ which are given by \emph{evaluation}---these are the functionals of the form
+Of particular algebraic interest are the elements of $V$ which are given by \emph{evaluation} at a point---these are the functionals $ev_{a,b}\colon \F_p[x,y]_n \to \F_p$ of the form
 \[
-	\F_p[x,y]_n \ni P \mapsto P(a,b) \in \F_p
+	ev_{a,b}(P) = P(a,b) 
 \]
-for some $a,b\in \F_p$. However, this set is not conical for $n>1$. So we will instead let $S$ be the set
+for some $a,b\in \F_p$.
+
+However, the set of all $ev_{a,b}$ need not be conical: consider
+\[
+	2ev_{1,0} \in \F_3[x,y]_2.
+\]
+This functional at $P(x,y) = x^2$ takes the value $2$, but $2\in \F_3$ is not a square and thus $2ev_{1,0}$ cannot be equal to $ev_{a,b}$ for any $a,b\in \F_3$. To get around this, we will instead let $S$ be the set
 \[
 	S=\{\xi_{a,b,c} \in V \mid \xi_{a,b,c}(P) = cP(a,b)\}.
 \]
@@ -70,3 +76,5 @@ Using the fact that $S$ is the union of the above lines, we can write
 where we have used the linearity of $\Phi$ together with Theorem \ref{thm:FT-subspace}. A polynomial $P$ is in $\ell_i^\bot$ when it vanishes on $\ell_i$. If $P$ vanishes at $N$ points in total, then it vanishes on $(N - 1)/(p-1)$ of the lines $\ell_i$. This gives another proof of Theorem \ref{thm:part2thm}.
 
 What is the ``geometry'' of these hyperplanes $\ell_i^\bot$? If $n < p$ then clearly not all $p+1$ of the lines $\ell_i$ can be linearly independent. We claim, however, that every subset of size at most $n+1$ is indeed linearly independent. A way of seeing this is by noting that the Vandermonde determinant is nonzero. Alternatively, one can explicitly produce a polynomial $P \in \F_p[x,y]_n$ which vanishes on $n$ given lines but not on the others. On the other hand, if an element of $\F_p[x,y]_n$ vanishes on $n+1$ of the lines, then in fact it vanishes on all of the lines. This is entirely what we expect: dividing the polynomial by $y^n$ gives a univariate polynomial in $(x/y)$ of degree at most $n$. If such a polynomial has $n+1$ roots, then it is identically zero.
+
+\textcolor{red}{need to add summary}

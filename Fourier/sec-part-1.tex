@@ -1,9 +1,9 @@
 \section{Homogeneous quadratics in $n$ variables}\label{sec:part1}
-Having established the needed groundwork in the preceding section, we move on to computing examples of the Fourier transform $\Phi(\IND_S)$. In this section we consider the case when $V = \F_p^n$ and
+Lemma \ref{lem:FT-conical-subset} is a powerful tool which, for conical $S$, reduces the computation of $\Phi(\IND_S)$ to a counting problem. Having established this useful groundwork, we move on to computing examples of $\Phi(\IND_S)$. In this section we consider the case when $V = \F_p^n$ and $S \subset V$ is a quadric defined by
 \[
 	S = \{(x_1,\ldots,x_n) \mid Q(x_1,\ldots,x_n) = 0\}
 \]
-where $Q$ is a homogeneous quadratic. In order to compute $\Phi(\IND_S)$ using Lemma \ref{lem:FT-conical-subset}, we must determine $|\ker \lambda \cap S|$ given a $\lambda \in V^*$. If we think of elements of $V$ as column vectors, then elements $\lambda \in V^*$ can be thought of as row vectors, with
+where $Q$ is a homogeneous quadratic. The set $S$ is conical because $Q$ is homogeneous, and in view of Lemma \ref{lem:FT-conical-subset}, our task is to determine $|\ker \lambda \cap S|$ given a $\lambda \in V^*$. If we write elements of $V$ as column vectors, then elements $\lambda \in V^*$ can be represented as row vectors, with
 \[
 	\ker \lambda = \langle \lambda \rangle^\bot = \{x \in V \mid \lambda x =0\}.
 \]
@@ -11,7 +11,7 @@ where $Q$ is a homogeneous quadratic. In order to compute $\Phi(\IND_S)$ using L
 We begin with an illustrative example over the reals before considering the situation over $\F_p$. Let $Q = 3x_1^2 + 3x_2^2 - 2x_3^2$.
 The intersection $\langle \lambda \rangle^\bot \cap S$ has three possible shapes:
 \begin{itemize}
-	\item a pair of lines intersecting at the origin (which depicted in Figure~\ref{fig:conic-with-plane} with $\lambda = (0,-2,1)$),
+	\item a pair of lines intersecting at the origin (which is depicted in Figure~\ref{fig:conic-with-plane} with $\lambda = (0,-2,1)$),
 	\item the origin alone (e.g. $\lambda = (0,0,1)$), and
 	\item a single line, which happens when $\langle \lambda \rangle^\bot$ is tangent to the quadric (e.g. $\lambda = (0,-\sqrt{3},\sqrt{2})$).
 \end{itemize}
@@ -45,6 +45,11 @@ Then, if $x = (x_1,\ldots,x_n)^\top$, we have
 \]
 The quadric $S = \{Q = 0\}$ is \emph{non-degenerate} if the matrix $A$ is invertible. We will assume that this is the case.
 
+Suppose $g \in GL(V)$ is an invertible linear operator on $V$ such that $g(S) = S$; i.e. it induces a bijection of $S$ with itself. If $\xi \in V^*$, the identity $(g^\top \xi)^\top x = \xi^\top (gx)$ shows that $g$ also induces a bijection of $\langle g^\top \xi \rangle^\bot$ with $\langle \xi \rangle^\bot$. Therefore we obtain a bijection
+\begin{equation}\label{eq:S-operator-hyperplane-bijection}
+	g\colon S \cap \langle g^\top \xi \rangle^\bot \to S \cap \langle \xi \rangle^\bot.
+\end{equation}
+Our interest in these operators $g$ motivates the following definition.
 \begin{defn}
 	The \emph{orthogonal group of $A$}, denoted $O(A)$, is defined to be
 	\[
@@ -55,8 +60,7 @@ The quadric $S = \{Q = 0\}$ is \emph{non-degenerate} if the matrix $A$ is invert
 		kO(A) \coloneqq \{ cg \mid c\in k, g\in O(A)\}.
 	\]
 \end{defn}
-
-We are interested in this group because elements of $kO(A)$ map $S$ to itself.
+By construction, elements of $O(A)$ map $S$ bijectively to itself. Elements of $kO(A)$ do as well, because $S$ is conical. The action of $kO(A)$ on $V$ has another important feature which we now discuss. 
 \begin{defn}
 	A group $G$ acts \emph{transitively} on a set $X$ if for all $a,b\in X$, there exists $g\in G$ such that $g\cdot a = b$. Equivalently, the only orbit of the action is the entirety of $X$.
 \end{defn}
@@ -92,7 +96,7 @@ Now suppose that $\lambda^\top,\lambda'^\top$ both belong to $S_0(A^{-1})$ (the 
 \]
 and thus $(g^\top)^{-1}$ maps $\langle \lambda \rangle^\bot$ to $\langle \lambda' \rangle^\bot$. Moreover, since $g \in O(A^{-1})$, inverting the identity $g^\top A^{-1} g = A^{-1}$ shows that $(g^\top)^{-1} \in O(A)$.
 
-Thus we get a map
+Thus as in \eqref{eq:S-operator-hyperplane-bijection} we get a map
 \[
 	(g^\top)^{-1} \colon S \cap \langle \lambda \rangle^\bot \to S \cap \langle \lambda' \rangle^\bot
 \]
@@ -131,6 +135,8 @@ where all the $c_i$ are nonzero because we assumed $A$ to be invertible.
 Fix a non-square $r\in \F_p$. For each $c_i$, either $c_i$ is a square or $c_i / r$ is a square. By scaling the coordinates as needed, we can assume that each $c_i$ is either $1$ or $r$.
 
 There exists an $a\in\F_p$ such that $a^2 + 1$ is a non-square. Suppose that for distinct $i,j\in\{1,\ldots,n\}$ the coefficients of $x_i$ and $x_j$ are both $r$. We can apply the invertible transformation which replaces $x_i$ by $ax_i + x_j$ and $x_j$ by $x_i - ax_j$ in the equation for the quadric, and this turns the expression $rx_i^2 + rx_j^2$ into $r(a^2 + 1)x_i^2 + r(a^2+1)x_j^2$. As the product of two non-squares, these new coefficients are squares. Hence we may assume that they are equal to $1$.
+
+\textcolor{red}{need to expand}
 
 This shows that we can reduce to the two following forms:
 \begin{align}
@@ -178,3 +184,5 @@ In Appendix \ref{sec:recursion-for-quadratic-solns} we give recursions $f_n, g_n
 	\]
 	If $n$ is even, then $f_{n-1}(0) = g_{n-1}(0)$ (c.f. Appendix \ref{sec:recursion-for-quadratic-solns}) and thus $N_+ = N_-$.
 \end{example}
+
+\textcolor{red}{need to add summary}
