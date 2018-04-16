@@ -4,8 +4,8 @@ Let $V$ be an $\F_p$ vector space.
 Throughout the rest of paper, for all such $V$, we implicitly pick an isomorphism 
 	$V\cong\F_p^n$, i.e., an explicit basis. This
 	entitles us to an inner product on $V$, as well as an isomorphism between $V$ and
-	$V^*$, where all functionals are of the form $x \mapsto \langle \lambda, x \rangle$
-	for some $\lambda\in V$. By abuse of notation, $\lambda$ also denotes the functional.
+	$V^*$, where all functionals are of the form $x \mapsto \langle \xi, x \rangle$
+	for some $\xi\in V$. By abuse of notation, $\xi$ also denotes the functional.
 
 We are interested in indicator functions of conical subsets of $V$:
 \begin{defn}
@@ -13,41 +13,41 @@ We are interested in indicator functions of conical subsets of $V$:
     i.e., for all $x\in \F_p$, $xS = S$.    
 \end{defn}
 Since we're studying indicator functions, we can simplify our expression for 
-$\Phi(\IND_S)$:
-\[ \Phi(\IND_S)(\lambda) = \sum_{x\in S} \exp \left(\frac{2\pi i}{p} \lambda(x)\right). \]
+$\widehat{\IND_S}$:
+\[ \widehat{\IND_S}(\xi) = \sum_{x\in S} \exp \left(\frac{2\pi i}{p} \xi(x)\right). \]
 Noting that $\IND_S = 1 - \IND_{V\setminus S}$, we can further write the Fourier transform as
-\[ \Phi(\IND_S)(\lambda) = 1 - \sum_{x\not\in S} \exp \left(\frac{2\pi i}{p} \lambda(x)\right), \]
+\[ \widehat{\IND_S}(\xi) = 1 - \sum_{x\not\in S} \exp \left(\frac{2\pi i}{p} \xi(x)\right), \]
 which will be occasionally convenient. The following lemma further reduces this expression,
 which will be useful throughout the paper.
 \begin{lem}\label{lem:FT-conical-subset}
 	For a conical subset $S \subset V$,
-	\[ \Phi(\IND_S)(\lambda) = \frac{p|S \cap \ker \lambda| - |S|}{p-1}. \]
+	\[ \widehat{\IND_S}(\xi) = \frac{p|S \cap \ker \xi| - |S|}{p-1}. \]
 	\begin{proof}
 	   The key insight is that a conical set can be viewed as a collection of lines.
 	   Define $S\P = (S\setminus\{0\}) / {\sim}$, where we declare that 
 	   $x \sim a x$, for all $a\in\F_p^\times$ and
 	   $x\in S$ (as one might define projective space). Let $[x]$ denote the class
 	   of $x$ in $S\P$. We can then write the Fourier transform as follows:
-	   \[ \Phi(\IND_S)(\lambda) = 
+	   \[ \widehat{\IND_S}(\xi) = 
 	           1 + \sum_{[x]\in S\P} 
-	               \sum_{a\in\F_p^\times} \exp \left(\frac{2\pi i a}{p} \lambda(x)\right) \]
-	   If $\lambda(x)$ vanishes, then the inner sum is just $p-1$; if it doesn't, then it's
+	               \sum_{a\in\F_p^\times} \exp \left(\frac{2\pi i a}{p} \xi(x)\right) \]
+	   If $\xi(x)$ vanishes, then the inner sum is just $p-1$; if it doesn't, then it's
 	   a sum of equal powers of all the roots of unity, except $1$, so the inner sum is $-1$.
 	   Thus,
 	   \begin{eqnarray*}
-	       \Phi(\IND_S)(\lambda)
+	       \widehat{\IND_S}(\xi)
 	       &=& 1 + 
-	           (p-1)|S\P \cap \ker \lambda| - 
-	           |S\P \setminus \ker\lambda| \\
+	           (p-1)|S\P \cap \ker \xi| - 
+	           |S\P \setminus \ker\xi| \\
 	       &=& 1 + 
-	           (p-1)|S\P \cap \ker \lambda| - 
-	           (|S\P| - |S\P \cap \ker\lambda|) \\
+	           (p-1)|S\P \cap \ker \xi| - 
+	           (|S\P| - |S\P \cap \ker\xi|) \\
 	       &=& 1 + 
-	           p|S\P \cap \ker \lambda| - |S\P|
+	           p|S\P \cap \ker \xi| - |S\P|
 	   \end{eqnarray*}
 	   Note now that $|S\P| = \frac{|S| - 1}{p-1}$, by definition. If we substitute
 	   this in, we find that 
-	   \[ \Phi(\IND_S)(\lambda) = \frac{p|S \cap \ker \lambda| - |S|}{p-1}, \]
+	   \[ \widehat{\IND_S}(\xi) = \frac{p|S \cap \ker \xi| - |S|}{p-1}, \]
 	   as desired.
 	\end{proof}
 \end{lem}
@@ -64,16 +64,16 @@ along $W$:
 \end{prop}
 
 \begin{thm}\label{thm:FT-subspace}
-    $\Phi(\IND_W) = |W| \IND_{W^\perp}$.
+    $\widehat{\IND_W} = |W| \IND_{W^\perp}$.
     \begin{proof}
         By Lemma \ref{lem:FT-conical-subset}, we need only compute what 
-        $|W\cap\ker\lambda|$. We can split $\lambda$ into orthogonal parts $w + w'$.
+        $|W\cap\ker\xi|$. We can split $\xi$ into orthogonal parts $w + w'$.
         Then, for $x\in W$,
         \[ \langle w + w', x \rangle = \langle w, x \rangle + \langle w', x \rangle
             = \langle w, x \rangle. \]
-        Thus, $x\in W\cap\ker\lambda$ iff $w = 0$, i.e., $\lambda\in W^\perp$. Since
-        this is independent of $x$, $W\cap\ker\lambda$ is either all of $W$ or zero,
-        depending on if $\lambda$ is in $W^\perp$ or not. Plugging this into the
+        Thus, $x\in W\cap\ker\xi$ iff $w = 0$, i.e., $\xi\in W^\perp$. Since
+        this is independent of $x$, $W\cap\ker\xi$ is either all of $W$ or zero,
+        depending on if $\xi$ is in $W^\perp$ or not. Plugging this into the
         formula of Lemma \ref{lem:FT-conical-subset} gives our result.
     \end{proof}
 \end{thm}

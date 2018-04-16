@@ -1,23 +1,23 @@
 \section{Introduction}\label{sec:intro}
 
 The \emph{Fourier transform} takes a function $f:\R\to\C$ and produces another
-function, $\Phi(f):\R\to\C$, via the following integral transform:
-\[ \Phi(f)(\lambda) = \int_\R e^{-2\pi i x \lambda} f(x)\, dx. \]
-Conceptually, this takes a \emph{frequency} $\lambda$, which determines the ``pure sinusoid''
-$e^{-2\pi i x \lambda}$, and convolves it with $f$ to extract the \emph{amplitude} of $f$ 
+function, $\widehat{f}:\R\to\C$, via the following integral transform:
+\[ \widehat{f}(\xi) = \int_\R e^{-2\pi i x \xi} f(x)\, dx. \]
+Conceptually, this takes a \emph{frequency} $\xi$, which determines the ``pure sinusoid''
+$e^{-2\pi i x \xi}$, and convolves it with $f$ to extract the \emph{amplitude} of $f$ 
 at that frequency. This is especially clear when $f$ represents a wave, such as an alternating
 current through time or a quantum mechanical wavefunction. 
 
 The Fourier transform generalizes to higher dimensions, too. If we now have a function
-$f:\R^n\to\C$, we can express the pure sinusoid associated to $\lambda\in\R^n$ by 
-$e^{-2\pi i x\cdot\lambda}$ (note the dot product). For a general real vector space $V$, where
+$f:\R^n\to\C$, we can express the pure sinusoid associated to $\xi\in\R^n$ by 
+$e^{-2\pi i x\cdot\xi}$ (note the dot product). For a general real vector space $V$, where
 we still have a notion of integration, it might be more natural to define the 
 Fourier transform as a function from the dual, $V^* \to \C$, given by
-\[ \Phi(f)(\lambda) = \int_\R e^{-2\pi i \lambda(x)} f(x)\, dx. \]
+\[ \widehat{f}(\xi) = \int_\R e^{-2\pi i \xi(x)} f(x)\, dx. \]
 This is the same transform described for $\R^n$; every linear functional from $\R^n$ is
 just given by a dot product. In all of the cases outlined above, a pure sinusoid, or
 \emph{character}, sends addition to multiplication. In fact, it's a group homomorphism 
-$\lambda:V \to \C^\times$, where we require that $|\lambda(x)| = 1$ for all $x\in V$.
+$\xi:V \to \C^\times$, where we require that $|\xi(x)| = 1$ for all $x\in V$.
 
 In fact, we don't need to stick to real analysis to preform Fourier transforms; they're
 valid wherever we have a notion of \emph{characters}
@@ -26,17 +26,17 @@ $\F_p$, as we will show. Our choice of integration is easy: given any $f:\F_p\to
 \[ \int_{\F_p} f(x)\, dx = \sum_{x\in\F_p} f(x). \]
 It's a linear map, and respects translation: $f(x + n)$, $n$ fixed, integrates to the 
 same value as $f(x)$. Characters require just a bit more thinking: to give a character 
-$\lambda$, we need to give a complex number whose $p$th power is $1$, that is, we need
+$\xi$, we need to give a complex number whose $p$th power is $1$, that is, we need
 to chose a root of unity. So we have a formula for the set of characters:
-\[ \lambda(x) = \exp {\frac{2\pi i}{p} x \lambda}, \]
-where we've identified the character $\lambda$ with the element $\lambda\in\F_p$, by
+\[ \xi(x) = \exp {\frac{2\pi i}{p} x \xi}, \]
+where we've identified the character $\xi$ with the element $\xi\in\F_p$, by
 abuse of notation. Applying a generalization like for $\R^n$, we can define a general
 finite Fourier transform.
 \begin{defn}
     Let $V$ be any $\F_p$-vector space, and $f:V\to \C$ be any function. The Fourier
-    transform is a function $\Phi(f):V^*\to\C$, defined on the dual space, given by
-    \[ \Phi(f)(\lambda) = 
-        \sum_{x\in\F_p} \exp \left(\frac{2\pi i}{p} \lambda(x)\right) f(x). \]
+    transform is a function $\widehat{f}:V^*\to\C$, defined on the dual space, given by
+    \[ \widehat{f}(\xi) = 
+        \sum_{x\in\F_p} \exp \left(\frac{2\pi i}{p} \xi(x)\right) f(x). \]
 \end{defn}
 
 It is evident from its definition that the Fourier transform is a \emph{linear} map from the space of $\C$-valued functions on $V$ to the space of $\C$-valued functions on $V^*$. In this paper, we will consider only finite-dimensional (and thus finite) $V$. Then, all functions on $V$ are complex linear combinations of indicator functions, where for a subset $S\subset V$ we define
@@ -44,15 +44,14 @@ It is evident from its definition that the Fourier transform is a \emph{linear} 
 1 & x \in V \\
 0 & \text{otherwise.}     
 \end{cases} \]
-Thus it is reasonable to focus on these functions specifically. One could take this to an extreme and compute the Fourier transform $\Phi(\IND_{\{v\}})$ for each $v\in V$, and then dismissively say that the Fourier transform of any function is just a linear combination of these:
+Thus it is reasonable to focus on these functions specifically. One could take this to an extreme and compute the Fourier transform $\widehat{\IND_{\{v\}}}$ for each $v\in V$, and then dismissively say that the Fourier transform of any function is just a linear combination of these:
 \[
-	\Phi(f) = \sum_{v\in V} f(v)\Phi(\IND_{\{v\}}).
+	\widehat{f} = \sum_{v\in V} f(v)\widehat{\IND_{\{v\}}}.
 \]
 
-While this is true, it alone is hardly an answer to the question ``what is $\Phi(f)$?'' As we will demonstrate in this paper, this question often admits a much more elegant answer than the above.
+While this is true, it is not an illuminating answer to the question ``what is $\widehat{f}$?'' As we will demonstrate in this paper, this question often admits a much more revealing answer than the above.
 
-
-In what follows, we will exclusively consider $\Phi(\IND_S)$ for \emph{conical} subsets $S\subset V$, meaning that $S$ is preserved under scaling. We will see in \S\ref{sec:part0} that $\Phi(\IND_S)$ has a simpler description in this case, and also compute the Fourier transform for when $S$ is a subspace of $V$. In sections \S\ref{sec:part1} and \S\ref{sec:part2} we consider two situations in which $S$ is related to polynomial equations. Finally, in \S\ref{sec:part3} we analyze the case when $S$ is the set of nilpotent $n\times n$ matrices in the space $V$ of all $n\times n$ matrices.
+In what follows, we will exclusively consider $\widehat{\IND_S}$ for \emph{conical} subsets $S\subset V$, meaning that $S$ is preserved under scaling. We will see in \S\ref{sec:part0} that $\widehat{\IND_S}$ has a simpler description in this case, and also compute the Fourier transform for when $S$ is a subspace of $V$. In sections \S\ref{sec:part1} and \S\ref{sec:part2} we consider two situations in which $S$ is related to polynomial equations. Finally, in \S\ref{sec:part3} we analyze the case when $S$ is the set of nilpotent $n\times n$ matrices in the space $V$ of all $n\times n$ matrices.
 
 \subsection*{Acknowledgments} Miguel wrote \S\ref{sec:intro} and \S\ref{sec:part0}. Xianglong wrote \S\ref{sec:part1}, \S\ref{sec:part2} (with Oron), and Appendix \ref{sec:recursion-for-quadratic-solns}. In addition to helping with \S\ref{sec:part2}, Oron also wrote \S\ref{sec:part3}.
 

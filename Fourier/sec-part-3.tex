@@ -4,25 +4,25 @@
 
 \section{Nilpotent $n\times n$ matrices}\label{sec:part3}
 
-Now we turn our attention to an example of a much different flavor: in this section, we consider the case where $V$ is the space of $n\times n$ matrices with entries in $\F_p$, and $S$ is the subset of all nilpotent matrices. We assume $n\ge 2$, as when $n=1$ the problem is trivial. As before, to compute $\Phi(\IND_S)$, we must determine $|\ker\lambda\cap S|$ for a given $\lambda\in V^*$. We begin by identifying $V^*$ with $V$ via the nondegenerate symmetric bilinear form
+Now we turn our attention to an example of a much different flavor: in this section, we consider the case where $V$ is the space of $n\times n$ matrices with entries in $\F_p$, and $S$ is the subset of all nilpotent matrices. We assume $n\ge 2$, as when $n=1$ the problem is trivial. As before, to compute $\widehat{\IND_S}$, we must determine $|\ker\xi\cap S|$ for a given $\xi\in V^*$. We begin by identifying $V^*$ with $V$ via the nondegenerate symmetric bilinear form
 \begin{align*}
 V\times V&\to\F_p,\\
 (A,B)&\mapsto\tr(AB).
 \end{align*}
-Under this identification, $\lambda$ corresponds to a matrix $M_\lambda\in V$, and we have
+Under this identification, $\xi$ corresponds to a matrix $M_\xi\in V$, and we have
 \begin{equation}
 \label{eqn:kerlambda}
-\ker\lambda\cap S=\{A\in S:\tr(AM_\lambda)=0\}.
+\ker\xi\cap S=\{A\in S:\tr(AM_\xi)=0\}.
 \end{equation}
-Our goal is to describe the cardinality of this set in terms of the matrix $M_\lambda$.
+Our goal is to describe the cardinality of this set in terms of the matrix $M_\xi$.
 \begin{lem}
 \label{lem:sim}
-The value $|\ker\lambda\cap S|$ depends only on $M_\lambda$ up to similarity.
+The value $|\ker\xi\cap S|$ depends only on $M_\xi$ up to similarity.
 \end{lem}
 \begin{proof}
 Let $P\in V$ be invertible. Then for any $A\in S$, we have
 \begin{equation*}
-\tr(AP^{-1}M_\lambda P)=\tr(PAP^{-1}M_\lambda),
+\tr(AP^{-1}M_\xi P)=\tr(PAP^{-1}M_\xi),
 \end{equation*}
 so it suffices to show that the invertible elements of $V$ act on $S$ by conjugation. Indeed, since $A$ is nilpotent, there exists some $k>0$ such that $A^k=0$, whence
 \begin{equation*}
@@ -30,7 +30,7 @@ so it suffices to show that the invertible elements of $V$ act on $S$ by conjuga
 \end{equation*}
 as well.
 \end{proof}
-This lemma allows us to replace $M_\lambda$ by any matrix similar to it, thus simplifying the set of matrices we must consider. Our next step is to obtain convenient representatives for the similarity classes in $V$.
+This lemma allows us to replace $M_\xi$ by any matrix similar to it, thus simplifying the set of matrices we must consider. Our next step is to obtain convenient representatives for the similarity classes in $V$.
 \begin{notation}
 Given a monic polynomial
 \begin{equation*}
@@ -77,7 +77,7 @@ of $\F_p[x]$-modules, where the $f_i$ are monic, uniquely determined, and satisf
 \end{equation*}
 it is given by $C(f_i)$. The remaining assertions are now immediate.
 \end{proof}
-In view of Lemma~\ref{lem:sim}, this result shows that we need only consider matrices $M_\lambda$ in rational canonical form; in fact, we lose no information by considering only the invariant factors of $M_\lambda$. Our next step is to attach a coarser combinatorial invariant to $M_\lambda$ via these polynomials.
+In view of Lemma~\ref{lem:sim}, this result shows that we need only consider matrices $M_\xi$ in rational canonical form; in fact, we lose no information by considering only the invariant factors of $M_\xi$. Our next step is to attach a coarser combinatorial invariant to $M_\xi$ via these polynomials.
 \begin{defn}
 Let $M\in V$, and let $f_1,\ldots,f_m$ be its invariant factors. Given a monic polynomial $f\in\F_p[x]$, write
 \begin{equation*}
@@ -143,19 +143,19 @@ A matrix $M$ is \emph{not} determined up to conjugacy by its factorization datum
 For instance, if $M$ is as in Example~\ref{ex:fact}, then we may deduce from \eqref{eqn:factM} that $M$ has two distinct eigenvalues over $\F_p$, which either occur with algebraic multiplicities $2$ and $2$ or $1$ and $3$ (of course, the former actually occurs). Moreover, $M$ is not diagonalizable, as its minimal polynomial does not factor into distinct linear factors; it follows that one of these eigenvalues is defective, and indeed, the eigenvalue $2$ has geometric multiplicity $1$, rather than $2$.
 \end{rem}
 
-Finally, we use these factorization data to formulate our main conjecture, which states that $\fact(M_\lambda)$ is the ``right'' invariant of $\lambda$ for determining $|\ker\lambda\cap S|$, and gives descriptions of the possible values of $|\ker\lambda\cap S|$ and its behavior in low dimensions.
+Finally, we use these factorization data to formulate our main conjecture, which states that $\fact(M_\xi)$ is the ``right'' invariant of $\xi$ for determining $|\ker\xi\cap S|$, and gives descriptions of the possible values of $|\ker\xi\cap S|$ and its behavior in low dimensions.
 
 \begin{conj}
 \label{conj:main}
-Let $\lambda\in V^*$. Then
+Let $\xi\in V^*$. Then
 \begin{enumerate}[(i)]
-\item $|\ker\lambda\cap S|$ depends only on $\fact(M_\lambda)$.
-\item $|\ker\lambda\cap S|$ is contained in the set
+\item $|\ker\xi\cap S|$ depends only on $\fact(M_\xi)$.
+\item $|\ker\xi\cap S|$ is contained in the set
 \begin{equation}
 \label{eqn:conjvalset}
 \{p^{n^2-n},p^{n^2-n-1}\}\cup\{p^{n^2-n-1}\pm(p-1)p^i:(n^2-n-2)/2\le i\le n^2-n-2\}.
 \end{equation}\label{item:conjvals}
-\item For $n=2,3$, the values of $|\ker\lambda\cap S|$ are entirely characterized by Table~\ref{tab:lowdim}. For $n=4$, the values of $|\ker\lambda\cap S|$ are characterized by Table~\ref{tab:lowdim} whenever $\fact(M_\lambda)$ appears in its rightmost column (see Remark~\ref{rem:conj}\eqref{item:rmkconjtwo} below).\label{item:conjlown}
+\item For $n=2,3$, the values of $|\ker\xi\cap S|$ are entirely characterized by Table~\ref{tab:lowdim}. For $n=4$, the values of $|\ker\xi\cap S|$ are characterized by Table~\ref{tab:lowdim} whenever $\fact(M_\xi)$ appears in its rightmost column (see Remark~\ref{rem:conj}\eqref{item:rmkconjtwo} below).\label{item:conjlown}
 \end{enumerate}
 \end{conj}
 
@@ -163,7 +163,7 @@ Let $\lambda\in V^*$. Then
 \begin{table}[h]
 \begin{tabular}{ccc}
 \toprule
-$n$&$|\ker\lambda\cap S|$&$\fact(M_\lambda)$\\
+$n$&$|\ker\xi\cap S|$&$\fact(M_\xi)$\\
 \midrule
 \multirow{4}{*}{$2$}&$1$&$\big(\big\{(2,1)\big\}\big)$\\
 \cmidrule(l){2-3}
@@ -211,21 +211,21 @@ $n$&$|\ker\lambda\cap S|$&$\fact(M_\lambda)$\\
 &$p^{12}$&$\big(\big\{(1,1)\big\},\big\{(1,1)\big\},\big\{(1,1)\big\},\big\{(1,1)\big\}\big)$\\
 \bottomrule\\
 \end{tabular}
-\caption{For $n=2,3,4$, the second column lists all observed values of $|\ker\lambda\cap S|$ in terms of $p$, and the third column lists the factorization data associated to the elements $\lambda\in V^*$ observed to give rise to a particular value in the second column (see Remark~\ref{rem:conj}\eqref{item:rmkconjone}).}
+\caption{For $n=2,3,4$, the second column lists all observed values of $|\ker\xi\cap S|$ in terms of $p$, and the third column lists the factorization data associated to the elements $\xi\in V^*$ observed to give rise to a particular value in the second column (see Remark~\ref{rem:conj}\eqref{item:rmkconjone}).}
 \label{tab:lowdim}
 \end{table}
 
 \begin{rem}
 \label{rem:conj}
 \begin{enumerate}[(a)]
-\item Even if proven, this conjecture would constitute only a partial answer to our original question: it does not propose a rule explaining \emph{how} $|\ker\lambda\cap S|$ depends on $\fact(M_\lambda)$, nor does it specify which elements of the set \eqref{eqn:conjvalset} occur for a particular $n$ (the answer for a particular $p$ should be the values corresponding to the factorization data that occur for that $p$, see \eqref{item:rmkconjtwo}). Already for $n=2,3$ we see in Table~\ref{tab:lowdim} that not all of the values listed in \eqref{eqn:conjvalset} occur (assuming part \eqref{item:conjlown} of the conjecture). In general, we know very little about the truth of this conjecture; in the remainder of this section, we prove two small assertions contained therein, namely, characterizations of the case $n=2$ and the value $p^{n^2-n}$.
+\item Even if proven, this conjecture would constitute only a partial answer to our original question: it does not propose a rule explaining \emph{how} $|\ker\xi\cap S|$ depends on $\fact(M_\xi)$, nor does it specify which elements of the set \eqref{eqn:conjvalset} occur for a particular $n$ (the answer for a particular $p$ should be the values corresponding to the factorization data that occur for that $p$, see \eqref{item:rmkconjtwo}). Already for $n=2,3$ we see in Table~\ref{tab:lowdim} that not all of the values listed in \eqref{eqn:conjvalset} occur (assuming part \eqref{item:conjlown} of the conjecture). In general, we know very little about the truth of this conjecture; in the remainder of this section, we prove two small assertions contained therein, namely, characterizations of the case $n=2$ and the value $p^{n^2-n}$.
 \item This conjecture is based on data computed in \texttt{Magma} \cite{magma} for the cases where $(n,p)$ is one of
 \begin{align*}
 &(2,2),(2,3),(2,5),(2,7),(2,11),\\
 &(3,2),(3,3),(3,5),\\
 &(4,2).
 \end{align*}
-Essentially, all matrices $\lambda\in V^*$ and $S$ were enumerated, and the functions $|\ker\lambda\cap S|$ and $\fact(M_\lambda)$ were computed explicitly; these data appear in Table~\ref{tab:lowdim}. Unfortunately, computing any further than this is difficult because the number of matrices in $V$ is $p^{n^2}$: the value $(n,p)=(3,5)$ was obtained only by using a $48$-thread parallelization on one of the \textsc{mit} mathematics department compute hosts, and the values $(4,3)$ and $(5,2)$ promptly threw segmentation faults. It is not unlikely that more efficient methods of computing this data could be devised; more data would likely assist with refining and proving or disproving this conjecture.\label{item:rmkconjone}
+Essentially, all matrices $\xi\in V^*$ and $S$ were enumerated, and the functions $|\ker\xi\cap S|$ and $\fact(M_\xi)$ were computed explicitly; these data appear in Table~\ref{tab:lowdim}. Unfortunately, computing any further than this is difficult because the number of matrices in $V$ is $p^{n^2}$: the value $(n,p)=(3,5)$ was obtained only by using a $48$-thread parallelization on one of the \textsc{mit} mathematics department compute hosts, and the values $(4,3)$ and $(5,2)$ promptly threw segmentation faults. It is not unlikely that more efficient methods of computing this data could be devised; more data would likely assist with refining and proving or disproving this conjecture.\label{item:rmkconjone}
 
 \item One relation between the values appearing in part \eqref{item:conjvals} and the set $S$ is manifest: it is well-known that the number of $n\times n$ nilpotent matrices with entries in $\F_p$ is $p^{n^2-n}$. For instance, in \cite{fine}, this was proven by counting the number of elements in the similarity class of each diagonal block matrix whose blocks are upper shift matrices (such matrices have ones along the superdiagonal and zeros elsewhere). In \cite{gerstenhaber}, this was proven inductively using two distinct ways of counting the pairs of matrices $(M,A)$ such that $A$ is nilpotent and $MA=NM$, where $N$ denotes the $n\times n$ upper shift matrix. Unfortunately, neither of these methods seem to generalize to our problem of counting the number of nilpotent matrices whose product with a particular rational canonical form has trace zero; such a nilpotent matrix must satisfy a certain linear relation in its entries (see Proposition~\ref{prop:2by2case} for the case $n=2$), which is not preserved by similarity, and does not admit a simple description in terms of the relations considered in \cite{gerstenhaber}.\label{item:rmkconjnum}
 
@@ -235,9 +235,9 @@ Essentially, all matrices $\lambda\in V^*$ and $S$ were enumerated, and the func
 \Big(\big\{(1,1),(1,1),(1,1),(1,1)\big\}\Big),\\
 \Big(\big\{(1,1)\big\},\big\{(1,1),(1,1),(1,1)\big\}\Big).
 \end{gather*}
-This is because none of these data arise as some $\fact(M_\lambda)$ when $p=2$: indeed, modulo $2$ there is only one irreducible degree-$2$ polynomial and only two distinct linear polynomials. While these data do all arise for larger $p$, computational limitations (see \eqref{item:rmkconjone}) have restricted us to computing only in the case $p=2$ when $n=4$, so the values of $|\ker\lambda\cap S|$ are unknown in these cases.\label{item:rmkconjtwo}
+This is because none of these data arise as some $\fact(M_\xi)$ when $p=2$: indeed, modulo $2$ there is only one irreducible degree-$2$ polynomial and only two distinct linear polynomials. While these data do all arise for larger $p$, computational limitations (see \eqref{item:rmkconjone}) have restricted us to computing only in the case $p=2$ when $n=4$, so the values of $|\ker\xi\cap S|$ are unknown in these cases.\label{item:rmkconjtwo}
 
-\item The entries of Table~\ref{tab:lowdim} exhibit many fascinating patterns, though we do not know if they would continue into higher dimensions. For instance, for each $n$, place the possible values of $|\ker\lambda\cap S|$ in ascending order, and label them by
+\item The entries of Table~\ref{tab:lowdim} exhibit many fascinating patterns, though we do not know if they would continue into higher dimensions. For instance, for each $n$, place the possible values of $|\ker\xi\cap S|$ in ascending order, and label them by
 \begin{equation*}
 a_{n,-i},\ldots,a_{n,-1},a_{n,0},a_{n,1},\ldots,a_{n,j}
 \end{equation*}
@@ -294,7 +294,7 @@ a&b\\
 -a^2/b&-a
 \end{bmatrix}:a\in\F_p,b\in\F_p^\times\right\}.
 \end{equation}
-Now, any $2\times 2$ matrix $M_\lambda$ in rational canonical form is either a scalar matrix or of the form
+Now, any $2\times 2$ matrix $M_\xi$ in rational canonical form is either a scalar matrix or of the form
 \begin{equation}
 \label{eqn:rcftwo}
 \begin{bmatrix}
@@ -302,11 +302,11 @@ Now, any $2\times 2$ matrix $M_\lambda$ in rational canonical form is either a s
 1&-\beta
 \end{bmatrix}
 \end{equation}
-corresponding to a polynomial $f=\alpha+\beta x+x^2\in\F_p[x]$. If $M_\lambda$ is a scalar matrix, then $\fact(M_\lambda)=(\{(1,1)\},\{(1,1)\})$ and every matrix $A\in S$ satisfies $\tr(AM_\lambda)=0$, so by \eqref{eqn:kerlambda},
+corresponding to a polynomial $f=\alpha+\beta x+x^2\in\F_p[x]$. If $M_\xi$ is a scalar matrix, then $\fact(M_\xi)=(\{(1,1)\},\{(1,1)\})$ and every matrix $A\in S$ satisfies $\tr(AM_\xi)=0$, so by \eqref{eqn:kerlambda},
 \begin{equation*}
-|\ker\lambda\cap S|=|S|=p+p(p-1)=p^2,
+|\ker\xi\cap S|=|S|=p+p(p-1)=p^2,
 \end{equation*}
-as desired. Otherwise, $M_\lambda$ is given by \eqref{eqn:rcftwo}, and we have
+as desired. Otherwise, $M_\xi$ is given by \eqref{eqn:rcftwo}, and we have
 \begin{equation}
 \label{eqn:linrels}
 \begin{split}
@@ -350,7 +350,7 @@ f(b/a)=\alpha+\beta b/a+b^2/a^2=\frac{b}{a^2}(b+\alpha a^2/b+\beta a)=0.
 \end{equation*}
 Now, the number of distinct roots of $f$ in $\F_p$ is $0$, $1$, or $2$, depending on if $f$ is irreducible, the square of a single linear factor, or the product of two distinct linear factors, respectively. It follows that
 \begin{align*}
-|\ker\lambda\cap S|&=\left|\left\{\begin{bmatrix}
+|\ker\xi\cap S|&=\left|\left\{\begin{bmatrix}
 0&0\\
 0&0
 \end{bmatrix}\right\}\cup
@@ -360,9 +360,9 @@ a&b\\
 \end{bmatrix}
 :a,b\in\F_p^\times, f(b/a)=0\right\}\right|\\
 &=\begin{cases}
-1&\text{if }\fact(M_\lambda)=(\{(2,1)\}),\\
-1+(p-1)&\text{if }\fact(M_\lambda)=(\{(1,2)\}),\\
-1+2(p-1)&\text{if }\fact(M_\lambda)=(\{(1,1),(1,1)\}),
+1&\text{if }\fact(M_\xi)=(\{(2,1)\}),\\
+1+(p-1)&\text{if }\fact(M_\xi)=(\{(1,2)\}),\\
+1+2(p-1)&\text{if }\fact(M_\xi)=(\{(1,1),(1,1)\}),
 \end{cases}
 \end{align*}
 completing the proof (see Table~\ref{tab:lowdim}).
@@ -372,19 +372,19 @@ The case $n=2$ is straightforward, since we can easily enumerate all of the nilp
 \end{rem}
 
 \begin{prop}
-Let $\lambda\in V^*$. We have $|\ker\lambda\cap S|=p^{n^2-n}$ if and only if
+Let $\xi\in V^*$. We have $|\ker\xi\cap S|=p^{n^2-n}$ if and only if
 \begin{equation*}
-\fact(M_\lambda)=\Big(\big\{(1,1)\big\},\ldots,\big\{(1,1)\big\}\Big),
+\fact(M_\xi)=\Big(\big\{(1,1)\big\},\ldots,\big\{(1,1)\big\}\Big),
 \end{equation*}
-that is, $M_\lambda$ is a scalar matrix.
+that is, $M_\xi$ is a scalar matrix.
 \end{prop}
 \begin{proof}
 The reverse implication is clear from Remark~\ref{rem:conj}\eqref{item:rmkconjone} and the fact that a nilpotent matrix is traceless (indeed, it has $0$ as an eigenvalue of multiplicity $n$).
 
-For the forward implication, recall that any strictly triangular matrix is nilpotent; in particular, the matrices $e_{i,j}$, which have a $1$ in entry $(i,j)$ and zeros elsewhere, are nilpotent when $i\ne j$. Since $\tr(e_{i,j}M_\lambda)$ is the $(j,i)$th entry of $M_\lambda$, we see that $M_\lambda$ must be diagonal. But a diagonal matrix is in rational canonical form if and only if it is scalar.
+For the forward implication, recall that any strictly triangular matrix is nilpotent; in particular, the matrices $e_{i,j}$, which have a $1$ in entry $(i,j)$ and zeros elsewhere, are nilpotent when $i\ne j$. Since $\tr(e_{i,j}M_\xi)$ is the $(j,i)$th entry of $M_\xi$, we see that $M_\xi$ must be diagonal. But a diagonal matrix is in rational canonical form if and only if it is scalar.
 \end{proof}
 
-Unfortunately, no other value of $|\ker\lambda\cap S|$ seems to admit such a simple characterization.
+Unfortunately, no other value of $|\ker\xi\cap S|$ seems to admit such a simple characterization.
 
 %%% Local Variables:
 %%% mode: latex

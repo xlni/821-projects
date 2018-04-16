@@ -33,27 +33,27 @@ and hence
 \[
 	|S| = 1 + (p+1)(p-1) = p^2.
 \]
-We will now give a very simple description of $\Phi(\IND_S)$.
+We will now give a very simple description of $\widehat{\IND_S}$.
 \begin{thm}\label{thm:part2thm}
 	Let $\F_p[x,y]_n$ be the space of homogeneous polynomials of degree $n$ over $\F_p$, $V$ its dual space, and $S\subset V$ the set $\{\xi_{a,b,c} \in V \mid \xi_{a,b,c}(P) = cP(a,b)\}$.
 	
-	An element $\lambda \in V^*$ is a polynomial $P(x,y)$. Let $N_\lambda$ be the number of solutions to $P(x,y)=0$ in $\F_p^2$. Then
+	An element $\xi \in V^*$ is a polynomial $P(x,y)$. Let $N_\xi$ be the number of solutions to $P(x,y)=0$ in $\F_p^2$. Then
 	\begin{equation}
-		\Phi(\IND_S)(\lambda) = \frac{pN_\lambda - p^2}{p-1}.\label{eq:FTpart2}
+		\widehat{\IND_S}(\xi) = \frac{pN_\xi - p^2}{p-1}.\label{eq:FTpart2}
 	\end{equation}
 \end{thm}
 \begin{proof}
-	An element $\xi_{a,b,c}\in S$ is in $\ker \lambda$ when $P(a,b) = 0$. From \eqref{eq:part2S}, we have
+	An element $\xi_{a,b,c}\in S$ is in $\ker \xi$ when $P(a,b) = 0$. From \eqref{eq:part2S}, we have
 	\[
-		|S \cap \ker \lambda| = N_\lambda
+		|S \cap \ker \xi| = N_\xi
 	\]
 	and thus, by Lemma \ref{lem:FT-conical-subset},
 	\begin{align*}
-		\Phi (\IND_S) (\lambda) &= \frac{p|S\cap \ker \lambda| - |S|}{p-1}\\
-		&= \frac{pN_\lambda - p^2}{p-1}.\qedhere
+		\widehat{\IND_S}(\xi) &= \frac{p|S\cap \ker \xi| - |S|}{p-1}\\
+		&= \frac{pN_\xi - p^2}{p-1}.\qedhere
 	\end{align*}
 \end{proof}
-There is unfortunately no explicit formula for the number $N_\lambda$ of solutions to $P(x,y) = 0$ in terms of the coefficients of $P$, so we will not attempt to expand further on \eqref{eq:FTpart2}. Instead, we offer an alternative geometric perspective which also leads to a proof of Theorem \ref{thm:part2thm}. Each polynomial in $V^* = \F_p[x,y]_n$ can be thought of a row vector $(a_0,\ldots,a_n)$ where $a_i$ is the coefficient of $x^{n-i}y^i$ in the polynomial. Then ``evaluation at $(a,b)$'' is given by pairing with the column vector
+There is unfortunately no explicit formula for the number $N_\xi$ of solutions to $P(x,y) = 0$ in terms of the coefficients of $P$, so we will not attempt to expand further on \eqref{eq:FTpart2}. Instead, we offer an alternative geometric perspective which also leads to a proof of Theorem \ref{thm:part2thm}. Each polynomial in $V^* = \F_p[x,y]_n$ can be thought of a row vector $(a_0,\ldots,a_n)$ where $a_i$ is the coefficient of $x^{n-i}y^i$ in the polynomial. Then ``evaluation at $(a,b)$'' is given by pairing with the column vector
 \[
 	(a^n,a^{n-1}b,\ldots,ab^{n-1},b^n)^\top.
 \]
@@ -70,10 +70,10 @@ As an aside for the reader familiar with algebraic geometry, if we think of $S$ 
 
 Using the fact that $S$ is the union of the above lines, we can write
 \begin{align*}
-	\Phi(\IND_S) &= \Phi\left( \sum \IND_{\ell_i} - p\IND_{\{0\}} \right)\\
+	\widehat{\IND_S} &= \sum \widehat{\IND_{\ell_i}} - p\widehat{\IND_{\{0\}}} \\
 	&= p\left(\sum \IND_{\ell_i^\bot} - \IND_{V^*}\right).
 \end{align*}
-where we have used the linearity of $\Phi$ together with Theorem \ref{thm:FT-subspace}. A polynomial $P$ is in $\ell_i^\bot$ when it vanishes on $\ell_i$. If $P$ vanishes at $N$ points in total, then it vanishes on $(N - 1)/(p-1)$ of the lines $\ell_i$. This gives another proof of Theorem \ref{thm:part2thm}.
+where we have used the linearity of the Fourier transform together with Theorem \ref{thm:FT-subspace}. A polynomial $P$ is in $\ell_i^\bot$ when it vanishes on $\ell_i$. If $P$ vanishes at $N$ points in total, then it vanishes on $(N - 1)/(p-1)$ of the lines $\ell_i$. This gives another proof of Theorem \ref{thm:part2thm}.
 
 What is the ``geometry'' of these hyperplanes $\ell_i^\bot$? If $n < p$ then clearly not all $p+1$ of the lines $\ell_i$ can be linearly independent. We claim, however, that every subset of size at most $n+1$ is indeed linearly independent. A way of seeing this is by noting that the Vandermonde determinant is nonzero. Alternatively, one can explicitly produce a polynomial $P \in \F_p[x,y]_n$ which vanishes on $n$ given lines but not on the others. On the other hand, if an element of $\F_p[x,y]_n$ vanishes on $n+1$ of the lines, then in fact it vanishes on all of the lines. This is entirely what we expect: dividing the polynomial by $y^n$ gives a univariate polynomial in $(x/y)$ of degree at most $n$. If such a polynomial has $n+1$ roots, then it is identically zero.
 
