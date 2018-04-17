@@ -4,7 +4,7 @@
 
 \section{Nilpotent $n\times n$ matrices}\label{sec:part3}
 
-Now we turn our attention to an example of a much different flavor: in this section, we consider the case where $V$ is the space of $n\times n$ matrices with entries in $\F_p$, and $S$ is the subset of all nilpotent matrices. We assume $n\ge 2$, as when $n=1$ the problem is trivial. As before, to compute $\widehat{\IND_S}$, we must determine $|\ker\xi\cap S|$ for a given $\xi\in V^*$. We begin by identifying $V^*$ with $V$ via the nondegenerate symmetric bilinear form
+Now we turn our attention to an example of a much different flavor: in this section, we consider the case where $V$ is the space of $n\times n$ matrices with entries in $\F_p$, and $S$ is the subset of all nilpotent matrices. We assume $n\ge 2$, as when $n=1$ the problem is trivial. As before, Lemma~\ref{lem:FT-conical-subset} shows that to compute $\widehat{\IND_S}$, we must determine $|\ker\xi\cap S|$ for a given $\xi\in V^*$ (as noted in Remark~\ref{rem:conj}\eqref{item:rmkconjnum} below, it is well-known that $|S|=p^{n^2-n}$). We begin by identifying $V^*$ with $V$ via the nondegenerate symmetric bilinear form
 \begin{align*}
 V\times V&\to\F_p,\\
 (A,B)&\mapsto\tr(AB).
@@ -150,11 +150,8 @@ Finally, we use these factorization data to formulate our main conjecture, which
 Let $\xi\in V^*$. Then
 \begin{enumerate}[(i)]
 \item $|\ker\xi\cap S|$ depends only on $\fact(M_\xi)$.
-\item $|\ker\xi\cap S|$ is contained in the set
-\begin{equation}
-\label{eqn:conjvalset}
-\{p^{n^2-n},p^{n^2-n-1}\}\cup\{p^{n^2-n-1}\pm(p-1)p^i:(n^2-n-2)/2\le i\le n^2-n-2\}.
-\end{equation}\label{item:conjvals}
+\item $|\ker\xi\cap S|$ is equal to either $p^{n^2-n}$, $p^{n^2-n-1}$, or $p^{n^2-n-1}\pm(p-1)p^i$ for some $(n^2-n-2)/2\le i\le n^2-n-2$.
+\label{item:conjvals}
 \item For $n=2,3$, the values of $|\ker\xi\cap S|$ are entirely characterized by Table~\ref{tab:lowdim}. For $n=4$, the values of $|\ker\xi\cap S|$ are characterized by Table~\ref{tab:lowdim} whenever $\fact(M_\xi)$ appears in its rightmost column (see Remark~\ref{rem:conj}\eqref{item:rmkconjtwo} below).\label{item:conjlown}
 \end{enumerate}
 \end{conj}
@@ -218,7 +215,7 @@ $n$&$|\ker\xi\cap S|$&$\fact(M_\xi)$\\
 \begin{rem}
 \label{rem:conj}
 \begin{enumerate}[(a)]
-\item Even if proven, this conjecture would constitute only a partial answer to our original question: it does not propose a rule explaining \emph{how} $|\ker\xi\cap S|$ depends on $\fact(M_\xi)$, nor does it specify which elements of the set \eqref{eqn:conjvalset} occur for a particular $n$ (the answer for a particular $p$ should be the values corresponding to the factorization data that occur for that $p$, see \eqref{item:rmkconjtwo}). Already for $n=2,3$ we see in Table~\ref{tab:lowdim} that not all of the values listed in \eqref{eqn:conjvalset} occur (assuming part \eqref{item:conjlown} of the conjecture). In general, we know very little about the truth of this conjecture; in the remainder of this section, we prove two small assertions contained therein, namely, characterizations of the case $n=2$ and the value $p^{n^2-n}$.
+\item Even if proven, this conjecture would constitute only a partial answer to our original question: it does not propose a rule explaining \emph{how} $|\ker\xi\cap S|$ depends on $\fact(M_\xi)$, nor does it specify which of the values listed in part \eqref{item:conjvals} of the conjecture occur for a particular $n$ (the answer for a particular $p$ should be the values corresponding to the factorization data that occur for that $p$, see \eqref{item:rmkconjtwo}). Already for $n=2,3$ we see in Table~\ref{tab:lowdim} that not all of the values listed in part \eqref{item:conjvals} of the conjecture occur (assuming part \eqref{item:conjlown}). In general, we know very little about the truth of this conjecture; in the remainder of this section, we prove two small assertions contained therein, namely, characterizations of the case $n=2$ and the value $p^{n^2-n}$.
 \item This conjecture is based on data computed in \texttt{Magma} \cite{magma} for the cases where $(n,p)$ is one of
 \begin{align*}
 &(2,2),(2,3),(2,5),(2,7),(2,11),\\
