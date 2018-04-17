@@ -4,8 +4,8 @@ Let $V$ be an $\F_p$ vector space.
 Throughout the rest of paper, for all such $V$, we implicitly pick an isomorphism 
 	$V\cong\F_p^n$, i.e., an explicit basis. This
 	entitles us to an inner product on $V$, as well as an isomorphism between $V$ and
-	$V^*$, where all functionals are of the form $x \mapsto \langle \xi, x \rangle$
-	for some $\xi\in V$. By abuse of notation, $\xi$ also denotes the functional.
+	$V^*$, where all functionals are of the unique form $x \mapsto \langle v, x \rangle$
+	for some $v\in V$.
 
 We are interested in indicator functions of conical subsets of $V$:
 \begin{defn}
@@ -25,12 +25,12 @@ which will be useful throughout the paper.
 	\begin{proof}
 	   The key insight is that a conical set can be viewed as a collection of lines.
 	   Define $S\P = (S\setminus\{0\}) / {\sim}$, where we declare that 
-	   $x \sim a x$, for all $a\in\F_p^\times$ and
+	   $x \sim \lambda x$, for all $\lambda\in\F_p^\times$ and
 	   $x\in S$ (as one might define projective space). Let $[x]$ denote the class
 	   of $x$ in $S\P$. We can then write the Fourier transform as follows:
 	   \[ \widehat{\IND_S}(\xi) = 
 	           1 + \sum_{[x]\in S\P} 
-	               \sum_{a\in\F_p^\times} \exp \left(\frac{2\pi i a}{p} \xi(x)\right) \]
+	               \sum_{\lambda\in\F_p^\times} \exp \left(\frac{2\pi i \lambda}{p} \xi(x)\right) \]
 	   If $\xi(x)$ vanishes, then the inner sum is just $p-1$; if it doesn't, then it's
 	   a sum of equal powers of all the roots of unity, except $1$, so the inner sum is $-1$.
 	   Thus,
@@ -54,26 +54,23 @@ which will be useful throughout the paper.
 
 The simplest conical set is a linear subspace $W$ of $V$.
 To show the power of Lemma \ref{lem:FT-conical-subset}, we use it to compute $\IND_W$
-as a warmup. We'll need a classical theorem of linear algebra allows us to decompose $V$
-along $W$:
-\begin{prop}
-    The \emph{orthogonal complement} of $W$ is the subspace    
-    \[ W^\perp = \{ v \in V \,|\, \langle v, w \rangle = 0 \text{ for all } w \in W \}. \]
-    Any element $x\in V$ may be uniquely written as a sum $x = w + w'$, where $w\in W$
-    and $w'\in W^\perp$.
-\end{prop}
+as a warmup. Let $W^\perp$ denote the \emph{annihilator} of $W$ in $V^*$, that is, the
+subspace
+\[ W^\perp = \{ \xi \in V^* \,|\, \xi(x) = 0 \text{ for all } x \in W \}. \]
+It turns out that this subspace is related to our original $W$ by way of the Fourier
+transform.
 
 \begin{thm}\label{thm:FT-subspace}
     $\widehat{\IND_W} = |W| \IND_{W^\perp}$.
     \begin{proof}
         By Lemma \ref{lem:FT-conical-subset}, we need only compute what 
-        $|W\cap\ker\xi|$. We can split $\xi$ into orthogonal parts $w + w'$.
-        Then, for $x\in W$,
-        \[ \langle w + w', x \rangle = \langle w, x \rangle + \langle w', x \rangle
-            = \langle w, x \rangle. \]
-        Thus, $x\in W\cap\ker\xi$ iff $w = 0$, i.e., $\xi\in W^\perp$. Since
-        this is independent of $x$, $W\cap\ker\xi$ is either all of $W$ or zero,
-        depending on if $\xi$ is in $W^\perp$ or not. Plugging this into the
-        formula of Lemma \ref{lem:FT-conical-subset} gives our result.
+        $|W\cap\ker\xi|$ is. Consider $\xi$ restricted to $W$. By the dimension theorem,
+        \[ \dim W = \dim \ker \xi + \dim \img \xi, \]
+        and since $\xi$ is a functional, we have two options for $\dim\img\xi$.
+        If it's $0$, then $\xi$ kills all of $W$ and thus is in $W^\perp$; 
+        $|W\cap\ker\xi| = |W|$ and thus $\widehat{\IND_W}(\xi) = |W|$. If it's $1$,
+        then there's some $x\in W$ which $\xi$ does not kill, so $\xi\not\in W^\perp$.
+        Moreover, the dimension theorem says that $|W\cap\ker\xi| = |W|/p$, so 
+        $\widehat{\IND_W}(\xi) = 0$.
     \end{proof}
 \end{thm}
