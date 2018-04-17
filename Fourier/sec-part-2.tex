@@ -1,33 +1,33 @@
 \section{Homogeneous polynomials in 2 variables}\label{sec:part2}
-In the preceding section, we considered degree $2$ homogeneous polynomials in $n$ variables. Now we will instead consider degree $n$ homogeneous polynomials in $2$ variables. However, we will set things up quite differently.
+In the preceding section, we considered degree $2$ homogeneous polynomials in $n$ variables. Now we will instead consider a situation involving degree $n$ homogeneous polynomials in $2$ variables. Although we will set things up quite differently, the driving idea is once again Lemma \ref{lem:FT-conical-subset} which reduces our task to analyzing hyperplane cross-sections. The cross-sections in this setting will have a particularly natural description, revealed in \eqref{eq:part2-cross-section-soln-count}.
 
-Let $\F_p[x,y]_n$ denote the space of homogeneous polynomials of degree $n$ over $\F_p$. It is an $(n+1)$-dimensional vector space, spanned by the basis elements
+First, let us define the set $S$ of interest. Let $\F_p[x,y]_n$ denote the space of homogeneous polynomials of degree $n$ over $\F_p$. It is an $(n+1)$-dimensional vector space, spanned by the basis elements
 \[
 	\{x^n, x^{n-1}y, \ldots, xy^{n-1}, y^n\}.
 \]
-Now define $V$ to be the dual space of this vector space:
+Define $V$ to be the dual space of this vector space:
 \[
 	V \coloneqq \left(\F_p[x,y]_n\right)^*.
 \]
-Of particular algebraic interest are the elements of $V$ which are given by \emph{evaluation} at a point---these are the functionals $ev_{a,b}\colon \F_p[x,y]_n \to \F_p$ of the form
+Of particular algebraic interest are the elements of $V$ which are given by \emph{evaluation} at a point---these are the functionals $\varepsilon_{a,b}\colon \F_p[x,y]_n \to \F_p$ of the form
 \[
-	ev_{a,b}(P) = P(a,b) 
+	\varepsilon_{a,b}(P) = P(a,b) 
 \]
 for some $a,b\in \F_p$.
 
-However, the set of all $ev_{a,b}$ need not be conical: consider
+However, the set of all $\varepsilon_{a,b}$ need not be conical: consider
 \[
-	2ev_{1,0} \in \F_3[x,y]_2.
+	2\varepsilon_{1,0} \in \F_3[x,y]_2.
 \]
-This functional at $P(x,y) = x^2$ takes the value $2$, but $2\in \F_3$ is not a square and thus $2ev_{1,0}$ cannot be equal to $ev_{a,b}$ for any $a,b\in \F_3$. To get around this, we will instead let $S$ be the set
-\[
-	S=\{\xi_{a,b,c} \in V \mid \xi_{a,b,c}(P) = cP(a,b)\}.
-\]
-The Fourier transform of $\IND_S$ will be a $\C$-valued function on $V^*$, where $V^*$ is the double dual of $\F_p[x,y]_n$. Since $\F_p[x,y]_n$ is finite-dimensional, it is canonically isomorphic to its double dual, so we will identify $V^* = \F_p[x,y]_n$.
+This functional at $P(x,y) = x^2$ takes the value $2$, but $2\in \F_3$ is not a square and thus $2\varepsilon_{1,0}$ cannot be equal to $\varepsilon_{a,b}$ for any $a,b\in \F_3$. To get around this, we will instead let $S$ be the set
+\begin{equation}\label{eq:part2-defn-S}
+	S=\left\{c\varepsilon_{a,b} \mid a,b,c \in \F_p\right\}.
+\end{equation}
+The Fourier transform $\widehat{\IND_S}$ will be a $\C$-valued function on $V^*$, where $V^*$ is the double dual of $\F_p[x,y]_n$. Since $\F_p[x,y]_n$ is finite-dimensional, it is canonically isomorphic to its double dual, so we will identify $V^* = \F_p[x,y]_n$.
 
 Define $\P^1$ to be the set of lines through the origin in $\F_p^2$. For each line $\ell \in \P^1$, pick a nonzero point $(a_\ell,b_\ell)$ on $\ell$. Then we have
 \begin{equation}\label{eq:part2S}
-	S = \{0\} \cup \{\xi_{a_\ell,b_\ell,c} \mid c\in \F_p \text{ nonzero}, \ell \in \P^1 \}
+	S = \{0\} \cup \left\{c\varepsilon_{a_\ell,b_\ell} \mid c\in \F_p \text{ nonzero}, \ell \in \P^1 \right\}
 \end{equation}
 and hence
 \[
@@ -35,7 +35,7 @@ and hence
 \]
 We will now give a very simple description of $\widehat{\IND_S}$.
 \begin{thm}\label{thm:part2thm}
-	Let $\F_p[x,y]_n$ be the space of homogeneous polynomials of degree $n$ over $\F_p$, $V$ its dual space, and $S\subset V$ the set $\{\xi_{a,b,c} \in V \mid \xi_{a,b,c}(P) = cP(a,b)\}$.
+	Let $\F_p[x,y]_n$ be the space of homogeneous polynomials of degree $n$ over $\F_p$, $V$ its dual space, and $S\subset V$ the set defined by \eqref{eq:part2-defn-S}.
 	
 	An element $\xi \in V^*$ is a polynomial $P(x,y)$. Let $N_\xi$ be the number of solutions to $P(x,y)=0$ in $\F_p^2$. Then
 	\begin{equation}
@@ -43,10 +43,10 @@ We will now give a very simple description of $\widehat{\IND_S}$.
 	\end{equation}
 \end{thm}
 \begin{proof}
-	An element $\xi_{a,b,c}\in S$ is in $\ker \xi$ when $P(a,b) = 0$. From \eqref{eq:part2S}, we have
-	\[
+	An element $c\varepsilon_{a,b}\in S$ is in $\ker \xi$ when $P(a,b) = 0$. From \eqref{eq:part2S}, we have
+	\begin{equation}\label{eq:part2-cross-section-soln-count}
 		|S \cap \ker \xi| = N_\xi
-	\]
+	\end{equation}
 	and thus, by Lemma \ref{lem:FT-conical-subset},
 	\begin{align*}
 		\widehat{\IND_S}(\xi) &= \frac{p|S\cap \ker \xi| - |S|}{p-1}\\
@@ -77,4 +77,4 @@ where we have used the linearity of the Fourier transform together with Theorem 
 
 What is the ``geometry'' of these hyperplanes $\ell_i^\bot$? If $n < p$ then clearly not all $p+1$ of the lines $\ell_i$ can be linearly independent. We claim, however, that every subset of size at most $n+1$ is indeed linearly independent. A way of seeing this is by noting that the Vandermonde determinant is nonzero. Alternatively, one can explicitly produce a polynomial $P \in \F_p[x,y]_n$ which vanishes on $n$ given lines but not on the others. On the other hand, if an element of $\F_p[x,y]_n$ vanishes on $n+1$ of the lines, then in fact it vanishes on all of the lines. This is entirely what we expect: dividing the polynomial by $y^n$ gives a univariate polynomial in $(x/y)$ of degree at most $n$. If such a polynomial has $n+1$ roots, then it is identically zero.
 
-\textcolor{red}{need to add summary}
+In this section, we considered a conical set $S$ arising from evaluation functionals. In this setting, the Fourier transform $\widehat{\IND_S}$ records the number of solutions to polynomials in $\F_p[x,y]_n$ in the manner given by Theorem \ref{thm:part2thm}. Note that, as we just discussed above, the only possible values of $N_\xi$ are $(p-1)k + 1$, where $k\in\{0,\ldots,n\}$ for nonzero $\xi$ and $k=p+1$ for $\xi = 0$.
