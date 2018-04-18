@@ -1,5 +1,5 @@
 \section{Homogeneous quadratics in $n$ variables}\label{sec:part1}
-Lemma \ref{lem:FT-conical-subset} is a powerful tool which, for conical $S$, reduces the computation of $\widehat{\IND_S}$ to a counting problem. Having established this useful groundwork, we move on to computing examples of $\widehat{\IND_S}$. In this section we consider the case when $V = \F_p^n$ and $S \subset V$ is a quadric defined by
+In this section we consider the case when $V = \F_p^n$ and $S \subset V$ is a quadric defined by
 \[
 	S = \{(x_1,\ldots,x_n) \mid Q(x_1,\ldots,x_n) = 0\}
 \]
@@ -7,6 +7,7 @@ where $Q$ is a homogeneous quadratic. The set $S$ is conical because $Q$ is homo
 \[
 	\ker \xi = \langle \xi \rangle^\bot = \{x \in V \mid \xi x =0\}.
 \]
+Here $\langle \xi \rangle$ means the span of $\xi$.
 
 We begin with an illustrative example over the reals before considering the situation over $\F_p$. Let $Q = 3x_1^2 + 3x_2^2 - 2x_3^2$.
 The intersection $\langle \xi \rangle^\bot \cap S$ has three possible shapes:
@@ -23,7 +24,7 @@ The intersection $\langle \xi \rangle^\bot \cap S$ has three possible shapes:
 \end{figure}
 In fact, the set of $\xi$ such that $\langle \xi \rangle^\bot$ is tangent to the quadric is given by
 \[
-	\left\{ \xi = (\xi_1,\xi_2,\xi_3) \mid \frac{1}{3} \xi_1^2 + \frac{1}{3} \xi_2^2 - \frac{1}{2} \xi_3^2 = 0 \right\} \subset V^*.
+	\left\{ \xi = (\xi_1,\xi_2,\xi_3) \,\middle|\, \frac{1}{3} \xi_1^2 + \frac{1}{3} \xi_2^2 - \frac{1}{2} \xi_3^2 = 0 \right\} \subset V^*.
 \]
 This is a quadric in $V^*$, and it is dual to our original quadric in a sense that we will soon explain. Let us write $Q^*$ for the equation of this dual quadric. Observe that $Q^*(0,-2,1) > 0$ while $Q^*(0,0,1) < 0$. It turns out that the sign of $Q^*(\xi)$ is all one needs to classify the intersection $\langle \xi \rangle^\bot \cap S$. Equivalently, one needs only consider the existence of square-roots of $Q^*(\xi)$---a notion which, unlike ``sign,'' still makes sense over $\F_p$.
 
@@ -55,9 +56,9 @@ Our interest in these operators $g$ motivates the following definition.
 	\[
 		O(A) \coloneqq \{ g \in GL(V) \mid g^\top A g = A\}.
 	\]
-	Also define
+	Also define the \emph{conical orthogonal group of $A$} as
 	\[
-		kO(A) \coloneqq \{ cg \mid c\in k, g\in O(A)\}.
+		kO(A) \coloneqq \{ cg \mid c\in k^\times, g\in O(A)\}.
 	\]
 \end{defn}
 By construction, elements of $O(A)$ map $S$ bijectively to itself. Elements of $kO(A)$ do as well, because $S$ is conical. The action of $kO(A)$ on $V$ has another important feature which we now discuss. 
@@ -94,9 +95,7 @@ Now suppose that $\xi^\top,\xi'^\top$ both belong to $S_0(A^{-1})$ (the followin
 \[
 	\xi' (g^\top)^{-1} x = \xi x = 0
 \]
-and thus $(g^\top)^{-1}$ maps $\langle \xi \rangle^\bot$ to $\langle \xi' \rangle^\bot$. Moreover, since $g \in O(A^{-1})$, inverting the identity $g^\top A^{-1} g = A^{-1}$ shows that $(g^\top)^{-1} \in O(A)$.
-
-Thus as in \eqref{eq:S-operator-hyperplane-bijection} we get a map
+and thus $(g^\top)^{-1}$ maps $\langle \xi \rangle^\bot$ to $\langle \xi' \rangle^\bot$. Moreover, since $g \in O(A^{-1})$, inverting the identity $g^\top A^{-1} g = A^{-1}$ shows that $(g^\top)^{-1} \in O(A)$. Thus as in \eqref{eq:S-operator-hyperplane-bijection} we get a map
 \[
 	(g^\top)^{-1} \colon S \cap \langle \xi \rangle^\bot \to S \cap \langle \xi' \rangle^\bot
 \]

@@ -1,23 +1,17 @@
 \section{First properties of conical subsets}\label{sec:part0}
 
-Let $V$ be an $\F_p$ vector space.
-Throughout the rest of paper, for all such $V$, we implicitly pick an isomorphism 
-	$V\cong\F_p^n$, i.e., an explicit basis. This
-	entitles us to an inner product on $V$, as well as an isomorphism between $V$ and
-	$V^*$, where all functionals are of the unique form $x \mapsto \langle v, x \rangle$
-	for some $v\in V$.
-
-We are interested in indicator functions of conical subsets of $V$:
+Let $V$ be an $\F_p$-vector space. We are interested in indicator functions of conical subsets of $V$:
 \begin{defn}
     A subset $S\subset V$ is called \emph{conical} if it is closed under scaling,
     i.e., for all $x\in \F_p$, $xS = S$.    
 \end{defn}
-Since we're studying indicator functions, we can simplify our expression for 
+Since we're studying indicator functions, we can simplify Definition \ref{defn:intro-FpFT} for 
 $\widehat{\IND_S}$:
 \[ \widehat{\IND_S}(\xi) = \sum_{x\in S} \exp \left(\frac{2\pi i}{p} \xi(x)\right). \]
-Noting that $\IND_S = 1 - \IND_{V\setminus S}$, we can further write the Fourier transform as
-\[ \widehat{\IND_S}(\xi) = 1 - \sum_{x\not\in S} \exp \left(\frac{2\pi i}{p} \xi(x)\right), \]
-which will be occasionally convenient. The following lemma further reduces this expression,
+%Noting that $\IND_S = 1 - \IND_{V\setminus S}$, we can further write the Fourier transform as
+%\[ \widehat{\IND_S}(\xi) = 1 - \sum_{x\not\in S} \exp \left(\frac{2\pi i}{p} \xi(x)\right), \]
+%which will be occasionally convenient.
+The following lemma further reduces this expression,
 which will be useful throughout the paper.
 \begin{lem}\label{lem:FT-conical-subset}
 	For a conical subset $S \subset V$,
@@ -51,10 +45,8 @@ which will be useful throughout the paper.
 	   as desired.
 	\end{proof}
 \end{lem}
-
-The simplest conical set is a linear subspace $W$ of $V$.
-To show the power of Lemma \ref{lem:FT-conical-subset}, we use it to compute $\IND_W$
-as a warmup. Let $W^\perp$ denote the \emph{annihilator} of $W$ in $V^*$, that is, the
+The simplest conical sets are linear subspaces $W$ of $V$, and we will compute $\widehat{\IND_W}$ using Lemma \ref{lem:FT-conical-subset}
+as a demonstration of its utility. Let $W^\perp$ denote the \emph{annihilator} of $W$ in $V^*$, that is, the
 subspace
 \[ W^\perp = \{ \xi \in V^* \,|\, \xi(x) = 0 \text{ for all } x \in W \}. \]
 It turns out that this subspace is related to our original $W$ by way of the Fourier
@@ -74,3 +66,4 @@ transform.
         $\widehat{\IND_W}(\xi) = 0$.
     \end{proof}
 \end{thm}
+As this proof demonstrates, Lemma \ref{lem:FT-conical-subset} is a powerful tool which, for conical $S$, reduces the computation of $\widehat{\IND_S}$ to a counting problem. We will repeatedly make use of the lemma in what follows. Having established this useful groundwork, we move on to computing $\widehat{\IND_S}$ for other interesting choices of $S$.
