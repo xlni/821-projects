@@ -12,7 +12,7 @@ V\times V&\to\F_p,\\
 Under this identification, $\xi$ corresponds to a matrix $M_\xi\in V$, and we have
 \begin{equation}
 \label{eqn:kerlambda}
-\ker\xi\cap S=\{A\in S:\tr(AM_\xi)=0\}.
+\ker\xi\cap S=\{A\in S \mid \tr(AM_\xi)=0\}.
 \end{equation}
 Our goal is to describe the cardinality of this set in terms of the matrix $M_\xi$.
 \begin{lem}
@@ -212,7 +212,7 @@ $n$&$|\ker\xi\cap S|$&$\fact(M_\xi)$\\
 \label{tab:lowdim}
 \end{table}
 
-\begin{rem}
+\begin{rem}\hfill
 \label{rem:conj}
 \begin{enumerate}[(a)]
 \item Even if proven, this conjecture would constitute only a partial answer to our original question: it does not propose a rule explaining \emph{how} $|\ker\xi\cap S|$ depends on $\fact(M_\xi)$, nor does it specify which of the values listed in part \eqref{item:conjvals} of the conjecture occur for a particular $n$ (the answer for a particular $p$ should be the values corresponding to the factorization data that occur for that $p$, see \eqref{item:rmkconjtwo}). Already for $n=2,3$ we see in Table~\ref{tab:lowdim} that not all of the values listed in part \eqref{item:conjvals} of the conjecture occur (assuming part \eqref{item:conjlown}). In general, we know very little about the truth of this conjecture; in the remainder of this section, we prove two small assertions contained therein, namely, characterizations of the case $n=2$ and the value $p^{n^2-n}$.
@@ -286,10 +286,10 @@ Presently we deduce that either $b=a=d=0$ or $b\ne 0$, $d=-a$, and $c=-a^2/b$, t
 S=\left\{\begin{bmatrix}
 0&0\\
 c&0
-\end{bmatrix}:c\in\F_p\right\}\cup\left\{\begin{bmatrix}
+\end{bmatrix} \,\middle|\, c\in\F_p\right\}\cup\left\{\begin{bmatrix}
 a&b\\
 -a^2/b&-a
-\end{bmatrix}:a\in\F_p,b\in\F_p^\times\right\}.
+\end{bmatrix} \,\middle|\, a\in\F_p,b\in\F_p^\times\right\}.
 \end{equation}
 Now, any $2\times 2$ matrix $M_\xi$ in rational canonical form is either a scalar matrix or of the form
 \begin{equation}
@@ -355,7 +355,7 @@ Now, the number of distinct roots of $f$ in $\F_p$ is $0$, $1$, or $2$, dependin
 a&b\\
 -a^2/b&-a
 \end{bmatrix}
-:a,b\in\F_p^\times, f(b/a)=0\right\}\right|\\
+\,\middle|\, a,b\in\F_p^\times, f(b/a)=0\right\}\right|\\
 &=\begin{cases}
 1&\text{if }\fact(M_\xi)=(\{(2,1)\}),\\
 1+(p-1)&\text{if }\fact(M_\xi)=(\{(1,2)\}),\\
