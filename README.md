@@ -7,4 +7,6 @@ Mentor: Rasmus Johansen
 
 ## Project 2: Fourier Transform over Fp
 Mentor: Stuart Thomson
-## Project 3:
+
+## Project 3: Noncommutative Polynomial Relations / Grobner Bases
+Mentor: Haynes Miller
