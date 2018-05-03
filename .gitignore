@@ -1,2 +1,7 @@
 *.texpadtmp
 *.pdf
+
+.idea
+*.iml
+target
+Cargo.lock
