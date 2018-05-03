@@ -1,0 +1,9 @@
+[package]
+name = "grobner"
+version = "0.1.0"
+authors = ["mcyoung <mcyoung@mit.edu>"]
+
+[dependencies]
+num = "0.1.42"
+clap = "2.31.2"
+nom = "3.2.1"
