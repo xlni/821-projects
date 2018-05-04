@@ -26,7 +26,7 @@ In particular, $p \in \mathfrak{a}$ if and only if $p_\red = 0$.
 
 We need an \emph{order} to make much sense of the word ``reduction.'' To this end, impose a well-ordering on $X$. Then, order monomials first by degree, and order monomials of the same degree by lexicographic order (using the order on $X$). For example, if $X = \{x,y\}$ with $x < y$, then the monomials are ordered as
 \[
-	1 < x < y < xx < xy < yx < yy < xxx < xxy < \ldots
+	1 < x < y < xx < xy < yx < yy < xxx < xxy < \cdots
 \]
 It is easy to see that, since $X$ is well-ordered, this \emph{degree-lexicographic} (deglex) ordering of monomials is also a well-ordering. We will say that a polynomial $\phi$ is \emph{lower} than a monomial $m$ if all monomials appearing in $\phi$ are smaller than $m$ according to this monomial order.
 
@@ -138,17 +138,16 @@ The following proposition shows that this notion successfully identifies the cau
 So when all overlaps are weakly consistent, if we take $p_\red$ to be the polynomial represented by a terminal node of the simplification tree of $L_p$, the assignment $p \mapsto p_\red$ is well-defined. Note that this also implies the overlaps are actually consistent, rather than just weakly consistent.
 
 We can replace each $\phi_i$ with $(\phi_i)_\red$, and this brings us to the definition of a (reduced) \emph{Gr\"obner basis}:
-\begin{defn}
-\label{def:grobner}
+\begin{defn}\label{def:grobner}
 	Let $\mathfrak{a}$ be a two-sided ideal in $T(V)$. We say that a subset $\{m_i - \phi_i\}\subset \mathfrak{a}$, where each $m_i$ is a monomial and $\phi_i$ is a polynomial lower than $m_i$, forms a (reduced) \emph{Gr\"obner basis} for $\mathfrak{a}$ if all of the following conditions are satisfied:
 	\begin{enumerate}
 		\item $\{m_i - \phi_i\}$ generates the ideal $\mathfrak{a}$.
+		\item\label{item:grobnerconsistent} All overlaps are (weakly) consistent (see Definitions \ref{def:overlap}, \ref{def:consistent}).
 		\item $m_i$ is not divisible by $m_j$ for all distinct $i,j$.
 		\item $\phi_i = (\phi_i)_\red$ for all $i$.
-		\item\label{item:grobnerconsistent} All overlaps are (weakly) consistent (see Definitions \ref{def:overlap}, \ref{def:consistent}).
 	\end{enumerate}
 \end{defn}
-The adjective ``reduced'' will be motivated in \S\ref{sec:rref}, when we establish a connection between (reduced) Gr\"obner bases and \emph{reduced row echelon form}.
+The adjective ``reduced'' refers to the last two conditions, and the word choice will be motivated in \S\ref{sec:rref}, where we examine a connection with \emph{reduced row echelon form}. Onwards, when we refer to a Gr\"obner basis, we assume that it is reduced.
 
 With a Gr\"obner basis, the map $p\mapsto p_\red$ is well-defined as a consequence of Proposition \ref{prop:consistent-tree-terminals}. However, we are interested in the assignment $[p]\mapsto p_\red$. We need to show that the outcome of reduction depends only on the congruence class, so that this function is well-defined.
 
@@ -173,4 +172,11 @@ Altogether, we have proven the following theorem.
 	T(V) \arrow[r, "p \mapsto {[p]}",swap] & \arrow[l,bend right, swap," p_\red \mapsfrom {[p]}"] T(V)/\mathfrak{a}
 	\end{tikzcd}\]
 \end{thm}
-We have shown that the reduction process is well-behaved if we have a Gr\"obner basis. But we have not discussed how to produce a Gr\"obner basis given generators of an ideal---so we have not yet resolved Example \ref{exa:x2-y2}, for instance. We do this and more in \textcolor{red}{(REFERENCE SECTION)}.
+\begin{cor}
+	A basis for $T(V)/\mathfrak{a}$ is given by the equivalence classes of reduced monomials:
+	\[
+		\{[u] \mid u \textnormal{ is a monomial and }u = u_\red\}.
+	\]
+	These are equivalently the monomials which are not divisible by any $m_i$.
+\end{cor}
+We have shown that the reduction process is well-behaved if we have a Gr\"obner basis. But we have not discussed how to produce a Gr\"obner basis given generators of an ideal---so we have not yet resolved Example \ref{exa:x2-y2}, for instance. We describe an algorithm for this task in \S\ref{sec:implementation}. But before we do so, let us examine some additional properties of Gr\"obner bases.
