@@ -1,7 +1,7 @@
 \section{Existence and uniqueness of Gr\"obner bases}\label{sec:rref}
-\textcolor{red}{missing exposition}
-
 Throughout this section, we consider a fixed well-ordering of $X$ (and thus a fixed induced deglex ordering on monomials).
+
+\textcolor{red}{missing exposition}
 
 \begin{prop}[Reduced row echelon form]\label{prop:rref}
 	Let $W$ be a linear subspace of $T(V)$. Then $W$ has a unique basis satisfying the following properties:
@@ -47,8 +47,8 @@ Now we will use this to prove an existence and uniqueness result for Gr\"obner b
 	\]
 	is lower than the leading monomial of $p$, and also doesn't belong to $\mathfrak{b}$---contradicting the minimality of $p$. Thus $\mathfrak{b} = \mathfrak{a}$.
 	
-	Suppose that $p\in \mathfrak{a}$ and we use congruences $m_i \equiv \phi_i$ to fully reduce it in some way, obtaining $p_\red \in \mathfrak{a}$. If $p_\red$ is nonzero, then its highest monomial is not divisible by any $m_i$, and thus is not equal to any $u_i$. But because $\{u_i - \psi_i\}$ is in reduced row echelon form, $p_\red$ cannot be in their span, contradiction. Hence any element of $\mathfrak{a}$ reduces to zero. In particular, this implies that all overlaps are consistent. We conclude that $\{m_i - \phi_i\}$ is indeed a reduced Gr\"obner basis for $\mathfrak{a}$.
+	Suppose that $p\in \mathfrak{a}$ and we use congruences $m_i \equiv \phi_i$ to fully reduce it in some way, obtaining $p_\red \in \mathfrak{a}$. This means that none of the terms in $p_\red$ are divisible by any $m_i$, so none of the monomials $u_i$ appear in $p_\red$. But since $\{u_i - \psi_i\}$ is in reduced row echelon form and $p_\red \in \mathfrak{a}$, we must have $p_\red = 0$. Hence any element of $\mathfrak{a}$ reduces to zero. In particular, this implies that all overlaps are consistent. We conclude that $\{m_i - \phi_i\}$ is indeed a Gr\"obner basis for $\mathfrak{a}$ (and it is reduced by construction).
 	
-	We have given processes for converting between a reduced Gr\"obner basis and reduced row echelon form for $\mathfrak{a}$. These constructions are inverse to one another, and hence the theorem follows from Proposition \ref{prop:rref}.
+	We have given processes for converting between a Gr\"obner basis and reduced row echelon form for $\mathfrak{a}$. These constructions are inverse to one another, and hence the theorem follows from Proposition \ref{prop:rref}.
 \end{proof}
-\textcolor{red}{exposition to be added}
+We have shown that a unique Gr\"obner basis always exists for any ideal $\mathfrak{a}$, but the basis need not be finite. In the following section, we detail a computer algorithm for finding the basis in the event that it is finite.

@@ -2,28 +2,24 @@
 \input{header.tex}
 
 \begin{document}
-	%\input{info.tex}
-	\title{The $\F_p$ Fourier transform of indicator functions of conical subsets}
+	\input{info.tex}
+	\title{Computing Gr\"obner bases in Noncommutative Polynomial Algebras}
 	\author{Xianglong Ni, Oron Propp, Miguel Young }
 	
 	\maketitle
-
-	\begin{abstract}
-	    We explore a generalization of the Fourier transform to complex
-	    functions defined on $\F_p$-vector spaces. To this end, we compute the Fourier
-	    transforms of indicator functions of conical subsets of these vector spaces in several specific cases.
-	\end{abstract}
 	
+    \begin{abstract}
+    We prove existence and uniqueness of reduced Gr\"obner bases for two-sided ideals in a noncommutative polynomial algebra, and show that they give rise to a well-defined reduction process for elements of the algebra. We then describe and implement an algorithm for computing these reductions and Gr\"obner bases. Finally, we work through several examples, and give an application to universal enveloping algebras, reproving the Poincar\'e--Birkhoff--Witt theorem.
+    \end{abstract}
+
 	\tableofcontents
 
-    \input{sec-intro.tex}
-    \input{sec-part-0.tex}
-	\input{sec-part-1.tex}
-	\input{sec-part-2.tex}
-    \input{sec-part-3.tex}
-	\clearpage
-	\appendix
-	\input{sec-recursion-for-quadratic-solns.tex}
+    \input{introduction.tex}
+    \input{sec-grobner-theorem.tex}
+    \input{sec-rref.tex}
+    \input{implementation.tex}
+    \input{sec-examples.tex}
+    \input{sec-applications.tex}
 
     \bibliographystyle{plain}
 	\bibliography{references}
