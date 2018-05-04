@@ -57,6 +57,7 @@ Now, by bilinearity of the bracket, $\a$ is equal to the two-sided ideal generat
 \end{equation}
 In fact, more is true:
 \begin{lem}
+\label{lem:ueagrobner}
 The set \eqref{eqn:ueabasis} is a (reduced) Gr\"obner basis for $\a$.
 \end{lem}
 \begin{proof}
@@ -84,14 +85,18 @@ x_im_{j,\ell}&\equiv x_i(x_\ell x_j+[x_j,x_\ell])\\
 &\qquad+([x_j,x_\ell]_{<i}x_i+[x_i,[x_j,x_\ell]_{<i}])+x_i[x_j,x_\ell]_{\ge i}.
 \end{align*}
 In both cases, we have made extensive use of the bilinearity of the bracket. Now, observe that these reduced polynomials are equivalent if and only if
-\begin{align*}
+\begin{equation}
+\label{eqn:ueaconsistency}
+\begin{split}
 [[x_j,x_\ell]_{>i},x_i]+&[x_j,[x_i,x_\ell]_{<j}]+[[x_i,x_j]_{>\ell},x_\ell]\\
 &=[x_\ell,[x_i,x_j]_{<\ell}]+[[x_i,x_\ell]_{>j},x_j]+[x_i,[x_j,x_\ell]_{<i}],
-\end{align*}
+\end{split}
+\end{equation}
 as all other terms of $(m_{i,j}x_\ell)_\red$ and $(x_im_{j,\ell})_\red$ cancel. Applying anti-commutativity and alternativity, we see that this is equivalent to the identity
-\begin{equation*}
+\begin{equation}
+\label{eqn:jacobi}
 [x_i,[x_j,x_\ell]]+[x_j,[x_\ell,x_i]]+[x_\ell,[x_i,x_j]]=0.
-\end{equation*}
+\end{equation}
 This is just the Jacobi identity.
 \end{proof}
 
@@ -135,11 +140,30 @@ T(\g)\arrow[rr,two heads]\arrow[rd,two heads]&&\gr U(\g)\\
 &\Sym(\g).\arrow[ru,dashed]&
 \end{tikzcd}
 \end{equation}
-Now, \eqref{eqn:symisopoly} shows that \eqref{eqn:ugbasis} is also a basis for $\Sym(\g)$, which is evidently mapped bijectively to the corresponding basis elements of $U(\g)$ by the dashed map. Thus, our results on Gr\"obner bases have given a slick proof of the following well-known result:
+Now, \eqref{eqn:symisopoly} shows that \eqref{eqn:ugbasis} is also a basis for $\Sym(\g)$, which is evidently mapped bijectively to the corresponding basis elements of $U(\g)$ by the dashed map (note that the canonical map $U(\g)\to\gr U(\g)$ is an isomorphism of vector spaces, though not of algebras). Thus, our results on Gr\"obner bases have given a slick proof of the following well-known result:
 
 \begin{cor}[Poincar\'e--Birkhoff--Witt theorem \cite{cohn}]
 The dashed map \eqref{eqn:factorization} is a (canonical) isomorphism of commutative algebras.
 \end{cor}
+
+Finally, we note that a sort of ``converse'' to this corollary holds as well:
+
+\begin{prop}
+Let $V$ be a vector space equipped with a bilinear pairing
+\begin{equation*}
+[-,-]\colon V\otimes V\to V,
+\end{equation*}
+and define $U(V)$ as before. If the dashed map \eqref{eqn:factorization} is an isomorphism (with $\g$ replaced by $V$ throughout), then this bracket gives $V$ the structure of a Lie algebra.
+\end{prop}
+\begin{proof}
+Choose a well-ordered basis $\{x_i\}$ for $V$. It follows as above that \eqref{eqn:ugbasis} is a basis for $U(V)$. By Corollary~\ref{cor:grobner}, this implies that no additional relations must be introduced to \eqref{eqn:ueabasis} to form a Gro\"bner basis for $U(V)$, i.e., the relations \eqref{eqn:ueabasis} are all (weakly) consistent. As in the proof of Lemma~\ref{lem:ueagrobner}, this is equivalent to \eqref{eqn:ueaconsistency}. Since the relation
+\begin{equation*}
+x^2-x^2-[x,x]=-[x,x]=0
+\end{equation*}
+holds in $U(V)$ for each $x\in V$, it follows that $[x,x]=0$ in $V$, as otherwise the set \eqref{eqn:ugbasis} would not be linearly independent in $U(V)$. Thus, the bracket satisfies alternativity; as before, this implies anti-commutativity, which we use along with alternativity to deduce the Jacobi identity \eqref{eqn:jacobi} from \eqref{eqn:ueaconsistency}
+\end{proof}
+
+Thus, the ``universal enveloping algebra'' of a vector space with a bilinear pairing satisfies the Poincar\'e--Birkhoff--Witt theorem if and only if the vector space has the structure of a Lie algebra.
 
 %%% Local Variables:
 %%% mode: latex
