@@ -204,65 +204,6 @@ necessary.
     \verb|Relation| any time the overlap of two \verb|Relation|s reduces to two
     distinct \verb|Poly|s, where the \verb|Relation| declares these \verb|Poly|s to
     be equal.
-    \begin{comment}
-        pub fn expand_overlaps(&mut self, iterations: usize) {
-        // run through all pairs of relations
-        let mut new_rels = Vec::new();
-        use std::collections::HashSet;
-        let mut checked_pairs = HashSet::new();
-        for _ in 0..iterations {
-            for i in 0..self.0.len() {
-                for j in 0..self.0.len() {
-                    let r1 = &self.0[i];
-                    let r2 = &self.0[j];
-
-                    if !checked_pairs.contains(&(r1.m.clone(), r2.m.clone())) {
-                        checked_pairs.insert((r1.m.clone(), r2.m.clone()));
-                    } else {
-                        continue
-                    }
-
-                    // check if a tail of the first is a head of the second
-                    for k in 0..r1.m.degree() {
-                        let tail = &r1.m.0[k..];
-                        if r2.m.0.starts_with(tail) {
-                            // we've found an overlap!
-
-                            // convert the overlapped monomials into polys:
-
-                            let mut p1 = Monomial::new(r1.m.0[..k].iter().cloned()).into_poly();
-                            p1 *= r2.phi.clone();
-
-                            let mut p2 = r1.phi.clone();
-                            p2 *= Monomial::new(r2.m.0[r1.m.degree() - k..].iter().cloned());
-
-
-                            p1 = p1.reduce(&self);
-                            p2 = p2.reduce(&self);
-
-                            // the reduced forms are inconsistent, so
-                            // we need to add another relation.
-                            if p1 != p2 {
-
-                                p1 -= p2;
-                                new_rels.push(Relation::new(p1));
-                            }
-                        }
-                    }
-                }
-            }
-            if new_rels.is_empty() {
-                // everything is consistent!
-                break;
-            } else {
-                for x in new_rels.drain(..) {
-                    self.0.push(x);
-                }
-            }
-        }
-    }    
-    \end{comment}
-
 \begin{verbatim}
 function expand_overlaps(ideal: Ideal, iterations: int) {
     // each iterations will produce new relations; we 
