@@ -1,19 +1,39 @@
 \section{Implementation of the simplification algorithm}
 \label{sec:implementation}
 
-The previous sections describe a process by which, given finitely-generated,
-two-sided ideal $\mathfrak{a}$, we can produce a Gr\"obner basis. We will now
-describe a computer implementation of this algorithm. We assume that the
-reader of this section is familiar with basic low-level programing and algorithms.
+The results from the previous section allow us to devise a process by which we can
+turn a finitely-generated, two-sided ideal $\mathfrak{a}$ into a Gr\"obner basis.
+Let us consider an abridged description first.
+
+\begin{alg}
+    Let $\mathfrak{a} = (p_1,\ldots,p_n)$ be a two-sided ideal. Let $m_i$ be the 
+    leading (w.r.t. deglex) term of each $p_i$ (we assume our polynomials are monic).
+    If $m_i \mid m_j$, we can reduce $m_j$ with respect to $p_i$, and replace $p_j$
+    with the resulting polynomial; this removes extraneous relations.
+    
+    Now that we have a set of polynomials with relatively-prime leading terms, we need
+    to correct overlaps. For each pair of polynomials, we say there is an overlap 
+    if there are $u$ and $v$ such that $um_i = m_j v$, for $v, u$ having degree smaller 
+    than $m_i$ and $m_j$, respectively. Let $q_i = u(m_i - p_i)$ and $q_j = (m_j - p_j)v$.
+    We reduce these polynomials with respect to $\mathfrak{a}$; if $q_{i,red} = q_{j,red}$,
+    this overlap produces consistent results, so we move on. Otherwise, we introduce
+    $q_{i,red} - q_{j,red}$ into $\mathfrak{a}$. We then repeat this process with the
+    augmented ideal until we reach a fixed point; this is our Gr\"obner basis. If
+    there is no finite Gr\"obner basis, this algorithm will not terminate.
+\end{alg}
+
+We will now dive into a detailed description of the algorithm. We assume that the
+reader of this section is familiar with basic low-level programing, algorithms, and
+big-oh notation.
 
 \begin{rem}
-    We will give a primarily low-level overview of the implementation, since some
+    We will give a primarily high-level overview of the implementation, though since some
     design choices involve avoiding memory allocation whenever possible, which
     affects, for example, complexity of polynomial arithmetic. 
     
     We will denote data structures and the names of instances thereof in typewriter font:
     for example, \verb|p| is a \verb|Polynomial|. All algorithms are described in
-    pseudo-code.
+    \verb|C|-like pseudo-code.
 \end{rem}
 
 Let us begin by defining the necessary data structures.
@@ -259,13 +279,26 @@ function expand_overlaps(ideal: Ideal, iterations: int) {
 Taking these three algorithms together, we can compute Gr\"obner bases. We have written
 a program which implements these algorithms, which can be be run from any Athena
 terminal with the command \verb|add mcyoung| followed by \verb|grobner|. Running
-\verb|grobner help| will show available options. Note that polynomials
-should be entered with single quotes around each one. Some example invocations:
+\verb|grobner help| will show available options. 
+
+\begin{example}
+    Use \verb|grobner| to compute a basis for $\mathfrak{a}=(x^2 - y^2)$:
 \begin{verbatim}
 $ grobner basis 'x^2 - y^2'
 y^2 - x^2
 yx^2 - x^2y
-$ grobner reduce 'x^2 - y^2' -p '1/3y^4 + 3x^4'
-1/3y^4 + 3x^4 = 10/3x^4 (mod a)
 \end{verbatim}
+
+    \noindent
+    Use \verb|grobner| to to reduce $3x^4 + \frac{1}{3} y^4$ with respect to
+    $\mathfrak{a}$:
+\begin{verbatim}
+$ grobner reduce 'x^2 - y^2' --poly '1/3y^4 + 3x^4'
+a = (y^2 - x^2, yx^2 - x^2y)
+1/3y^4 + 3x^4 = 10/3x^4 (mod a)
+\end{verbatim}    
+\end{example}
+
+
+
 

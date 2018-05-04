@@ -8,10 +8,11 @@ extern crate num;
 use clap::AppSettings;
 
 use num::traits::*;
-use num::rational::Rational;
+use num::Rational;
 
-use std::ops::{AddAssign, SubAssign, MulAssign};
-use std::fmt::{Result as FResult, Display, Formatter};
+use std::cmp::{ PartialOrd, Ord, Ordering };
+use std::fmt::{ Result as FResult, Display, Formatter };
+use std::ops::{ AddAssign, SubAssign, MulAssign };
 
 #[allow(unused_macros)]
 macro_rules! __monomial_inner {
@@ -145,8 +146,6 @@ impl Display for Monomial {
     }
 }
 
-use std::cmp::{ PartialOrd, Ord, Ordering };
-
 impl PartialOrd for Monomial {
 
     fn partial_cmp(&self, other: &Monomial) -> Option<Ordering> {
@@ -239,10 +238,9 @@ impl Poly {
 
     pub fn from_str(s: &str) -> Result<Poly, String> {
 
-        use std::str;
-        use std::str::FromStr;
         use nom::*;
         use std::ops::*;
+        use std::str::{ self, FromStr };
 
         pub fn one_alpha<T>(input:T) -> IResult<T, T> where
             T: Slice<Range<usize>> + Slice<RangeFrom<usize>> + Slice<RangeTo<usize>>,
