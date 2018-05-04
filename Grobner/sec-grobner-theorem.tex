@@ -139,12 +139,13 @@ So when all overlaps are weakly consistent, if we take $p_\red$ to be the polyno
 
 We can replace each $\phi_i$ with $(\phi_i)_\red$, and this brings us to the definition of a (reduced) \emph{Gr\"obner basis}:
 \begin{defn}
+\label{def:grobner}
 	Let $\mathfrak{a}$ be a two-sided ideal in $T(V)$. We say that a subset $\{m_i - \phi_i\}\subset \mathfrak{a}$, where each $m_i$ is a monomial and $\phi_i$ is a polynomial lower than $m_i$, forms a (reduced) \emph{Gr\"obner basis} for $\mathfrak{a}$ if all of the following conditions are satisfied:
 	\begin{enumerate}
 		\item $\{m_i - \phi_i\}$ generates the ideal $\mathfrak{a}$.
 		\item $m_i$ is not divisible by $m_j$ for all distinct $i,j$.
 		\item $\phi_i = (\phi_i)_\red$ for all $i$.
-		\item All overlaps are (weakly) consistent (see Definitions \ref{def:overlap}, \ref{def:consistent}).
+		\item\label{item:grobnerconsistent} All overlaps are (weakly) consistent (see Definitions \ref{def:overlap}, \ref{def:consistent}).
 	\end{enumerate}
 \end{defn}
 The adjective ``reduced'' will be motivated in \S\ref{sec:rref}, when we establish a connection between (reduced) Gr\"obner bases and \emph{reduced row echelon form}.
