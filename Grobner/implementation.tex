@@ -15,11 +15,14 @@ Let us consider an abridged description first.
     to correct overlaps. For each pair of polynomials, we say there is an overlap 
     if there are $u$ and $v$ such that $um_i = m_j v$, for $v, u$ having degree smaller 
     than $m_i$ and $m_j$, respectively. Let $q_i = u(m_i - p_i)$ and $q_j = (m_j - p_j)v$.
-    We reduce these polynomials with respect to $\mathfrak{a}$; if $q_{i,red} = q_{j,red}$,
+    We reduce these polynomials with respect to $\mathfrak{a}$; if $q_{i,\red} = q_{j,\red}$,
     this overlap produces consistent results, so we move on. Otherwise, we introduce
-    $q_{i,red} - q_{j,red}$ into $\mathfrak{a}$. We then repeat this process with the
-    augmented ideal until we reach a fixed point; this is our Gr\"obner basis. If
-    there is no finite Gr\"obner basis, this algorithm will not terminate.
+    $q_{i,red} - q_{j,red}$ as a new generator of $\mathfrak{a}$. 
+    We then repeat this process with the enlarged set of generators 
+    until we reach a fixed point.
+    
+    Finally, we reduce the $\phi_i$ component of each generator with respect to the 
+    ideal; this gives us our Gr\"obner basis.
 \end{alg}
 
 We will now dive into a detailed description of the algorithm. We assume that the
@@ -32,7 +35,7 @@ big-oh notation.
     affects, for example, complexity of polynomial arithmetic. 
     
     We will denote data structures and the names of instances thereof in typewriter font:
-    for example, \verb|p| is a \verb|Polynomial|. All algorithms are described in
+    for example, \verb|p| is a \verb|Poly|. All algorithms are described in
     \verb|C|-like pseudo-code.
 \end{rem}
 
@@ -79,8 +82,9 @@ Let us begin by defining the necessary data structures.
 \end{defn}
 
 Our goal is to implement an algorithm which takes a list of \verb|Poly|s, representing the
-generators of $\mathfrak{a}$, and produce a Gr\"obner basis. This is performed in two
-steps: expansion of relations by divisibility, and resolution of overlaps. Before
+generators of $\mathfrak{a}$, and produce a Gr\"obner basis. This is performed in three
+steps: expansion of relations by divisibility, resolution of overlaps, and reduction
+of the $\phi_i$. Before
 we can describe this algorithm, we need to describe reduction of a \verb|Poly| with
 respect to an \verb|Ideal|.
 
@@ -116,37 +120,6 @@ function reduce(mon: Monomial, rel: Relation) {
     return result
 }
 \end{verbatim}
-\begin{comment}
-// Reduce a Poly with respect to a single Relation,
-// by reducing each of its terms.
-function reduce(poly: Poly, rel: Relation) {
-    let result = 0
-    for c, m in poly {
-        reduced = reduce(m, rel)
-        result += reduced * v;
-    }
-    return result
-}
-
-// Reduce a Poly with respect to an ideal, by
-// reducing with respect to each relation until 
-// until we obtain a Poly fixed by all of them.
-function reduce(poly: Poly, ideal: Ideal) {
-    let last = poly
-    let result = poly
-    while true {
-        for relation in ideal {
-            result = reduce(result, ideal)
-        }
-        if result == last {
-            break
-        } else {
-            last = result
-        }
-    }
-    return result
-}
-\end{comment}
     This takes, at worst, $O(n^d)$ time, where $d$ is the
     degree of \verb|mon| and $n$ is the number of terms in \verb|rel.phi|,
     in the case where the degree of \verb|rel.m| is $1$ and \verb|mon| is all one
