@@ -3,7 +3,7 @@
 \newcommand{\gr}{\operatorname{gr}}
 \newcommand{\Sym}{\operatorname{Sym}}
 
-\section{Applications}\label{sec:applications}
+\section{Universal enveloping algebras}\label{sec:applications}
 
 Let $\g$ be a Lie algebra over $k$, that is, a $k$-vector space equipped with a linear map
 \begin{equation}
@@ -60,7 +60,7 @@ In fact, more is true:
 The set \eqref{eqn:ueabasis} is a (reduced) Gr\"obner basis for $\a$.
 \end{lem}
 \begin{proof}
-For each $i,j\in I$ with $i>j$, set $m_{i,j}=x_ix_j$ and $\phi_{i,j}=x_jx_i+[x_i,x_j]$. The first three properties of Definition~\ref{def:grobner} are then immediate; it remains to verify property \eqref{item:grobnerconsistent}, that all overlaps in \eqref{eqn:ueabasis} are (weakly) consistent. The only overlaps in this family of congruences are those of the form $m_{i,j}x_\ell=x_im_{j,\ell}$, where $i>j>\ell$. Given any such overlap, we have sequences of reductions
+For each $i,j\in I$ with $i>j$, set $m_{i,j}=x_ix_j$ and $\phi_{i,j}=x_jx_i+[x_i,x_j]$. The first and last two properties of Definition~\ref{def:grobner} are then immediate; it remains to verify property \eqref{item:grobnerconsistent}, that all overlaps in \eqref{eqn:ueabasis} are (weakly) consistent. The only overlaps in this family of congruences are those of the form $m_{i,j}x_\ell=x_im_{j,\ell}$, where $i>j>\ell$. Given any such overlap, we have sequences of reductions
 \begin{align*}
 m_{i,j}x_\ell&\equiv(x_jx_i+[x_i,x_j])x_\ell\\
 &=x_j(x_ix_\ell)+([x_i,x_j]_{\le\ell}+[x_i,x_j]_{>\ell})x_\ell\\
@@ -95,7 +95,7 @@ as all other terms of $(m_{i,j}x_\ell)_\red$ and $(x_im_{j,\ell})_\red$ cancel. 
 This is just the Jacobi identity.
 \end{proof}
 
-Thus, by Theorem~\ref{thm:grobner-thm}, a basis of $U(\g)$ is given by the monomials in $T(\g)$ that are not divisible by any $x_ix_j$ with $i>j$. Equivalently:
+Thus, by Corollary~\ref{cor:grobner}, a basis of $U(\g)$ is given by the monomials in $T(\g)$ that are not divisible by any $x_ix_j$ with $i>j$. Equivalently:
 \begin{thm}
 The set
 \begin{equation}
@@ -137,7 +137,7 @@ T(\g)\arrow[rr,two heads]\arrow[rd,two heads]&&\gr U(\g)\\
 \end{equation}
 Now, \eqref{eqn:symisopoly} shows that \eqref{eqn:ugbasis} is also a basis for $\Sym(\g)$, which is evidently mapped bijectively to the corresponding basis elements of $U(\g)$ by the dashed map. Thus, our results on Gr\"obner bases have given a slick proof of the following well-known result:
 
-\begin{cor}[Poincar\'e--Birkhoff--Witt theorem]
+\begin{cor}[Poincar\'e--Birkhoff--Witt theorem \cite{cohn}]
 The dashed map \eqref{eqn:factorization} is a (canonical) isomorphism of commutative algebras.
 \end{cor}
 
