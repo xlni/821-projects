@@ -1,6 +1,4 @@
 
-use std::collections::BTreeMap;
-
 #[macro_use]
 extern crate nom;
 #[macro_use]
@@ -12,10 +10,10 @@ use clap::AppSettings;
 use num::traits::*;
 use num::rational::Rational;
 
-use std::mem;
-use std::ops::{Add, AddAssign, SubAssign, MulAssign};
+use std::ops::{AddAssign, SubAssign, MulAssign};
 use std::fmt::{Result as FResult, Display, Formatter};
 
+#[allow(unused_macros)]
 macro_rules! __monomial_inner {
     ($var:ident) => {stringify!($var).as_bytes()[0]}
 }
@@ -49,7 +47,7 @@ macro_rules! poly {
 
 /// A single monomial, represented as
 /// a vector of `u8`-indexed variables.
-#[derive(Clone, Hash, Debug, PartialEq, Eq, PartialOrd, Ord)]
+#[derive(Clone, Hash, Debug, PartialEq, Eq)]
 struct Monomial(Vec<u8>);
 
 impl Monomial {
@@ -83,7 +81,7 @@ impl Monomial {
         let mut res = poly![(1)];
 
         if self.degree() < r.m.degree() {
-            return self.into_poly()
+            return self.clone().into_poly()
         }
 
         let mut c = 0;
@@ -144,6 +142,26 @@ impl Display for Monomial {
             buf.push(format!("^{}", count))
         }
         write!(f, "{}", buf.join(""))
+    }
+}
+
+use std::cmp::{ PartialOrd, Ord, Ordering };
+
+impl PartialOrd for Monomial {
+
+    fn partial_cmp(&self, other: &Monomial) -> Option<Ordering> {
+        Some(<Self as Ord>::cmp(self, other))
+    }
+}
+
+impl Ord for Monomial {
+
+    fn cmp(&self, other: &Monomial) -> Ordering {
+        match (self.degree(), other.degree()) {
+            (a, b) if a < b => Ordering::Less,
+            (a, b) if a > b => Ordering::Greater,
+            _ => self.0.cmp(&other.0)
+        }
     }
 }
 
@@ -424,7 +442,6 @@ impl MulAssign<Monomial> for Poly {
 
 impl MulAssign<Poly> for Poly {
     fn mul_assign(&mut self, mut rhs: Poly) {
-        use std::mem;
         let mut monomials = Vec::new();
         for &mut (ref mut m1, ref c1) in &mut self.0 {
             for &mut (ref mut m2, ref c2) in &mut rhs.0 {
@@ -583,6 +600,10 @@ impl Ideal {
                     let r1 = &self.0[i];
                     let r2 = &self.0[j];
 
+                    //if i == j {
+                    //    continue;
+                    //}
+
                     if !checked_pairs.contains(&(r1.m.clone(), r2.m.clone())) {
                         checked_pairs.insert((r1.m.clone(), r2.m.clone()));
                     } else {
@@ -603,14 +624,14 @@ impl Ideal {
                             let mut p2 = r1.phi.clone();
                             p2 *= Monomial::new(r2.m.0[r1.m.degree() - k..].iter().cloned());
 
-
                             p1 = p1.reduce(&self);
                             p2 = p2.reduce(&self);
+
+
 
                             // the reduced forms are inconsistent, so
                             // we need to add another relation.
                             if p1 != p2 {
-
                                 p1 -= p2;
                                 new_rels.push(Relation::new(p1));
                             }
@@ -639,7 +660,16 @@ impl Display for Ideal {
 fn main() {
 
     let matches = clap_app! ( grobner =>
-        (about: "compute Gröbner bases of quotients of tensor algebras over Q")
+        //(about: "compute Gröbner bases over the rationals")
+        (version: crate_version!())
+        (author: crate_authors!())
+        (long_about: "compute Gröbner bases for quotients of tensor algebras over Q")
+        (after_help:
+"NOTE:
+    Polynomials should be entered between single quotes, for example:
+        grobner basis 'y^2 - x' 'yx - y'
+
+    This program was developed as part of 18.821.")
         (setting: AppSettings::SubcommandRequired)
         (@arg ITERATIONS: -i --iterations +takes_value default_value("20")
             {|s| s.parse::<usize>().map(|_| ()).map_err(|_| "expected nonnegative integer".into())}
@@ -676,6 +706,7 @@ fn main() {
         ideal.simplify();
         ideal.expand_overlaps(iterations);
         let poly = Poly::from_str(&matches.value_of("POLY").unwrap()).unwrap();
+        println!("a = {}", ideal);
         println!("{} = {} (mod a)", poly, poly.reduce(&ideal));
     }
 
