@@ -23,9 +23,9 @@ y^2-xy\equiv x-1-xy=x(1-y)-1\equiv(y^2+1)(1-y)-1=y^2-y^3-y\equiv\cdots,
 but this does not seem to ever end in $0$. How can we conclude that $p_2$ is \emph{not} equivalent to $0$?
 
 A naive first attempt at an argument might run as follows: order the monomials in $T(x,y)$ first by degree, and then within each degree, by lexicographic order. Thus,
-\begin{equation*}
-1<x<y<x^2<xy<y^2<x^3<x^2y<xyx<xy^2<\cdots.
-\end{equation*}
+\begin{equation}\label{eq:deglex-two-variables}
+1<x<y<x^2<xy<yx<y^2<x^3<x^2y<xyx<xy^2<\cdots.
+\end{equation}
 Let us say that a polynomial $p\in T(x,y)$ is ``lower'' than a monomial $m$ if all monomials appearing in $f$ are smaller than $m$ with respect to this order. This allows us to define a ``reduction'' process on polynomials $p\in T(x,y)$: successively replace monomials in $p$ by lower polynomials using the given relations, until no more such substitutions are possible. We might hope that if the resultant polynomial $p_\red$ is $0$, then our original polynomial $p$ was equivalent to $0$. For instance, we have shown above that $(p_2)_\red=xy+x-1\ne 0$, as the only substitutions possible introduce the monomial $y^2$, and so do not result in lower polynomials.
 
 However, such a hope would be false: for instance, the (nonzero) polynomial $p_1$ is already reduced! Only by replacing the monomials $x$ with the higher polynomials $y^2+1$ can we see that $p_1\equiv 0$, as in \eqref{eqn:p1}. The problem is, as \eqref{eqn:p1} shows, that there are \emph{two} distinct ways of reducing the monomial $y^3$:
