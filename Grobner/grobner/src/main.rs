@@ -83,7 +83,7 @@ impl Monomial {
         let mut res = poly![(1)];
 
         if self.degree() < r.m.degree() {
-            return res
+            return self.into_poly()
         }
 
         let mut c = 0;
@@ -232,7 +232,7 @@ impl Poly {
             <T as InputIter>::Item: AsChar {
             let input_length = input.input_len();
             if input_length == 0 {
-                return IResult::Incomplete(Needed::Unknown);
+                return IResult::Incomplete(Needed::Unknown)
             }
 
             let (_, next) = input.iter_indices().next().unwrap();
@@ -269,7 +269,7 @@ impl Poly {
         ));
 
         named!(parse_rational<Rational>, alt!(
-           parse_fractional | parse_integral
+           complete!(parse_fractional) | complete!(parse_integral)
         ));
 
         named!(parse_power<isize>, do_parse!(
@@ -280,13 +280,13 @@ impl Poly {
 
         named!(parse_var<(u8, usize)>, do_parse!(
             var: ws!(one_alpha) >>
-            power: opt!(parse_power) >>
+            power: opt!(complete!(parse_power)) >>
             (var[0], power.unwrap_or(1) as usize)
         ));
 
         named!(parse_monomial<Monomial>, map!(
             fold_many0!(
-                ws!(parse_var), Vec::new(), |mut acc: Vec<_>, (var, pow)| {
+                ws!(complete!(parse_var)), Vec::new(), |mut acc: Vec<_>, (var, pow)| {
                     for _ in 0..pow {
                         acc.push(var)
                     }
@@ -295,10 +295,16 @@ impl Poly {
             ), Monomial::new
         ));
 
-        named!(parse_scaled_monomial<(Monomial, Rational)>, do_parse!(
-           c: ws!(opt!(parse_rational)) >>
-           m: ws!(parse_monomial) >>
-           (m, c.unwrap_or(1.into()))
+        named!(parse_scaled_monomial<(Monomial, Rational)>, alt!(
+            complete!(do_parse!(
+                c: ws!(opt!(parse_rational)) >>
+                m: ws!(parse_monomial) >>
+                (m, c.unwrap_or(1.into()))
+            )) |
+            complete!(do_parse!(
+                c: ws!(parse_rational) >>
+                (Monomial::one(), c)
+            ))
         ));
 
         named!(parse_signed_monomial<(Monomial, Rational, bool)>, do_parse!(
@@ -322,7 +328,9 @@ impl Poly {
             ({let mut rest = rest; rest += leading; rest})
         ));
 
-        parse_polynomial(s.as_bytes()).to_result().map_err(|s| format!("{}", s))
+        let res = parse_polynomial(s.as_bytes());
+
+        res.to_result().map_err(|s| format!("{}", s))
     }
 }
 

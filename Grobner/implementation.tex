@@ -1,0 +1,330 @@
+\section{Implementation of the simplification algorithm}
+\label{sec:implementation}
+
+The previous sections describe a process by which, given finitely-generated,
+two-sided ideal $\mathfrak{a}$, we can produce a Gr\"obner basis. We will now
+describe a computer implementation of this algorithm. We assume that the
+reader of this section is familiar with basic low-level programing and algorithms.
+
+\begin{rem}
+    We will give a primarily low-level overview of the implementation, since some
+    design choices involve avoiding memory allocation whenever possible, which
+    affects, for example, complexity of polynomial arithmetic. 
+    
+    We will denote data structures and the names of instances thereof in typewriter font:
+    for example, \verb|p| is a \verb|Polynomial|. All algorithms are described in
+    pseudo-code.
+\end{rem}
+
+Let us begin by defining the necessary data structures.
+
+\begin{defn}
+    A \verb|Rational| represents a rational number as a pair of signed machine-sized 
+    integers\footnote{A machine-sized integer is an integer large enough to hold a pointer on
+    the host system. For most modern systems, this is eight bytes, or 64 bits.}. Arithmetic
+    operations are a fixed number of arithmetic instructions, though testing for equality
+    may require running Euclid's algorithm, which requires a variable but bounded number 
+    of instructions.
+    
+    A \verb|Monomial| represents a generator of the algebra $T(V)$ as a heap-allocated
+    list of unsigned bytes, where the byte value $n$ represents the variable $x_n$ 
+    (for a total of 256 variables). \verb|Monomials| are ordered by deglex,
+    and multiplication can be performed in linear time (though it may invoke memory
+    allocation).
+
+    A \verb|Poly| represents an element of the algebra $T(V)$ as a heap-allocated
+    list of pairs of \verb|Rational|s and \verb|Monomial|s. This object maintains the
+    invariant that pairs are sorted by the ordering on \verb|Monomial|s. Addition
+    of a \verb|Monomial| with some \verb|Rational| coefficient takes $O(\log n)$ time,
+    where $n$ is the number of nonzero terms of the polynomial, implemented with binary
+    search. In-place addition of two polynomials $p + q$ takes $O(m\log (n+m))$ time, 
+    where $n$ and $m$ are the number of nonzero terms of these polynomials, and
+    multiplication takes $O(nm)$ time. In-place multiplication by a single monomial
+    is $O(n)$, disregarding memory allocation, implemented by concatenating the monomial
+    to each term in the polynomial; note that this preserves the order invariant.
+    
+    This approach, unlike a hashtable or a binary
+    search tree, avoids having to perform hashing or indirection. It also has the
+    advantage that accessing the maximal element takes $O(1)$ time. We could have
+    also represented polynomials as a list of \verb|Rational|s, and assigned each
+    \verb|Monomial| an index corresponding to the ordering, but we would still have to pay
+    the cost of converting a \verb|Monomial| to index form and back later on, in addition
+    to performing additional allocations.
+    
+    An \verb|Ideal| will consist of a heap-allocated list of \verb|Relation|s,
+    each consisting of a \verb|Monomial| \verb|m| and a \verb|Poly| \verb|phi|, 
+    such that \verb|m| is greater than all terms in \verb|phi|. A \verb|Relation|
+    may be constructed from a \verb|Poly| by subtracting off the leading term (due
+    to the ordering invariant, this may be done in $O(1)$ time).
+\end{defn}
+
+Our goal is to implement an algorithm which takes a list of \verb|Poly|s, representing the
+generators of $\mathfrak{a}$, and produce a Gr\"obner basis. This is performed in two
+steps: expansion of relations by divisibility, and resolution of overlaps. Before
+we can describe this algorithm, we need to describe reduction of a \verb|Poly| with
+respect to an \verb|Ideal|.
+
+\begin{alg}
+    Reduction with respect to an ideal is defined in three steps: first, reduce
+    a monomial with respect to a relation; then, reduce a polynomial with respect
+    to a relation; finally, reduce repeatedly to reduce against an ideal. We will
+    describe the first algorithm in detail.
+\begin{verbatim}
+function reduce(mon: Monomial, rel: Relation) {
+    let result = 1
+    let index = 0
+    while true {
+        // run through mon looking for occurences of rel.m
+        if mon[index ... index + degree(rel.m)] == rel.m {
+            // if the range [index, index + degree(rel.m)) 
+            // in the variables of mon is rel.m, replace it.
+            result *= rel.phi
+            index += degree(rel.m)
+        } else {
+            // otherwise, append the next variable
+            result *= mon[index]
+            index += 1
+        }
+        
+        if index + degree(rel.m) > degree(mon) {
+            // if rel.m can't fit into what's left, we're done
+            result *= mon[index ...]
+            break
+        }
+    }
+    
+    return result
+}
+\end{verbatim}
+\begin{comment}
+// Reduce a Poly with respect to a single Relation,
+// by reducing each of its terms.
+function reduce(poly: Poly, rel: Relation) {
+    let result = 0
+    for c, m in poly {
+        reduced = reduce(m, rel)
+        result += reduced * v;
+    }
+    return result
+}
+
+// Reduce a Poly with respect to an ideal, by
+// reducing with respect to each relation until 
+// until we obtain a Poly fixed by all of them.
+function reduce(poly: Poly, ideal: Ideal) {
+    let last = poly
+    let result = poly
+    while true {
+        for relation in ideal {
+            result = reduce(result, ideal)
+        }
+        if result == last {
+            break
+        } else {
+            last = result
+        }
+    }
+    return result
+}
+\end{comment}
+    This takes, at worst, $O(n^d)$ time, where $d$ is the
+    degree of \verb|mon| and $n$ is the number of terms in \verb|rel.phi|,
+    in the case where the degree of \verb|rel.m| is $1$ and \verb|mon| is all one
+    variable. As the length of \verb|rel.m| increases, the probability of a long-enough
+    substring of \verb|mon| being replaceable will decrease: if there are $v$ variables
+    and \verb|rel.m| is of degree $k$ and there are $v$ variables to choose from,
+    the probability of a substring matching \verb|rel.m| is $v^{-k}$. Ignoring
+    the fact that these substrings may overlap, this comes out to having to perform
+    $(d-k+1)v^{-k}$ substitutions on average, each of which costs $O(n)$. This gives
+    an average bound of $O(n^{(d-k+1)v^{-k}})$. When $k=1$, this gives our original
+    worst-case analysis.
+    
+    The other two steps can be performed by repeated application of this algorithm:
+    we can reduce a \verb|Poly| with respect to a \verb|Relation| by by applying 
+    this algorithm to each constituent monomial, and we can reduce a \verb|Poly| with
+    respect to an \verb|Ideal| by repeatedly applying each relation until none of them
+    have any further effect. This procedure will terminate, since in each step
+    we reduce the the maximal monomial with respect to their ordering.
+\end{alg}
+
+Next, we describe how to simplify an ideal with respect to itself, the first
+step in finding a Gr\"obner basis.
+
+\begin{alg}
+    The following algorithm modifies an \verb|Ideal| in-place, by reducing a \verb|Relation|
+    with respect to another if the \verb|Monomial| of the first divides the \verb|Monomial|
+    of the second.
+\begin{verbatim}
+function simplify(ideal: Ideal) {
+    while true {
+        // keep track of wether this iteration 
+        // did anything
+        let changed = false
+        for (a, b) in ideal x ideal {
+            // attempt to reduce b.m by a if a.m divides b.m
+            if a == b or b.m == 0 or degree(a.m) >= degree(b.m) or 
+                not a.m | b.m {
+                continue
+            }
+            
+            // we're going to change
+            changed = true
+            
+            let reduced = reduce(b.m, a)
+            b.phi -= reduced
+            
+            // if b.phi is zero, we're totally done with it,
+            // because this just indicates that the ideal
+            // kills b.m
+            if b.phi == 0 {
+                continue
+            }
+            
+            // remove the highest term from b.phi
+            // and make it into the new b.m
+            let (c, m) = pop_highest_term(b.phi)
+            b.phi /= c
+            b.m = m
+        }
+        
+        // we've found a fixed point
+        if !changed {
+            break
+        }
+    }
+}
+\end{verbatim}
+\end{alg}
+
+Finally, we produce a Gr\"obner basis by expanding overlapping relations as
+necessary.
+
+\begin{alg}
+    The following algorithm modifies an \verb|Ideal| in-place, introducing a new
+    \verb|Relation| any time the overlap of two \verb|Relation|s reduces to two
+    distinct \verb|Poly|s, where the \verb|Relation| declares these \verb|Poly|s to
+    be equal.
+    \begin{comment}
+        pub fn expand_overlaps(&mut self, iterations: usize) {
+        // run through all pairs of relations
+        let mut new_rels = Vec::new();
+        use std::collections::HashSet;
+        let mut checked_pairs = HashSet::new();
+        for _ in 0..iterations {
+            for i in 0..self.0.len() {
+                for j in 0..self.0.len() {
+                    let r1 = &self.0[i];
+                    let r2 = &self.0[j];
+
+                    if !checked_pairs.contains(&(r1.m.clone(), r2.m.clone())) {
+                        checked_pairs.insert((r1.m.clone(), r2.m.clone()));
+                    } else {
+                        continue
+                    }
+
+                    // check if a tail of the first is a head of the second
+                    for k in 0..r1.m.degree() {
+                        let tail = &r1.m.0[k..];
+                        if r2.m.0.starts_with(tail) {
+                            // we've found an overlap!
+
+                            // convert the overlapped monomials into polys:
+
+                            let mut p1 = Monomial::new(r1.m.0[..k].iter().cloned()).into_poly();
+                            p1 *= r2.phi.clone();
+
+                            let mut p2 = r1.phi.clone();
+                            p2 *= Monomial::new(r2.m.0[r1.m.degree() - k..].iter().cloned());
+
+
+                            p1 = p1.reduce(&self);
+                            p2 = p2.reduce(&self);
+
+                            // the reduced forms are inconsistent, so
+                            // we need to add another relation.
+                            if p1 != p2 {
+
+                                p1 -= p2;
+                                new_rels.push(Relation::new(p1));
+                            }
+                        }
+                    }
+                }
+            }
+            if new_rels.is_empty() {
+                // everything is consistent!
+                break;
+            } else {
+                for x in new_rels.drain(..) {
+                    self.0.push(x);
+                }
+            }
+        }
+    }    
+    \end{comment}
+
+\begin{verbatim}
+function expand_overlaps(ideal: Ideal, iterations: int) {
+    // each iterations will produce new relations; we 
+    // only add them to the ideal at the end of an iteration
+    let new_relations = new List
+    // since we're running through the ideal over and over,
+    // we need to make sure we don't check the same pair twice.
+    let checked_pairs = new HashTable
+    while true {
+        for (a, b) in ideal x ideal {
+            if (a, b) in checked_pairs {
+                continue
+            } else {
+                checked_pairs += (a, b)
+            }
+            
+            for k in 0 ... degree(a.m) {
+                if b.m.starts_with(a.m[k ...]) {
+                    // we've found an overlap
+                    
+                    // compute m_i * u and v * m_j
+                    let p1 = a.m[k ...] * b2.phi
+                    let p2 = a.phi * b2.m[degree(a.m) - k ...]
+                    
+                    // reduce the polynomials
+                    p1 = reduce(p1, ideal)
+                    p2 = reduce(p2, ideal)
+                    
+                    if p1 != p2 {
+                        // the reduced forms are inconsistent, 
+                        // so we need to add a new relation
+                        new_relations += relation(p1 - p2)
+                    }
+                }
+            }
+        }
+        
+        if empty(new_rels) {
+            // no more relations were added, so everything
+            // is consistent and we're done
+            break
+        } else {
+            // otherwise, add the new relations
+            // and check again
+            ideal += new_rels
+            new_rels = new List
+        }
+    }
+}
+\end{verbatim}
+\end{alg}
+
+Taking these three algorithms together, we can compute Gr\"obner bases. We have written
+a program which implements these algorithms, which can be be run from any Athena
+terminal with the command \verb|add mcyoung| followed by \verb|grobner|. Running
+\verb|grobner help| will show available options. Note that polynomials
+should be entered with single quotes around each one. Some example invocations:
+\begin{verbatim}
+$ grobner basis 'x^2 - y^2'
+y^2 - x^2
+yx^2 - x^2y
+$ grobner reduce 'x^2 - y^2' -p '1/3y^4 + 3x^4'
+1/3y^4 + 3x^4 = 10/3x^4 (mod a)
+\end{verbatim}
+
