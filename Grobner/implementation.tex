@@ -2,7 +2,8 @@
 \label{sec:implementation}
 
 The results from the previous section allow us to devise a process by which we can
-turn a finitely-generated, two-sided ideal $\mathfrak{a}$ into a Gr\"obner basis.
+turn a finitely-generated, two-sided ideal $\mathfrak{a}$ into a Gr\"obner basis. This
+algorithm is field-agnostic, so we've implemented it to work both over $\Q$ and $\F_p$.
 Let us consider an abridged description first.
 
 \begin{alg}
@@ -46,8 +47,12 @@ Let us begin by defining the necessary data structures.
     integers\footnote{A machine-sized integer is an integer large enough to hold a pointer on
     the host system. For most modern systems, this is eight bytes, or 64 bits.}. Arithmetic
     operations are a fixed number of arithmetic instructions, though testing for equality
-    may require running Euclid's algorithm, which requires a variable but bounded number 
+    may require running the Euclidean algorithm, which requires a variable but bounded number 
     of instructions.
+    
+    A \verb|Finite| represents an element of $\F_p$, for some fixed prime $p$, as a
+    single machine-sized integer. Arithmetic operations are all fixed-time, except division,
+    which is implemented with the extended Euclidean algorithm.
     
     A \verb|Monomial| represents a generator of the algebra $T(V)$ as a heap-allocated
     list of unsigned bytes, where the byte value $n$ represents the variable $x_n$ 
@@ -56,9 +61,10 @@ Let us begin by defining the necessary data structures.
     allocation).
 
     A \verb|Poly| represents an element of the algebra $T(V)$ as a heap-allocated
-    list of pairs of \verb|Rational|s and \verb|Monomial|s. This object maintains the
+    list of pairs of \verb|Field|s (where \verb|Field| is either \verb|Rational| or
+    \verb|Finite|) and \verb|Monomial|s. This object maintains the
     invariant that pairs are sorted by the ordering on \verb|Monomial|s. Addition
-    of a \verb|Monomial| with some \verb|Rational| coefficient takes $O(\log n)$ time,
+    of a \verb|Monomial| with some \verb|Field| coefficient takes $O(\log n)$ time,
     where $n$ is the number of nonzero terms of the polynomial, implemented with binary
     search. In-place addition of two polynomials $p + q$ takes $O(m\log (n+m))$ time, 
     where $n$ and $m$ are the number of nonzero terms of these polynomials, and
@@ -69,7 +75,7 @@ Let us begin by defining the necessary data structures.
     This approach, unlike a hashtable or a binary
     search tree, avoids having to perform hashing or indirection. It also has the
     advantage that accessing the maximal element takes $O(1)$ time. We could have
-    also represented polynomials as a list of \verb|Rational|s, and assigned each
+    also represented polynomials as a list of \verb|Field|s, and assigned each
     \verb|Monomial| an index corresponding to the ordering, but we would still have to pay
     the cost of converting a \verb|Monomial| to index form and back later on, in addition
     to performing additional allocations.
@@ -252,7 +258,8 @@ function expand_overlaps(ideal: Ideal, iterations: int) {
 Taking these three algorithms together, we can compute Gr\"obner bases. We have written
 a program which implements these algorithms, which can be be run from any Athena
 terminal with the command \verb|add mcyoung| followed by \verb|grobner|. Running
-\verb|grobner help| will show available options. 
+\verb|grobner help| will show available options. By default, computations are done
+over $\Q$.
 
 \begin{example}
     Use \verb|grobner| to compute a basis for $\mathfrak{a}=(x^2 - y^2)$:
