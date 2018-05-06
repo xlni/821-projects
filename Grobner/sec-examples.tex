@@ -178,7 +178,9 @@ In the below, we assume that $M$ is finite. We examine the structure of language
 	
 	For the other direction, let $M$ be the set of all (non-empty) strings of length at most $D + 1$ which are \emph{not} elements of $B$. The two conditions entail that, in order to test if a given string $b$ is an element of $B$, it suffices to check all of its substrings of length at most $D$. Hence $B = B_M$ as desired.
 \end{proof}
-One might also note that all of the sets of reduced monomials from \S\ref{sec:assignment-examples} can be written as regular expressions (regex). Take \eqref{eqn:basisone} for instance, where we have 
+This result is readily used to show that certain languages are \emph{not} of the form $B_M$ for any $M$, and thus do not define a set of reduced monomials (for any Gr\"obner basis). In this sense, it is similar to the ``pumping lemmas'' in computability theory.
+
+Note that all of the sets of reduced monomials from \S\ref{sec:assignment-examples} can be written as regular expressions (regex). Take \eqref{eqn:basisone} for instance, where we have 
 \[
 	\left\{x^i(yx)^jy^\ell\mid i,j\ge 0,\text{ }\ell\in\{0,1\}\right\} = \{ x^* (yx)^* \} \cup \{ x^* (yx)^* y \}.
 \]
