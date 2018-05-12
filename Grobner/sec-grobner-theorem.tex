@@ -104,7 +104,7 @@ The culprit is that there are two different reductions of the monomial $(y^2) y 
 	\[
 	m_i u = v m_j,
 	\]
-	where $u,v$ are monomials and $\deg v \leq \deg m_i$ (equivalently, $\deg u \leq \deg m_j$).
+	where $u,v$ are monomials and $\deg v < \deg m_i$ (equivalently, $\deg u < \deg m_j$).
 \end{defn}
 \begin{defn}\label{def:consistent}
 	Given a family of congruences $\{m_i \equiv \phi_i\}$ and an overlap $m_i u = v m_j$, we say that the overlap is
@@ -134,9 +134,9 @@ The following proposition shows that this notion successfully identifies the cau
 \end{proof}
 So when all overlaps are weakly consistent, if we take $p_\red$ to be the polynomial represented by a terminal node of the simplification tree of $L_p$, the assignment $p \mapsto p_\red$ is well-defined. Note that this also implies the overlaps are actually consistent, rather than just weakly consistent.
 
-We can replace each $\phi_i$ with $(\phi_i)_\red$, and this brings us to the definition of a (reduced) \emph{Gr\"obner basis}:
+We can replace each $\phi_i$ with $(\phi_i)_\red$, and this brings us to the definition of a \emph{Gr\"obner basis}:
 \begin{defn}\label{def:grobner}
-	Let $\mathfrak{a}$ be a two-sided ideal in $T(V)$. We say that a subset $\{m_i - \phi_i\}\subset \mathfrak{a}$, where each $m_i$ is a monomial and $\phi_i$ is a polynomial lower than $m_i$, forms a (reduced) \emph{Gr\"obner basis} for $\mathfrak{a}$ if all of the following conditions are satisfied:
+	Let $\mathfrak{a}$ be a two-sided ideal in $T(V)$. We say that a subset $\{m_i - \phi_i\}\subset \mathfrak{a}$, where each $m_i$ is a monomial and $\phi_i$ is a polynomial lower than $m_i$, forms a \emph{Gr\"obner basis} for $\mathfrak{a}$ if all of the following conditions are satisfied:
 	\begin{enumerate}
 		\item $\{m_i - \phi_i\}$ generates the ideal $\mathfrak{a}$.
 		\item\label{item:grobnerconsistent} All overlaps are (weakly) consistent (see Definitions \ref{def:overlap}, \ref{def:consistent}).
@@ -144,8 +144,6 @@ We can replace each $\phi_i$ with $(\phi_i)_\red$, and this brings us to the def
 		\item $\phi_i = (\phi_i)_\red$ for all $i$.
 	\end{enumerate}
 \end{defn}
-The adjective ``reduced'' refers to the last two conditions, and the word choice will be motivated in \S\ref{sec:rref}, where we examine a connection with \emph{reduced row echelon form}. Onwards, when we refer to a Gr\"obner basis, we assume that it is reduced.
-
 With a Gr\"obner basis, the map $p\mapsto p_\red$ is well-defined as a consequence of Proposition \ref{prop:consistent-tree-terminals}. However, we are interested in the assignment $[p]\mapsto p_\red$. We need to show that the outcome of reduction depends only on the congruence class, so that this function is well-defined.
 
 To this end, suppose that $[p] = [q]$, meaning that
