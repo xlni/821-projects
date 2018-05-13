@@ -159,7 +159,7 @@ Now we compute the Hilbert function and Poincar\'e series for each of the exampl
 		\]
 	\end{enumerate}
 \end{enumerate}
-The computations done for the examples above are rather ad-hoc, but we give a general method of computing $H(t)$ below.
+The computations done for the examples above are rather ad-hoc, but we give a general method of computing $H(t)$ below. Let $X$ be an finite well-ordered set of variables, and let $M$ be the set of leading monomials in a Gr\"obner basis. Denote the set of reduced monomials by $B_M$. Elements of $B_M$ are the monomials which are not divisible by any element of $M$, and $h(d)$ is the number of monomials in $B_M$ of degree $d$.
 
 Let $D = \min_{m_i \in M} \deg(m_i) - 1$. We define a $|X|^D \times |X|^D$ matrix $A$ whose rows and columns are indexed by the monomials of degree $D$. Let $u,v$ be two such monomials. We set $A_{u,v} = 1$ if there exist $x_i, x_j \in X$ such that $x_i u = v x_j$ and $x_i u \in B_M$. This condition means that if $sv \in B_M$ for some monomial $s$, then $svx_j \in B_M$ as well. Otherwise we set $A_{u,v} = 0$.
 
