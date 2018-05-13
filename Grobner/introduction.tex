@@ -1,6 +1,6 @@
 \section{Introduction}\label{sec:introduction}
 
-Let $T(x,y)$ denote the noncommutative polynomial ring in two variables $x,y$. Suppose we impose a set of relations $\{f_i(x,y)\equiv 0\}$ on the variables $x,y$, where the $f_i$ are elements of $T(x,y)$. We wish to know which noncommutative polynomials $p\in T(x,y)$ are equivalent to $0$ as a consequence of these relations.
+Let $T\langle x,y\rangle$ denote the noncommutative polynomial ring in two variables $x,y$. Suppose we impose a set of relations $\{f_i(x,y)\equiv 0\}$ on the variables $x,y$, where the $f_i$ are elements of $T\langle x,y\rangle$. We wish to know which noncommutative polynomials $p\in T\langle x,y\rangle$ are equivalent to $0$ as a consequence of these relations.
 
 Let us illustrate this problem by way of example: consider the set containing a single relation
 \begin{equation}
@@ -22,26 +22,46 @@ y^2-xy\equiv x-1-xy=x(1-y)-1\equiv(y^2+1)(1-y)-1=y^2-y^3-y\equiv\cdots,
 \end{equation*}
 but this does not seem to ever end in $0$. How can we conclude that $p_2$ is \emph{not} equivalent to $0$?
 
-A naive first attempt at an argument might run as follows: order the monomials in $T(x,y)$ first by degree, and then within each degree, by lexicographic order. Thus,
+A naive first attempt at an argument might run as follows: order the monomials in $T\langle x,y\rangle$ first by degree, and then within each degree, by lexicographic order. Thus,
 \begin{equation}\label{eq:deglex-two-variables}
 1<x<y<x^2<xy<yx<y^2<x^3<x^2y<xyx<xy^2<\cdots.
 \end{equation}
-Let us say that a polynomial $p\in T(x,y)$ is ``lower'' than a monomial $m$ if all monomials appearing in $f$ are smaller than $m$ with respect to this order. This allows us to define a ``reduction'' process on polynomials $p\in T(x,y)$: successively replace monomials in $p$ by lower polynomials using the given relations, until no more such substitutions are possible. We might hope that if the resultant polynomial $p_\red$ is $0$, then our original polynomial $p$ was equivalent to $0$. For instance, we have shown above that $(p_2)_\red=xy+x-1\ne 0$, as the only substitutions possible introduce the monomial $y^2$, and so do not result in lower polynomials.
+Let us say that a polynomial $p\in T\langle x,y\rangle$ is ``lower'' than a monomial $m$ if all monomials appearing in $f$ are smaller than $m$ with respect to this order. This allows us to define a ``reduction'' process on polynomials $p\in T\langle x,y\rangle$: successively replace monomials in $p$ by lower polynomials using the given relations, until no more such substitutions are possible. We might hope that any resultant polynomial $p_\red$ will be $0$ if and only if our original polynomial $p$ was equivalent to $0$. This would show that $p_2$ is not equivalent to $0$, as we have shown above that $(p_2)_\red=xy+x-1\ne 0$; indeed, the only substitutions possible introduce the monomial $y^2$, and so do not result in lower polynomials.
 
 However, such a hope would be false: for instance, the (nonzero) polynomial $p_1$ is already reduced! Only by replacing the monomials $x$ with the higher polynomials $y^2+1$ can we see that $p_1\equiv 0$, as in \eqref{eqn:p1}. The problem is, as \eqref{eqn:p1} shows, that there are \emph{two} distinct ways of reducing the monomial $y^3$:
+\begin{equation*}
+xy-y=(x-1)y\equiv (y^2)y=y^3=y(y^2)\equiv y(x-1)=yx-y.
+\end{equation*}
+More precisely, we have an ``overlap'' of the largest monomial $y^2$ in the relation $y^2-x+1\equiv 0$ and itself, as illustrated by the box in the following figure:
 \begin{equation}
 \label{eqn:overlap}
-xy-y=(x-1)y\equiv (y^2)y=y^3=y(y^2)\equiv y(x-1)=yx-y.
+\begin{aligned}
+y(y^2)=\quad&y\\
+(y^2)y=\hspace{.35em}(&y
+\end{aligned}
+\quad
+\boxed{\begin{aligned}
+(&y\\
+&y)
+\end{aligned}}
+\quad
+\begin{aligned}
+&y)\\
+&y.
+\end{aligned}
 \end{equation}
-Thus, we are tempted to introduce the additional relation $yx-xy\equiv 0$, so that the reduction process replaces $yx-y$ with $xy-y$; both reductions then agree. However, this introduces additional ``overlaps'' as in \eqref{eqn:overlap}. For instance, we can reduce the monomial $y^2x$ in two distinct ways:
+This overlap is ``inconsistent'': the two corresponding reductions of $y^3$ do not agree.
+
+Thus, we are tempted to introduce the additional relation $yx-xy\equiv 0$, so that the reduction process replaces $yx-y$ with $xy-y$; both reductions then agree. However, this introduces additional overlaps as in \eqref{eqn:overlap}. For instance, we can reduce the monomial $y^2x$ in two distinct ways:
 \begin{equation*}
 (x-1)x\equiv(y^2)x=y^2x=y(yx)\equiv(yx)y\equiv x(y^2)\equiv x(x-1).
 \end{equation*}
-Now, though, both reductions result in the same polynomial: this overlap is ``consistent.'' In fact, it is easy to see that these are all possible overlaps; thus, all overlaps are consistent with respect to the set of relations
-\begin{equation*}
-\{y^2-x+1\equiv 0, yx-xy\equiv 0\},
-\end{equation*}
-and so we term it a ``Gr\"obner basis'' for our original set of relations \eqref{eqn:relations}.
+Now, though, both reductions result in the same polynomial $x^2-x$: this overlap is ``consistent.'' This shows that all overlaps among monomials appearing in the set of relations
+\begin{equation}
+\label{eqn:newrelations}
+\{y^2-x+1\equiv 0, yx-xy\equiv 0\}
+\end{equation}
+are consistent; moreover, each relation is reduced with respect to this set of relations. We term any set of relations satisfying these conditions a ``Gr\"obner basis'' for the two-sided ideal in $T\langle x,y\rangle$ that it generates. So here, \eqref{eqn:newrelations} is a Gr\"obner basis for the ideal generated by our original set of relations \eqref{eqn:relations}.
 
 In \S\ref{sec:grobner-theorem}, we prove that a Gr\"obner basis gives rise to a well-defined reduction process, working in the more general setting of an arbitrary number of variables; in particular, $p_\red=0$ if and only if $p\equiv 0$, answering our original question (and proving that $p_2\not\equiv 0$ above!). We use this result to give an explicit basis of the quotient algebra by the two-sided ideal generated by the set of relations. In \S\ref{sec:rref}, we prove existence and uniqueness of Gro\"bner bases. In \S\ref{sec:implementation}, we describe and implement algorithms for reduction with respect to a set of relations and computation of Gr\"obner bases. In \S\ref{sec:examples}, we work through a series of examples provided in the project description. Finally, in \S\ref{sec:applications}, we apply our general results on Gr\"obner bases to the case where the set of relations describes the universal enveloping algebra of a vector space equipped with a bilinear pairing. We show that this algebra satisfies the conclusion of the well-known Poincar\'e--Birkhoff--Witt theorem if and only if the vector space is a Lie algebra.
 
