@@ -131,8 +131,8 @@ When all overlaps are weakly consistent, Proposition \ref{prop:consistent-tree-t
 	\begin{enumerate}
 		\item $\{m_i - \phi_i\}$ generates the ideal $\mathfrak{a}$.
 		\item\label{item:grobnerconsistent} The family of congruences $\{m_i \equiv \phi_i\}$ is weakly consistent.
-		\item $m_i$ is not divisible by $m_j$ for all distinct $i,j$.
-		\item $\phi_i = (\phi_i)_\red$ for all $i$.
+		\item\label{item:reduced-1} $m_i$ is not divisible by $m_j$ for all distinct $i,j$.
+		\item\label{item:reduced-2} $\phi_i = (\phi_i)_\red$ for all $i$.
 	\end{enumerate}
 \end{defn}
 With a Gr\"obner basis, the map $p\mapsto p_\red$ is well-defined as a consequence of Proposition \ref{prop:consistent-tree-terminals}. However, we are interested in the assignment $[p]\mapsto p_\red$. We need to show that the outcome of reduction depends only on the congruence class, so that this function is well-defined.
