@@ -159,67 +159,93 @@ Now we compute the Hilbert function and Poincar\'e series for each of the exampl
 		\]
 	\end{enumerate}
 \end{enumerate}
-Note that the last sub-case of the final example differs from all the other examples: $h(d)$ is asymptotically exponential rather than (eventually) linear, and $H(t)$ has a denominator of $1 - t - t^2$ rather than $(1-t)^\delta$ for some $\delta$.
+The computations done for the examples above are rather ad-hoc, but we give a general method of computing $H(t)$ below.
 
-We conclude this section with some additional observations and conjectures regarding reduced monomial bases and the eventual behavior of $h(d)$. To make sense of $h(d)$, we continue assuming that $X$ is finite, although we no longer assume $|X| = 2$. In what follows, we use some nomenclature from computability theory. A \emph{language} is a set of strings (monomials) formed out of letters (variables) from $X$, which we call our \emph{alphabet}. As an example, we have the language $M = \{m_i\}$ consisting of the leading monomials from our Gr\"obner basis. The linear basis of reduced monomials is then precisely the language
-\[
-	B_M = \{u \mid \text{for all }m_i \in M\text{, }u \text{ does not contain }m_i\text{ as a substring}\}.
-\]  
-In the below, we assume that $M$ is finite. We examine the structure of languages $B_M$ with this assumption.
-\begin{prop}\label{prop:BM-characterization}
-	A language $B$ is of the form $B_M$ for some finite set of strings $M$ if and only if $B$ satisfies the following:
-	\begin{enumerate}
-		\item\label{item:substringcondition} If $b \in B$ and $b'$ is a substring of $b$, then $b' \in B$.
-		\item\label{item:gluingcondition} There exists a non-negative integer $D$ such that if $b_1 u$ and $u b_2$ are elements of $B$ and $\ell(u) = D$, then $b_1 u b_2 \in B$.
-	\end{enumerate}
-\end{prop}
-\begin{proof}
-	Given a language of the form $B_M$ where $M=\{m_i\}$, we can take $D = \max_i(\ell(m_i))-1$ and it is straightforward to check that the conditions are satisfied.
-	
-	For the other direction, let $M$ be the set of all (non-empty) strings of length at most $D + 1$ which are \emph{not} elements of $B$. The two conditions entail that, in order to test if a given string $b$ is an element of $B$, it suffices to check all of its substrings of length at most $D$. Hence $B = B_M$ as desired.
-\end{proof}
-This result is readily used to show that certain languages are \emph{not} of the form $B_M$ for any $M$, and thus do not define a set of reduced monomials (for any Gr\"obner basis). In this sense, it is similar to the ``pumping lemmas'' in computability theory.
+Let $D = \min_{m_i \in M} \deg(m_i) - 1$. We define a $|X|^D \times |X|^D$ matrix $A$ whose rows and columns are indexed by the monomials of degree $D$. Let $u,v$ be two such monomials. We set $A_{u,v} = 1$ if there exist $x_i, x_j \in X$ such that $x_i u = v x_j$ and $x_i u \in B_M$. This condition means that if $sv \in B_M$ for some monomial $s$, then $svx_j \in B_M$ as well. Otherwise we set $A_{u,v} = 0$.
 
-Note that all of the sets of reduced monomials from \S\ref{sec:assignment-examples} can be written as regular expressions (regex). Take \eqref{eqn:basisone} for instance, where we have 
+Define $h(d,u)$ to be the number of monomials $s$ such that $su\in B_M$ and $\deg(su) = d$. Then the matrix $A$ satisfies
 \[
-	\left\{x^i(yx)^jy^\ell\mid i,j\ge 0,\text{ }\ell\in\{0,1\}\right\} = \{ x^* (yx)^* \} \cup \{ x^* (yx)^* y \}.
+	A\begin{bmatrix}
+	\vdots\\
+	h(d,u)\\
+	\vdots
+	\end{bmatrix}
+	=\begin{bmatrix}
+	\vdots\\
+	h(d+1,u)\\
+	\vdots
+	\end{bmatrix}
 \]
-This is true in general, as the following proposition shows.
-\begin{prop}
-	Any language of the form $B_M$ is regular, meaning that $B_M$ can be characterized by a regular expression.
-\end{prop}
-\begin{proof}
-	For a fixed string $m$, consider the language $R_{m}$ consisting of all strings which contain $m$ as a substring. This is a regular language as it can be expressed by the regex $X^* m X^*$, where $X$ is the alphabet. Note that
+for $d \geq D$. If we define
+\[
+	H(t,u) = \sum_{d\geq D} h(d,u)t^d
+\]
+then we also get the identity
+\[
+	\begin{bmatrix}
+	\vdots\\
+	H(t,u)\\
+	\vdots
+	\end{bmatrix}=
+	tA\begin{bmatrix}
+	\vdots\\
+	H(t,u)\\
+	\vdots
+	\end{bmatrix}+
+	\begin{bmatrix}
+	t^D\\
+	\vdots\\
+	t^D
+	\end{bmatrix}.
+\]
+Then,
+\begin{align}
+	H(t) &= \sum_{d=0}^{D-1} h(d)t^d + \sum_u H(t,u) \nonumber\\
+	&= \sum_{d=0}^{D-1} h(d)t^d + [1 \cdots 1]
+	t^D (I - tA)^{-1} \begin{bmatrix}
+		1\\
+		\vdots\\
+		1
+	\end{bmatrix} \label{eq:Poincare-series-formula}
+\end{align}
+where the second term is the sum of the entries of $t^D(I-tA)^{-1}$. It is a fact that the asymptotic behavior of $h(d)$ is determined by the poles of $H(t)$ with minimal modulus; see \cite[Theorem 5.2.1]{wilf}. Observe that if $z \in \mathbb{C}$ is a pole of $H(t)$, then $\det(I-zA) = 0$. Since $z \neq 0$, this means $\det(I/z - A) = 0$ and $1/z$ is an eigenvalue of $A$. Sadly the converse is not true in general. Even so, we suspect that the asymptotic behavior of $h(d)$ is related to the eigenvalues of $A$ with maximal modulus, as the following examples suggest.
+\begin{example}
+	Let $X = \{x,y\}$ and $M = \{yx\}$. Then $D = 1$ and
 	\[
-	B_M = \bigcap_{m \in M} R_{m}^C
+		A = 
+		\begin{blockarray}{ccc}
+		x & y &\\
+		\begin{block}{[cc]c}
+		1 & 0 & x\\
+		1 & 1 & y\\
+		\end{block}
+		\end{blockarray}
 	\]
-	where $R_m^C$ denotes the complement of $R_m$. This is a finite intersection, and it is a well-known fact that regular languages are closed under set-theoretic Boolean operations. Therefore $B_M$ is also regular.
-\end{proof}
+	which has $1$ as its only eigenvalue. Equation \eqref{eq:Poincare-series-formula} gives
+	\[
+		H(t) = 1 + \frac{2-t}{(1-t)^2} = 1 + 2t + 3t^2 + \cdots
+	\]
+	and we see that $h(d)$ is linear. Also, $\lim_{d\to \infty} (h(d+1)/h(d)) = 1$.
+	
+	If we instead consider $M = \{yy\}$, then we get
+	\[
+		A = 
+		\begin{blockarray}{ccc}
+		x & y &\\
+		\begin{block}{[cc]c}
+		1 & 1 & x\\
+		1 & 0 & y\\
+		\end{block}
+		\end{blockarray}
+	\]
+	which has $(1+\sqrt{5})/2$ as its eigenvalue with maximal modulus. As we saw before, $h(d)$ in this case is the Fibonacci sequence, and $\lim_{d\to \infty} (h(d+1) / h(d)) = (1+\sqrt{5})/2$.
+\end{example}
 
-We finish this section with a few questions. If $X = \{x_1,\ldots,x_N\}$, note that for $0 \leq i \leq N$, the language
-\[
-	B_i = \{ x_1^* x_2^* \cdots x_i^* \}
-\]
-satisfies the conditions of Proposition \ref{prop:BM-characterization} and thus is a family of reduced monomials for some finite Gr\"obner basis. The Hilbert function $h(n)$ for these reduced monomials is eventually polynomial, with degree $i - 1$.
-
-The degree is maximal when we have $B_N$. If we attempt to introduce more Kleene stars (the asterisks) to the regex for $B_N$, it seems that rather than becoming a polynomial of higher degree, the Hilbert function explodes exponentially. As an illustrative special case, suppose our set $B$ of reduced monomials contains the set
-\[
-	\{x_i^* x_j^* x_i^*\}
-\]
-where $i\neq j$.
-Let $D$ be as in Proposition \ref{prop:BM-characterization} applied to $B$. Using conditions \eqref{item:substringcondition} and \eqref{item:gluingcondition}, we deduce that for any $\alpha\colon \mathbb{N} \to \{i,j\}$, the string
-\[
-	x_i^D x_{\alpha(0)} x_i^D x_{\alpha(1)} x_i^D \cdots x_i^D x_{\alpha(n)} x_i^D 
-\]
-is always in $B$. But this results in exponential growth of $h(d)$. Also, if we look back at the example where $M = \{y^2\}$, the reduced monomials are characterized by the regex $x^* (yxx^*)^*$. The Kleene star applied to $yxx^*$ again results in exponential growth of $h(d)$ for similar reasons.
-
-From what we've seen so far, we formulate the following conjecture.
+We conclude this section by formulating the following conjecture, motivated by the examples that we have seen so far.
 \begin{conj}
-	For a finite $X$ and a finite Gr\"obner basis, $h(d)$ is either eventually polynomial (with degree at most $N-1$) or it is asymptotically exponential.
+	For a finite $X$ and a finite Gr\"obner basis, $h(d)$ is either eventually polynomial, with degree at most $|X| - 1$, or it is asymptotically exponential. The former occurs when $1$ is the only pole of $H(t)$.
 \end{conj}
-For example, in the case $N = 2$, we saw instances where $h(d)$ was eventually linear (or constant, or zero), and an instance where it was asymptotically exponential.
-Ideally, one would like to discern the behavior of $h(d)$ from the monomials $m_i$ directly, but it is unclear to us how one would do so.
-
+For example, in the case $|X|=2$, we saw instances where $h(d)$ was eventually linear, constant, or zero, and an instance where it was asymptotically exponential.
 %%% Local Variables:
 %%% mode: latex
 %%% TeX-master: t
