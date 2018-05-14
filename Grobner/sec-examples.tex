@@ -45,7 +45,20 @@ from \S\ref{sec:implementation}.
     \begin{equation*}
       \{1,x,y\}.
     \end{equation*}
-    \item For the set $\{yxy-xyx\}$, the program does not terminate.
+    \item\label{item:infinite-case-yxy} For the set $\{yxy-xyx\}$, the program does not terminate. However, one can check by hand that the set
+    \[
+    	\{yxy - xyx\} \cup \{yx^{i+1}yx = xyx^2 y^i \mid i \geq 1\}
+    \]
+    is a Gr\"obner basis. We check the overlap $(yx^{i+1}yx)x^j yx = yx^{i+1}(yx^{j+1}yx)$ as an example and leave the rest to the reader. 
+    \begin{align*}
+    	(yx^{i+1}yx)x^j yx &\equiv xyx^2 y^i x^j yx\\
+    	yx^{i+1}(yx^{j+1}yx) &\equiv (yx^{i+2}yx)xy^j\\
+    	&\equiv xyx^2 y^i (yxy) y^{j-1}\\
+    	&\equiv xyx^2 y^i x (yxy) y^{j-2}\\
+    	&\hspace{6pt} \vdots\\
+    	&\equiv xyx^2 y^i x^j yx.
+    \end{align*}
+	Thus this overlap is weakly consistent.
 	\item For the set $\{yxy-x\}$, we obtain the Gr\"obner basis
 	\begin{equation*}
 		\{yxy-x,yx^2-x^2y\}.
@@ -70,7 +83,11 @@ from \S\ref{sec:implementation}.
 \left\{x^{i_1}yx^{i_2}y\cdots yx^{i_n}\mid n\ge 1,\text{ }i_1,i_n\ge 0,\text{ }i_2,\ldots,i_{n-1}\ge 1\right\}&\text{if }a=b=0.\\
 \end{cases}
       \end{equation*}
-	\item For the set $\{yxyx-xyxy\}$, the program does not terminate.
+	\item For the set $\{yxyx-xyxy\}$, the program does not terminate. However, as in \eqref{item:infinite-case-yxy}, one can check by hand that the set
+	\[
+		\{yxyx - xyxy\} \cup \{yx^{i+1}yxy - xyxy^2 x^i \mid i \geq 1\}
+	\]
+	is a Gr\"obner basis.
     \item The project description suggests that we consider when $X = \{x,y,z\}$ (with $x<y<z$) and we have a set of relations
 \begin{equation*}
 \{yx-\phi_1,zx-\phi_2,zy-\phi_3\},
@@ -82,7 +99,7 @@ where $\phi_1$ (resp.\ $\phi_2$, $\phi_3$) is lower than $yx$ (resp.\ $zx$, $zy$
 then consistency is achieved; these relations correspond to the special linear Lie algebra $\mathfrak{sl}_2(k)$. A basis for the quotient algebra is given in Theorem~\ref{thm:ugbasis}.
 \end{enumerate}
 
-\subsection{The associated graded}\label{sec:assoc-graded}
+\subsection{The associated graded algebra}\label{sec:assoc-graded}
 Given an ideal $\mathfrak{a} \subset T(V)$, we may also ask about the ``size'' of $T(V)/\mathfrak{a}$. The dimension alone is too crude of a measurement, as $T(V)/\mathfrak{a}$ will almost always be infinite-dimensional. We can get a more refined sense of size by considering its associated graded algebra, which we construct now.
 
 The tensor algebra $T(V)$ is naturally graded by degree. As $\mathfrak{a}$ need not be homogeneous, in general we do not get a grading of the quotient $T(V)/\mathfrak{a}$. However, if we take the grading filtration on $T(V)$ defined by
@@ -159,7 +176,7 @@ Now we compute the Hilbert function and Poincar\'e series for each of the exampl
 		\]
 	\end{enumerate}
 \end{enumerate}
-The computations done for the examples above are rather ad-hoc, but we give a general method of computing $H(t)$ below. Let $X$ be an finite well-ordered set of variables, and let $M$ be the set of leading monomials in a Gr\"obner basis. Denote the set of reduced monomials by $B_M$. Elements of $B_M$ are the monomials which are not divisible by any element of $M$, and $h(d)$ is the number of monomials in $B_M$ of degree $d$.
+The computations done for the examples above are rather ad-hoc, but we give a general method of computing $H(t)$ below. Let $X$ be an finite well-ordered set of variables, and let $M$ be the set of leading monomials in a finite Gr\"obner basis. Denote the set of reduced monomials by $B_M$. Elements of $B_M$ are the monomials which are not divisible by any element of $M$, and $h(d)$ is the number of monomials in $B_M$ of degree $d$.
 
 Let $D = \min_{m_i \in M} \deg(m_i) - 1$. We define a $|X|^D \times |X|^D$ matrix $A$ whose rows and columns are indexed by the monomials of degree $D$. Let $u,v$ be two such monomials. We set $A_{u,v} = 1$ if there exist $x_i, x_j \in X$ such that $x_i u = v x_j$ and $x_i u \in B_M$. This condition means that if $sv \in B_M$ for some monomial $s$, then $svx_j \in B_M$ as well. Otherwise we set $A_{u,v} = 0$.
 
