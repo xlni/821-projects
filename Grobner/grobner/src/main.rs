@@ -33,7 +33,7 @@ fn main() {
 
     This program was developed as part of 18.821.")
         (setting: AppSettings::SubcommandRequired)
-        (@arg ITERATIONS: -i --iterations +takes_value default_value("20")
+        (@arg ITERATIONS: -i --iterations +takes_value default_value("5")
             {|s| s.parse::<usize>().map(|_| ()).map_err(|_| "expected nonnegative integer".into())}
             "iterations to run when computing a basis")
         (@arg CHAR: -f --field +takes_value default_value("0")

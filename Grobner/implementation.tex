@@ -2,28 +2,29 @@
 \label{sec:implementation}
 
 The results from the previous section allow us to devise a process by which we can
-turn a finitely-generated, two-sided ideal $\mathfrak{a}$ into a Gr\"obner basis. This
+convert a finitely-generated, two-sided ideal $\mathfrak{a}$ into a Gr\"obner basis. This
 algorithm is field-agnostic, so we've implemented it to work both over $\Q$ and $\F_p$.
 Let us consider an abridged description first.
 
 \begin{alg}
-    Let $\mathfrak{a} = (p_1,\ldots,p_n)$ be a two-sided ideal. Let $m_i$ be the 
-    leading (w.r.t. deglex) term of each $p_i$ (we assume our polynomials are monic).
-    If $m_i \mid m_j$, we can reduce $m_j$ with respect to $p_i$, and replace $p_j$
-    with the resulting polynomial; this removes extraneous relations.
+    Let $\mathfrak{a} = (p_1,\ldots,p_n)$ be a two-sided ideal. Assume each $p_i$ is
+    monic, and write $p_i = m_i - \phi_i$, where $m_i$ is the leading term with respect 
+    to the deglex order. If $m_i \mid m_j$ for some $i\neq j$, 
+    reduce $m_j$ with respect to $p_i$, and replace $p_j$ with the resulting polynomial; 
+    this removes extraneous relations.
     
     Now that we have a set of polynomials with relatively-prime leading terms, we need
-    to correct overlaps. For each pair of polynomials, we say there is an overlap 
-    if there are $u$ and $v$ such that $um_i = m_j v$, for $v, u$ having degree smaller 
-    than $m_i$ and $m_j$, respectively. Let $q_i = u(m_i - p_i)$ and $q_j = (m_j - p_j)v$.
+    to correct overlaps. For each pair of polynomials $p_i,p_j$, we say they overlap 
+    if there are $u$ and $v$ such that $m_i u = v m_j$, for $u, v$ having degree smaller 
+    than $m_j$ and $m_i$, respectively. Let $q_i = \phi_i u$ and $q_j = v\phi_j$.
     We reduce these polynomials with respect to $\mathfrak{a}$; if $q_{i,\red} = q_{j,\red}$,
     this overlap produces consistent results, so we move on. Otherwise, we introduce
     $q_{i,red} - q_{j,red}$ as a new generator of $\mathfrak{a}$. 
     We then repeat this process with the enlarged set of generators 
     until we reach a fixed point.
     
-    Finally, we reduce the $\phi_i$ component of each generator with respect to the 
-    ideal; this gives us our Gr\"obner basis.
+    Finally, we reduce (as described below) the $\phi_i$ component of each generator 
+    with respect to the new, expanded ideal; this produces a Gr\"obner basis.
 \end{alg}
 
 We will now dive into a detailed description of the algorithm. We assume that the
@@ -55,10 +56,9 @@ Let us begin by defining the necessary data structures.
     which is implemented with the extended Euclidean algorithm.
     
     A \verb|Monomial| represents a generator of the algebra $T(V)$ as a heap-allocated
-    list of unsigned bytes, where the byte value $n$ represents the variable $x_n$ 
-    (for a total of 256 variables). \verb|Monomials| are ordered by deglex,
-    and multiplication can be performed in linear time (though it may invoke memory
-    allocation).
+    list of unsigned bytes, where the byte value $n$ represents the variable $x_n$,
+    for a maximum of 256 variables. \verb|Monomials| are ordered by deglex,
+    and multiplication can be performed in linear time.
 
     A \verb|Poly| represents an element of the algebra $T(V)$ as a heap-allocated
     list of pairs of \verb|Field|s (where \verb|Field| is either \verb|Rational| or
@@ -70,7 +70,8 @@ Let us begin by defining the necessary data structures.
     where $n$ and $m$ are the number of nonzero terms of these polynomials, and
     multiplication takes $O(nm)$ time. In-place multiplication by a single monomial
     is $O(n)$, disregarding memory allocation, implemented by concatenating the monomial
-    to each term in the polynomial; note that this preserves the order invariant.
+    to each term in the polynomial; note that this preserves the invariant that the backing
+    list of the polynomial is sorted.
     
     This approach, unlike a hashtable or a binary
     search tree, avoids having to perform hashing or indirection. It also has the
@@ -94,7 +95,7 @@ of the $\phi_i$. Before
 we can describe this algorithm, we need to describe reduction of a \verb|Poly| with
 respect to an \verb|Ideal|.
 
-\begin{alg}
+\begin{subalg}[Polynomial reduction modulo an ideal]
     Reduction with respect to an ideal is defined in three steps: first, reduce
     a monomial with respect to a relation; then, reduce a polynomial with respect
     to a relation; finally, reduce repeatedly to reduce against an ideal. We will
@@ -144,12 +145,12 @@ function reduce(mon: Monomial, rel: Relation) {
     respect to an \verb|Ideal| by repeatedly applying each relation until none of them
     have any further effect. This procedure will terminate, since in each step
     we reduce the the maximal monomial with respect to their ordering.
-\end{alg}
+\end{subalg}
 
 Next, we describe how to simplify an ideal with respect to itself, the first
 step in finding a Gr\"obner basis.
 
-\begin{alg}
+\begin{subalg}[Simplification of an ideal by division]
     The following algorithm modifies an \verb|Ideal| in-place, by reducing a \verb|Relation|
     with respect to another if the \verb|Monomial| of the first divides the \verb|Monomial|
     of the second.
@@ -193,25 +194,25 @@ function simplify(ideal: Ideal) {
     }
 }
 \end{verbatim}
-\end{alg}
+\end{subalg}
 
 Finally, we produce a Gr\"obner basis by expanding overlapping relations as
 necessary.
 
-\begin{alg}
+\begin{subalg}[Expansion of overlaps]
     The following algorithm modifies an \verb|Ideal| in-place, introducing a new
     \verb|Relation| any time the overlap of two \verb|Relation|s reduces to two
     distinct \verb|Poly|s, where the \verb|Relation| declares these \verb|Poly|s to
     be equal.
 \begin{verbatim}
 function expand_overlaps(ideal: Ideal, iterations: int) {
-    // each iterations will produce new relations; we 
+    // each iteration will produce new relations; we 
     // only add them to the ideal at the end of an iteration
     let new_relations = new List
     // since we're running through the ideal over and over,
     // we need to make sure we don't check the same pair twice.
-    let checked_pairs = new HashTable
-    while true {
+    let checked_pairs = new Set
+    for _ in 0..iterations {
         for (a, b) in ideal x ideal {
             if (a, b) in checked_pairs {
                 continue
@@ -253,13 +254,13 @@ function expand_overlaps(ideal: Ideal, iterations: int) {
     }
 }
 \end{verbatim}
-\end{alg}
+\end{subalg}
 
 Taking these three algorithms together, we can compute Gr\"obner bases. We have written
 a program which implements these algorithms, which can be be run from any Athena
 terminal with the command \verb|add mcyoung| followed by \verb|grobner|. Running
-\verb|grobner help| will show available options. By default, computations are done
-over $\Q$.
+\verb|grobner help| will show available options. By default, computations are performed
+over $\Q$, though the finite fields $\F_p$ are also supported.
 
 \begin{example}
     Use \verb|grobner| to compute a basis for $\mathfrak{a}=(x^2 - y^2)$:

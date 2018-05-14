@@ -141,6 +141,8 @@ impl<F: Field> Ideal<F> {
                                 p1 -= p2;
                                 new_rels.push(Relation::new(p1));
                             }
+
+                            //break
                         }
                     }
                 }
@@ -152,6 +154,24 @@ impl<F: Field> Ideal<F> {
                 for x in new_rels.drain(..) {
                     self.0.push(x);
                 }
+            }
+        }
+    }
+
+    pub fn reduce_self(&mut self) {
+        let mut changed = true;
+        // cheating borrowck yaaaay
+        // this is ok, because this reference
+        // never escapes this function... assuming
+        // LLVM doesn't do any "clever" optimizations
+        let duped_self = unsafe { (self as *mut Ideal<F>).as_ref().unwrap() };
+        while changed {
+            changed = false;
+
+            for rel in &mut self.0 {
+                let phi = rel.phi.reduce(duped_self);
+                changed |= phi != rel.phi;
+                rel.phi = phi;
             }
         }
     }
