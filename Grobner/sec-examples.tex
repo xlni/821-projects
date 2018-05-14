@@ -16,7 +16,7 @@ from \S\ref{sec:implementation}, which first computes a Gr\"obner basis for $\ma
 	\item If $f = yx - xy - 1$ and $p = yx^2 - 2x$, then $p_\red = x^2 y$.
     \item If $f = yx - 2xy$ and $p = yx^2 - xyx$, then $p_\red = 2x^2y$.
     \item If $f = y^2 - x^2$ and $p = yx^2 - x^2y$, then $p_\red = 0$.
-    \item If $f = y^2 - x + 1$ and $p=y^3 - xy$, then $p_\red - y$.
+    \item If $f = y^2 - x + 1$ and $p=y^3 - xy$, then $p_\red = - y$.
 \end{enumerate}
 
 \subsection*{Parts II, III}
@@ -32,18 +32,19 @@ from \S\ref{sec:implementation}.
 	\begin{equation*}
 		\{y^2-x^2,yx^2-x^2y\}.
 	\end{equation*}
-    By Corollary~\ref{cor:grobner}, a basis for the quotient algebra $T(x,y)/\mathfrak{a}$ is therefore given by
+    By Corollary~\ref{cor:grobner}, a basis for the quotient algebra $T\langle x,y\rangle/\mathfrak{a}$ is therefore given by
     \begin{equation}
       \label{eqn:basisone}
-    \left\{x^i(yx)^jy^\ell\mid i,j\ge 0,\text{ }\ell\in\{0,1\}\right\}.
+    \left\{[x^i(yx)^jy^\ell]\mid i,j\ge 0,\text{ }\ell\in\{0,1\}\right\},
     \end{equation}
+    as these are the equivalence classes of monomials in $T\langle x,y\rangle$ not divisible by any of the monomials $m_i\in\{y^2,yx^2\}$ corresponding to this Gr\"obner basis.
 	\item For the set $\{y^2-x,yx-y\}$, we obtain the Gr\"obner basis
     \begin{equation*}
       \{y^2 - x,yx - y,xy - y,x^2 - x\}.
     \end{equation*}
-    A basis for the quotient algebra is therefore
+    As before, the set of monomials $m_i$ is given by $\{y^2,yx,xy,x^2\}$, and therefore a basis for the quotient algebra is given by
     \begin{equation*}
-      \{1,x,y\}.
+      \{[1],[x],[y]\}.
     \end{equation*}
     \item\label{item:infinite-case-yxy} For the set $\{yxy-xyx\}$, the program does not terminate. However, one can check by hand that the set
     \[
@@ -63,9 +64,9 @@ from \S\ref{sec:implementation}.
 	\begin{equation*}
 		\{yxy-x,yx^2-x^2y\}.
 	\end{equation*}
-    A basis for the quotient algebra is therefore given by
+    The set of monomials $m_i$ is given by $\{yxy,yx^2\}$, and therefore a basis for the quotient algebra is given by
     \begin{equation*}
-      \left\{x^iy^jx^\ell\mid i,j\ge 0,\text{ }\ell\in\{0,1\}\right\}.
+      \left\{[x^iy^jx^\ell]\mid i,j\ge 0,\text{ }\ell\in\{0,1\}\right\}.
     \end{equation*}
 	\item For the set $\{y^2-ax^2-bx\}$, where $a,b\in k$, we observe by testing various values of $a$ and $b$ that the Gr\"obner bases look like
       \begin{equation*}
@@ -75,12 +76,12 @@ from \S\ref{sec:implementation}.
 \{y^2\}&\text{if }a=b=0.\\
 \end{cases}
         \end{equation*}
-      This is easily proven to hold in general. Thus, a basis for the quotient algebra is given by
+      This is easily proven to hold in general. The set of monomials $m_i$ is therefore given by $\{y^2,yx^2\}$, $\{y^2,yx\}$, and $\{y^2\}$, respectively, in these three cases. Thus, a basis for the quotient algebra is given by
       \begin{equation*}
 \begin{cases}
 \eqref{eqn:basisone}&\text{if }a\ne 0,\\
-\left\{x^iy^\ell\mid i\ge 0,\text{ }\ell\in\{0,1\}\right\}&\text{if }a=0\text{ and }b\ne 0,\\
-\left\{x^{i_1}yx^{i_2}y\cdots yx^{i_n}\mid n\ge 1,\text{ }i_1,i_n\ge 0,\text{ }i_2,\ldots,i_{n-1}\ge 1\right\}&\text{if }a=b=0.\\
+\left\{[x^iy^\ell]\mid i\ge 0,\text{ }\ell\in\{0,1\}\right\}&\text{if }a=0\text{ and }b\ne 0,\\
+\left\{[x^{i_1}yx^{i_2}y\cdots yx^{i_n}]\mid n\ge 1,\text{ }i_1,i_n\ge 0,\text{ }i_2,\ldots,i_{n-1}\ge 1\right\}&\text{if }a=b=0.\\
 \end{cases}
       \end{equation*}
 	\item For the set $\{yxyx-xyxy\}$, the program does not terminate. However, as in \eqref{item:infinite-case-yxy}, one can check by hand that the set
