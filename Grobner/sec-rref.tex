@@ -24,7 +24,7 @@ Let us first make precise what is meant by ``reduced row echelon form''---this p
 	\end{enumerate}
 \end{prop}
 \begin{proof}
-	We inductively define a set of monomials $B(u)$ for each monomial $u$. First, $B(1) = \{1\}$ if $1 \in W$, and $B(1) = \emptyset$ otherwise.
+	We inductively define a set of monomials $B(u)$ for each monomial $u$. First, let $B(1) = \{1\}$ if $1 \in W$, and $B(1) = \emptyset$ otherwise.
 	
 	Let $u$ be a monomial, and suppose $B(v)$ has been defined for all $v < u$. Let $M_{<u}$ denote the set of monomials lower than $u$. If there exists a polynomial $\psi$ in the span of $M_{<u} \setminus \bigcup_{v<u} B(v)$ such that $u - \psi \in W$, then define
 	\[
