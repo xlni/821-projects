@@ -2,7 +2,8 @@
 \label{sec:implementation}
 
 The results from the previous section allow us to devise a process by which we can
-convert a finitely-generated, two-sided ideal $\mathfrak{a}$ into a Gr\"obner basis. This
+produce a Gr\"obner basis for 
+finitely-generated, two-sided ideal $\mathfrak{a}$. This
 algorithm is field-agnostic, so we've implemented it to work both over $\Q$ and $\F_p$.
 Let us consider an abridged description first.
 
@@ -23,7 +24,7 @@ Let us consider an abridged description first.
     We then repeat this process with the enlarged set of generators 
     until we reach a fixed point.
     
-    Finally, we reduce (as described below) the $\phi_i$ component of each generator 
+    Finally, we reduce the $\phi_i$ component of each generator 
     with respect to the new, expanded ideal; this produces a Gr\"obner basis.
 \end{alg}
 
@@ -60,9 +61,9 @@ Let us begin by defining the necessary data structures.
     for a maximum of 256 variables. \verb|Monomials| are ordered by deglex,
     and multiplication can be performed in linear time.
 
-    A \verb|Poly| represents an element of the algebra $T(V)$ as a heap-allocated
-    list of pairs of \verb|Field|s (where \verb|Field| is either \verb|Rational| or
-    \verb|Finite|) and \verb|Monomial|s. This object maintains the
+    Given a choice of ground field, denoted as \verb|Field|, 
+    a \verb|Poly| represents an element of the algebra $T(V)$ as a heap-allocated
+    list of pairs of \verb|Field|s and \verb|Monomial|s. This object maintains the
     invariant that pairs are sorted by the ordering on \verb|Monomial|s. Addition
     of a \verb|Monomial| with some \verb|Field| coefficient takes $O(\log n)$ time,
     where $n$ is the number of nonzero terms of the polynomial, implemented with binary
@@ -84,8 +85,8 @@ Let us begin by defining the necessary data structures.
     An \verb|Ideal| will consist of a heap-allocated list of \verb|Relation|s,
     each consisting of a \verb|Monomial| \verb|m| and a \verb|Poly| \verb|phi|, 
     such that \verb|m| is greater than all terms in \verb|phi|. A \verb|Relation|
-    may be constructed from a \verb|Poly| by subtracting off the leading term (due
-    to the ordering invariant, this may be done in $O(1)$ time).
+    may be constructed from a \verb|Poly| by subtracting off the leading term. Due
+    to the ordering invariant, this may be done in $O(1)$ time.
 \end{defn}
 
 Our goal is to implement an algorithm which takes a list of \verb|Poly|s, representing the
