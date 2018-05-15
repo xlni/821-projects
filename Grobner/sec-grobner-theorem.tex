@@ -27,7 +27,7 @@ In particular, $p \in \mathfrak{a}$ if and only if $p_\red = 0$.
 We need an \emph{order} to make much sense of the word ``reduction.'' To this end, impose a well-ordering on $X$. Then order monomials first by degree, and order monomials of the same degree by lexicographic order using the order on $X$. For example, if $X = \{x,y\}$ with $x < y$, then the monomials are ordered as in \eqref{eq:deglex-two-variables}.
 It is easy to see that, since $X$ is well-ordered, this \emph{degree-lexicographic} (deglex) ordering of monomials is also a well-ordering. Furthermore, note that if $u,v,m$ are monomials and $u < v$, we also have $um < vm$ and $mu < mv$. We will say that a polynomial $\phi$ is \emph{lower} than a monomial $m$ if all monomials appearing in $\phi$ are smaller than $m$ according to this monomial order. The zero polynomial is lower than every monomial.
 
-Each $f \in F$ can be written in the form $f = am - \phi$, where $m$ is the highest appearing monomial with respect to deglex, $\phi$ is lower than $m$, and $a \in k^\times$. Since scaling the elements of $F$ does not affect the ideal $\mathfrak{a}$, we may assume\footnote{If we do not work over a field, then we cannot make this assumption, and that complicates things significantly.} that $a = 1$. Hence $f$ gives us the equality $[m] = [\phi]$, which we alternatively express as the congruence $m \equiv \phi$. Using all the elements of $F$, we get a family of congruences $\{ m_i \equiv \phi_i \}$. Note that if we ever have $m_i = um_jv$ for some monomials $u,v$, then we can replace $f_i$ by $u\phi_j v - \phi_i$ without altering $\mathfrak{a}$. Repeating this process as necessary, we can assume that no leading monomial $m_i$ is divisible by another.
+Each $f \in F$ can be written in the form $f = am - \phi$, where $m$ is the highest appearing monomial with respect to deglex, $\phi$ is lower than $m$, and $a \in k^\times$. Since scaling the elements of $F$ does not affect the ideal $\mathfrak{a}$, we may assume\footnote{If we do not work over a field, then we cannot make this assumption, and that complicates things significantly.} that $a = 1$. Hence $f$ gives us the equality $[m] = [\phi]$, which we alternatively express as the congruence $m \equiv \phi$. Using all the elements of $F$, we get a family of congruences $\{ m_i \equiv \phi_i \}$. Suppose that $m_i$ is divisible by $m_j$ for some distinct $i,j$, meaning that $m_i = um_jv$ for some monomials $u,v$. We can then replace $f_i$ by $u\phi_j v - \phi_i$ without altering $\mathfrak{a}$. Repeating this process as necessary, we can assume that no leading monomial $m_i$ is divisible by another.
 
 Using these congruences, we can reduce polynomials: if a monomial $u m_i v$ appears in our polynomial $p$, we can replace that monomial by $u \phi_i v$. Eventually we will obtain a polynomial where no monomial of the form $u m_i v$ appears---we call such a polynomial \emph{reduced}. However, this naive reduction process has flaws. We gave an example in \S\ref{sec:introduction} to demonstrate its shortcomings, and we give another example now.
 
@@ -94,7 +94,7 @@ The terminal nodes of this tree are simplified monomial lists, which need not be
 	\[
 	m_i u = v m_j,
 	\]
-	where $u,v$ are monomials and $\deg v < \deg m_i$ (equivalently, $\deg u < \deg m_j$).
+	where $u,v$ are monomials and $\deg v < \deg m_i$, or equivalently $\deg u < \deg m_j$.
 \end{defn}
 \begin{defn}\label{def:consistent}
 	Given a family of congruences $\{m_i \equiv \phi_i\}$ and an overlap $m_i u = v m_j$, we say that the overlap is

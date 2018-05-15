@@ -24,7 +24,7 @@ Let us first make precise what is meant by ``reduced row echelon form''---this p
 	\end{enumerate}
 \end{prop}
 \begin{proof}
-	We inductively define a set of monomials $B(u)$ for each monomial $u$. First, let $B(1) = \{1\}$ if $1 \in W$, and $B(1) = \emptyset$ otherwise.
+	For each monomial $u$ we shall define a set of monomials $B(u)$, which will be the set of \emph{pivots} not greater than $u$. We do this inductively. First, let $B(1) = \{1\}$ if $1 \in W$, and $B(1) = \emptyset$ otherwise.
 	
 	Let $u$ be a monomial, and suppose $B(v)$ has been defined for all $v < u$. Let $M_{<u}$ denote the set of monomials lower than $u$. If there exists a polynomial $\psi$ in the span of $M_{<u} \setminus \bigcup_{v<u} B(v)$ such that $u - \psi \in W$, then define
 	\[
@@ -32,7 +32,7 @@ Let us first make precise what is meant by ``reduced row echelon form''---this p
 	\]
 	Note that if there were two distinct choices of $\psi$, say $\psi_1$ and $\psi_2$, then $\psi_1 - \psi_2 \in W$ is also in the span of $M_{<u} \setminus \bigcup_{v<u} B(v)$. But then its leading monomial is lower than $u$ and should belong to $\bigcup_{v<u} B(v)$, a contradiction. Thus if $\psi$ exists, it is unique---call it $\psi_u$. If no such $\psi_u$ exists for $u$, define $B(u) = \bigcup_{v<u} B(v)$.
 	
-	To use linear algebra language, $B(u)$ is the set of \emph{pivots} not greater than $u$. Let $B = \bigcup_u B(u)$ be the set of all pivots. Our desired basis is then
+	This inductive process is valid because the monomials are well-ordered. Let $B = \bigcup_u B(u)$ be the set of all pivots. Our desired basis is then
 	\[
 		\{u - \psi_u \mid u \in B\},
 	\]
@@ -65,4 +65,4 @@ Now we will use this to prove an existence and uniqueness result for Gr\"obner b
 	
 	We have given processes for converting between a Gr\"obner basis and reduced row echelon form for $\mathfrak{a}$. These constructions are inverse to one another, and hence the theorem follows from Proposition \ref{prop:rref}.
 \end{proof}
-We have shown that a unique Gr\"obner basis always exists for any ideal $\mathfrak{a}$, but the basis need not be finite. In the following section, we detail a computer algorithm for finding the basis in the event that it is finite.
+We have shown that a unique Gr\"obner basis always exists for any ideal $\mathfrak{a}$, but the basis need not be finite. In the following section, we detail a computer algorithm for finding the basis in the event that it is finite. Unfortunately, we do not have a criterion for finiteness---other than running the program and hoping that it terminates!

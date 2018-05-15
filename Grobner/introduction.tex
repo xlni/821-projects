@@ -28,7 +28,7 @@ A naive first attempt at an argument might run as follows: order the monomials i
 \end{equation}
 Let us say that a polynomial $p\in T\langle x,y\rangle$ is ``lower'' than a monomial $m$ if all monomials appearing in $f$ are smaller than $m$ with respect to this order. This allows us to define a ``reduction'' process on polynomials $p\in T\langle x,y\rangle$: successively replace monomials in $p$ by lower polynomials using the given relations, until no more such substitutions are possible. We might hope that any resultant polynomial $p_\red$ will be $0$ if and only if our original polynomial $p$ was equivalent to $0$. This would show that $p_2$ is not equivalent to $0$, as we have shown above that $(p_2)_\red=xy+x-1\ne 0$; indeed, the only substitutions possible introduce the monomial $y^2$, and so do not result in lower polynomials.
 
-However, such a hope would be false: for instance, the (nonzero) polynomial $p_1$ is already reduced! Only by replacing the monomials $x$ with the higher polynomials $y^2+1$ can we see that $p_1\equiv 0$, as in \eqref{eqn:p1}. The problem is, as \eqref{eqn:p1} shows, that there are \emph{two} distinct ways of reducing the monomial $y^3$:
+However, such a hope would be false. For instance, the polynomial $p_1$ is already reduced, despite being equivalent to 0. Only by replacing the monomials $x$ with the higher polynomials $y^2+1$ as in \eqref{eqn:p1} can we see that $p_1\equiv 0$. The problem is, as \eqref{eqn:p1} shows, that there are \emph{two} distinct ways of reducing the monomial $y^3$:
 \begin{equation*}
 xy-y=(x-1)y\equiv (y^2)y=y^3=y(y^2)\equiv y(x-1)=yx-y.
 \end{equation*}

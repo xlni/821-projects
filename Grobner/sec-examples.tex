@@ -139,7 +139,7 @@ Now we compute the Hilbert function and Poincar\'e series for each of the exampl
 	\begin{equation}
 		H(t) = 1 + 2t + 3t^2 + 4t^3 + \cdots.\label{eq:poincare-y2-x2}
 	\end{equation}
-	Note that $H - tH = 1 + t + t^2 + t^3 + \cdots$ is the series expansion for $1/(1-t)$, so we can write $H$ in closed form as (the series expansion of)
+	Note that $H - tH = 1 + t + t^2 + t^3 + \cdots$ is the series expansion for $1/(1-t)$, so $H$ is the series expansion of
 	\[
 		H(t) = \frac{1}{(1-t)^2}.
 	\]
@@ -226,7 +226,7 @@ Then,
 		1
 	\end{bmatrix} \label{eq:Poincare-series-formula}
 \end{align}
-where the second term is the sum of the entries of $t^D(I-tA)^{-1}$. It is a fact that the asymptotic behavior of $h(d)$ is determined by the poles of $H(t)$ with minimal modulus; see \cite[Theorem 5.2.1]{wilf}. Observe that if $z \in \mathbb{C}$ is a pole of $H(t)$, then $\det(I-zA) = 0$. Since $z \neq 0$, this means $\det(I/z - A) = 0$ and $1/z$ is an eigenvalue of $A$. Sadly the converse is not true in general. Even so, we suspect that the asymptotic behavior of $h(d)$ is related to the eigenvalues of $A$ with maximal modulus, as the following examples suggest.
+where the second term is the sum of the entries of $t^D(I-tA)^{-1}$. It is a fact that the asymptotic behavior of $h(d)$ is determined by the poles of $H(t)$ with minimal modulus; see \cite[Theorem 5.2.1]{wilf}. Observe that if $z \in \mathbb{C}$ is a pole of $H(t)$, then $\det(I-zA) = 0$. Since $z \neq 0$, this means $\det(I/z - A) = 0$ and $1/z$ is an eigenvalue of $A$. Sadly the converse is not true in general. Even so, we suspect that the asymptotic behavior of $h(d)$ is related to the eigenvalue(s) of $A$ that have maximal modulus, as the following examples suggest.
 \begin{example}
 	Let $X = \{x,y\}$ and $M = \{yx\}$. Then $D = 1$ and
 	\[
